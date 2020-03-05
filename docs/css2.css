@@ -14,14 +14,14 @@ img {
 }
 
 a {
-  color: blue;
+  color: white;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   transition: all 0.5s;
 }
 
 a:visited {
-  color: blue;
+  color: white;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   transition: all 0.5s;
@@ -215,6 +215,13 @@ article .btn:hover {
   overflow: hidden;
 }
 
+.wrapper{
+  min-height: 100vh;
+  position: relative;/*←相対位置*/
+  padding-bottom: 120px;/*←footerの高さ*/
+  box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+}
+
 footer {
   font-size: 80%;
   width: 100%;
@@ -222,6 +229,9 @@ footer {
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #313131;
+
+  position: absolute;/*←絶対位置*/
+  bottom: 0; /*下に固定*/
 }
 
 footer a {
