@@ -1,11 +1,78 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+
+  <meta charset="UTF-8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="user-scalable=no" />
+  <link rel="icon" sizes="any" href="icon/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon/icon.png" />
+  <link href="css2.css" rel="stylesheet" type="text/css">
+
+  <title>アライさんマンション - Html5Game</title>
+
 </head>
-<body>
-  <p>hello github pages</p>
+
+<body style="background-color: black">
+  <header>
+    <h1>■ アライさんマンションのゲームなのだ</h1>
+  </header>
+
+  <div onclick>
+    <div>
+      <button id="fullscreenSwitch" onclick="goFS()">
+        フルスクリーンにする
+      </button>
+    </div>
+    <div>
+      <iframe id="ifr" class="GamePlayerCore" scrolling="no" allowfullscreen
+        src="https://umaaji298.github.io/araisan/game/index.html" frameborder="0" title="ゲーム画面" name="umami298のゲーム画面"
+        sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-orientation-lock"
+        allow="accelerometer; ambient-light-sensor; autoplay; camera; encrypted-media; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; speaker; vibrate; vr"
+        style="width: 816px; height: 624px;"></iframe>
+    </div>
+
+    <p>アライさんマンション 怪異自動生成！</p>
+
+    <form>
+      <textarea cols=60 rows=3>
+更新
+2020/03/06 ver 0.1.1 試作版(html5)
+2020/03/03 ver 0.1 (アクツクmv版:破棄)
+2020/03/02 ver -----
+          </textarea>
+    </form>
+
+  </div>
+
+  <footer>
+    <div>アライさんマンションとはあぶぶ氏@健全の創作ホラーです。</div>
+    <div>素材の権利は素材作成者に帰属します。<small>エレベータパネルは新しく描き起こしています。</small></div>
+    <a href=http://www.2chan.net>ふたば★ちゃんねる </a>
+  </footer>
+  <script>
+    var target = document.getElementsByClassName('GamePlayerCore')[0]
+    var btn = document.getElementById('fullscreenSwitch')
+
+    /*フルスクリーン実行用ファンクション*/
+    function goFS() {
+      if (target.webkitRequestFullscreen) {
+        target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
+      } else if (target.mozRequestFullScreen) {
+        target.mozRequestFullScreen() //FF10+
+      } else if (target.msRequestFullscreen) {
+        target.msRequestFullscreen() //IE11+
+      } else if (target.requestFullscreen) {
+        target.requestFullscreen() // HTML5 Fullscreen API仕様
+      } else {
+        alert('ご利用のブラウザはフルスクリーン操作に対応していません')
+        return
+      }
+    }
+  </script>
+
 </body>
+
 </html>
