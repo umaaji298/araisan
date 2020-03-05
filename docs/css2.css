@@ -215,11 +215,11 @@ article .btn:hover {
   overflow: hidden;
 }
 
-.wrapper{
+body,
+#wrapper{
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  position: relative;/*←相対位置*/
-  padding-bottom: 120px;/*←footerの高さ*/
-  box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
 }
 
 footer {
@@ -229,9 +229,7 @@ footer {
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #313131;
-
-  position: absolute;/*←絶対位置*/
-  bottom: 0; /*下に固定*/
+  margin-top:auto;
 }
 
 footer a {
