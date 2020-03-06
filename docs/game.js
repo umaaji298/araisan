@@ -474,7 +474,7 @@ var config = {
   scale: {
     parent: 'phaser-game',
     mode: Phaser.Scale.FIT,
-    // autoCenter: Phaser.Scale.CENTER_BOTH,
+    autoCenter: Phaser.Scale.CENTER_VERTICALLY,
     width: 800,
     height: 600
   },
