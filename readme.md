@@ -16,7 +16,7 @@ PC上のブラウザにて動作します。(スマフォは未検証)
 https://umaaji298.github.io/araisan/
 
 ## VS. 
-未調査
+- [Pixcel Art:ゲーム『アライさんマンション』](https://www.pixiv.net/artworks/79642866)
 
 ## Caution
 Internet Explolerでは動作しません。  

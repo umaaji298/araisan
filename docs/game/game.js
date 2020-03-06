@@ -8,9 +8,11 @@ var Preloader = new Phaser.Class({
     },
 
   preload: function () {
+    this.load.image('fullscreen', 'assets/fullscreen.png');
     this.load.image('title', 'assets/title.png');
     this.load.image('panel', 'assets/panel.png');
     this.load.image('next', 'assets/next.png');
+    
 
     this.load.multiatlas('textures', 'assets/texture/textures.json', 'assets/texture');
     this.load.audio('click', 'assets/audio/click2.ogg');
@@ -24,6 +26,21 @@ var Preloader = new Phaser.Class({
   create: function () {
     console.log('%c Preloader ', 'background: green; color: white; display: block;');
     //loadgin
+    // game.scale.pageAlignHorizontally = true;
+    // game.scale.pageAlignVertically = true;
+    //game.scale.scaleMode = Phaser.Scale.ScaleModes.FIT;
+    // game.scale.scaleMode = Phaser.Scale.HEIGHT_CONTROLS_WIDTH;
+    // game.scale.refresh();
+
+    // this.fullscreen = this.add.image(400,300,'fullscreen');
+    // this.fullscreen.setInteractive();
+
+    // this.fullscreen.on('pointerup',()=>{
+    //   console.log('hello',game);
+    //   game.scale.startFullscreen();
+    //   game.scale.refresh();
+    // },this);
+
     this.scene.start('start');
   }
 
@@ -412,7 +429,7 @@ var Game = new Phaser.Class({
     }
 
     function all14event_text6() {
-      this.add.text(40, 500, 'もう怪異に悩まされることはないんだ…', this.fontev);
+      this.add.text(40, 500, 'もう怪異に悩まされることはない…', this.fontev);
       this.time.delayedCall(6000, all14event_end, [], this);
     }
 
@@ -436,15 +453,15 @@ var Game = new Phaser.Class({
 
 var config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
+  scale: {
+    parent: 'phaser-game',
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: 800,
+    height: 600
+  },
+  //mode: Phaser.Scale.NONE,
   backgroundColor: '#000000',
-  parent: 'phaser-game',
-  // scene: {
-  //     preload: preload,
-  //     create: create,
-  //     update: update
-  // },
   scene: [Preloader, Start, Game, GameOver]
 };
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -11,77 +11,87 @@
 
     gtag('config', 'UA-159940516-1');
   </script>
-  <meta charset="UTF-8" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="viewport" content="user-scalable=no" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no,user-scalable=no">
+  <meta name="description" content="アライさんマンションのゲームです。最近のブラウザで動作します。これはHtml5とPhaserによって作られています。">
+  <meta name="author" content="toshiaki(umaaji298)">
   <link rel="icon" sizes="any" href="icon/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icon/icon.png" />
-  <link href="css2.css" rel="stylesheet" type="text/css">
 
   <title>アライさんマンション - Html5Game</title>
 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <link href="index.css" rel="stylesheet">
 </head>
 
-<body style="background-color: black">
-  <div id="wrapper">
-    <header>
-      <h1>■ アライさんマンションのゲームなのだ</h1>
-    </header>
+<body>
 
-    <div onclick>
-      <div>
-        <button id="fullscreenSwitch" onclick="goFS()">
-          フルスクリーンにする
-        </button>
+  <header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#"><img src="icon/icon.svg" width="48" height="48"></a>
+      <div class="collapse navbar-collapse" id="navmenu1">
+        <span class="navbar-text-title">アライさんマンション</span>
       </div>
-      <div>
-        <iframe id="ifr" class="GamePlayerCore" scrolling="no" allowfullscreen
-          src="https://umaaji298.github.io/araisan/game/index.html" frameborder="0" title="ゲーム画面" name="umami298のゲーム画面"
-          sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-orientation-lock"
-          allow="accelerometer; ambient-light-sensor; autoplay; camera; encrypted-media; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; speaker; vibrate; vr"
-          style="width: 816px; height: 624px;"></iframe>
-      </div>
+    </nav>
+  </header>
 
-      <p>アライさんマンション 怪異自動生成！</p>
+  <!-- Begin page content -->
+  <main role="main" class="container text-center">
+    <h2 class="mt-5">アライさんマンションのゲームなのだ！</h1>
 
-      <form>
-        <textarea cols=60 rows=3>
-更新
-2020/03/06 ver 0.1.1 試作版
-2020/03/03 ver 0.1 アクツクmv版:破棄
-2020/03/02 ver -----
-          </textarea>
-      </form>
-
+    <div>
+      <button id="fullscreenSwitch" class="btn btn-outline-secondary btn-sm mb-1" onclick="goFS()">
+        フルスクリーンにする
+      </button>
     </div>
 
-    <footer>
-      <div>アライさんマンションとは<a href="https://twitter.com/abubu_newnanka">あぶぶ氏@健全</a>の創作ホラーです。</div>
-      <div style="color: gray;">素材の権利は素材作成者に帰属します。(エレベータパネルは新しく描き起こしています)</div>
-      🌱<a href=http://www.2chan.net>ふたば★ちゃんねる</a> 🐈<a href="https://umaaji298.github.io/rituRPG/">りつねぇ！RPG</a>
-    </footer>
-    <script>
-      var target = document.getElementsByClassName('GamePlayerCore')[0]
-      var btn = document.getElementById('fullscreenSwitch')
+    <div>
+      <iframe id="ifr" class="GamePlayerCore" scrolling="no" allowfullscreen src="game/index.html" frameborder="0"
+        title="ゲーム画面" name="umaaji298のゲーム画面"
+        sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-orientation-lock"
+        allow="accelerometer; ambient-light-sensor; autoplay; camera; encrypted-media; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; speaker; vibrate; vr"
+        style="width: 800px; height: 600px;"></iframe>
+    </div>
 
-      /*フルスクリーン実行用ファンクション*/
-      function goFS() {
-        if (target.webkitRequestFullscreen) {
-          target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
-        } else if (target.mozRequestFullScreen) {
-          target.mozRequestFullScreen() //FF10+
-        } else if (target.msRequestFullscreen) {
-          target.msRequestFullscreen() //IE11+
-        } else if (target.requestFullscreen) {
-          target.requestFullscreen() // HTML5 Fullscreen API仕様
-        } else {
-          alert('ご利用のブラウザはフルスクリーン操作に対応していません')
-          return
-        }
-      }
-    </script>
-  </div>
+    <p class="mt-3">アライさんマンションの怪異フロアを自動生成できます。</p>
+    <p>アライさんマンションとは<a href="https://twitter.com/abubu_newnanka">あぶぶ氏@健全</a>の創作ホラーです。</p>
+    <small>更新情報</small>
+    <form>
+      <textarea cols=60 rows=2>
+2020/03/06 ver 0.1.2 スマフォ対応レイアウト修正
+2020/03/05 ver 0.1.1 試作版
+2020/03/03 ver 0.1 アクツクmv版:破棄
+2020/03/02 ver -----
+        </textarea>
+    </form>
+
+
+  </main><!-- /.container -->
+
+  <footer class="footer">
+    <div class="container center-block text-center">
+      <span>🎫<a class="text-light" href="https://github.com/umaaji298/araisan" target="_blank">License</a></span>
+      <span>🌱<a class="text-light" href=http://www.2chan.net target="_blank">ふたば★ちゃんねる</a></span>
+      <span>🐈<a class="text-light" href="https://umaaji298.github.io/rituRPG/" target="_blank">りつねぇ！RPG</a></span>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="index.js"></script>
 </body>
 
 </html>
