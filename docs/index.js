@@ -26,7 +26,14 @@ function goFS() {
     //変更前の値を取得
     styleBeforeW = target.firstChild.style.width;
     styleBeforeH = target.firstChild.style.height;
+
+    if ("orientation" in screen) {
+      //スマフォは横向き
+      screen.orientation.lock("portrait-secondary");
+    }
+    
     target.requestFullscreen() // HTML5 Fullscreen API仕様
+
   } else {
     alert('ご利用のブラウザはフルスクリーン操作に対応していません')
     return
