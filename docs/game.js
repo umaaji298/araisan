@@ -41,6 +41,10 @@ var Preloader = new Phaser.Class({
     //   game.scale.refresh();
     // },this);
 
+    game.scale.onFullScreenChange(()=>{
+      console.log('change');
+    })
+
     this.scene.start('start');
   }
 
@@ -62,14 +66,28 @@ var Start = new Phaser.Class({
     console.log('%c Start ', 'background: green; color: white; display: block;');
 
     var bg = this.add.image(400, 300, 'title');
-
     bg.setInteractive();
 
     bg.once('pointerup', function () {
-
       this.scene.start('game');
-
     }, this);
+
+
+    // this.fullscreen = this.add.image(400,300,'fullscreen');
+    // this.fullscreen.setInteractive();
+
+    // this.fullscreen.on('pointerup',()=>{
+    //   console.log('hello',game);
+      
+    //   // game.scale.scaleMode = Phaser.Scale.ScaleModes.FIT;
+    //   // game.scale.autoCenter = Phaser.Scale.CENTER_BOTH;
+      
+    //   game.scale.startFullscreen();
+    //   game.scale.refresh();
+    //   //game.scale.autoCenter = Phaser.Scale.CENTER_BOTH;
+     
+      
+    // },this);
   }
 
 });
@@ -456,11 +474,10 @@ var config = {
   scale: {
     parent: 'phaser-game',
     mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH,
+    // autoCenter: Phaser.Scale.CENTER_BOTH,
     width: 800,
     height: 600
   },
-  //mode: Phaser.Scale.NONE,
   backgroundColor: '#000000',
   scene: [Preloader, Start, Game, GameOver]
 };

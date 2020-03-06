@@ -6,7 +6,7 @@ html {
 }
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 0px;
 }
 .footer {
   position: absolute;
@@ -22,8 +22,24 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
+#game-container{
+  width:800px;
+  height:600px;
+}
+
+/* #phaser-game{
+  width:800px;
+  height:600px;
+} */
+
 body > .container {
-  padding: 60px 15px 0;
+  /* padding: 70px 0px 0px 0px; */
+  /* margin: 0; */
+}
+
+.container-main{
+  padding: 70px 0px 0px 0px;
+  width:100%;
 }
 
 code {
