@@ -5,6 +5,12 @@ html {
   min-height: 100%;
 }
 
+/* body{
+  margin-bottom : 0px;
+  padding-bottom : 0px;
+} */
+
+
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */

@@ -27,11 +27,6 @@ function goFS() {
     styleBeforeW = target.firstChild.style.width;
     styleBeforeH = target.firstChild.style.height;
 
-    if ("orientation" in screen) {
-      //スマフォは横向き
-      screen.orientation.lock("portrait-secondary");
-    }
-    
     target.requestFullscreen() // HTML5 Fullscreen API仕様
 
   } else {
