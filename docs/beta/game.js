@@ -14,7 +14,7 @@ var Preloader = new Phaser.Class({
     this.load.image('next', 'assets/next.png');
     this.load.multiatlas('textures', 'assets/texture/textures.json', 'assets/texture');
 
-    this.load.audio('title','assets/audio/town_afternoon.ogg');
+    this.load.audio('title', 'assets/audio/town_afternoon.ogg');
     this.load.audio('click', 'assets/audio/click2.ogg');
     this.load.audio('evmove', 'assets/audio/elevetor_6sec.ogg');
     this.load.audio('pone', 'assets/audio/ariplane-chime_one.ogg');
@@ -41,7 +41,7 @@ var Preloader = new Phaser.Class({
     //   game.scale.refresh();
     // },this);
 
-    game.scale.onFullScreenChange(()=>{
+    game.scale.onFullScreenChange(() => {
       console.log('change');
     })
 
@@ -67,18 +67,18 @@ var Start = new Phaser.Class({
     console.log('%c Start ', 'background: green; color: white; display: block;');
 
     this.titleBGM = this.sound.add('ending');
-    
+
 
     var bg = this.add.image(400, 300, 'title');
     bg.setInteractive();
 
-    this.input.on('gameobjectup', ()=>{
+    this.input.on('gameobjectup', () => {
       this.titleBGM.play();
 
       // this.titleBGM.stop();
       // this.cameras.main.fadeOut(2000, 0, 0, 0);
       // this.time.delayedCall(2000,()=> {
-        // this.scene.start('game');
+      // this.scene.start('game');
 
       // }, [], this);
     }, this);
@@ -210,8 +210,8 @@ var Game = new Phaser.Class({
     },
 
   create: function () {
-    
-    if(!this.retry){
+
+    if (!this.retry) {
       this.cameras.main.fadeIn(2000, 0, 0, 0);
     }
 
@@ -474,6 +474,8 @@ var Game = new Phaser.Class({
 
 });
 
+var audioContext = new ((window).AudioContext || (window).webkitAudioContext)();
+
 var config = {
   type: Phaser.AUTO,
   scale: {
@@ -483,8 +485,19 @@ var config = {
     width: 800,
     height: 600
   },
+  audio: {
+    context: audioContext
+  },
   backgroundColor: '#000000',
   scene: [Preloader, Start, Game, GameOver]
 };
 
 var game = new Phaser.Game(config);
+
+window.addEventListener('focus', function (event) {
+  setTimeout(function () {
+    console.log('resuming…')
+    audioContext.resume();
+  }, 1000);
+},
+  false);
