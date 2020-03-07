@@ -14,32 +14,17 @@ var Preloader = new Phaser.Class({
     this.load.image('next', 'assets/next.png');
     this.load.multiatlas('textures', 'assets/texture/textures.json', 'assets/texture');
 
-    this.load.audio('title', 'assets/audio/town_afternoon.ogg');
-    this.load.audio('click', 'assets/audio/click2.ogg');
-    this.load.audio('evmove', 'assets/audio/elevetor_6sec.ogg');
-    this.load.audio('pone', 'assets/audio/ariplane-chime_one.ogg');
-    this.load.audio('dooropen', 'assets/audio/elevetordoor.ogg');
-    this.load.audio('ending', 'assets/audio/taiju_43sec.ogg');
+    //this.load.audio('click', 'assets/audio/click2.ogg');
+    this.load.audio('click', 'assets/audio/click2.mp3');
+    this.load.audio('evmove', 'assets/audio/elevetor_6sec.mp3');
+    this.load.audio('pone', 'assets/audio/ariplane-chime_one.mp3');
+    this.load.audio('dooropen', 'assets/audio/elevetordoor.mp3');
+    this.load.audio('ending', 'assets/audio/taiju_43sec.mp3');
     //this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
   },
 
   create: function () {
     console.log('%c Preloader ', 'background: green; color: white; display: block;');
-    //loadgin
-    // game.scale.pageAlignHorizontally = true;
-    // game.scale.pageAlignVertically = true;
-    //game.scale.scaleMode = Phaser.Scale.ScaleModes.FIT;
-    // game.scale.scaleMode = Phaser.Scale.HEIGHT_CONTROLS_WIDTH;
-    // game.scale.refresh();
-
-    // this.fullscreen = this.add.image(400,300,'fullscreen');
-    // this.fullscreen.setInteractive();
-
-    // this.fullscreen.on('pointerup',()=>{
-    //   console.log('hello',game);
-    //   game.scale.startFullscreen();
-    //   game.scale.refresh();
-    // },this);
 
     game.scale.onFullScreenChange(() => {
       console.log('change');
