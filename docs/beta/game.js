@@ -14,12 +14,14 @@ var Preloader = new Phaser.Class({
     this.load.image('next', 'assets/next.png');
     this.load.multiatlas('textures', 'assets/texture/textures.json', 'assets/texture');
 
-    this.load.audio('title', 'assets/audio/town_afternoon.ogg');
-    this.load.audio('click', 'assets/audio/click2.ogg');
-    this.load.audio('evmove', 'assets/audio/elevetor_6sec.ogg');
-    this.load.audio('pone', 'assets/audio/ariplane-chime_one.ogg');
-    this.load.audio('dooropen', 'assets/audio/elevetordoor.ogg');
-    this.load.audio('ending', 'assets/audio/taiju_43sec.ogg');
+    this.load.audio('test','assets/audio/test.mp3');
+
+    // this.load.audio('title', 'assets/audio/town_afternoon.ogg');
+    // this.load.audio('click', 'assets/audio/click2.ogg');
+    // this.load.audio('evmove', 'assets/audio/elevetor_6sec.ogg');
+    // this.load.audio('pone', 'assets/audio/ariplane-chime_one.ogg');
+    // this.load.audio('dooropen', 'assets/audio/elevetordoor.ogg');
+    // this.load.audio('ending', 'assets/audio/taiju_43sec.ogg');
     //this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
   },
 
@@ -66,7 +68,7 @@ var Start = new Phaser.Class({
   create: function () {
     console.log('%c Start ', 'background: green; color: white; display: block;');
 
-    this.titleBGM = this.sound.add('ending');
+    this.titleBGM = this.sound.add('test');
 
 
     var bg = this.add.image(400, 300, 'title');
@@ -486,7 +488,8 @@ var config = {
     height: 600
   },
   audio: {
-    context: audioContext
+    context: audioContext,
+    // disableWebAudio: true
   },
   backgroundColor: '#000000',
   scene: [Preloader, Start, Game, GameOver]
