@@ -5,7 +5,7 @@ araisan mansion
 
 ## Description
 アライさんマンションのゲームです。Phaserにて制作されています。  
-PC上のブラウザにて動作します。(スマフォは未検証)
+PC/スマートフォンの最新のブラウザにて動作します。
 
 
 試作版となります。幾つか改善が必要な問題点があります。
@@ -21,9 +21,6 @@ https://umaaji298.github.io/araisan/
 
 ## Caution
 Internet Explolerでは動作しません。  
-
-- 確認済みブラウザ
-  - Chrome
 
 ## Licence
 Pending...  
