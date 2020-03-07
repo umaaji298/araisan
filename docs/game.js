@@ -66,25 +66,19 @@ var Start = new Phaser.Class({
   create: function () {
     console.log('%c Start ', 'background: green; color: white; display: block;');
 
-    this.titleBGM = this.sound.add('title');
-    this.titleBGM.play({loop:true,seek:2});
+    // this.titleBGM = this.sound.add('title');
+    // this.titleBGM.play({loop:true,seek:2});
 
     var bg = this.add.image(400, 300, 'title');
     bg.setInteractive();
 
-
-
     this.input.on('gameobjectup', ()=>{
-      this.titleBGM.stop();
+      // this.titleBGM.stop();
       this.cameras.main.fadeOut(2000, 0, 0, 0);
       this.time.delayedCall(2000,()=> {
         this.scene.start('game');
       }, [], this);
     }, this);
-
-    
-
-    
 
     // bg.once('pointerup', function () {
     //   this.titleBGM.stop();
