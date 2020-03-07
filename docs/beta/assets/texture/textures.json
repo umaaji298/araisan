@@ -1,0 +1,1784 @@
+{
+	"textures": [
+		{
+			"image": "textures.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 365,
+				"h": 243
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "buttons/26/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 34
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 34
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 33,
+						"h": 34
+					}
+				},
+				{
+					"filename": "buttons/26/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 34
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 34
+					},
+					"frame": {
+						"x": 1,
+						"y": 37,
+						"w": 33,
+						"h": 34
+					}
+				},
+				{
+					"filename": "buttons/1/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 36,
+						"y": 1,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/1/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 1,
+						"y": 73,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/10/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 36,
+						"y": 36,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/10/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 71,
+						"y": 1,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/2/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 1,
+						"y": 108,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/2/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 36,
+						"y": 71,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/20/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 71,
+						"y": 36,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/20/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 106,
+						"y": 1,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/25/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 1,
+						"y": 143,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/25/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 36,
+						"y": 106,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/3/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 71,
+						"y": 71,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/3/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 106,
+						"y": 36,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/5/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 141,
+						"y": 1,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/5/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 1,
+						"y": 178,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "evfont/24.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 27,
+						"h": 29
+					},
+					"frame": {
+						"x": 1,
+						"y": 213,
+						"w": 27,
+						"h": 29
+					}
+				},
+				{
+					"filename": "buttons/6/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 36,
+						"y": 141,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/6/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 71,
+						"y": 106,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/7/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 106,
+						"y": 71,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/7/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 141,
+						"y": 36,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/8/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 176,
+						"y": 1,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/8/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 36,
+						"y": 176,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/9/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 71,
+						"y": 141,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/9/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 106,
+						"y": 106,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/11/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 141,
+						"y": 71,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/11/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 176,
+						"y": 36,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/12/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 211,
+						"y": 1,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/12/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 71,
+						"y": 176,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/13/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 106,
+						"y": 141,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/13/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 141,
+						"y": 106,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/14/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 175,
+						"y": 71,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/14/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 210,
+						"y": 36,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/15/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 245,
+						"y": 1,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/15/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 105,
+						"y": 176,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/16/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 140,
+						"y": 141,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/16/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 175,
+						"y": 106,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/17/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 209,
+						"y": 71,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/17/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 244,
+						"y": 36,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/18/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 279,
+						"y": 1,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/18/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 139,
+						"y": 176,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/19/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 174,
+						"y": 141,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/19/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 209,
+						"y": 106,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/21/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 243,
+						"y": 71,
+						"w": 33,
+						"h": 32
+					}
+				},
+				{
+					"filename": "buttons/21/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 278,
+						"y": 36,
+						"w": 33,
+						"h": 32
+					}
+				},
+				{
+					"filename": "buttons/22/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 313,
+						"y": 1,
+						"w": 33,
+						"h": 32
+					}
+				},
+				{
+					"filename": "buttons/22/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 173,
+						"y": 176,
+						"w": 33,
+						"h": 32
+					}
+				},
+				{
+					"filename": "buttons/23/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 173,
+						"y": 210,
+						"w": 33,
+						"h": 32
+					}
+				},
+				{
+					"filename": "buttons/23/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 208,
+						"y": 141,
+						"w": 33,
+						"h": 32
+					}
+				},
+				{
+					"filename": "buttons/24/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 243,
+						"y": 105,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/24/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 278,
+						"y": 70,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/27/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 313,
+						"y": 35,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/27/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 208,
+						"y": 175,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/28/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 208,
+						"y": 210,
+						"w": 33,
+						"h": 32
+					}
+				},
+				{
+					"filename": "buttons/28/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 277,
+						"y": 105,
+						"w": 33,
+						"h": 32
+					}
+				},
+				{
+					"filename": "evfont/15.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 31,
+						"h": 26
+					},
+					"frame": {
+						"x": 243,
+						"y": 140,
+						"w": 31,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/17.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 3,
+						"w": 31,
+						"h": 26
+					},
+					"frame": {
+						"x": 312,
+						"y": 70,
+						"w": 31,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 30,
+						"h": 26
+					},
+					"frame": {
+						"x": 312,
+						"y": 98,
+						"w": 30,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/27.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 11,
+						"w": 16,
+						"h": 19
+					},
+					"frame": {
+						"x": 348,
+						"y": 1,
+						"w": 16,
+						"h": 19
+					}
+				},
+				{
+					"filename": "evfont/5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 19,
+						"h": 26
+					},
+					"frame": {
+						"x": 345,
+						"y": 70,
+						"w": 19,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/23.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 20,
+						"h": 25
+					},
+					"frame": {
+						"x": 344,
+						"y": 98,
+						"w": 20,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/12.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 30,
+						"h": 25
+					},
+					"frame": {
+						"x": 312,
+						"y": 126,
+						"w": 30,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 3,
+						"w": 19,
+						"h": 26
+					},
+					"frame": {
+						"x": 344,
+						"y": 125,
+						"w": 19,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/14.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 31,
+						"h": 25
+					},
+					"frame": {
+						"x": 243,
+						"y": 168,
+						"w": 31,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/13.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 30,
+						"h": 26
+					},
+					"frame": {
+						"x": 243,
+						"y": 195,
+						"w": 30,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/26.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 10,
+						"w": 30,
+						"h": 18
+					},
+					"frame": {
+						"x": 243,
+						"y": 223,
+						"w": 30,
+						"h": 18
+					}
+				},
+				{
+					"filename": "evfont/16.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 30,
+						"h": 26
+					},
+					"frame": {
+						"x": 30,
+						"y": 213,
+						"w": 30,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/18.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 30,
+						"h": 26
+					},
+					"frame": {
+						"x": 62,
+						"y": 211,
+						"w": 30,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/19.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 30,
+						"h": 26
+					},
+					"frame": {
+						"x": 94,
+						"y": 211,
+						"w": 30,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/11.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 3,
+						"w": 28,
+						"h": 25
+					},
+					"frame": {
+						"x": 126,
+						"y": 211,
+						"w": 28,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 3,
+						"w": 14,
+						"h": 25
+					},
+					"frame": {
+						"x": 156,
+						"y": 211,
+						"w": 14,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/25.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 4,
+						"w": 22,
+						"h": 26
+					},
+					"frame": {
+						"x": 276,
+						"y": 140,
+						"w": 22,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/20.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 4,
+						"w": 24,
+						"h": 25
+					},
+					"frame": {
+						"x": 276,
+						"y": 168,
+						"w": 24,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/22.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 4,
+						"w": 23,
+						"h": 25
+					},
+					"frame": {
+						"x": 275,
+						"y": 195,
+						"w": 23,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/28.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 10,
+						"w": 21,
+						"h": 18
+					},
+					"frame": {
+						"x": 275,
+						"y": 222,
+						"w": 21,
+						"h": 18
+					}
+				},
+				{
+					"filename": "evfont/2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 3,
+						"w": 19,
+						"h": 25
+					},
+					"frame": {
+						"x": 300,
+						"y": 195,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/21.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 3,
+						"w": 22,
+						"h": 25
+					},
+					"frame": {
+						"x": 302,
+						"y": 153,
+						"w": 22,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 3,
+						"w": 21,
+						"h": 25
+					},
+					"frame": {
+						"x": 326,
+						"y": 153,
+						"w": 21,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 19,
+						"h": 26
+					},
+					"frame": {
+						"x": 321,
+						"y": 180,
+						"w": 19,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 2,
+						"w": 18,
+						"h": 26
+					},
+					"frame": {
+						"x": 342,
+						"y": 180,
+						"w": 18,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 19,
+						"h": 26
+					},
+					"frame": {
+						"x": 321,
+						"y": 208,
+						"w": 19,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 19,
+						"h": 26
+					},
+					"frame": {
+						"x": 342,
+						"y": 208,
+						"w": 19,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/haifun.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 13,
+						"w": 9,
+						"h": 5
+					},
+					"frame": {
+						"x": 348,
+						"y": 22,
+						"w": 9,
+						"h": 5
+					}
+				},
+				{
+					"filename": "evfont/0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 3,
+						"h": 3
+					},
+					"frame": {
+						"x": 62,
+						"y": 239,
+						"w": 3,
+						"h": 3
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:47426716ff30f5b0276f941d97885655:b03f6779221dcd9e9f1b73eed697428e:cf827d152df04949dfee256cd0c8efd8$"
+	}
+}
