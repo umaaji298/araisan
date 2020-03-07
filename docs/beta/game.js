@@ -14,7 +14,7 @@ var Preloader = new Phaser.Class({
     this.load.image('next', 'assets/next.png');
     this.load.multiatlas('textures', 'assets/texture/textures.json', 'assets/texture');
 
-    this.load.audio('test','assets/audio/test.mp3');
+    this.load.audio('test', 'assets/audio/test.mp3');
 
     // this.load.audio('title', 'assets/audio/town_afternoon.ogg');
     // this.load.audio('click', 'assets/audio/click2.ogg');
@@ -504,3 +504,13 @@ window.addEventListener('focus', function (event) {
   }, 1000);
 },
   false);
+
+  // for ios
+document.addEventListener('touchstart', initAudioContext);
+function initAudioContext() {
+  document.removeEventListener('touchstart', initAudioContext);
+  // wake up AudioContext
+  const emptySource = ctx.createBufferSource();
+  emptySource.start();
+  emptySource.stop();
+}
