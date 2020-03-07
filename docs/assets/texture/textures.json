@@ -4,11 +4,32 @@
 			"image": "textures.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 365,
-				"h": 243
+				"w": 371,
+				"h": 248
 			},
 			"scale": 1,
 			"frames": [
+				{
+					"filename": "rotarysw.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 43,
+						"h": 44
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 43,
+						"h": 44
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 43,
+						"h": 44
+					}
+				},
 				{
 					"filename": "buttons/26/1.png",
 					"rotated": false,
@@ -25,7 +46,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 1,
+						"y": 47,
 						"w": 33,
 						"h": 34
 					}
@@ -46,7 +67,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 37,
+						"y": 83,
 						"w": 33,
 						"h": 34
 					}
@@ -66,8 +87,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 36,
-						"y": 1,
+						"x": 1,
+						"y": 119,
 						"w": 33,
 						"h": 33
 					}
@@ -88,7 +109,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 73,
+						"y": 154,
 						"w": 33,
 						"h": 33
 					}
@@ -108,10 +129,94 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 36,
-						"y": 36,
+						"x": 1,
+						"y": 189,
 						"w": 33,
 						"h": 33
+					}
+				},
+				{
+					"filename": "evfont/26.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 10,
+						"w": 30,
+						"h": 18
+					},
+					"frame": {
+						"x": 1,
+						"y": 224,
+						"w": 30,
+						"h": 18
+					}
+				},
+				{
+					"filename": "evfont/0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 3,
+						"h": 3
+					},
+					"frame": {
+						"x": 1,
+						"y": 244,
+						"w": 3,
+						"h": 3
+					}
+				},
+				{
+					"filename": "gauge.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 45,
+						"h": 11
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 45,
+						"h": 11
+					},
+					"frame": {
+						"x": 33,
+						"y": 224,
+						"w": 45,
+						"h": 11
+					}
+				},
+				{
+					"filename": "evfont/haifun.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 13,
+						"w": 9,
+						"h": 5
+					},
+					"frame": {
+						"x": 33,
+						"y": 237,
+						"w": 9,
+						"h": 5
 					}
 				},
 				{
@@ -129,8 +234,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 71,
-						"y": 1,
+						"x": 36,
+						"y": 47,
 						"w": 33,
 						"h": 33
 					}
@@ -150,8 +255,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 1,
-						"y": 108,
+						"x": 46,
+						"y": 1,
 						"w": 33,
 						"h": 33
 					}
@@ -172,7 +277,7 @@
 					},
 					"frame": {
 						"x": 36,
-						"y": 71,
+						"y": 82,
 						"w": 33,
 						"h": 33
 					}
@@ -192,8 +297,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 71,
-						"y": 36,
+						"x": 36,
+						"y": 117,
 						"w": 33,
 						"h": 33
 					}
@@ -213,8 +318,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 106,
-						"y": 1,
+						"x": 36,
+						"y": 152,
 						"w": 33,
 						"h": 33
 					}
@@ -234,8 +339,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 1,
-						"y": 143,
+						"x": 36,
+						"y": 187,
 						"w": 33,
 						"h": 33
 					}
@@ -255,14 +360,35 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 36,
-						"y": 106,
+						"x": 71,
+						"y": 36,
 						"w": 33,
 						"h": 33
 					}
 				},
 				{
 					"filename": "buttons/3/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 81,
+						"y": 1,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/3/2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -283,27 +409,6 @@
 					}
 				},
 				{
-					"filename": "buttons/3/2.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 33,
-						"h": 33
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 33,
-						"h": 33
-					},
-					"frame": {
-						"x": 106,
-						"y": 36,
-						"w": 33,
-						"h": 33
-					}
-				},
-				{
 					"filename": "buttons/5/1.png",
 					"rotated": false,
 					"trimmed": false,
@@ -318,8 +423,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 141,
-						"y": 1,
+						"x": 71,
+						"y": 106,
 						"w": 33,
 						"h": 33
 					}
@@ -339,31 +444,10 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 1,
-						"y": 178,
+						"x": 71,
+						"y": 141,
 						"w": 33,
 						"h": 33
-					}
-				},
-				{
-					"filename": "evfont/24.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 3,
-						"w": 27,
-						"h": 29
-					},
-					"frame": {
-						"x": 1,
-						"y": 213,
-						"w": 27,
-						"h": 29
 					}
 				},
 				{
@@ -381,8 +465,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 36,
-						"y": 141,
+						"x": 71,
+						"y": 176,
 						"w": 33,
 						"h": 33
 					}
@@ -402,8 +486,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 71,
-						"y": 106,
+						"x": 80,
+						"y": 211,
 						"w": 33,
 						"h": 33
 					}
@@ -424,7 +508,7 @@
 					},
 					"frame": {
 						"x": 106,
-						"y": 71,
+						"y": 36,
 						"w": 33,
 						"h": 33
 					}
@@ -444,8 +528,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 141,
-						"y": 36,
+						"x": 116,
+						"y": 1,
 						"w": 33,
 						"h": 33
 					}
@@ -465,8 +549,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 176,
-						"y": 1,
+						"x": 106,
+						"y": 71,
 						"w": 33,
 						"h": 33
 					}
@@ -486,8 +570,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 36,
-						"y": 176,
+						"x": 106,
+						"y": 106,
 						"w": 33,
 						"h": 33
 					}
@@ -507,7 +591,7 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 71,
+						"x": 106,
 						"y": 141,
 						"w": 33,
 						"h": 33
@@ -529,7 +613,7 @@
 					},
 					"frame": {
 						"x": 106,
-						"y": 106,
+						"y": 176,
 						"w": 33,
 						"h": 33
 					}
@@ -549,8 +633,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 141,
-						"y": 71,
+						"x": 115,
+						"y": 211,
 						"w": 32,
 						"h": 33
 					}
@@ -570,7 +654,7 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 176,
+						"x": 141,
 						"y": 36,
 						"w": 32,
 						"h": 33
@@ -591,7 +675,7 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 211,
+						"x": 151,
 						"y": 1,
 						"w": 32,
 						"h": 33
@@ -612,35 +696,14 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 71,
-						"y": 176,
+						"x": 141,
+						"y": 71,
 						"w": 32,
 						"h": 33
 					}
 				},
 				{
 					"filename": "buttons/13/1.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 33
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 33
-					},
-					"frame": {
-						"x": 106,
-						"y": 141,
-						"w": 32,
-						"h": 33
-					}
-				},
-				{
-					"filename": "buttons/13/2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -661,6 +724,27 @@
 					}
 				},
 				{
+					"filename": "buttons/13/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 141,
+						"y": 141,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
 					"filename": "buttons/14/1.png",
 					"rotated": false,
 					"trimmed": false,
@@ -675,8 +759,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 175,
-						"y": 71,
+						"x": 141,
+						"y": 176,
 						"w": 32,
 						"h": 33
 					}
@@ -696,8 +780,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 210,
-						"y": 36,
+						"x": 149,
+						"y": 211,
 						"w": 32,
 						"h": 33
 					}
@@ -717,8 +801,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 245,
-						"y": 1,
+						"x": 175,
+						"y": 36,
 						"w": 32,
 						"h": 33
 					}
@@ -738,8 +822,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 105,
-						"y": 176,
+						"x": 185,
+						"y": 1,
 						"w": 32,
 						"h": 33
 					}
@@ -759,8 +843,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 140,
-						"y": 141,
+						"x": 175,
+						"y": 71,
 						"w": 32,
 						"h": 33
 					}
@@ -801,8 +885,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 209,
-						"y": 71,
+						"x": 175,
+						"y": 141,
 						"w": 32,
 						"h": 33
 					}
@@ -822,8 +906,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 244,
-						"y": 36,
+						"x": 175,
+						"y": 176,
 						"w": 32,
 						"h": 33
 					}
@@ -843,10 +927,31 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 279,
-						"y": 1,
+						"x": 183,
+						"y": 211,
 						"w": 32,
 						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/21/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 209,
+						"y": 36,
+						"w": 33,
+						"h": 32
 					}
 				},
 				{
@@ -864,8 +969,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 139,
-						"y": 176,
+						"x": 219,
+						"y": 1,
 						"w": 32,
 						"h": 33
 					}
@@ -885,8 +990,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 174,
-						"y": 141,
+						"x": 209,
+						"y": 70,
 						"w": 32,
 						"h": 33
 					}
@@ -907,135 +1012,9 @@
 					},
 					"frame": {
 						"x": 209,
-						"y": 106,
+						"y": 105,
 						"w": 32,
 						"h": 33
-					}
-				},
-				{
-					"filename": "buttons/21/1.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 33,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 33,
-						"h": 32
-					},
-					"frame": {
-						"x": 243,
-						"y": 71,
-						"w": 33,
-						"h": 32
-					}
-				},
-				{
-					"filename": "buttons/21/2.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 33,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 33,
-						"h": 32
-					},
-					"frame": {
-						"x": 278,
-						"y": 36,
-						"w": 33,
-						"h": 32
-					}
-				},
-				{
-					"filename": "buttons/22/1.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 33,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 33,
-						"h": 32
-					},
-					"frame": {
-						"x": 313,
-						"y": 1,
-						"w": 33,
-						"h": 32
-					}
-				},
-				{
-					"filename": "buttons/22/2.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 33,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 33,
-						"h": 32
-					},
-					"frame": {
-						"x": 173,
-						"y": 176,
-						"w": 33,
-						"h": 32
-					}
-				},
-				{
-					"filename": "buttons/23/1.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 33,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 33,
-						"h": 32
-					},
-					"frame": {
-						"x": 173,
-						"y": 210,
-						"w": 33,
-						"h": 32
-					}
-				},
-				{
-					"filename": "buttons/23/2.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 33,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 33,
-						"h": 32
-					},
-					"frame": {
-						"x": 208,
-						"y": 141,
-						"w": 33,
-						"h": 32
 					}
 				},
 				{
@@ -1053,8 +1032,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 243,
-						"y": 105,
+						"x": 209,
+						"y": 140,
 						"w": 32,
 						"h": 33
 					}
@@ -1074,8 +1053,8 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 278,
-						"y": 70,
+						"x": 209,
+						"y": 175,
 						"w": 32,
 						"h": 33
 					}
@@ -1095,10 +1074,52 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 313,
-						"y": 35,
+						"x": 217,
+						"y": 210,
 						"w": 32,
 						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/21/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 243,
+						"y": 70,
+						"w": 33,
+						"h": 32
+					}
+				},
+				{
+					"filename": "buttons/22/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 244,
+						"y": 36,
+						"w": 33,
+						"h": 32
 					}
 				},
 				{
@@ -1116,10 +1137,73 @@
 						"h": 33
 					},
 					"frame": {
-						"x": 208,
-						"y": 175,
+						"x": 253,
+						"y": 1,
 						"w": 32,
 						"h": 33
+					}
+				},
+				{
+					"filename": "buttons/22/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 243,
+						"y": 104,
+						"w": 33,
+						"h": 32
+					}
+				},
+				{
+					"filename": "buttons/23/1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 243,
+						"y": 138,
+						"w": 33,
+						"h": 32
+					}
+				},
+				{
+					"filename": "buttons/23/2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 32
+					},
+					"frame": {
+						"x": 243,
+						"y": 172,
+						"w": 33,
+						"h": 32
 					}
 				},
 				{
@@ -1137,8 +1221,8 @@
 						"h": 32
 					},
 					"frame": {
-						"x": 208,
-						"y": 210,
+						"x": 251,
+						"y": 206,
 						"w": 33,
 						"h": 32
 					}
@@ -1158,8 +1242,8 @@
 						"h": 32
 					},
 					"frame": {
-						"x": 277,
-						"y": 105,
+						"x": 278,
+						"y": 70,
 						"w": 33,
 						"h": 32
 					}
@@ -1179,8 +1263,8 @@
 						"h": 26
 					},
 					"frame": {
-						"x": 243,
-						"y": 140,
+						"x": 279,
+						"y": 36,
 						"w": 31,
 						"h": 26
 					}
@@ -1200,10 +1284,31 @@
 						"h": 26
 					},
 					"frame": {
-						"x": 312,
-						"y": 70,
+						"x": 287,
+						"y": 1,
 						"w": 31,
 						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/24.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 27,
+						"h": 29
+					},
+					"frame": {
+						"x": 312,
+						"y": 29,
+						"w": 27,
+						"h": 29
 					}
 				},
 				{
@@ -1221,98 +1326,14 @@
 						"h": 26
 					},
 					"frame": {
-						"x": 312,
-						"y": 98,
-						"w": 30,
-						"h": 26
-					}
-				},
-				{
-					"filename": "evfont/27.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 8,
-						"y": 11,
-						"w": 16,
-						"h": 19
-					},
-					"frame": {
-						"x": 348,
+						"x": 320,
 						"y": 1,
-						"w": 16,
-						"h": 19
-					}
-				},
-				{
-					"filename": "evfont/5.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 3,
-						"w": 19,
-						"h": 26
-					},
-					"frame": {
-						"x": 345,
-						"y": 70,
-						"w": 19,
+						"w": 30,
 						"h": 26
 					}
 				},
 				{
-					"filename": "evfont/23.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 3,
-						"w": 20,
-						"h": 25
-					},
-					"frame": {
-						"x": 344,
-						"y": 98,
-						"w": 20,
-						"h": 25
-					}
-				},
-				{
-					"filename": "evfont/12.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 4,
-						"w": 30,
-						"h": 25
-					},
-					"frame": {
-						"x": 312,
-						"y": 126,
-						"w": 30,
-						"h": 25
-					}
-				},
-				{
-					"filename": "evfont/6.png",
+					"filename": "evfont/3.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1321,140 +1342,14 @@
 					},
 					"spriteSourceSize": {
 						"x": 7,
-						"y": 3,
-						"w": 19,
+						"y": 2,
+						"w": 18,
 						"h": 26
 					},
 					"frame": {
-						"x": 344,
-						"y": 125,
-						"w": 19,
-						"h": 26
-					}
-				},
-				{
-					"filename": "evfont/14.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 3,
-						"w": 31,
-						"h": 25
-					},
-					"frame": {
-						"x": 243,
-						"y": 168,
-						"w": 31,
-						"h": 25
-					}
-				},
-				{
-					"filename": "evfont/13.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 4,
-						"w": 30,
-						"h": 26
-					},
-					"frame": {
-						"x": 243,
-						"y": 195,
-						"w": 30,
-						"h": 26
-					}
-				},
-				{
-					"filename": "evfont/26.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 10,
-						"w": 30,
-						"h": 18
-					},
-					"frame": {
-						"x": 243,
-						"y": 223,
-						"w": 30,
-						"h": 18
-					}
-				},
-				{
-					"filename": "evfont/16.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 4,
-						"w": 30,
-						"h": 26
-					},
-					"frame": {
-						"x": 30,
-						"y": 213,
-						"w": 30,
-						"h": 26
-					}
-				},
-				{
-					"filename": "evfont/18.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 4,
-						"w": 30,
-						"h": 26
-					},
-					"frame": {
-						"x": 62,
-						"y": 211,
-						"w": 30,
-						"h": 26
-					}
-				},
-				{
-					"filename": "evfont/19.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 4,
-						"w": 30,
-						"h": 26
-					},
-					"frame": {
-						"x": 94,
-						"y": 211,
-						"w": 30,
+						"x": 352,
+						"y": 1,
+						"w": 18,
 						"h": 26
 					}
 				},
@@ -1473,52 +1368,10 @@
 						"h": 25
 					},
 					"frame": {
-						"x": 126,
-						"y": 211,
+						"x": 341,
+						"y": 29,
 						"w": 28,
 						"h": 25
-					}
-				},
-				{
-					"filename": "evfont/1.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 9,
-						"y": 3,
-						"w": 14,
-						"h": 25
-					},
-					"frame": {
-						"x": 156,
-						"y": 211,
-						"w": 14,
-						"h": 25
-					}
-				},
-				{
-					"filename": "evfont/25.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 5,
-						"y": 4,
-						"w": 22,
-						"h": 26
-					},
-					"frame": {
-						"x": 276,
-						"y": 140,
-						"w": 22,
-						"h": 26
 					}
 				},
 				{
@@ -1536,8 +1389,8 @@
 						"h": 25
 					},
 					"frame": {
-						"x": 276,
-						"y": 168,
+						"x": 341,
+						"y": 56,
 						"w": 24,
 						"h": 25
 					}
@@ -1557,14 +1410,35 @@
 						"h": 25
 					},
 					"frame": {
-						"x": 275,
-						"y": 195,
+						"x": 313,
+						"y": 60,
 						"w": 23,
 						"h": 25
 					}
 				},
 				{
-					"filename": "evfont/28.png",
+					"filename": "evfont/13.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 30,
+						"h": 26
+					},
+					"frame": {
+						"x": 338,
+						"y": 83,
+						"w": 30,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/25.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1573,19 +1447,19 @@
 					},
 					"spriteSourceSize": {
 						"x": 5,
-						"y": 10,
-						"w": 21,
-						"h": 18
+						"y": 4,
+						"w": 22,
+						"h": 26
 					},
 					"frame": {
-						"x": 275,
-						"y": 222,
-						"w": 21,
-						"h": 18
+						"x": 313,
+						"y": 87,
+						"w": 22,
+						"h": 26
 					}
 				},
 				{
-					"filename": "evfont/2.png",
+					"filename": "evfont/16.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1593,16 +1467,37 @@
 						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 7,
-						"y": 3,
-						"w": 19,
-						"h": 25
+						"x": 1,
+						"y": 4,
+						"w": 30,
+						"h": 26
 					},
 					"frame": {
-						"x": 300,
-						"y": 195,
-						"w": 19,
-						"h": 25
+						"x": 278,
+						"y": 104,
+						"w": 30,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/18.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 30,
+						"h": 26
+					},
+					"frame": {
+						"x": 337,
+						"y": 111,
+						"w": 30,
+						"h": 26
 					}
 				},
 				{
@@ -1620,9 +1515,72 @@
 						"h": 25
 					},
 					"frame": {
-						"x": 302,
-						"y": 153,
+						"x": 310,
+						"y": 115,
 						"w": 22,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/19.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 30,
+						"h": 26
+					},
+					"frame": {
+						"x": 278,
+						"y": 132,
+						"w": 30,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/14.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 3,
+						"w": 31,
+						"h": 25
+					},
+					"frame": {
+						"x": 334,
+						"y": 139,
+						"w": 31,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/12.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 30,
+						"h": 25
+					},
+					"frame": {
+						"x": 278,
+						"y": 160,
+						"w": 30,
 						"h": 25
 					}
 				},
@@ -1641,10 +1599,94 @@
 						"h": 25
 					},
 					"frame": {
-						"x": 326,
-						"y": 153,
+						"x": 310,
+						"y": 142,
 						"w": 21,
 						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/23.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 20,
+						"h": 25
+					},
+					"frame": {
+						"x": 333,
+						"y": 166,
+						"w": 20,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 3,
+						"w": 14,
+						"h": 25
+					},
+					"frame": {
+						"x": 355,
+						"y": 166,
+						"w": 14,
+						"h": 25
+					}
+				},
+				{
+					"filename": "evfont/5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 3,
+						"w": 19,
+						"h": 26
+					},
+					"frame": {
+						"x": 310,
+						"y": 169,
+						"w": 19,
+						"h": 26
+					}
+				},
+				{
+					"filename": "evfont/6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 3,
+						"w": 19,
+						"h": 26
+					},
+					"frame": {
+						"x": 286,
+						"y": 187,
+						"w": 19,
+						"h": 26
 					}
 				},
 				{
@@ -1662,30 +1704,9 @@
 						"h": 26
 					},
 					"frame": {
-						"x": 321,
-						"y": 180,
+						"x": 331,
+						"y": 193,
 						"w": 19,
-						"h": 26
-					}
-				},
-				{
-					"filename": "evfont/3.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 7,
-						"y": 2,
-						"w": 18,
-						"h": 26
-					},
-					"frame": {
-						"x": 342,
-						"y": 180,
-						"w": 18,
 						"h": 26
 					}
 				},
@@ -1704,8 +1725,8 @@
 						"h": 26
 					},
 					"frame": {
-						"x": 321,
-						"y": 208,
+						"x": 307,
+						"y": 197,
 						"w": 19,
 						"h": 26
 					}
@@ -1725,14 +1746,14 @@
 						"h": 26
 					},
 					"frame": {
-						"x": 342,
-						"y": 208,
+						"x": 286,
+						"y": 215,
 						"w": 19,
 						"h": 26
 					}
 				},
 				{
-					"filename": "evfont/haifun.png",
+					"filename": "evfont/2.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1740,20 +1761,20 @@
 						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 12,
-						"y": 13,
-						"w": 9,
-						"h": 5
+						"x": 7,
+						"y": 3,
+						"w": 19,
+						"h": 25
 					},
 					"frame": {
-						"x": 348,
-						"y": 22,
-						"w": 9,
-						"h": 5
+						"x": 328,
+						"y": 221,
+						"w": 19,
+						"h": 25
 					}
 				},
 				{
-					"filename": "evfont/0.png",
+					"filename": "evfont/27.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1761,16 +1782,37 @@
 						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 3,
-						"h": 3
+						"x": 8,
+						"y": 11,
+						"w": 16,
+						"h": 19
 					},
 					"frame": {
-						"x": 62,
-						"y": 239,
-						"w": 3,
-						"h": 3
+						"x": 307,
+						"y": 225,
+						"w": 16,
+						"h": 19
+					}
+				},
+				{
+					"filename": "evfont/28.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 10,
+						"w": 21,
+						"h": 18
+					},
+					"frame": {
+						"x": 349,
+						"y": 221,
+						"w": 21,
+						"h": 18
 					}
 				}
 			]
@@ -1779,6 +1821,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:47426716ff30f5b0276f941d97885655:b03f6779221dcd9e9f1b73eed697428e:cf827d152df04949dfee256cd0c8efd8$"
+		"smartupdate": "$TexturePacker:SmartUpdate:b1b21dab73c1486467bdf98f064d9b36:aae11f3d4521dc0e59860f58c102f74d:cf827d152df04949dfee256cd0c8efd8$"
 	}
 }

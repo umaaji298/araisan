@@ -14,34 +14,19 @@ var Preloader = new Phaser.Class({
     this.load.image('next', 'assets/next.png');
     this.load.multiatlas('textures', 'assets/texture/textures.json', 'assets/texture');
 
-    this.load.audio('title','assets/audio/town_afternoon.ogg');
-    this.load.audio('click', 'assets/audio/click2.ogg');
-    this.load.audio('evmove', 'assets/audio/elevetor_6sec.ogg');
-    this.load.audio('pone', 'assets/audio/ariplane-chime_one.ogg');
-    this.load.audio('dooropen', 'assets/audio/elevetordoor.ogg');
-    this.load.audio('ending', 'assets/audio/taiju_43sec.ogg');
+    //this.load.audio('click', 'assets/audio/click2.ogg');
+    this.load.audio('click', 'assets/audio/click2.mp3');
+    this.load.audio('evmove', 'assets/audio/elevetor_6sec.mp3');
+    this.load.audio('pone', 'assets/audio/ariplane-chime_one.mp3');
+    this.load.audio('dooropen', 'assets/audio/elevetordoor.mp3');
+    this.load.audio('ending', 'assets/audio/taiju_43sec.mp3');
     //this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
   },
 
   create: function () {
     console.log('%c Preloader ', 'background: green; color: white; display: block;');
-    //loadgin
-    // game.scale.pageAlignHorizontally = true;
-    // game.scale.pageAlignVertically = true;
-    //game.scale.scaleMode = Phaser.Scale.ScaleModes.FIT;
-    // game.scale.scaleMode = Phaser.Scale.HEIGHT_CONTROLS_WIDTH;
-    // game.scale.refresh();
 
-    // this.fullscreen = this.add.image(400,300,'fullscreen');
-    // this.fullscreen.setInteractive();
-
-    // this.fullscreen.on('pointerup',()=>{
-    //   console.log('hello',game);
-    //   game.scale.startFullscreen();
-    //   game.scale.refresh();
-    // },this);
-
-    game.scale.onFullScreenChange(()=>{
+    game.scale.onFullScreenChange(() => {
       console.log('change');
     })
 
@@ -66,16 +51,18 @@ var Start = new Phaser.Class({
   create: function () {
     console.log('%c Start ', 'background: green; color: white; display: block;');
 
-    // this.titleBGM = this.sound.add('title');
-    // this.titleBGM.play({loop:true,seek:2});
+    this.poneSE = this.sound.add('pone');
+    //this.titleBGM = this.sound.add('title'); 
+    //this.titleBGM.play({loop:true,seek:2}); //iOS this is NG : user touch event need
 
     var bg = this.add.image(400, 300, 'title');
     bg.setInteractive();
 
-    this.input.on('gameobjectup', ()=>{
-      // this.titleBGM.stop();
+    this.input.on('gameobjectup', () => {
+      this.poneSE.play();
+      //this.titleBGM.stop();
       this.cameras.main.fadeOut(2000, 0, 0, 0);
-      this.time.delayedCall(2000,()=> {
+      this.time.delayedCall(2000, () => {
         this.scene.start('game');
       }, [], this);
     }, this);
@@ -123,13 +110,16 @@ var GameOver = new Phaser.Class({
       "",
       "遊句@夢に見た緑",
       "ポケットサウンド@https://pocket-se.info/",
-      "小森平@無料効果音で遊ぼう！",
       "",
       "",
       "素材",
       "",
       "illustAC@アトリエウパ",
       "",
+      "",
+      "デバッグ協力",
+      "",
+      "COP",
       "",
       "",
       "他",
@@ -207,8 +197,8 @@ var Game = new Phaser.Class({
     },
 
   create: function () {
-    
-    if(!this.retry){
+
+    if (!this.retry) {
       this.cameras.main.fadeIn(2000, 0, 0, 0);
     }
 
@@ -277,6 +267,12 @@ var Game = new Phaser.Class({
       this.anims.create({ key: swev, frames: frameNames, frameRate: 10, repeat: 0 });
       swobj.anims.load(swev);
     }
+
+    // //rotary sw
+    // this.add.sprite(563, 162, 'textures', 'rotarysw.png');
+
+    // //gauge
+    // this.add.sprite(563, 262, 'textures', 'gauge.png');
 
     //next button 
     this.next = this.add.image(400, 530, 'next');
@@ -471,6 +467,8 @@ var Game = new Phaser.Class({
 
 });
 
+var audioContext = new ((window).AudioContext || (window).webkitAudioContext)();
+
 var config = {
   type: Phaser.AUTO,
   scale: {
@@ -480,8 +478,31 @@ var config = {
     width: 800,
     height: 600
   },
+  audio: {
+    context: audioContext,
+    // disableWebAudio: true
+  },
   backgroundColor: '#000000',
   scene: [Preloader, Start, Game, GameOver]
 };
 
 var game = new Phaser.Game(config);
+
+// for ios
+window.addEventListener('focus', function (event) {
+  setTimeout(function () {
+    console.log('resuming…')
+    audioContext.resume();
+  }, 1000);
+},
+  false);
+
+// for ios
+document.addEventListener('touchstart', initAudioContext);
+function initAudioContext() {
+  document.removeEventListener('touchstart', initAudioContext);
+  // wake up AudioContext
+  const emptySource = ctx.createBufferSource();
+  emptySource.start();
+  emptySource.stop();
+}
