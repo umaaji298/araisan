@@ -493,6 +493,10 @@ var config = {
     width: 800,
     height: 600
   },
+  audio: {
+    context: audioContext,
+    // disableWebAudio: true
+  },
   backgroundColor: '#000000',
   scene: [Preloader, Start, Game, GameOver]
 };

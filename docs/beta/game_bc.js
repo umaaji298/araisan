@@ -22,7 +22,7 @@ var Preloader = new Phaser.Class({
     this.load.audio('pone', 'assets/audio/ariplane-chime_one.ogg');
     this.load.audio('dooropen', 'assets/audio/elevetordoor.ogg');
     this.load.audio('ending', 'assets/audio/taiju_43sec.ogg');
-    this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
+    // this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
   },
 
   create: function () {
