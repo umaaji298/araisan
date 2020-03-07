@@ -12,9 +12,9 @@ var Preloader = new Phaser.Class({
     this.load.image('title', 'assets/title.png');
     this.load.image('panel', 'assets/panel.png');
     this.load.image('next', 'assets/next.png');
-    
-
     this.load.multiatlas('textures', 'assets/texture/textures.json', 'assets/texture');
+
+    this.load.audio('title','assets/audio/town_afternoon.ogg');
     this.load.audio('click', 'assets/audio/click2.ogg');
     this.load.audio('evmove', 'assets/audio/elevetor_6sec.ogg');
     this.load.audio('pone', 'assets/audio/ariplane-chime_one.ogg');
@@ -46,6 +46,7 @@ var Preloader = new Phaser.Class({
     })
 
     this.scene.start('start');
+
   }
 
 });
@@ -65,29 +66,30 @@ var Start = new Phaser.Class({
   create: function () {
     console.log('%c Start ', 'background: green; color: white; display: block;');
 
+    this.titleBGM = this.sound.add('title');
+    this.titleBGM.play({loop:true,seek:2});
+
     var bg = this.add.image(400, 300, 'title');
     bg.setInteractive();
 
-    bg.once('pointerup', function () {
-      this.scene.start('game');
+
+
+    this.input.on('gameobjectup', ()=>{
+      this.titleBGM.stop();
+      this.cameras.main.fadeOut(2000, 0, 0, 0);
+      this.time.delayedCall(2000,()=> {
+        this.scene.start('game');
+      }, [], this);
     }, this);
 
+    
 
-    // this.fullscreen = this.add.image(400,300,'fullscreen');
-    // this.fullscreen.setInteractive();
+    
 
-    // this.fullscreen.on('pointerup',()=>{
-    //   console.log('hello',game);
-      
-    //   // game.scale.scaleMode = Phaser.Scale.ScaleModes.FIT;
-    //   // game.scale.autoCenter = Phaser.Scale.CENTER_BOTH;
-      
-    //   game.scale.startFullscreen();
-    //   game.scale.refresh();
-    //   //game.scale.autoCenter = Phaser.Scale.CENTER_BOTH;
-     
-      
-    // },this);
+    // bg.once('pointerup', function () {
+    //   this.titleBGM.stop();
+    //   this.scene.start('game');
+    // }, this);
   }
 
 });
@@ -127,6 +129,7 @@ var GameOver = new Phaser.Class({
       "",
       "遊句@夢に見た緑",
       "ポケットサウンド@https://pocket-se.info/",
+      "小森平@無料効果音で遊ぼう！",
       "",
       "",
       "素材",
@@ -198,7 +201,7 @@ var Game = new Phaser.Class({
       this.ev1data = ["0", "人型の", "蟲型の", "不定形の", "4", "半透明の", "複数の", "機械の", "太った", "植物の", "影のような", "小さい", "巨大な", "花にまみれた", "あなたは１４に向かった", "異質の", "光に包まれた", "夜の", "頭が２つある", "ふたなりの", "水中の", "空飛ぶ", "発情した", "ひからびた", "首だけの", "閉じ込められた", "フレンズ化した", "黒く塗りつぶされた", "血まみれの"];
       this.ev2data = ["0", "みんみが", "オオカワウソが", "ガチおじが", "4", "怪異が", "おじぞうさんが", "かたまりが", "人形が", "全裸の異性が", "としあきが", "地下ラッコが", "コツメカワウソが", "荒耶宗蓮が", "メリーさんが", "探索者が", "ギンキタが", "アライさんが", "フェネックが", "きんたまが", "モブフレンズが", "肉食ちゃんが", "草食ちゃんが", "木魚マンが", "のじゃ巫女が", "目玉が", "ネズミボトルが", "待機カワウソが", "じごくボスが"];
       this.ev3data = ["0", "はいずりながら", "ゆっくりと近づきながら", "武器を振りかざして", "4", "天井に張り付きながら", "高速で走りながら", "踊りながら", "君を見つめながら", "何かを食べながら", "ウインクしながら", "笑いながら", "自分を切りつけながら", "君と大きく距離をとって", "謎の液体を飛ばしながら", "さっと照明を消して", "ここは安全だと叫びながら", "小さく助けてとつぶやいて", "泥のようなものを投擲しながら", "変形しながら", "下着をずらしながら", "口から血を吐きながら", "ようこそと手招きして", "震えながらお金を差し出して", "血走った目で君を睨みつけて", "気弱げにしゃがみこんで", "エレベーターを塞ぎながら", "苦しげに来るなと言いながら", "薔薇に絡まりながら"];
-      this.ev4data = ["0", "挨拶をしてきた。", "襲ってきた。", "帰れと警告してきた。", "4", "君の落とし物を届けてくれた。", "手打ちうどんを\nごちそうしてくれた。", "ずっと後をつけてくる…", "何かを探していた。", "フロアの物を破壊していた。", "君を殺しに来た。", "他の怪異から君を守った。", "君の大切なものを奪った。", "君にキスをした。", "君に決闘を申し込んだ。", "君を閉じ込めた。", "君と１０年ほど暮らした。", "君に寄生した。", "あたりに火を付けた。", "ベランダから飛び降りた！", "君を無視した。", "君を誘った。", "君を囮にして逃げた。", "壁に消えていった…", "君の服を脱がした。", "君の髪の毛を毟った！", "君に何かの魔法をかけたようだ…", "君を血を啜った。", "息絶えた…"];
+      this.ev4data = ["0", "挨拶をしてきた。", "襲ってきた。", "帰れと警告してきた。", "4", "君の落とし物を届けてくれた。", "手打ちうどんを\nごちそうしてくれた。", "ずっと後をつけてくる…", "何かを探していた。", "フロアの物を破壊していた。", "君を殺しに来た。", "他の怪異から君を守った。", "君の大切なものを奪った。", "君にキスをした。", "君に決闘を申し込んだ。", "君を閉じ込めた。", "君と１０年ほど暮らした。", "君に寄生した。", "あたりに火を付けた。", "ベランダから飛び降りた！", "君を無視した。", "君を誘った。", "君を囮にして逃げた。", "壁に消えていった…", "君の服を脱がした。", "君の髪の毛を毟った！", "君に何かの魔法をかけたようだ…", "君の血を啜った。", "息絶えた…"];
 
       //others
       this.fontopt = { fontSize: '16px', color: '#fff', backgroundColor: '#f00', padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
@@ -206,9 +209,14 @@ var Game = new Phaser.Class({
       this.fontsysSmall = { fontSize: '16px', color: '#fff', maxLines: 2, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
       this.fontev = { fontSize: '30px', color: '#fff', maxLines: 4, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
       this.fontevRed = { fontSize: '30px', color: '#f00', maxLines: 4, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
+
     },
 
   create: function () {
+    
+    if(!this.retry){
+      this.cameras.main.fadeIn(2000, 0, 0, 0);
+    }
 
     this.switches = new Array();
     this.inputNo = new Array();
@@ -226,8 +234,6 @@ var Game = new Phaser.Class({
 
     //base
     this.add.image(650, 300, 'panel');
-
-
 
     //darty code
     this.switches.push({}); // 1 is null
@@ -302,6 +308,8 @@ var Game = new Phaser.Class({
 
       if (sw.name === 'next') {
         console.log('restart');
+
+        this.retry = true;
 
         delete this.switches;
         this.scene.start('game');
