@@ -14,13 +14,15 @@ var Preloader = new Phaser.Class({
     this.load.image('next', 'assets/next.png');
     this.load.multiatlas('textures', 'assets/texture/textures.json', 'assets/texture');
 
+    this.load.audio('test', 'assets/audio/test.mp3');
+
     this.load.audio('title', 'assets/audio/town_afternoon.ogg');
     this.load.audio('click', 'assets/audio/click2.ogg');
     this.load.audio('evmove', 'assets/audio/elevetor_6sec.ogg');
     this.load.audio('pone', 'assets/audio/ariplane-chime_one.ogg');
     this.load.audio('dooropen', 'assets/audio/elevetordoor.ogg');
     this.load.audio('ending', 'assets/audio/taiju_43sec.ogg');
-    //this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
+    this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
   },
 
   create: function () {
@@ -66,20 +68,20 @@ var Start = new Phaser.Class({
   create: function () {
     console.log('%c Start ', 'background: green; color: white; display: block;');
 
-    this.poneSE = this.sound.add('pone');
-    //this.titleBGM = this.sound.add('title'); 
-    //this.titleBGM.play({loop:true,seek:2}); //iOS this is NG : user touch event need
+    this.titleBGM = this.sound.add('test');
 
     var bg = this.add.image(400, 300, 'title');
     bg.setInteractive();
 
     this.input.on('gameobjectup', () => {
-      this.poneSE.play();
-      //this.titleBGM.stop();
-      this.cameras.main.fadeOut(2000, 0, 0, 0);
-      this.time.delayedCall(2000, () => {
-        this.scene.start('game');
-      }, [], this);
+      this.titleBGM.play();
+
+      // this.titleBGM.stop();
+      // this.cameras.main.fadeOut(2000, 0, 0, 0);
+      // this.time.delayedCall(2000,()=> {
+      // this.scene.start('game');
+
+      // }, [], this);
     }, this);
 
     // bg.once('pointerup', function () {
@@ -132,9 +134,6 @@ var GameOver = new Phaser.Class({
       "",
       "illustAC@アトリエウパ",
       "",
-      "デバッグ協力",
-      "",
-      "COP",
       "",
       "",
       "他",
@@ -282,12 +281,6 @@ var Game = new Phaser.Class({
       this.anims.create({ key: swev, frames: frameNames, frameRate: 10, repeat: 0 });
       swobj.anims.load(swev);
     }
-
-    // //rotary sw
-    // this.add.sprite(563, 162, 'textures', 'rotarysw.png');
-
-    // //gauge
-    // this.add.sprite(563, 262, 'textures', 'gauge.png');
 
     //next button 
     this.next = this.add.image(400, 530, 'next');
@@ -493,13 +486,17 @@ var config = {
     width: 800,
     height: 600
   },
+  audio: {
+    context: audioContext,
+    // disableWebAudio: true
+  },
   backgroundColor: '#000000',
   scene: [Preloader, Start, Game, GameOver]
 };
 
 var game = new Phaser.Game(config);
 
-// for ios
+  // for ios
 window.addEventListener('focus', function (event) {
   setTimeout(function () {
     console.log('resuming…')
@@ -508,7 +505,7 @@ window.addEventListener('focus', function (event) {
 },
   false);
 
-// for ios
+  // for ios
 document.addEventListener('touchstart', initAudioContext);
 function initAudioContext() {
   document.removeEventListener('touchstart', initAudioContext);
