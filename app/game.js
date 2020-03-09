@@ -14,14 +14,18 @@ var Preloader = new Phaser.Class({
     this.load.image('title', 'assets/title.png');
     this.load.image('panel', 'assets/panel.png');
     this.load.image('next', 'assets/next.png');
+    this.load.image('arraw', 'assets/arraw.png');
     this.load.multiatlas('textures', 'assets/texture/textures.json', 'assets/texture');
 
     //this.load.audio('click', 'assets/audio/click2.ogg');
     this.load.audio('click', 'assets/audio/click2.mp3');
+    this.load.audio('rsw', 'assets/audio/switch1.mp3');
+    this.load.audio('gauge', 'assets/audio/kachi4.mp3');
     this.load.audio('evmove', 'assets/audio/elevetor_6sec.mp3');
     this.load.audio('pone', 'assets/audio/ariplane-chime_one.mp3');
     this.load.audio('dooropen', 'assets/audio/elevetordoor.mp3');
     this.load.audio('ending', 'assets/audio/taiju_43sec.mp3');
+
     //this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
   },
 
@@ -33,6 +37,7 @@ var Preloader = new Phaser.Class({
     })
 
     this.scene.start('start');
+    // this.scene.start('game');
 
   }
 
@@ -50,29 +55,45 @@ var Start = new Phaser.Class({
       window.MENU = this;// whats?
     },
 
+  // preload: function () {
+  //   // this.load.plugin('rexshakepositionplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexshakepositionplugin.min.js', true);
+  //   this.load.plugin('rexShake', 'a.js', true);
+  // },
+
   create: function () {
     console.log('%c Start ', 'background: green; color: white; display: block;');
 
     this.poneSE = this.sound.add('pone');
-    //this.titleBGM = this.sound.add('title'); 
-    //this.titleBGM.play({loop:true,seek:2}); //iOS this is NG : user touch event need
 
     var bg = this.add.image(400, 300, 'title');
     bg.setInteractive();
 
-    this.input.on('gameobjectup', () => {
+    // var shake = this.plugins.get('rexShake');
+    // console.log(shake);
+
+    // var shake = this.plugins.get('rexShake').add(bg, {
+    //   mode:0,
+    //   duration:1500,
+    //   magnitudeMode:10,
+    //   decay:1
+    // });
+
+    // this.input.on('gameobjectup', () => {
+    //   this.poneSE.play();
+    //   // shake.shake();
+    //   this.cameras.main.fadeOut(2000, 0, 0, 0);
+    //   this.time.delayedCall(2000, () => {
+    //     this.scene.start('game');
+    //   }, [], this);
+    // }, this);
+
+    bg.once('pointerup', function () {
       this.poneSE.play();
-      //this.titleBGM.stop();
       this.cameras.main.fadeOut(2000, 0, 0, 0);
       this.time.delayedCall(2000, () => {
         this.scene.start('game');
       }, [], this);
     }, this);
-
-    // bg.once('pointerup', function () {
-    //   this.titleBGM.stop();
-    //   this.scene.start('game');
-    // }, this);
   }
 
 });
@@ -189,29 +210,35 @@ var Game = new Phaser.Class({
       this.ev3data = ["0", "はいずりながら", "ゆっくりと近づきながら", "武器を振りかざして", "4", "天井に張り付きながら", "高速で走りながら", "踊りながら", "君を見つめながら", "何かを食べながら", "ウインクしながら", "笑いながら", "自分を切りつけながら", "君と大きく距離をとって", "謎の液体を飛ばしながら", "さっと照明を消して", "ここは安全だと叫びながら", "小さく助けてとつぶやいて", "泥のようなものを投擲しながら", "変形しながら", "下着をずらしながら", "口から血を吐きながら", "ようこそと手招きして", "震えながらお金を差し出して", "血走った目で君を睨みつけて", "気弱げにしゃがみこんで", "エレベーターを塞ぎながら", "苦しげに来るなと言いながら", "薔薇に絡まりながら"];
       this.ev4data = ["0", "挨拶をしてきた。", "襲ってきた。", "帰れと警告してきた。", "4", "君の落とし物を届けてくれた。", "手打ちうどんを\nごちそうしてくれた。", "ずっと後をつけてくる…", "何かを探していた。", "フロアの物を破壊していた。", "君を殺しに来た。", "他の怪異から君を守った。", "君の大切なものを奪った。", "君にキスをした。", "君に決闘を申し込んだ。", "君を閉じ込めた。", "君と１０年ほど暮らした。", "君に寄生した。", "あたりに火を付けた。", "ベランダから飛び降りた！", "君を無視した。", "君を誘った。", "君を囮にして逃げた。", "壁に消えていった…", "君の服を脱がした。", "君の髪の毛を毟った！", "君に何かの魔法をかけたようだ…", "君の血を啜った。", "息絶えた…"];
 
-      //others
+      //font
       this.fontopt = { fontSize: '16px', color: '#fff', backgroundColor: '#f00', padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
       this.fontsys = { fontSize: '30px', color: '#fff', maxLines: 2, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
       this.fontsysSmall = { fontSize: '16px', color: '#fff', maxLines: 2, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
       this.fontev = { fontSize: '30px', color: '#fff', maxLines: 4, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
       this.fontevRed = { fontSize: '30px', color: '#f00', maxLines: 4, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
 
+      //angle // is this utils?
+      this.angles = [0, 0.785, 1.570, 2.356, 3.141, -2.35, -1.57, -0.78]; // see https://phaser.io/examples/v3/view/game-objects/sprites/sprite-rotation
+
+      //gauge step // bad system...
+      this.geugeYpos = [342, 351, 361, 371, 381, 390, 400, 410, 420, 430, 440, 449, 459, 469, 478, 488];
+
     },
 
   create: function () {
 
     if (!this.retry) {
+      //リトライ時はフェードしない
       this.cameras.main.fadeIn(2000, 0, 0, 0);
     }
 
     this.switches = new Array();
-    this.inputNo = new Array();
+    this.inputNo = new Array(); // 階表示用データ
+
+    this.rswitches = new Array(); // rotary sw
+    //this.viewRotarySw = [0, 0]; // 表示用データ : arraw1.step から取得する
 
     this.specialFloor = 0;
-
-
-    // var add = this.add;
-    // var input = this.input;
 
     this.graphics = this.add.graphics();
     this.graphics.lineStyle(2, 0xFFFFFF, 1);
@@ -261,20 +288,64 @@ var Game = new Phaser.Class({
       }
 
       var swobj = this.switches[i];
-      swobj.name = i;
-      var swev = 'sw' + i + 'on';
+      swobj.name = 'sw';
+      swobj.no = i;
+      var evname = 'sw' + i + 'on'
       swobj.setInteractive();
 
       const frameNames = this.anims.generateFrameNames('textures', { start: 1, end: 2, prefix: 'buttons/' + i + '/', suffix: '.png' });
-      this.anims.create({ key: swev, frames: frameNames, frameRate: 10, repeat: 0 });
-      swobj.anims.load(swev);
+      this.anims.create({ key: evname, frames: frameNames, frameRate: 10, repeat: 0 });
+      swobj.anims.load(evname);
     }
 
     // //rotary sw
-    // this.add.sprite(563, 162, 'textures', 'rotarysw.png');
+    this.rswitches.push(this.add.sprite(721, 175, 'textures', 'rotarysw.png'));
+    this.rswitches.push(this.add.sprite(721, 239, 'textures', 'rotarysw.png'));
+    this.rswitches.push(this.add.sprite(721, 299, 'textures', 'rotarysw.png'));
 
-    // //gauge
-    // this.add.sprite(563, 262, 'textures', 'gauge.png');
+    for (let i = 0; i < this.rswitches.length; i++) {
+      var swobj = this.rswitches[i];
+      swobj.name = 'rsw';
+      swobj.no = i;
+      swobj.isLocked = false;
+      swobj.direction = 1;
+      swobj.setInteractive();
+
+      //初期配置
+      if (i === 0) {
+        swobj.step = 2;
+        swobj.stepMax = 3;
+        swobj.stepMin = 0;
+      }
+      else if (i === 1) {
+        swobj.step = 1;
+        swobj.stepMax = 3;
+        swobj.stepMin = 0;
+      }
+      else if (i === 2) {
+        swobj.step = 5;
+        swobj.stepMax = 7;
+        swobj.stepMin = 3;
+      }
+
+      swobj.rotation = this.angles[swobj.step];
+    }
+
+    // display arrow
+    this.arraw1 = this.add.image(721, 58, 'arraw');
+    this.arraw2 = this.add.image(721, 88, 'arraw');
+    setArraw(this);
+
+    //gauge
+    this.gauge = this.add.sprite(717, 342, 'textures', 'gauge.png');
+    this.gauge.name = 'gauge';
+    this.gauge.isLocked = false;
+    this.gauge.direction = 1; // 1 is down : 0 is up
+    this.gauge.step = 3; // 初期位置
+    setGauge(this);
+    let gaugeHitarea = this.gauge.setInteractive();
+    gaugeHitarea.input.hitArea.setTo(0, -15, 45, 11 + 40); // original size : 45,11 : 上15 下25
+    //this.input.enableDebug(this.gauge);
 
     //next button 
     this.next = this.add.image(400, 530, 'next');
@@ -283,70 +354,239 @@ var Game = new Phaser.Class({
     this.next.setInteractive();
     this.next.setVisible(false);
 
-    this.input.on('gameobjectup', toggleSw, this);
+    this.input.on('gameobjectup', panelFeedBack, this);
 
     //display
 
     //audio
     this.clickSE = this.sound.add('click');
+    this.rswSE = this.sound.add('rsw');
+    this.gaugeSE = this.sound.add('gauge');
     this.poneSE = this.sound.add('pone');
     this.dooropenSE = this.sound.add('dooropen');
     this.evMoveBGM = this.sound.add('evmove');
 
-    //functions
-    function toggleSw(pointer, sw) {
+    /**
+     * UI FeedBack
+     */
+    function panelFeedBack(pointer, obj) {
 
-      //console.log('pushobj:', sw.name);
+      switch (obj.name) {
+        case 'next': {
+          console.log('restart');
+          this.retry = true;
+          delete this.switches;
+          this.scene.start('game');
+          break;
+        }
+        case 'gauge': {
+          const gauge = obj; // rename
 
-      if (sw.name === 'next') {
-        console.log('restart');
+          if (gauge.isLocked) {
+            break;
+          }
 
-        this.retry = true;
+          let step = gauge.step;
+          let direction = gauge.direction;
 
-        delete this.switches;
-        this.scene.start('game');
-        return;
-      }
+          this.gaugeSE.play();
 
-      sw.anims.nextFrame();
-      this.clickSE.play();
-
-      this.inputNo.push(sw.name);
-      console.log('totalinput', this.inputNo);
-
-      switch (this.inputNo.length) {
-        case 1: {
-          //special
-          if (sw.name === 14) {
-            all14event_view(this);
-            this.specialFloor = 14;
+          if (direction === 1) {
+            if (step + 1 > 15) {
+              step = 14;
+              direction = 0;
+            } else {
+              step += 1;
+            }
           } else {
-            this.add.sprite(585, 75, 'textures', `evfont/${sw.name}.png`);
+            if (step - 1 < 0) {
+              step = 1;
+              direction = 1;
+            } else {
+              step -= 1;
+            }
+          }
+
+          gauge.step = step;
+          gauge.direction = direction;
+
+          setGauge(this);
+
+          break;
+        }
+        case 'rsw': {
+          const rsw = obj; // rename
+
+          if (rsw.isLocked) {
+            break;
+          }
+
+          this.rswSE.play();
+
+          switch (rsw.no) {
+            case 0: //fall through
+            case 1:
+            case 2:
+              {
+                //caution　rsw0 is arraw2 : はみ出るが仕様
+                if (rsw.direction === 1) {
+                  if (rsw.step + 1 > rsw.stepMax) {
+                    rsw.step = rsw.stepMax - 1;
+                    rsw.direction = 0; // 方向切替
+                  } else {
+                    rsw.step += 1;
+                  }
+                } else if (rsw.direction === 0) {
+                  if (rsw.step - 1 < rsw.stepMin) {
+                    rsw.step = rsw.stepMin + 1;
+                    rsw.direction = 1; //方向切替
+                  } else {
+                    rsw.step -= 1;
+                  }
+                }
+                rsw.rotation = this.angles[rsw.step];
+                break;
+              }
+            default: {
+              console.log('unknown rsw');
+              break;
+            }
+          }
+
+          setArraw(this);
+          break;
+        }
+        case 'sw': {
+          const sw = obj;//rename
+          sw.anims.nextFrame();
+          this.clickSE.play();
+
+          this.inputNo.push(sw.no);
+          console.log('totalinput', this.inputNo);
+
+          switch (this.inputNo.length) {
+            case 1: {
+              //special
+              if (sw.no === 14) {
+                all14event_view(this);
+                this.specialFloor = 14;
+              } else {
+                this.add.sprite(585, 75, 'textures', `evfont/${sw.no}.png`);
+              }
+              break;
+            }
+            case 2: {
+              this.add.sprite(603, 75, 'textures', 'evfont/haifun.png');
+              this.add.sprite(621, 75, 'textures', `evfont/${sw.no}.png`);
+              break;
+            }
+            case 3: {
+              this.add.sprite(639, 75, 'textures', 'evfont/haifun.png');
+              this.add.sprite(657, 75, 'textures', `evfont/${sw.no}.png`);
+              break;
+            }
+            case 4: {
+              this.add.sprite(675, 75, 'textures', 'evfont/haifun.png');
+              this.add.sprite(693, 75, 'textures', `evfont/${sw.no}.png`);
+              lockSwitches(this);
+              this.evMoveBGM.play();
+              break;
+            }
+            default: {
+              //todo 6keta
+              break;
+            }
           }
           break;
         }
-        case 2: {
-          this.add.sprite(603, 75, 'textures', 'evfont/haifun.png');
-          this.add.sprite(621, 75, 'textures', `evfont/${sw.name}.png`);
-          break;
-        }
-        case 3: {
-          this.add.sprite(639, 75, 'textures', 'evfont/haifun.png');
-          this.add.sprite(657, 75, 'textures', `evfont/${sw.name}.png`);
-          break;
-        }
-        case 4: {
-          this.add.sprite(675, 75, 'textures', 'evfont/haifun.png');
-          this.add.sprite(693, 75, 'textures', `evfont/${sw.name}.png`);
-          this.evMoveBGM.play();
-          break;
-        }
         default: {
-          //todo 6keta
-          break;
+          console.error('unknown sw pushed!', obj);
         }
       }
     }
+
+    function setGauge(secne) {
+      //表示修正
+      secne.gauge.y = secne.geugeYpos[secne.gauge.step];
+
+      //console.log(secne.gauge.y, secne.gauge.step)
+    }
+
+    function setArraw(scene) {
+      let arraw2step;
+      let arraw1step;
+
+      //rsw3状態を取得して、表示状態を補正
+      const rswf = scene.rswitches[2];
+      switch (rswf.step) {
+        case 1:
+        case 2:
+        case 4: {
+          //no arraw view
+          arraw2step = -1;
+          arraw1step = -1;
+          break;
+        }
+        case 5: {
+          arraw2step = scene.rswitches[0].step + 4;
+          arraw1step = scene.rswitches[1].step;
+          break;
+        }
+        case 6: {
+          arraw2step = scene.rswitches[0].step;
+          arraw1step = scene.rswitches[1].step + 4;
+          break;
+        }
+        case 7: {
+          arraw2step = scene.rswitches[0].step + 4;
+          arraw1step = scene.rswitches[1].step + 4;
+          break;
+        }
+        case 0:
+        case 3:
+        default:
+          {
+            arraw2step = scene.rswitches[0].step;
+            arraw1step = scene.rswitches[1].step;
+            break;
+          }
+      }
+
+      //arraw viwe 確定
+
+      //dataset
+      scene.arraw2.step = arraw2step;
+      scene.arraw1.step = arraw1step;
+
+      //console.log(scene.arraw2.step, scene.arraw1.step)
+
+      if (arraw1step === -1) {
+        scene.arraw1.setVisible(false);
+      } else {
+        scene.arraw1.setVisible(true);
+        scene.arraw1.rotation = scene.angles[arraw1step];
+      }
+      //arraw viwe 確定
+      if (arraw2step === -1) {
+        scene.arraw2.setVisible(false);
+      } else {
+        scene.arraw2.setVisible(true);
+        scene.arraw2.rotation = scene.angles[arraw2step];
+      }
+
+      return
+    }
+
+    function lockSwitches(scene) {
+      scene.rswitches.forEach(obj => {
+        obj.isLocked = true;
+      })
+
+      scene.gauge.isLocked = true;
+    }
+    /**
+     * EVENT 
+     */
 
     // sound event
     this.evMoveBGM.on('complete', function (sound) {
