@@ -4,13 +4,15 @@ const pathToPhaser = path.join(__dirname, "/node_modules/phaser/");
 const phaser = path.join(pathToPhaser, "dist/phaser.js");
 
 module.exports = {
+  watch : false, // what?
   context: __dirname,
   entry:{
     'game': './app/game.js',
   },
   output: {
     path: path.resolve(__dirname, './docs'),
-    filename: "game.js"   //バンドルして書き出すファイル名
+    filename: "game.js",
+    publicPath:"/docs/"
   },
   module: {
     rules: [
@@ -34,6 +36,6 @@ module.exports = {
   },
   mode: 'none',
   optimization: {
-    minimize: true
+    minimize: false
   }
 };
