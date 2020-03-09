@@ -1,14 +1,10 @@
+export default class Preloader extends Phaser.Scene {
 
-export default new Phaser.Class({
+  constructor() {
+    super({ key: 'preloader' })
+  }
 
-  Extends: Phaser.Scene,
-
-  initialize:
-    function Preloader() {
-      Phaser.Scene.call(this, { key: 'preloader' });
-    },
-
-  preload: function () {
+  preload() {
     this.load.image('fullscreen', 'assets/fullscreen.png');
     this.load.image('title', 'assets/title.png');
     this.load.image('panel', 'assets/panel.png');
@@ -26,19 +22,17 @@ export default new Phaser.Class({
     this.load.audio('ending', 'assets/audio/taiju_43sec.mp3');
 
     //this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
-  },
+  }
 
-  create: function () {
+  create() {
     console.log('%c Preloader ', 'background: green; color: white; display: block;');
 
-    // gameobject??
+    // game??? : 取得方法が分からなくなった
     // game.scale.onFullScreenChange(() => {
     //   console.log('change');
     // })
 
     this.scene.start('start');
     // this.scene.start('game');
-
   }
-
-});
+}

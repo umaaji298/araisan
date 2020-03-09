@@ -1,17 +1,12 @@
 
-export default new Phaser.Class({
+export default class GameOver extends Phaser.Scene {
 
-  Extends: Phaser.Scene,
+  constructor() {
+    super({ key: 'gameover' })
+    window.OVER = this; // whats?
+  }
 
-  initialize:
-
-    function GameOver() {
-      Phaser.Scene.call(this, { key: 'gameover' });
-      window.OVER = this; // whats?
-
-    },
-
-  create: function () {
+  create() {
     console.log('%c GameOver ', 'background: green; color: white; display: block;');
 
     var content = [
@@ -85,11 +80,9 @@ export default new Phaser.Class({
     }, this);
 
     this.cameras.main.fadeIn(3000, 0, 0, 0);
-
-  },
-
-  update: function () {
-    this.scrolltext.y -= 0.5;
   }
 
-});
+  update() {
+    this.scrolltext.y -= 0.5;
+  }
+}
