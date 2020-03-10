@@ -150,7 +150,9 @@ export default class Game extends Phaser.Scene {
         disp.destroy();
       });
 
-      // this.scene.restart('game');
+      //locksw解除
+      unlockSwitches(this);
+
     }, this);
 
     eventScene.events.on('toGameOver', () => {
@@ -384,8 +386,14 @@ function lockSwitches(scene) {
   scene.rswitches.forEach(obj => {
     obj.isLocked = true;
   })
-
   scene.gauge.isLocked = true;
+}
+
+function unlockSwitches(scene) {
+  scene.rswitches.forEach(obj => {
+    obj.isLocked = false;
+  })
+  scene.gauge.isLocked = false;
 }
 
 function getFloorData(scene) {
