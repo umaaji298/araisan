@@ -7,35 +7,18 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
-    console.log('call game pleroad');
+    //console.log('call game pleroad');
   }
 
   create() {
-    console.log('call game create');
-    console.log(this);
-
-    if (!this.retry) {
-      //リトライ時はフェードしない
-      this.cameras.main.fadeIn(2000, 0, 0, 0);
-
-      //restart scene : イベントの再登録なし
-      const eventScene = this.scene.get('floorEvent');
-      eventScene.events.on('restert', () => {
-        console.log('call restert');
-        this.retry = true;
-        this.scene.restart('game');
-        // this.scene.start('game');
-      }, this);
-
-      eventScene.events.on('toGameOver', () => {
-        console.log('call togameover');
-        this.scene.start('gameover');
-      }, this);
-    }
+    console.log('%c game ', 'background: green; color: white; display: block;');
+    //console.log(this);
+    this.cameras.main.fadeIn(2000, 0, 0, 0);
 
     this.switches = new Array(); // normal sw
-    this.rswitches = new Array(); // rotary sw
     this.inputNo = new Array(); // 階表示用データ
+    this.rswitches = new Array(); // rotary sw
+    this.evDisplay = new Array();
 
     //panel
     this.add.image(650, 300, 'panel');
@@ -144,6 +127,36 @@ export default class Game extends Phaser.Scene {
     this.clickSE = this.sound.add('click');
     this.rswSE = this.sound.add('rsw');
     this.gaugeSE = this.sound.add('gauge');
+
+    /**
+     * Scene events
+     */
+    //restart scene : イベントの再登録なし
+    const eventScene = this.scene.get('floorEvent');
+    eventScene.events.on('restert', () => {
+      console.log('call restert');
+
+      this.inputNo = new Array();
+
+      //sw off表示
+      this.switches.forEach(sw => {
+        if(sw.hasOwnProperty('anims')){
+          sw.anims.previousFrame();
+        }        
+      });
+
+      //display表示消去
+      this.evDisplay.forEach(disp=>{
+        disp.destroy();
+      });
+
+      // this.scene.restart('game');
+    }, this);
+
+    eventScene.events.on('toGameOver', () => {
+      console.log('call togameover');
+      this.scene.start('gameover');
+    }, this);
   }
 }
 
@@ -153,13 +166,6 @@ export default class Game extends Phaser.Scene {
 function panelFeedBack(pointer, obj) {
 
   switch (obj.name) {
-    case 'next': {
-      console.log('restart');
-      this.retry = true;
-      delete this.switches;
-      this.scene.start('game');
-      break;
-    }
     case 'gauge': {
       const gauge = obj; // rename
 
@@ -266,29 +272,27 @@ function panelFeedBack(pointer, obj) {
           //special
           if (sw.no === 14) {
             all14event_view(this);
-            this.specialFloor = 14;
           } else {
-            this.add.sprite(585, 75, 'textures', `evfont/${sw.no}.png`);
+            this.evDisplay.push(this.add.sprite(585, 75, 'textures', `evfont/${sw.no}.png`));
           }
           break;
         }
         case 2: {
-          this.add.sprite(603, 75, 'textures', 'evfont/haifun.png');
-          this.add.sprite(621, 75, 'textures', `evfont/${sw.no}.png`);
+          this.evDisplay.push(this.add.sprite(603, 75, 'textures', 'evfont/haifun.png'));
+          this.evDisplay.push(this.add.sprite(621, 75, 'textures', `evfont/${sw.no}.png`));
           break;
         }
         case 3: {
-          this.add.sprite(639, 75, 'textures', 'evfont/haifun.png');
-          this.add.sprite(657, 75, 'textures', `evfont/${sw.no}.png`);
+          this.evDisplay.push(this.add.sprite(639, 75, 'textures', 'evfont/haifun.png'));
+          this.evDisplay.push(this.add.sprite(657, 75, 'textures', `evfont/${sw.no}.png`));
           break;
         }
         case 4: {
-          this.add.sprite(675, 75, 'textures', 'evfont/haifun.png');
-          this.add.sprite(693, 75, 'textures', `evfont/${sw.no}.png`);
+          this.evDisplay.push(this.add.sprite(675, 75, 'textures', 'evfont/haifun.png'));
+          this.evDisplay.push(this.add.sprite(693, 75, 'textures', `evfont/${sw.no}.png`));
           lockSwitches(this);
           //イベントの起点
           this.scene.launch('floorSelector', getFloorData(this));
-          //this.evMoveBGM.play();
           break;
         }
         default: {
@@ -385,10 +389,20 @@ function lockSwitches(scene) {
 }
 
 function getFloorData(scene) {
+  let code4 = "";
+
+  if (scene.inputNo.length > 3) {
+    code4 = scene.inputNo.slice(0, 4).join(''); // 4桁目までの文字列結合
+  } else {
+    code4 = scene.inputNo.join(''); //少ない場合
+  }
+
   return {
     inputNo: scene.inputNo,
     arraws: [scene.arraw2.step, scene.arraw1.step], // reversed
-    gauge: scene.gauge.step
+    gauge: scene.gauge.step,
+    code4: code4,
+    codefull: scene.inputNo.join('') + scene.arraw1.step + scene.arraw2.step + + scene.gauge.step
   }
 }
 

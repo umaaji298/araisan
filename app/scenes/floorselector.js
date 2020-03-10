@@ -10,13 +10,18 @@ export default class FloorSelector extends Phaser.Scene {
     this.ev2data = ["0", "みんみが", "オオカワウソが", "ガチおじが", "4", "怪異が", "おじぞうさんが", "かたまりが", "人形が", "全裸の異性が", "としあきが", "地下ラッコが", "コツメカワウソが", "荒耶宗蓮が", "メリーさんが", "探索者が", "ギンキタが", "アライさんが", "フェネックが", "きんたまが", "モブフレンズが", "肉食ちゃんが", "草食ちゃんが", "木魚マンが", "のじゃ巫女が", "目玉が", "ネズミボトルが", "待機カワウソが", "じごくボスが"];
     this.ev3data = ["0", "はいずりながら", "ゆっくりと近づきながら", "武器を振りかざして", "4", "天井に張り付きながら", "高速で走りながら", "踊りながら", "君を見つめながら", "何かを食べながら", "ウインクしながら", "笑いながら", "自分を切りつけながら", "君と大きく距離をとって", "謎の液体を飛ばしながら", "さっと照明を消して", "ここは安全だと叫びながら", "小さく助けてとつぶやいて", "泥のようなものを投擲しながら", "変形しながら", "下着をずらしながら", "口から血を吐きながら", "ようこそと手招きして", "震えながらお金を差し出して", "血走った目で君を睨みつけて", "気弱げにしゃがみこんで", "エレベーターを塞ぎながら", "苦しげに来るなと言いながら", "薔薇に絡まりながら"];
     this.ev4data = ["0", "挨拶をしてきた。", "襲ってきた。", "帰れと警告してきた。", "4", "君の落とし物を届けてくれた。", "手打ちうどんを\nごちそうしてくれた。", "ずっと後をつけてくる…", "何かを探していた。", "フロアの物を破壊していた。", "君を殺しに来た。", "他の怪異から君を守った。", "君の大切なものを奪った。", "君にキスをした。", "君に決闘を申し込んだ。", "君を閉じ込めた。", "君と１０年ほど暮らした。", "君に寄生した。", "あたりに火を付けた。", "ベランダから飛び降りた！", "君を無視した。", "君を誘った。", "君を囮にして逃げた。", "壁に消えていった…", "君の服を脱がした。", "君の髪の毛を毟った！", "君に何かの魔法をかけたようだ…", "君の血を啜った。", "息絶えた…"];
+
+    this.specialEeventsMap = new Map([
+      ["2311324163",1],// アライさん家
+      ["14141414",14],// go to hell
+    ])
   }
 
   create(data) {
     console.log('%c floorSelector ', 'background: green; color: white; display: block;');
     console.log('floordata', data);
 
-    const specialNo = checkSpecial(data)
+    const specialNo = checkSpecial(data.code4,data.codefull,this)
     if (specialNo) {
       doSpecialEvent(specialNo, this);
     } else {
@@ -57,32 +62,60 @@ export default class FloorSelector extends Phaser.Scene {
   }
 }
 
-function checkSpecial(data) {
+function checkSpecial(code4,codefull,scene) {
   let specialNo = 0; // No.0 is normal event
 
-  if (data.inputNo[0] === 14) {
-    specialNo = 14;
+  if(scene.specialEeventsMap.has(codefull)){
+    specialNo = scene.specialEeventsMap.get(codefull);
+  }
+  else if(scene.specialEeventsMap.has(code4)){
+    specialNo = scene.specialEeventsMap.get(code4);
   }
 
   return specialNo;
 }
 
 function doSpecialEvent(specialNo, scene) {
+  let text1,text2,text3,text4,text5;
+  let commands;
 
   switch (specialNo) {
-    case 14:
-      const text1 = 'ドン！という大きな音に驚く。';
-      const text2 = 'それは君が床に崩れ落ちた音だ。';
-      const text3 = '床に血溜まりを広げ、\n痛みに悶える。';
-      const text4 = 'だが、どこか安らぎも感じている。';
-      const text5 = 'もう怪異に悩まされることはない…'
+    case 1:
+      text1 = 'アライさんの家があるフロアだ。';
+      text2 = '「ん？誰か降りたのだ？」';
+      text3 = '「アライさーんご飯できたよ～」';
+      text4 = '…ヨシ。';
+      text5 = 'フロアの安全を確認した君は、次の階へと向かう。';
 
-      const commands = [
+      commands = [
+        [0, 'evMoveBGM'],
+        [6000, 'poneSE'],
+        [1000, 'dooropenSE'],
+        [5000, 'preText', 'エレベーターを降りた\nとしあきは見た…', 80, 50, 350, 76],
+        [3000, 'text', text1, 40, 210],
+        [3000, 'text', text2, 40, 250],
+        [3000, 'text', text3, 40, 290],
+        [4000, 'text', text4, 40, 330],
+        [3000, 'text', text5, 40, 370],
+        [3000, 'next'],
+      ];
+
+      scene.scene.start('floorEvent', { commands });
+      break;
+
+    case 14:
+      text1 = 'ドン！という大きな音に驚く。';
+      text2 = 'それは君が床に崩れ落ちた音だ。';
+      text3 = '床に血溜まりを広げ、\n痛みに悶える。';
+      text4 = 'だが、どこか安らぎも感じている。';
+      text5 = 'もう怪異に悩まされることはない…'
+
+      commands = [
         [0, 'evMoveBGM'],
         [6000, 'poneSE'],
         [1000, 'dooropenSE'],
         [6000, 'preText', 'としあきは\n１４に辿り着いた…', 80, 70, 350, 76],
-        [6000, 'text', text1, 40, 220],
+        [5000, 'text', text1, 40, 220],
         [6000, 'textRed', text2, 40, 250],
         [6500, 'textRed', text3, 40, 300],
         [6500, 'text', text4, 40, 400],
@@ -97,6 +130,7 @@ function doSpecialEvent(specialNo, scene) {
 
       scene.scene.start('floorEvent', { commands });
       break;
+
     default:
       console.error('unknown special event');
       break;
