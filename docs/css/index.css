@@ -1,0 +1,32 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.container-main{
+  width:100%;
+}
+
+.news{
+  height:3.3em;
+  text-align: center;
+  overflow-y: scroll;
+}
+
+.news-main{
+  display: inline-block;
+  background-color: lightsteelblue;
+  text-align: left;
+}
+
+.news-item{
+  margin:0;
+  padding:0;
+}
+
+.top{
+  background-color: #343a40;
+}
+.bottom{
+  background-color: #343a40;
+}

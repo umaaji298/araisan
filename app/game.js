@@ -3,6 +3,7 @@ import 'phaser';
 import Scenes from './scenes/scenes'
 
 import ShakePositionPlugin from 'phaser3-rex-plugins/plugins/shakeposition-plugin.js';
+import TCRPPlugin from 'phaser3-rex-plugins/plugins/tcrp-plugin.js'
 
 var audioContext = new ((window).AudioContext || (window).webkitAudioContext)();
 
@@ -22,8 +23,13 @@ var config = {
     global: [{
       key: 'rexShakePosition',
       plugin: ShakePositionPlugin,
-      start: true
-    },]
+      start: true // start timing?
+    },
+    {
+      key: 'rexTCRP',
+      plugin: TCRPPlugin,
+      start: true // start timing?
+    }]
   },
   backgroundColor: '#000000',
   scene: Scenes
