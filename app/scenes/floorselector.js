@@ -4,11 +4,6 @@ export default class FloorSelector extends Phaser.Scene {
     super('floorSelector');
   }
 
-  init(data) {
-    console.log('call init', data);
-    this.floordata = data;
-  }
-
   preload() {
     //data
     this.ev1data = ["0", "人型の", "蟲型の", "不定形の", "4", "半透明の", "複数の", "機械の", "太った", "植物の", "影のような", "小さい", "巨大な", "花にまみれた", "あなたは１４に向かった", "異質の", "光に包まれた", "夜の", "頭が２つある", "ふたなりの", "水中の", "空飛ぶ", "発情した", "ひからびた", "首だけの", "閉じ込められた", "フレンズ化した", "黒く塗りつぶされた", "血まみれの"];
@@ -19,62 +14,19 @@ export default class FloorSelector extends Phaser.Scene {
 
   create(data) {
     console.log('%c floorSelector ', 'background: green; color: white; display: block;');
+    console.log('floordata', data);
 
-    //console.log(data);
-    // const data = this.floordata;
-    //console.log(data.inputNo,data.arraws,data.gauge);
-
-    let preTxtTime = 11000;
-    let text1Time = preTxtTime + 3000;
-    let text2Time = text1Time + 3000;
-    let text3Time = text2Time + 3000;
-    let text4Time = text3Time + 3000;
-    let nextTime = text4Time + 3000;
-
-    let text1 = this.ev1data[data.inputNo[0]];
-    let text2 = this.ev2data[data.inputNo[1]];
-    let text3 = this.ev3data[data.inputNo[2]];
-    let text4 = this.ev4data[data.inputNo[3]];
-
-    //todo check datas specialeventcheck is here
-    if (data.inputNo[0] === 14) {
-      text1Time = preTxtTime + 6000;
-      text2Time = text1Time + 6000;
-      text3Time = text2Time + 6500;
-      text4Time = text3Time + 6500;
-      let text5Time = text4Time + 6000;
-      let poneSETime2 = text5Time + 6000;
-      let doorcloseTime = poneSETime2 + 1000;
-      let endTime = doorcloseTime + 6000;
-
-
-      text1 = 'ドン！という大きな音に驚く。';
-      text2 = 'それは君が床に崩れ落ちた音だ。';
-      text3 = '床に血溜まりを広げ、\n痛みに悶える。';
-      text4 = 'だが、どこか安らぎも感じている。';
-      let text5 = 'もう怪異に悩まされることはない…'
-
-      const commands = [
-        [0, 'evMoveBGM'],
-        [6000, 'poneSE'],
-        [7000, 'dooropenSE'],
-        [preTxtTime, 'preText', 'としあきは\n１４に辿り着いた…',80,70,350,76],
-        [text1Time, 'text', text1, 40, 220],
-        [text2Time, 'textRed', text2, 40, 250],
-        [text3Time, 'textRed', text3, 40, 300],
-        [text4Time, 'text', text4, 40, 400],
-        [text5Time, 'text', text5, 40, 500],
-        [poneSETime2, 'poneSE'],
-        [doorcloseTime,[
-          ['dooropenSE'],
-          ['fadeOut',6000],
-        ]],
-        [endTime,'toGameOver']
-      ];
-
-      this.scene.start('floorEvent', { commands });
-
+    const specialNo = checkSpecial(data)
+    if (specialNo) {
+      doSpecialEvent(specialNo, this);
     } else {
+      //normal event
+
+      let text1 = this.ev1data[data.inputNo[0]];
+      let text2 = this.ev2data[data.inputNo[1]];
+      let text3 = this.ev3data[data.inputNo[2]];
+      let text4 = this.ev4data[data.inputNo[3]];
+
       //create TCRP commands
 
       // const commands = [
@@ -88,20 +40,65 @@ export default class FloorSelector extends Phaser.Scene {
       // ];
 
       //todo use : data.arraws[0] , data.arraws[1] , data.gauge??
-
       const commands = [
         [0, 'evMoveBGM'],
         [6000, 'poneSE'],
-        [7000, 'dooropenSE'],
-        [preTxtTime, 'preText', 'エレベーターを降りた\nとしあきは見た…',80,50,350,76],
-        [text1Time, 'text', text1, 40, 210],
-        [text2Time, 'text', text2, 40, 250],
-        [text3Time, 'text', text3, 40, 290],
-        [text4Time, 'text', text4, 40, 330],
-        [nextTime, 'next'],
+        [1000, 'dooropenSE'],
+        [5000, 'preText', 'エレベーターを降りた\nとしあきは見た…', 80, 50, 350, 76],
+        [3000, 'text', text1, 40, 210],
+        [3000, 'text', text2, 40, 250],
+        [3000, 'text', text3, 40, 290],
+        [3000, 'text', text4, 40, 330],
+        [3000, 'next'],
       ];
 
       this.scene.start('floorEvent', { commands });
     }
+  }
+}
+
+function checkSpecial(data) {
+  let specialNo = 0; // No.0 is normal event
+
+  if (data.inputNo[0] === 14) {
+    specialNo = 14;
+  }
+
+  return specialNo;
+}
+
+function doSpecialEvent(specialNo, scene) {
+
+  switch (specialNo) {
+    case 14:
+      const text1 = 'ドン！という大きな音に驚く。';
+      const text2 = 'それは君が床に崩れ落ちた音だ。';
+      const text3 = '床に血溜まりを広げ、\n痛みに悶える。';
+      const text4 = 'だが、どこか安らぎも感じている。';
+      const text5 = 'もう怪異に悩まされることはない…'
+
+      const commands = [
+        [0, 'evMoveBGM'],
+        [6000, 'poneSE'],
+        [1000, 'dooropenSE'],
+        [6000, 'preText', 'としあきは\n１４に辿り着いた…', 80, 70, 350, 76],
+        [6000, 'text', text1, 40, 220],
+        [6000, 'textRed', text2, 40, 250],
+        [6500, 'textRed', text3, 40, 300],
+        [6500, 'text', text4, 40, 400],
+        [6000, 'text', text5, 40, 500],
+        [6000, 'poneSE'],
+        [1000, [
+          ['dooropenSE'],
+          ['fadeOut', 6000],
+        ]],
+        [6000, 'toGameOver']
+      ];
+
+      scene.scene.start('floorEvent', { commands });
+      break;
+    default:
+      console.error('unknown special event');
+      break;
   }
 }
