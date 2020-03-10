@@ -397,20 +397,34 @@ function unlockSwitches(scene) {
 }
 
 function getFloorData(scene) {
-  let code4 = "";
+  let code = "";
+  const inputNo = scene.inputNo; 
 
-  if (scene.inputNo.length > 3) {
-    code4 = scene.inputNo.slice(0, 4).join(''); // 4桁目までの文字列結合
-  } else {
-    code4 = scene.inputNo.join(''); //少ない場合
+  //4桁未満の対応
+  if(inputNo.length < 4){
+    for(let i = inputNo.length;i<4;i++){
+      inputNo[i] = 0; // 0埋め
+    }
   }
+
+  //基本コード作成
+  for(let i =0;i<inputNo.length;i++){
+    const num = inputNo[i];
+    const fixnum = ('00' + num).slice(-2); // 2桁合わせ
+    code += fixnum;
+  }
+
+  const fixgauge = ('00' + scene.gauge.step).slice(-2);
+  code = code + scene.arraw1.step + scene.arraw2.step + fixgauge;
+  const code4 = code.slice(0,8);
+
 
   return {
     inputNo: scene.inputNo,
     arraws: [scene.arraw2.step, scene.arraw1.step], // reversed
     gauge: scene.gauge.step,
     code4: code4,
-    codefull: scene.inputNo.join('') + scene.arraw1.step + scene.arraw2.step + + scene.gauge.step
+    code: code
   }
 }
 

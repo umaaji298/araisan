@@ -11,8 +11,11 @@ export default class FloorSelector extends Phaser.Scene {
     this.ev3data = ["0", "はいずりながら", "ゆっくりと近づきながら", "武器を振りかざして", "4", "天井に張り付きながら", "高速で走りながら", "踊りながら", "君を見つめながら", "何かを食べながら", "ウインクしながら", "笑いながら", "自分を切りつけながら", "君と大きく距離をとって", "謎の液体を飛ばしながら", "さっと照明を消して", "ここは安全だと叫びながら", "小さく助けてとつぶやいて", "泥のようなものを投擲しながら", "変形しながら", "下着をずらしながら", "口から血を吐きながら", "ようこそと手招きして", "震えながらお金を差し出して", "血走った目で君を睨みつけて", "気弱げにしゃがみこんで", "エレベーターを塞ぎながら", "苦しげに来るなと言いながら", "薔薇に絡まりながら"];
     this.ev4data = ["0", "挨拶をしてきた。", "襲ってきた。", "帰れと警告してきた。", "4", "君の落とし物を届けてくれた。", "手打ちうどんを\nごちそうしてくれた。", "ずっと後をつけてくる…", "何かを探していた。", "フロアの物を破壊していた。", "君を殺しに来た。", "他の怪異から君を守った。", "君の大切なものを奪った。", "君にキスをした。", "君に決闘を申し込んだ。", "君を閉じ込めた。", "君と１０年ほど暮らした。", "君に寄生した。", "あたりに火を付けた。", "ベランダから飛び降りた！", "君を無視した。", "君を誘った。", "君を囮にして逃げた。", "壁に消えていった…", "君の服を脱がした。", "君の髪の毛を毟った！", "君に何かの魔法をかけたようだ…", "君の血を啜った。", "息絶えた…"];
 
-    this.specialEeventsMap = new Map([
-      ["2311324163",1],// アライさん家
+    this.spEeventsMapfull = new Map([
+      ["230113241603",1],// アライさん家      
+    ])
+
+    this.spEventMap4 = new Map([
       ["14141414",14],// go to hell
     ])
   }
@@ -21,7 +24,7 @@ export default class FloorSelector extends Phaser.Scene {
     console.log('%c floorSelector ', 'background: green; color: white; display: block;');
     console.log('floordata', data);
 
-    const specialNo = checkSpecial(data.code4,data.codefull,this)
+    const specialNo = checkSpecial(data.code,data.code4,this)
     if (specialNo) {
       doSpecialEvent(specialNo, this);
     } else {
@@ -62,14 +65,14 @@ export default class FloorSelector extends Phaser.Scene {
   }
 }
 
-function checkSpecial(code4,codefull,scene) {
+function checkSpecial(code,code4,scene) {
   let specialNo = 0; // No.0 is normal event
 
-  if(scene.specialEeventsMap.has(codefull)){
-    specialNo = scene.specialEeventsMap.get(codefull);
+  if(scene.spEeventsMapfull.has(code)){
+    specialNo = scene.spEeventsMapfull.get(code);
   }
-  else if(scene.specialEeventsMap.has(code4)){
-    specialNo = scene.specialEeventsMap.get(code4);
+  else if(scene.spEventMap4.has(code4)){
+    specialNo = scene.spEventMap4.get(code4);
   }
 
   return specialNo;
@@ -85,7 +88,7 @@ function doSpecialEvent(specialNo, scene) {
       text2 = '「ん？誰か降りたのだ？」';
       text3 = '「アライさーんご飯できたよ～」';
       text4 = '…ヨシ。';
-      text5 = 'フロアの安全を確認した君は、次の階へと向かう。';
+      text5 = 'フロアの安全を確認した君は、\n次の階へと向かう。';
 
       commands = [
         [0, 'evMoveBGM'],
@@ -114,13 +117,13 @@ function doSpecialEvent(specialNo, scene) {
         [0, 'evMoveBGM'],
         [6000, 'poneSE'],
         [1000, 'dooropenSE'],
-        [6000, 'preText', 'としあきは\n１４に辿り着いた…', 80, 70, 350, 76],
+        [4000, 'preText', 'としあきは\n１４に辿り着いた…', 80, 70, 350, 76],
         [5000, 'text', text1, 40, 220],
-        [6000, 'textRed', text2, 40, 250],
-        [6500, 'textRed', text3, 40, 300],
-        [6500, 'text', text4, 40, 400],
-        [6000, 'text', text5, 40, 500],
-        [6000, 'poneSE'],
+        [5000, 'textRed', text2, 40, 250],
+        [5500, 'textRed', text3, 40, 300],
+        [5500, 'text', text4, 40, 400],
+        [5000, 'text', text5, 40, 500],
+        [5000, 'poneSE'],
         [1000, [
           ['dooropenSE'],
           ['fadeOut', 6000],
