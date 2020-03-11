@@ -31,7 +31,7 @@ export default class FloorSelector extends Phaser.Scene {
     ]);
 
     this.ev1data = [
-      ["0", "となりの", "TSした", "ゼラチナス", "4", "狂気に飲まれた", "多脚の", "メスガキの", "健康的に日焼けした", "箱化した", "極限まで鍛えた", "デパートの", "奇妙な仮面を付けた", "ひどい匂いのする", "生まれたての", "有り金を溶かした", "モデル体型の", "あお向けに倒れた", "君の", "何かに操られた", "概念となった", "プロ野球選手の", "噛むとほろ苦い", "君を殴った", "脳を交換した", "妹の", "生まれたての", "爆発寸前の", "召喚に応じた"],
+      ["0", "となりの", "ＴＳした", "ゼラチナス", "4", "狂気に飲まれた", "多脚の", "メスガキの", "健康的に日焼けした", "箱化した", "極限まで鍛えた", "デパートの", "奇妙な仮面を付けた", "ひどい匂いのする", "生まれたての", "有り金を溶かした", "モデル体型の", "あお向けに倒れた", "君の", "何かに操られた", "概念となった", "プロ野球選手の", "噛むとほろ苦い", "君を殴った", "脳を交換した", "妹の", "生まれたての", "爆発寸前の", "召喚に応じた"],
       ["0", "人型の", "蟲型の", "不定形の", "4", "神となった", "複数の", "機械の", "太った", "植物の", "影のような", "小さい", "巨大な", "時を止めてくる", "あなたは１４に向かった", "異質の", "古い書物に描かれた", "夜の", "頭が２つある", "ふたなりの", "水中の", "空飛ぶ", "発情した", "ひからびた", "首だけの", "閉じ込められた", "フレンズ化した", "黒く塗りつぶされた", "血まみれの"]
     ];
     this.ev2data = [
@@ -59,13 +59,13 @@ export default class FloorSelector extends Phaser.Scene {
       ["2205222004", 100], // diner
       ["2816102313", 101], // parking
       ["2625072372", 102], // おじぞうさま ←SPEAK ENGLISH!!
-      // ["2424222042", 103], // HOSPITAL
-      // ["1606070204", 104], // CHURCH
-      // ["0202202522", 105], // BASEMENT
-      // ["2403102024", 106], // UPSIDE DOWN
+      ["2424222042", 103], // HOSPITAL
+      ["1606070204", 104], // CHURCH
+      ["0202202522", 105], // BASEMENT
+      ["2403102024", 106], // UPSIDE DOWN
       ["0906250373", 107], // みんみ ←What's???
-      //["2807182225", 108], // SAFE
-      //["2120191004", 109], // "NOT"SAFE
+      ["2807182225", 108], // SAFE
+      ["2120191004", 109], // "NOT"SAFE
     ])
 
     this.spEventsMap4 = new Map([
@@ -86,15 +86,15 @@ export default class FloorSelector extends Phaser.Scene {
     } else {
       //normal event
 
-       const evKey = (data.arraws[0] % 2).toString() + data.arraws[1];
-       console.log('evKey',evKey);
+      const evKey = (data.arraws[0] % 2).toString() + data.arraws[1];
+      console.log('evKey', evKey);
 
-       const select = this.evSelector.get(evKey);
+      const select = this.evSelector.get(evKey);
 
-       let text1 = this.ev1data[select[0]][data.inputNo[0]];
-       let text2 = this.ev2data[select[1]][data.inputNo[1]];
-       let text3 = this.ev3data[select[2]][data.inputNo[2]];
-       let text4 = this.ev4data[select[3]][data.inputNo[3]];
+      let text1 = this.ev1data[select[0]][data.inputNo[0]];
+      let text2 = this.ev2data[select[1]][data.inputNo[1]];
+      let text3 = this.ev3data[select[2]][data.inputNo[2]];
+      let text4 = this.ev4data[select[3]][data.inputNo[3]];
 
       //create TCRP commands
 
@@ -146,7 +146,7 @@ function checkSpecial(code, scene) {
 }
 
 function doSpecialEvent(specialNo, scene, data) {
-  let text1, text2, text3, text4, text5, text6, text7;
+  let text1, text2, text3, text4, text5, text6, text7,text8,text9;
   let commands;
 
   switch (specialNo) {
@@ -350,28 +350,30 @@ function doSpecialEvent(specialNo, scene, data) {
       break;
 
     case 107:
-      text1 = '崩れ果てた建物、穴だらけの道、渦を巻いた雲';
-      text2 = 'それら全て、全てが赤いのだ！';
-      text3 = 'はるか遠方で、冗談のように巨大mなモノが動く。';
-      text4 = '地獄nn！ここは地獄なんだiよ！';
-      text5 = '君みは、\n何かが決ん定的に終わってしまったのを感じみん。';
-      text6 = 'みみ…？';
+      text1 = '崩れ果てた建物、穴だらけの道、渦を巻いた雲！';
+      text2 = 'ここはあらゆる全てがくすんだ赤で表現される。';
+      text3 = 'はるか遠方では、冗談のように巨大mな何かが塔を崩した。';
+      text4 = '打ち捨nてられた頭部だけのmセミが耳元でわめく。'
+      text5 = '「地獄yn！ここは地獄なんでmiすよ！」';
+      text6 = '君みは、何かが決ん定的に\n終わってしまったのを感じみん。';
       text7 = 'みみ…？';
       text8 = 'みみ…？';
+      text9 = 'みみ…？';
 
       commands = [
         [0, 'evMoveBGM'],
         [6000, 'poneSE'],
         [1000, 'dooropenSE'],
         [5000, 'preText', 'エレベータを降りた\nとしあきは見た…', 80, 50, 350, 76],
-        [3000, 'text', text1, 40, 210],
-        [3000, 'text', text2, 40, 250],
-        [5000, 'text', text3, 40, 290],
-        [5000, 'text', text4, 40, 330],
-        [5000, 'text', text5, 40, 370],
-        [3000, 'text', text6, 40, 460],
-        [4000, 'text', text7, 40, 480],
-        [4000, 'text', text8, 40, 500],
+        [3000, 'text', text1, 40, 150],
+        [3000, 'text', text2, 40, 180],
+        [5000, 'text', text3, 40, 220],
+        [5000, 'text', text4, 40, 250],
+        [5000, 'text', text5, 40, 280],
+        [3000, 'text', text6, 40, 320],
+        [4000, 'text', text7, 40, 380],
+        [4000, 'text', text8, 40, 400],
+        [4000, 'text', text8, 40, 420],
         [3000, 'next'],
       ];
 
@@ -489,6 +491,29 @@ function doSpecialEvent(specialNo, scene, data) {
 
 
     default:
+      //未実装階の場合
+      text1 = '…？';
+      text2 = '珍しくエレベーターが反応しない。';
+      text3 = 'どうやらこの階は、今は封印されているようだ。';
+      text4 = '「このマンションの神の噂を聞いたことは？';
+      text5 = '…そうか。まぁいずれ時が来れば、';
+      text6 = 'この階の秘密も明らかになるだろうさ」';
+      text7 = '中性的な顔立ちの青年が、興味なさげにうそぶいた。';
+
+      commands = [
+        [3000, 'text', text1, 40, 210],
+        [3000, 'text', text2, 40, 250],
+        [5000, 'text', text3, 40, 310],
+        [5000, 'text', text4, 40, 340],
+        [8000, 'text', text5, 40, 370],
+        [6000, 'text', text6, 40, 400],
+        [6000, 'text', text7, 40, 430],
+        [5000, 'next'],
+      ];
+
+      scene.scene.start('floorEvent', { commands });
+      break;
+
       console.error('unknown special event');
       break;
   }

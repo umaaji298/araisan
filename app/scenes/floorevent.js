@@ -21,6 +21,10 @@ class ActionKlass {
     this.scene.dooropenSE.play();
   }
 
+  rswSE(){
+    this.scene.rswSE.play();
+  }
+
   fadeOut(milliseconds){
     this.scene.cameras.main.fadeOut(milliseconds, 0, 0, 0);
   }
@@ -71,6 +75,7 @@ export default class FloorEvent extends Phaser.Scene {
     this.evMoveBGM = this.sound.add('evmove');
     this.poneSE = this.sound.add('pone');
     this.dooropenSE = this.sound.add('dooropen');
+    this.rswSE = this.sound.add('rsw');
 
     this.graphics = this.add.graphics();
     this.graphics.lineStyle(2, 0xFFFFFF, 1);

@@ -102,8 +102,9 @@ export default class Game extends Phaser.Scene {
         swobj.stepMin = 3;
       }
 
-      swobj.rotation = getAngleFromStep(swobj.step);
+      // swobj.rotation = getAngleFromStep(swobj.step);
     }
+    setRotarySw(this);
 
     // display arrow
     this.arraw1 = this.add.image(721, 58, 'arraw');
@@ -310,6 +311,13 @@ function panelFeedBack(pointer, obj) {
   }
 }
 
+function setRotarySw(scene){
+  scene.rswitches.forEach(swobj=>{
+    swobj.rotation = getAngleFromStep(swobj.step);
+  });
+  return;
+}
+
 function setGauge(secne) {
   //表示修正
   secne.gauge.y = getGeugeYpos(secne.gauge.step);
@@ -439,6 +447,8 @@ function getGeugeYpos(index) {
 
 //special event
 function all14event_view(scene) {
+  lockSwitches(scene);
+
   scene.add.sprite(585, 75, 'textures', `evfont/14.png`);
   scene.add.sprite(603, 75, 'textures', 'evfont/haifun.png');
   scene.add.sprite(621, 75, 'textures', `evfont/14.png`);
@@ -446,6 +456,18 @@ function all14event_view(scene) {
   scene.add.sprite(657, 75, 'textures', `evfont/14.png`);
   scene.add.sprite(675, 75, 'textures', 'evfont/haifun.png');
   scene.add.sprite(693, 75, 'textures', `evfont/14.png`);
+
+  //rsw移動
+  scene.rswSE.play();
+  scene.rswitches[0].step= 0;
+  scene.rswitches[1].step= 0;
+  scene.rswitches[2].step= 7;
+  setRotarySw(scene);
+  setArraw(scene);
+
+  //gauge移動
+  scene.gauge.step = 15;
+  setGauge(scene);
 
   scene.inputNo = new Array(14, 14, 14, 14);
   scene.scene.launch('floorSelector', getFloorData(scene));
