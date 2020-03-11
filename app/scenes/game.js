@@ -140,13 +140,13 @@ export default class Game extends Phaser.Scene {
 
       //sw off表示
       this.switches.forEach(sw => {
-        if(sw.hasOwnProperty('anims')){
+        if (sw.hasOwnProperty('anims')) {
           sw.anims.previousFrame();
-        }        
+        }
       });
 
       //display表示消去
-      this.evDisplay.forEach(disp=>{
+      this.evDisplay.forEach(disp => {
         disp.destroy();
       });
 
@@ -398,17 +398,17 @@ function unlockSwitches(scene) {
 
 function getFloorData(scene) {
   let code = "";
-  const inputNo = scene.inputNo; 
+  const inputNo = scene.inputNo;
 
   //4桁未満の対応
-  if(inputNo.length < 4){
-    for(let i = inputNo.length;i<4;i++){
+  if (inputNo.length < 4) {
+    for (let i = inputNo.length; i < 4; i++) {
       inputNo[i] = 0; // 0埋め
     }
   }
 
   //基本コード作成
-  for(let i =0;i<inputNo.length;i++){
+  for (let i = 0; i < inputNo.length; i++) {
     const num = inputNo[i];
     const fixnum = ('00' + num).slice(-2); // 2桁合わせ
     code += fixnum;
@@ -419,7 +419,7 @@ function getFloorData(scene) {
 
   return {
     inputNo: scene.inputNo,
-    arraws: [scene.arraw2.step, scene.arraw1.step], // reversed
+    arraws: [scene.arraw1.step, scene.arraw2.step], // reversed
     gauge: scene.gauge.step,
     code: code
   }
