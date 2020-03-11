@@ -328,8 +328,8 @@ function setArraw(scene) {
     case 2:
     case 4: {
       //no arraw view
-      arraw2step = -1;
-      arraw1step = -1;
+      arraw2step = 8; // 8 is disable
+      arraw1step = 8;
       break;
     }
     case 5: {
@@ -365,14 +365,14 @@ function setArraw(scene) {
 
   //console.log(scene.arraw2.step, scene.arraw1.step)
 
-  if (arraw1step === -1) {
+  if (arraw1step === 8) {
     scene.arraw1.setVisible(false);
   } else {
     scene.arraw1.setVisible(true);
     scene.arraw1.rotation = getAngleFromStep(arraw1step);
   }
   //arraw viwe 確定
-  if (arraw2step === -1) {
+  if (arraw2step === 8) {
     scene.arraw2.setVisible(false);
   } else {
     scene.arraw2.setVisible(true);
@@ -416,14 +416,11 @@ function getFloorData(scene) {
 
   const fixgauge = ('00' + scene.gauge.step).slice(-2);
   code = code + scene.arraw1.step + scene.arraw2.step + fixgauge;
-  const code4 = code.slice(0,8);
-
 
   return {
     inputNo: scene.inputNo,
     arraws: [scene.arraw2.step, scene.arraw1.step], // reversed
     gauge: scene.gauge.step,
-    code4: code4,
     code: code
   }
 }
