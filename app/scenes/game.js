@@ -21,40 +21,41 @@ export default class Game extends Phaser.Scene {
     this.evDisplay = new Array();
 
     //panel
-    this.add.image(650, 300, 'panel');
+    this.add.image(660, 300, 'panel');
 
     //normal sw : this is darty code
     this.switches.push({}); // 1 is null
-    this.switches.push(this.add.sprite(563, 162, 'textures', 'buttons/1/1.png'));
-    this.switches.push(this.add.sprite(563, 201, 'textures', 'buttons/2/1.png'));
-    this.switches.push(this.add.sprite(563, 239, 'textures', 'buttons/3/1.png'));
+    // this.switches.push(this.add.sprite(563, 162, 'textures', 'buttons/1/1.png'));
+    this.switches.push(this.add.sprite(573, 162, 'textures', 'buttons/1/1.png'));
+    this.switches.push(this.add.sprite(573, 201, 'textures', 'buttons/2/1.png'));
+    this.switches.push(this.add.sprite(573, 239, 'textures', 'buttons/3/1.png'));
     this.switches.push({}); // 4 is null
-    this.switches.push(this.add.sprite(563, 277, 'textures', 'buttons/5/1.png'));
-    this.switches.push(this.add.sprite(563, 316, 'textures', 'buttons/6/1.png'));
-    this.switches.push(this.add.sprite(563, 355, 'textures', 'buttons/7/1.png'));
-    this.switches.push(this.add.sprite(563, 394, 'textures', 'buttons/8/1.png'));
-    this.switches.push(this.add.sprite(563, 433, 'textures', 'buttons/9/1.png'));
-    this.switches.push(this.add.sprite(563, 471, 'textures', 'buttons/10/1.png'));
+    this.switches.push(this.add.sprite(573, 277, 'textures', 'buttons/5/1.png'));
+    this.switches.push(this.add.sprite(573, 316, 'textures', 'buttons/6/1.png'));
+    this.switches.push(this.add.sprite(573, 355, 'textures', 'buttons/7/1.png'));
+    this.switches.push(this.add.sprite(573, 394, 'textures', 'buttons/8/1.png'));
+    this.switches.push(this.add.sprite(573, 433, 'textures', 'buttons/9/1.png'));
+    this.switches.push(this.add.sprite(573, 471, 'textures', 'buttons/10/1.png'));
 
-    this.switches.push(this.add.sprite(612, 162, 'textures', 'buttons/11/1.png'));
-    this.switches.push(this.add.sprite(612, 201, 'textures', 'buttons/12/1.png'));
-    this.switches.push(this.add.sprite(612, 239, 'textures', 'buttons/13/1.png'));
-    this.switches.push(this.add.sprite(612, 277, 'textures', 'buttons/14/1.png'));
-    this.switches.push(this.add.sprite(612, 317, 'textures', 'buttons/15/1.png'));
-    this.switches.push(this.add.sprite(612, 355, 'textures', 'buttons/16/1.png'));
-    this.switches.push(this.add.sprite(612, 394, 'textures', 'buttons/17/1.png'));
-    this.switches.push(this.add.sprite(612, 433, 'textures', 'buttons/18/1.png'));
-    this.switches.push(this.add.sprite(612, 471, 'textures', 'buttons/19/1.png'));
+    this.switches.push(this.add.sprite(622, 162, 'textures', 'buttons/11/1.png'));
+    this.switches.push(this.add.sprite(622, 201, 'textures', 'buttons/12/1.png'));
+    this.switches.push(this.add.sprite(622, 239, 'textures', 'buttons/13/1.png'));
+    this.switches.push(this.add.sprite(622, 277, 'textures', 'buttons/14/1.png'));
+    this.switches.push(this.add.sprite(622, 317, 'textures', 'buttons/15/1.png'));
+    this.switches.push(this.add.sprite(622, 355, 'textures', 'buttons/16/1.png'));
+    this.switches.push(this.add.sprite(622, 394, 'textures', 'buttons/17/1.png'));
+    this.switches.push(this.add.sprite(622, 433, 'textures', 'buttons/18/1.png'));
+    this.switches.push(this.add.sprite(622, 471, 'textures', 'buttons/19/1.png'));
 
-    this.switches.push(this.add.sprite(663, 162, 'textures', 'buttons/20/1.png'));
-    this.switches.push(this.add.sprite(663, 201, 'textures', 'buttons/21/1.png'));
-    this.switches.push(this.add.sprite(663, 239, 'textures', 'buttons/22/1.png'));
-    this.switches.push(this.add.sprite(663, 277, 'textures', 'buttons/23/1.png'));
-    this.switches.push(this.add.sprite(663, 317, 'textures', 'buttons/24/1.png'));
-    this.switches.push(this.add.sprite(663, 355, 'textures', 'buttons/25/1.png'));
-    this.switches.push(this.add.sprite(663, 394, 'textures', 'buttons/26/1.png'));
-    this.switches.push(this.add.sprite(663, 433, 'textures', 'buttons/27/1.png'));
-    this.switches.push(this.add.sprite(663, 471, 'textures', 'buttons/28/1.png'));
+    this.switches.push(this.add.sprite(673, 162, 'textures', 'buttons/20/1.png'));
+    this.switches.push(this.add.sprite(673, 201, 'textures', 'buttons/21/1.png'));
+    this.switches.push(this.add.sprite(673, 239, 'textures', 'buttons/22/1.png'));
+    this.switches.push(this.add.sprite(673, 277, 'textures', 'buttons/23/1.png'));
+    this.switches.push(this.add.sprite(673, 317, 'textures', 'buttons/24/1.png'));
+    this.switches.push(this.add.sprite(673, 355, 'textures', 'buttons/25/1.png'));
+    this.switches.push(this.add.sprite(673, 394, 'textures', 'buttons/26/1.png'));
+    this.switches.push(this.add.sprite(673, 433, 'textures', 'buttons/27/1.png'));
+    this.switches.push(this.add.sprite(673, 471, 'textures', 'buttons/28/1.png'));
 
     for (let i = 0; i < this.switches.length; i++) {
       if (i === 0 || i === 4) {
@@ -73,9 +74,9 @@ export default class Game extends Phaser.Scene {
     }
 
     // //rotary sw
-    this.rswitches.push(this.add.sprite(721, 175, 'textures', 'rotarysw.png'));
-    this.rswitches.push(this.add.sprite(721, 239, 'textures', 'rotarysw.png'));
-    this.rswitches.push(this.add.sprite(721, 299, 'textures', 'rotarysw.png'));
+    this.rswitches.push(this.add.sprite(731, 175, 'textures', 'rotarysw.png'));
+    this.rswitches.push(this.add.sprite(731, 239, 'textures', 'rotarysw.png'));
+    this.rswitches.push(this.add.sprite(731, 299, 'textures', 'rotarysw.png'));
 
     for (let i = 0; i < this.rswitches.length; i++) {
       var swobj = this.rswitches[i];
@@ -107,12 +108,12 @@ export default class Game extends Phaser.Scene {
     setRotarySw(this);
 
     // display arrow
-    this.arraw1 = this.add.image(721, 58, 'arraw');
-    this.arraw2 = this.add.image(721, 88, 'arraw');
+    this.arraw1 = this.add.image(731, 58, 'arraw');
+    this.arraw2 = this.add.image(731, 88, 'arraw');
     setArraw(this);
 
     //gauge
-    this.gauge = this.add.sprite(717, 342, 'textures', 'gauge.png');
+    this.gauge = this.add.sprite(727, 342, 'textures', 'gauge.png');
     this.gauge.name = 'gauge';
     this.gauge.isLocked = false;
     this.gauge.direction = 1; // 1 is down : 0 is up
@@ -280,23 +281,23 @@ function panelFeedBack(pointer, obj) {
           if (sw.no === 14) {
             all14event_view(this);
           } else {
-            this.evDisplay.push(this.add.sprite(585, 75, 'textures', `evfont/${sw.no}.png`));
+            this.evDisplay.push(this.add.sprite(595, 75, 'textures', `evfont/${sw.no}.png`));
           }
           break;
         }
         case 2: {
-          this.evDisplay.push(this.add.sprite(603, 75, 'textures', 'evfont/haifun.png'));
-          this.evDisplay.push(this.add.sprite(621, 75, 'textures', `evfont/${sw.no}.png`));
+          this.evDisplay.push(this.add.sprite(613, 75, 'textures', 'evfont/haifun.png'));
+          this.evDisplay.push(this.add.sprite(631, 75, 'textures', `evfont/${sw.no}.png`));
           break;
         }
         case 3: {
-          this.evDisplay.push(this.add.sprite(639, 75, 'textures', 'evfont/haifun.png'));
-          this.evDisplay.push(this.add.sprite(657, 75, 'textures', `evfont/${sw.no}.png`));
+          this.evDisplay.push(this.add.sprite(649, 75, 'textures', 'evfont/haifun.png'));
+          this.evDisplay.push(this.add.sprite(667, 75, 'textures', `evfont/${sw.no}.png`));
           break;
         }
         case 4: {
-          this.evDisplay.push(this.add.sprite(675, 75, 'textures', 'evfont/haifun.png'));
-          this.evDisplay.push(this.add.sprite(693, 75, 'textures', `evfont/${sw.no}.png`));
+          this.evDisplay.push(this.add.sprite(685, 75, 'textures', 'evfont/haifun.png'));
+          this.evDisplay.push(this.add.sprite(703, 75, 'textures', `evfont/${sw.no}.png`));
           lockSwitches(this);
 
           //イベントの起点
@@ -325,10 +326,7 @@ function setRotarySw(scene){
 }
 
 function setGauge(secne) {
-  //表示修正
   secne.gauge.y = getGeugeYpos(secne.gauge.step);
-
-  //console.log(secne.gauge.y, secne.gauge.step)
 }
 
 function setArraw(scene) {

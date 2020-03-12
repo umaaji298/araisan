@@ -97,7 +97,7 @@ export default class FloorEvent extends Phaser.Scene {
     this.graphics.lineStyle(2, 0xFFFFFF, 1);
 
     //next button 
-    this.next = this.add.image(400, 530, 'next');
+    this.next = this.add.image(400, 553, 'next');
     this.next.setScale(0.8, 0.8);
     this.next.name = "next";
     this.next.setInteractive();

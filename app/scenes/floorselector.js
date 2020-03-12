@@ -358,7 +358,7 @@ function doSpecialEvent(specialNo, scene, data) {
       text5 = 'もう怪異に悩まされることはない…'
 
       commands = [
-        [0], 'preText', 'としあきは\n１４に辿り着いた…', 80, 70, 350, 76],
+        [0, 'preText', 'としあきは\n１４に辿り着いた…', 80, 70, 350, 76],
         [5000, 'text', text1, 40, 220],
         [5000, 'textRed', text2, 40, 250],
         [5500, 'textRed', text3, 40, 300],
