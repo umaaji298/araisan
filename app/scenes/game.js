@@ -129,6 +129,10 @@ export default class Game extends Phaser.Scene {
     this.rswSE = this.sound.add('rsw');
     this.gaugeSE = this.sound.add('gauge');
 
+    this.evMoveBGM = this.sound.add('evmove');
+    this.poneSE = this.sound.add('pone');
+    this.dooropenSE = this.sound.add('dooropen')
+
     /**
      * Scene events
      */
@@ -294,8 +298,10 @@ function panelFeedBack(pointer, obj) {
           this.evDisplay.push(this.add.sprite(675, 75, 'textures', 'evfont/haifun.png'));
           this.evDisplay.push(this.add.sprite(693, 75, 'textures', `evfont/${sw.no}.png`));
           lockSwitches(this);
+
           //イベントの起点
-          this.scene.launch('floorSelector', getFloorData(this));
+          startFloorEvent(this);
+          
           break;
         }
         default: {
@@ -445,6 +451,27 @@ function getGeugeYpos(index) {
   return geugeYpos[index];
 }
 
+/** Events */
+
+function startFloorEvent(scene){
+
+  scene.evMoveBGM.play();
+  scene.time.delayedCall(6000,(_this)=>{
+    _this.poneSE.play();
+  },[scene]);
+
+  scene.time.delayedCall(7500,(_this)=>{
+    _this.dooropenSE.play();
+  },[scene]);
+
+  scene.time.delayedCall(12500,(_this)=>{
+    console.log('to next scene');
+    //ここで入力が確定する : overload sw input 対応
+    _this.scene.launch('floorSelector', getFloorData(_this));
+  },[scene]); 
+
+}
+
 //special event
 function all14event_view(scene) {
   lockSwitches(scene);
@@ -470,5 +497,6 @@ function all14event_view(scene) {
   setGauge(scene);
 
   scene.inputNo = new Array(14, 14, 14, 14);
-  scene.scene.launch('floorSelector', getFloorData(scene));
+  startFloorEvent(scene);
+  //scene.scene.launch('floorSelector', getFloorData(scene));
 }

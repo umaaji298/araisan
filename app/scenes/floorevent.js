@@ -72,6 +72,22 @@ export default class FloorEvent extends Phaser.Scene {
 
     console.log('%c floorEvent ', 'background: green; color: white; display: block;');
 
+    //背景トーンダウン
+    var cameras = this.cameras.main;
+    this.tweens.addCounter({
+      targets : this,
+      from: 0.0,
+      to : 0.5,
+      duration : 500,
+      onUpdate: function(tween,targets){
+        const opacity = tween.getValue();
+        const color = `rgba(50,50,50,${opacity})`;
+        cameras.setBackgroundColor(color);
+      }
+    })
+
+    // this.cameras.main.setBackgroundColor('rgba(50,50,50,0.4)');
+
     this.evMoveBGM = this.sound.add('evmove');
     this.poneSE = this.sound.add('pone');
     this.dooropenSE = this.sound.add('dooropen');
