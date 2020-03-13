@@ -87,10 +87,10 @@ export default class FloorSelector extends Phaser.Scene {
       //todo use : data.arraws[0] , data.arraws[1] , data.gauge??
       const commands = [
         [0, 'preText', 'エレベータを降りた\nとしあきは見た…', 257, 77, 20, 10],
-        [3000, 'text', text1, 40, 210],
-        [3000, 'text', text2, 40, 250],
-        [3000, 'text', text3, 40, 290],
-        [3000, 'text', text4, 40, 330],
+        [3000, 'text', text1, 40, 172],
+        [3000, 'text', text2, 40, 212],
+        [3000, 'text', text3, 40, 252],
+        [3000, 'text', text4, 40, 292],
         [3000, 'next'],
       ];
 
