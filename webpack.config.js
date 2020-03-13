@@ -1,10 +1,15 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path");
+const webpack = require("webpack");
+
 const pathToPhaser = path.join(__dirname, "/node_modules/phaser/");
 const phaser = path.join(pathToPhaser, "dist/phaser.js");
 
 module.exports = {
-  watch : false, // what?
+  watch : true, // what?
+  watchOptions: {
+    poll: 500
+  },
   context: __dirname,
   entry:{
     'game': './app/game.js',
@@ -37,5 +42,11 @@ module.exports = {
   mode: 'none',
   optimization: {
     minimize: false
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      CANVAS_RENDERER: JSON.stringify(true),
+      WEBGL_RENDERER: JSON.stringify(true)
+    })
+  ]
 };

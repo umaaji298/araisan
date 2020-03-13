@@ -1,9 +1,10 @@
 import 'phaser';
 
-import Scenes from './scenes/scenes'
-
+import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import ShakePositionPlugin from 'phaser3-rex-plugins/plugins/shakeposition-plugin.js';
 import TCRPPlugin from 'phaser3-rex-plugins/plugins/tcrp-plugin.js'
+
+import Scenes from './scenes/scenes'
 
 var audioContext = new ((window).AudioContext || (window).webkitAudioContext)();
 
@@ -29,6 +30,11 @@ var config = {
       key: 'rexTCRP',
       plugin: TCRPPlugin,
       start: true // start timing?
+    }],
+    scene: [{
+      key: 'rexUI',
+      plugin: UIPlugin,
+      mapping: 'rexUI'
     }]
   },
   backgroundColor: '#000000',

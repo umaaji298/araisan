@@ -21,23 +21,75 @@ class ActionKlass {
     this.scene.dooropenSE.play();
   }
 
-  rswSE(){
+  rswSE() {
     this.scene.rswSE.play();
   }
 
-  fadeOut(milliseconds){
+  fadeOut(milliseconds) {
     this.scene.cameras.main.fadeOut(milliseconds, 0, 0, 0);
   }
-  preText(text,x,y,w,h) {
-    this.scene.add.text(x, y, text, this.scene.fontsys);
-    this.scene.graphics.strokeRoundedRect(x, y, w, h, 2);
+
+  //引数を無効化
+  preText(text) {
+    const x = 280;
+    const y = 77;
+    const px = 20;
+    const py = 10;
+    const textBox = this.scene.rexUI.add.textBox({
+      x: x,
+      y: y,
+
+      background: this.scene.rexUI.add.roundRectangle(0, 0, 2, 2, 2, 0x000000)
+        .setStrokeStyle(2, 0xffffff),
+
+      text: getBBcodeText(this.scene, 0, 0, 0),
+
+      space: {
+        left: px,
+        right: px,
+        top: py,
+        bottom: py,
+        // icon: 10,
+        // text: 10,
+      }
+    })
+      //.setOrigin(0)
+      .layout();
+
+    textBox.start(text, 0);
   }
 
-  text(text,x,y) {
+  //引数を無効化
+  roundText(text, x, y, px, py) {
+    const textBox = this.scene.rexUI.add.textBox({
+      x: x,
+      y: y,
+
+      background: this.scene.rexUI.add.roundRectangle(0, 0, 2, 2, 2, 0x000000)
+        .setStrokeStyle(2, 0xffffff),
+
+      text: getBBcodeText(this.scene, 0, 0, 0),
+
+      space: {
+        left: px,
+        right: px,
+        top: py,
+        bottom: py,
+        // icon: 10,
+        // text: 10,
+      }
+    })
+      //.setOrigin(0)
+      .layout();
+
+    textBox.start(text, 0);
+  }
+
+  text(text, x, y) {
     this.scene.add.text(x, y, text, this.scene.fontev);
   }
 
-  textRed(text,x,y){
+  textRed(text, x, y) {
     this.scene.add.text(x, y, text, this.scene.fontevRed);
   }
 
@@ -45,7 +97,7 @@ class ActionKlass {
     this.scene.next.setVisible(true);
   }
 
-  toGameOver(){
+  toGameOver() {
     console.log('player call to Gameover')
     this.scene.events.emit('toGameOver');
     this.scene.scene.stop('floorEvent');
@@ -75,26 +127,29 @@ export default class FloorEvent extends Phaser.Scene {
     //背景トーンダウン
     var cameras = this.cameras.main;
     this.tweens.addCounter({
-      targets : this,
+      targets: this,
       from: 0.0,
-      to : 0.5,
-      duration : 500,
-      onUpdate: function(tween,targets){
+      to: 0.5,
+      duration: 500,
+      onUpdate: function (tween, targets) {
         const opacity = tween.getValue();
         const color = `rgba(50,50,50,${opacity})`;
         cameras.setBackgroundColor(color);
       }
     })
 
-    // this.cameras.main.setBackgroundColor('rgba(50,50,50,0.4)');
+    // this.graphics = this.add.graphics();
+    // this.graphics.lineStyle(2, 0xFFFFFF, 1);
+    //this.add.rectangle(200, 200, 148, 148, 0x6666ff);
+    this.add.rectangle(40, 127, 480, 387, 0x6666ff).setOrigin(0);
+
 
     this.evMoveBGM = this.sound.add('evmove');
     this.poneSE = this.sound.add('pone');
     this.dooropenSE = this.sound.add('dooropen');
     this.rswSE = this.sound.add('rsw');
 
-    this.graphics = this.add.graphics();
-    this.graphics.lineStyle(2, 0xFFFFFF, 1);
+
 
     //next button 
     this.next = this.add.image(400, 553, 'next');
@@ -103,12 +158,15 @@ export default class FloorEvent extends Phaser.Scene {
     this.next.setInteractive();
     this.next.setVisible(false);
 
-    this.next.on('pointerup', ()=>{
-      console.log('restart');
-      //gameシーンからこのシーンを削除する？
-      this.events.emit('restert');
-      this.scene.stop('floorEvent');
-    }, this);
+    //textbox
+    this.textBoxConf =
+
+      this.next.on('pointerup', () => {
+        console.log('restart');
+        //gameシーンからこのシーンを削除する？
+        this.events.emit('restert');
+        this.scene.stop('floorEvent');
+      }, this);
 
     //TCRP event
     var myCmds = new ActionKlass(this);
@@ -124,4 +182,18 @@ export default class FloorEvent extends Phaser.Scene {
         console.log(player.now * 0.001);
       });
   }
+}
+
+var getBBcodeText = function (scene, wrapWidth, fixedWidth, fixedHeight) {
+  return scene.rexUI.add.BBCodeText(0, 0, '', {
+    fixedWidth: fixedWidth,
+    fixedHeight: fixedHeight,
+
+    fontSize: '30px',
+    wrap: {
+      mode: 'word',
+      width: wrapWidth
+    },
+    maxLines: 3
+  })
 }

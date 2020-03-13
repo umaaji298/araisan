@@ -64,8 +64,9 @@ export default class FloorSelector extends Phaser.Scene {
       ["0202202522", 105], // BASEMENT
       ["2403102024", 106], // UPSIDE DOWN
       ["0906250373", 107], // みんみ ←What's???
-      ["2807182225", 108], // SAFE
-      ["2120191004", 109], // "NOT"SAFE
+      ["0906252773", 108], // ダミー
+      ["2807182225", 109], // SAFE
+      ["2120191004", 110], // "NOT"SAFE
     ])
 
     this.spEventsMap4 = new Map([
@@ -110,7 +111,7 @@ export default class FloorSelector extends Phaser.Scene {
 
       //todo use : data.arraws[0] , data.arraws[1] , data.gauge??
       const commands = [
-        [0, 'preText', 'エレベータを降りた\nとしあきは見た…', 80, 50, 350, 76],
+        [0, 'preText', 'エレベータを降りた\nとしあきは見た…', 257, 77, 20, 10],
         [3000, 'text', text1, 40, 210],
         [3000, 'text', text2, 40, 250],
         [3000, 'text', text3, 40, 290],
@@ -139,14 +140,48 @@ function checkSpecial(code, scene) {
     specialNo = scene.spEventsMap4.get(code4);
   }
 
+  //debug 
+  specialNo = 9999;
+
   return specialNo;
 }
 
 function doSpecialEvent(specialNo, scene, data) {
-  let text1, text2, text3, text4, text5, text6, text7,text8,text9;
+  let text1, text2, text3, text4, text5, text6, text7, text8, text9, text10;
   let commands;
 
   switch (specialNo) {
+    case 9999:
+      //for debug
+      text1 = 'ああああああああああいいいいいいいいいいうううう';
+      text2 = 'に';
+      text3 = 'さん';
+      text4 = 'し';
+      text5 = 'ご';
+      text6 = 'ろく';
+      text7 = 'なな';
+      text8 = '８';
+      text9 = '9';
+      text10 = 'デバッグでバッグデバッグでバッグデバッグでバッグデバッグでバッグ';
+
+      commands = [
+        [0, 'preText', 'エレベータを降りた\nとしあきは見た…'],
+        [100, 'text', text1, 40, 117],
+        [100, 'text', text2, 40, 157],
+        [100, 'text', text3, 40, 197],
+        [100, 'text', text4, 40, 237],
+        [100, 'text', text5, 40, 277],
+        [100, 'text', text6, 40, 317],
+        [100, 'text', text7, 40, 357],
+        [100, 'text', text8, 40, 397],
+        [100, 'text', text9, 40, 437],
+        [100, 'text', text10, 40, 477],
+        [100, 'next'],
+      ];
+
+      scene.scene.start('floorEvent', { commands });
+      break;
+
     case 1:
       text1 = 'アライさんの家があるフロアだ。';
       text2 = '「ん？誰か降りたのだ？」';
@@ -322,13 +357,13 @@ function doSpecialEvent(specialNo, scene, data) {
       scene.scene.start('floorEvent', { commands });
       break;
 
-    case 107:
+    case 108:
       text1 = '崩れ果てた建物、穴だらけの道、渦を巻いた雲！';
       text2 = 'ここはあらゆる全てがくすんだ赤で表現される。';
-      text3 = 'はるか遠方では、冗談のように巨大mな何かが塔を崩した。';
-      text4 = '打ち捨nてられた頭部だけのmセミが耳元でわめく。'
-      text5 = '「地獄yn！ここは地獄なんでmiすよ！」';
-      text6 = '君みは、何かが決ん定的に\n終わってしまったのを感じみん。';
+      text3 = 'はるか遠方で、\n冗談のように巨大な何かが塔を崩した。';
+      text4 = '打ち捨てらmiれた頭部だけのじごくボスがわめynく。'
+      text5 = '「みカmiセテ！ココハジゴクmmmmチホウi」';
+      text6 = '君nみは、何かが決ん定的に\n終わってしまったのを感じみん。';
       text7 = 'みみ…？';
       text8 = 'みみ…？';
       text9 = 'みみ…？';
@@ -338,12 +373,12 @@ function doSpecialEvent(specialNo, scene, data) {
         [3000, 'text', text1, 40, 150],
         [3000, 'text', text2, 40, 180],
         [5000, 'text', text3, 40, 220],
-        [5000, 'text', text4, 40, 250],
-        [5000, 'text', text5, 40, 280],
-        [3000, 'text', text6, 40, 320],
-        [4000, 'text', text7, 40, 380],
-        [4000, 'text', text8, 40, 400],
-        [4000, 'text', text8, 40, 420],
+        [5000, 'text', text4, 40, 280],
+        [5000, 'text', text5, 40, 310],
+        [5000, 'text', text6, 40, 340],
+        [4000, 'text', text7, 40, 400],
+        [3000, 'text', text8, 40, 420],
+        [3000, 'text', text8, 40, 440],
         [3000, 'next'],
       ];
 

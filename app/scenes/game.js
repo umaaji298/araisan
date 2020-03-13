@@ -474,13 +474,13 @@ function startFloorEvent(scene){
 function all14event_view(scene) {
   lockSwitches(scene);
 
-  scene.add.sprite(585, 75, 'textures', `evfont/14.png`);
-  scene.add.sprite(603, 75, 'textures', 'evfont/haifun.png');
-  scene.add.sprite(621, 75, 'textures', `evfont/14.png`);
-  scene.add.sprite(639, 75, 'textures', 'evfont/haifun.png');
-  scene.add.sprite(657, 75, 'textures', `evfont/14.png`);
-  scene.add.sprite(675, 75, 'textures', 'evfont/haifun.png');
-  scene.add.sprite(693, 75, 'textures', `evfont/14.png`);
+  scene.add.sprite(595, 75, 'textures', `evfont/14.png`);
+  scene.add.sprite(613, 75, 'textures', 'evfont/haifun.png');
+  scene.add.sprite(631, 75, 'textures', `evfont/14.png`);
+  scene.add.sprite(649, 75, 'textures', 'evfont/haifun.png');
+  scene.add.sprite(667, 75, 'textures', `evfont/14.png`);
+  scene.add.sprite(685, 75, 'textures', 'evfont/haifun.png');
+  scene.add.sprite(703, 75, 'textures', `evfont/14.png`);
 
   //rsw移動
   scene.rswSE.play();
