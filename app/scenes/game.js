@@ -85,6 +85,13 @@ export default class Game extends Phaser.Scene {
       swobj.direction = 1;
       swobj.setInteractive();
 
+      swobj.shake = this.plugins.get('rexShakePosition').add(swobj, {
+        mode: 0,
+        duration: 600,
+        magnitude: 3,
+        magnitudeMode: 1
+      });
+
       //初期配置
       if (i === 0) {
         swobj.step = 2;
@@ -115,6 +122,13 @@ export default class Game extends Phaser.Scene {
     this.gauge.isLocked = false;
     this.gauge.direction = 1; // 1 is down : 0 is up
     this.gauge.step = 3; // 初期位置
+    this.gauge.shake = this.plugins.get('rexShakePosition').add(this.gauge, {
+      mode: 0,
+      duration: 600,
+      magnitude: 3,
+      magnitudeMode: 1
+    });
+
     setGauge(this);
     let gaugeHitarea = this.gauge.setInteractive();
     gaugeHitarea.input.hitArea.setTo(0, -15, 45, 11 + 40); // original size : 45,11 : 上15 下25
@@ -175,14 +189,7 @@ function panelFeedBack(pointer, obj) {
       const gauge = obj; // rename
 
       if (gauge.isLocked) {
-        var shake = this.plugins.get('rexShakePosition').add(obj, {
-          mode: 0,
-          duration: 600,
-          magnitude: 3,
-          magnitudeMode: 1
-        });
-        shake.shake();
-
+        if(!obj.shake.isRunning) obj.shake.shake();
         break;
       }
 
@@ -219,13 +226,7 @@ function panelFeedBack(pointer, obj) {
 
       //ロック中
       if (rsw.isLocked) {
-        var shake = this.plugins.get('rexShakePosition').add(obj, {
-          mode: 0,
-          duration: 600,
-          magnitude: 3,
-          magnitudeMode: 1
-        });
-        shake.shake();
+        if(!obj.shake.isRunning) obj.shake.shake();
         break;
       }
 
