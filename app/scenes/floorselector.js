@@ -35,7 +35,7 @@ export default class FloorSelector extends Phaser.Scene {
       ["0", "人型の", "蟲型の", "不定形の", "4", "神となった", "複数の", "機械の", "太った", "植物の", "影のような", "小さい", "巨大な", "時を止めてくる", "あなたは１４に向かった", "異質の", "古い書物に描かれた", "夜の", "頭が２つある", "ふたなりの", "水中の", "空飛ぶ", "発情した", "ひからびた", "首だけの", "閉じ込められた", "フレンズ化した", "黒く塗りつぶされた", "血まみれの"]
     ];
     this.ev2data = [
-      ["0", "裸フレンズが", "ケルピーが", "ニセイさんが", "4", "クラウケンが", "異形が", "古狩人が", "ジョンレノが", "宇宙人が", "ボンドルド卿が", "霊体が", "かーさばが", "壁の絵が", "キタキツネが", "警察が", "ホオジロザメが", "狐ババアが", "ショタが", "ピザ屋が", "狂犬フレンズが", "ワシさんが", "「あけて」君が", "死体が", "７人ミサキが", "光が", "闇が", "悪鬼が", "機械が"],
+      ["0", "裸フレンズが", "ケルピーが", "ニセイさんが", "4", "クラウケンが", "異形が", "古狩人が", "ジャンレノが", "宇宙人が", "ボンドルド卿が", "霊体が", "かーさばが", "壁の絵が", "キタキツネが", "警察が", "ホオジロザメが", "狐ババアが", "ショタが", "ピザ屋が", "狂犬フレンズが", "ワシさんが", "「あけて」君が", "死体が", "７人ミサキが", "光が", "闇が", "悪鬼が", "機械が"],
       ["0", "みんみが", "オオカワウソが", "ガチおじが", "4", "怪異が", "おじぞうさんが", "かたまりが", "人形が", "全裸の異性が", "としあきが", "地下ラッコが", "コツメカワウソが", "荒耶宗蓮が", "メリーさんが", "探索者が", "ギンギツネが", "アライさんが", "フェネックが", "きんたまが", "モブフレンズが", "肉食ちゃんが", "草食ちゃんが", "木魚マンが", "お稲荷様が", "目玉が", "ネズミボトルが", "待機カワウソが", "じごくボスが"]
     ];
     this.ev3data = [
@@ -75,15 +75,21 @@ export default class FloorSelector extends Phaser.Scene {
       ["19102809", 202], // 仮眠室
       ["02220508", 203], // 目目目(TVShow)
     ])
+
+    //event.jsonよりイベント呼び出し
+    this.spEvents = this.cache.json.get('events');
   }
 
   create(data) {
     console.log('%c floorSelector ', 'background: green; color: white; display: block;');
     console.log('floordata', data);
 
-    const specialNo = checkSpecial(data.code, this)
-    if (specialNo) {
-      doSpecialEvent(specialNo, this, data);
+    console.log('spevents',this.spEvents);
+
+    const commands = checkEvent(data.code, this)
+    if (commands) {
+      //doSpecialEvent(specialNo, this, data);
+      this.scene.start('floorEvent', { commands });
     } else {
       //normal event
 
@@ -124,26 +130,22 @@ export default class FloorSelector extends Phaser.Scene {
   }
 }
 
-function checkSpecial(code, scene) {
-  let specialNo = 0; // No.0 is normal event
+function checkEvent(code, scene) {
+  let commands = 0; // No.0 is normal event
   const code4 = code.slice(0, 8);
   const code6 = code.slice(0, 10);
 
+  // console.log(code,code4,code6);
 
-  if (scene.spEeventsMapfull.has(code)) {
-    specialNo = scene.spEeventsMapfull.get(code);
-  }
-  else if (scene.spEventsMap6.has(code6)) {
-    specialNo = scene.spEventsMap6.get(code6);
-  }
-  else if (scene.spEventsMap4.has(code4)) {
-    specialNo = scene.spEventsMap4.get(code4);
+  if(scene.spEvents.hasOwnProperty(code)){
+    commands = scene.spEvents[code];
+  }else if(scene.spEvents.hasOwnProperty(code6)){
+    commands = scene.spEvents[code6];
+  }else if(scene.spEvents.hasOwnProperty(code4)){
+    commands = scene.spEvents[code4];
   }
 
-  //debug 
-  specialNo = 9999;
-
-  return specialNo;
+  return commands;
 }
 
 function doSpecialEvent(specialNo, scene, data) {
@@ -151,37 +153,6 @@ function doSpecialEvent(specialNo, scene, data) {
   let commands;
 
   switch (specialNo) {
-    case 9999:
-      //for debug
-      text1 = 'ああああああああああいいいいいいいいいいうううう';
-      text2 = 'に';
-      text3 = 'さん';
-      text4 = 'し';
-      text5 = 'ご';
-      text6 = 'ろく';
-      text7 = 'なな';
-      text8 = '８';
-      text9 = '9';
-      text10 = 'デバッグでバッグデバッグでバッグデバッグでバッグデバッグでバッグ';
-
-      commands = [
-        [0, 'preText', 'エレベータを降りた\nとしあきは見た…'],
-        [100, 'text', text1, 40, 117],
-        [100, 'text', text2, 40, 157],
-        [100, 'text', text3, 40, 197],
-        [100, 'text', text4, 40, 237],
-        [100, 'text', text5, 40, 277],
-        [100, 'text', text6, 40, 317],
-        [100, 'text', text7, 40, 357],
-        [100, 'text', text8, 40, 397],
-        [100, 'text', text9, 40, 437],
-        [100, 'text', text10, 40, 477],
-        [100, 'next'],
-      ];
-
-      scene.scene.start('floorEvent', { commands });
-      break;
-
     case 1:
       text1 = 'アライさんの家があるフロアだ。';
       text2 = '「ん？誰か降りたのだ？」';
@@ -312,7 +283,7 @@ function doSpecialEvent(specialNo, scene, data) {
       break;
 
     case 101:
-      text1 = '「水没した地下駐車場か…」';
+      text1 = '「水没した駐車場か…」';
       text2 = '全体に亀裂が入り、深い水が溜まっている。';
       text3 = '静かな水面には軍用風のゴムボート。';
       text4 = '…そして「信じろ」のメモ書き。';

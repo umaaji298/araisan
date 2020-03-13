@@ -21,6 +21,9 @@ export default class Preloader extends Phaser.Scene {
     this.load.audio('dooropen', 'assets/audio/elevetordoor.mp3');
     this.load.audio('ending', 'assets/audio/taiju_43sec.mp3');
 
+    //scripts
+    this.load.json('events', 'events/events.json');
+
     //this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
   }
 
