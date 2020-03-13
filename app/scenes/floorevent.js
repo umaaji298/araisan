@@ -109,8 +109,7 @@ export default class FloorEvent extends Phaser.Scene {
     super('floorEvent');
   }
 
-  preload(data) {
-    //console.log('call init', data);
+  preload() {
 
     //font
     this.fontopt = { fontSize: '16px', color: '#fff', backgroundColor: '#f00', padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
@@ -138,10 +137,8 @@ export default class FloorEvent extends Phaser.Scene {
       }
     })
 
-    // this.graphics = this.add.graphics();
-    // this.graphics.lineStyle(2, 0xFFFFFF, 1);
-    //this.add.rectangle(200, 200, 148, 148, 0x6666ff);
-    this.add.rectangle(40, 127, 480, 387, 0x6666ff).setOrigin(0);
+    // todo random color
+    //this.add.rectangle(40, 127, 480, 387, 0x6666ff).setOrigin(0);
 
 
     this.evMoveBGM = this.sound.add('evmove');
@@ -160,7 +157,6 @@ export default class FloorEvent extends Phaser.Scene {
 
     //textbox
     this.textBoxConf =
-
       this.next.on('pointerup', () => {
         console.log('restart');
         //gameシーンからこのシーンを削除する？

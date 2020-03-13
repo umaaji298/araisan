@@ -3,7 +3,6 @@ export default class Game extends Phaser.Scene {
 
   constructor() {
     super({ key: 'game' });
-    //window.GAME = this; // what?
   }
 
   preload() {
@@ -102,8 +101,6 @@ export default class Game extends Phaser.Scene {
         swobj.stepMax = 7;
         swobj.stepMin = 3;
       }
-
-      // swobj.rotation = getAngleFromStep(swobj.step);
     }
     setRotarySw(this);
 
@@ -302,7 +299,7 @@ function panelFeedBack(pointer, obj) {
 
           //イベントの起点
           startFloorEvent(this);
-          
+
           break;
         }
         default: {
@@ -318,8 +315,8 @@ function panelFeedBack(pointer, obj) {
   }
 }
 
-function setRotarySw(scene){
-  scene.rswitches.forEach(swobj=>{
+function setRotarySw(scene) {
+  scene.rswitches.forEach(swobj => {
     swobj.rotation = getAngleFromStep(swobj.step);
   });
   return;
@@ -369,7 +366,7 @@ function setArraw(scene) {
       }
   }
 
-  //arraw viwe 確定
+  //arraw view 確定
 
   //dataset
   scene.arraw2.step = arraw2step;
@@ -451,22 +448,22 @@ function getGeugeYpos(index) {
 
 /** Events */
 
-function startFloorEvent(scene){
+function startFloorEvent(scene) {
 
   scene.evMoveBGM.play();
-  scene.time.delayedCall(6000,(_this)=>{
+  scene.time.delayedCall(6000, (_this) => {
     _this.poneSE.play();
-  },[scene]);
+  }, [scene]);
 
-  scene.time.delayedCall(7500,(_this)=>{
+  scene.time.delayedCall(7500, (_this) => {
     _this.dooropenSE.play();
-  },[scene]);
+  }, [scene]);
 
-  scene.time.delayedCall(12500,(_this)=>{
+  scene.time.delayedCall(12500, (_this) => {
     console.log('to next scene');
     //ここで入力が確定する : overload sw input 対応
     _this.scene.launch('floorSelector', getFloorData(_this));
-  },[scene]); 
+  }, [scene]);
 
 }
 
@@ -484,9 +481,9 @@ function all14event_view(scene) {
 
   //rsw移動
   scene.rswSE.play();
-  scene.rswitches[0].step= 0;
-  scene.rswitches[1].step= 0;
-  scene.rswitches[2].step= 7;
+  scene.rswitches[0].step = 0;
+  scene.rswitches[1].step = 0;
+  scene.rswitches[2].step = 7;
   setRotarySw(scene);
   setArraw(scene);
 

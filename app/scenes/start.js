@@ -22,11 +22,6 @@ export default class Start extends Phaser.Scene {
         this.scene.start('game');
       }, [], this);
     }, this);
-
-
-    // createTextBox(this, 100, 100)
-    //   .start(content, 0);
-
   }
 }
 
