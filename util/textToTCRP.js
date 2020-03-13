@@ -7,7 +7,7 @@ const events = {}
 async function main() {
 
   const fileList = await getFiles();
-  console.log(fileList);
+  //console.log(fileList);
 
   for (let i = 0; i < fileList.length; i++) {
     const file = fileList[i];
@@ -15,7 +15,7 @@ async function main() {
     scriptsToEvents(data);
   }
 
-  console.log(events);
+  //console.log(events);
   await fs.writeFile('docs/events/events.json', JSON.stringify(events));
 
   console.log('done');
@@ -76,12 +76,18 @@ function scriptsToEvents(data) {
   }
   if (id === '14141414') {
     events[id] = commands.concat([[5000, "poneSE"], [1000, [["dooropenSE"], ["fadeOut", 6000]]], [6000, "toGameOver"]]);
-  } else {
+  }else if(id === '999999990000'){
+    commands.push([wait, 'next'])
+    events[id] = commands.slice(1);
+  }
+else if(id === '999999990001'){
+  commands.push([wait, 'next'])
+  events[id] = commands.slice(1);
+}
+  else {
     commands.push([wait, 'next']) // 次へボタン表示
     events[id] = commands;
   }
-
-
 }
 
 function floorToId(floor) {

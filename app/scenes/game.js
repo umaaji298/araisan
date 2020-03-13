@@ -450,21 +450,34 @@ function getGeugeYpos(index) {
 
 function startFloorEvent(scene) {
 
-  scene.evMoveBGM.play();
-  scene.time.delayedCall(6000, (_this) => {
-    _this.poneSE.play();
-  }, [scene]);
+  //暫定 closecheck
+  let floorData = getFloorData(scene)
+  if (checkClose(floorData.code)) {
+    // close中
+    const code6 = floorData.code.slice(0, 10);
+    if(code6 === "1606070204"){
+      floorData.code = "999999990001"
+    }else{
+      floorData.code = "999999990000"
+    }
+    scene.scene.launch('floorSelector', floorData);
 
-  scene.time.delayedCall(7500, (_this) => {
-    _this.dooropenSE.play();
-  }, [scene]);
+  } else {
+    scene.evMoveBGM.play();
+    scene.time.delayedCall(6000, (_this) => {
+      _this.poneSE.play();
+    }, [scene]);
 
-  scene.time.delayedCall(12500, (_this) => {
-    console.log('to next scene');
-    //ここで入力が確定する : overload sw input 対応
-    _this.scene.launch('floorSelector', getFloorData(_this));
-  }, [scene]);
+    scene.time.delayedCall(7500, (_this) => {
+      _this.dooropenSE.play();
+    }, [scene]);
 
+    scene.time.delayedCall(12500, (_this) => {
+      console.log('to next scene');
+      //ここで入力が確定する : overload sw input 対応
+      _this.scene.launch('floorSelector', getFloorData(_this));
+    }, [scene]);
+  }
 }
 
 //special event
@@ -494,4 +507,21 @@ function all14event_view(scene) {
   scene.inputNo = new Array(14, 14, 14, 14);
   startFloorEvent(scene);
   //scene.scene.launch('floorSelector', getFloorData(scene));
+}
+
+function checkClose(code) {
+  let isClosed = false;
+  const code6 = code.slice(0, 10);
+
+  const closeList = ["2424222042", "1606070204", "0202202522", "2403102024", "2807182225", "2120191004"];
+
+  closeList.forEach(num => {
+    if (num === code6) {
+      //closeCode = "999999990000";
+      isClosed = true;
+      console.log('hit', code6);
+    }
+  })
+
+  return isClosed;
 }

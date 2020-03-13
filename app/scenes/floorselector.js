@@ -59,6 +59,7 @@ export default class FloorSelector extends Phaser.Scene {
     console.log('floordata', data);
 
     const commands = checkEvent(data.code, this)
+
     if (commands) {
       // todo 制御文字の構文解析はここでやる感じ
       this.scene.start('floorEvent', { commands });
