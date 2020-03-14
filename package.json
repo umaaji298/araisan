@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "bundle": "node node_modules/webpack/bin/webpack.js",
+    "bundle" : "./node_modules/.bin/webpack",
+    "build": "./node_modules/.bin/webpack --config webpack.production.js",
     "start": "node ./bin/www",
     "dev": "PORT=8000 node ./bin/www"
   },
