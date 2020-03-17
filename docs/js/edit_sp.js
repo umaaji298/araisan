@@ -5,7 +5,7 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 
   /** すべて消す */
-  $('#allClear').click(()=>{
+  $('#allClear').click(() => {
     console.log('call');
     $('#eventText').val("");
     $('#floorname').val("");
@@ -94,11 +94,12 @@ $('#submit').click(() => {
 
   if (isAnonymous && uid) {
 
-    //IDの決定
-    let idObj;
+    //特権用ID
+    let idObj = new Object();
+    idObj.idString = $('#floorNo').val();
 
     try {
-      idObj = createFloorId();
+      idObj.id = createFloorIdSp(idObj.idString);
     } catch (err) {
       console.log(err);
       alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:20')
@@ -132,7 +133,6 @@ $('#submit').click(() => {
         console.error("Error adding document: ", error);
         return
       });
-
   }
   else {
     alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:40');
@@ -141,32 +141,27 @@ $('#submit').click(() => {
   }
 })
 
-function createFloorId() {
+const convertMap = new Map([["А", "20"], ["Б", "21"], ["В", "22"], ["Г", "23"], ["Д", "24"], ["Е", "25"], ["Ж", "26"], ["з", "27"], ["и", "28"], ["И", "28"], ["↑", "0"], ["↗", "1"], ["→", "2"], ["↘", "3"], ["↓", "4"], ["↙", "5"], ["←", "6"], ["↖", "7"], ["|", "00"], ["||", "01"], ["|||", "02"], ["||||", "03"], ["|||||", "04"], ["||||||", "05"], ["|||||||", "06"], ["||||||||", "07"], ["|||||||||", "08"], ["||||||||||", "09"], ["|||||||||||", "10"], ["||||||||||||", "11"], ["|||||||||||||", "12"], ["||||||||||||||", "13"], ["|||||||||||||||", "14"]]);
 
-  let id, id_1, id_2, id_3, id_4;
+function createFloorIdSp(input) {
+  const array = input.split(',');
+  let result = ""
 
-  //既存IDとかぶってないかチェックする
-  for (let i = 0; i < 5; i++) {
-    id_1 = rand28String();
-    id_2 = rand28String();
-    id_3 = rand28String();
-    id_4 = rand28String();
-
-    id = id_1 + id_2 + id_3 + id_4;
-
-    if (chekNewId(id)) {
-      break;
-    }
-
-    if (i === 4) {
-      //4回もやってダメならなんか変！
-      throw Error();
+  for (let i = 0; i < array.length; i++) {
+    if (convertMap.has(array[i])) {
+      // console.log('hit of',array[i]);
+      result += convertMap.get(array[i]);
+    } else {
+      result += ('00' + array[i]).slice(-2); // 2桁揃え
     }
   }
 
-  const idString = `${idToPanelNo(id_1)},${idToPanelNo(id_2)},${idToPanelNo(id_3)},${idToPanelNo(id_4)}`;
+  if (!chekNewId(result)) {
+    console.error('id is already regestred!', result);
+    throw Error();
+  }
 
-  return { id, idString }
+  return result;
 }
 
 function rand28String() {

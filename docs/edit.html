@@ -39,6 +39,13 @@
 
     <h3 class="m-3 text-center">新しいフロアを作成するのだ！</h3>
 
+    <div class="form-group row px-5 mt-5">
+      <div class="col-2"></div>
+      <div class="col-10">
+        <button id="allClear" class="btn btn-warning btn-sm">すべて消す</button>
+      </div>
+    </div>
+
     <!-- <form> -->
       <div class="form-group row px-5 py-2 text-right">
         <label class="col-2 col-form-label" for="textarea">表示する文章<br>・1行24文字<br>・10行まで<br><span class="badge badge-info">必須</span></label>
@@ -48,17 +55,23 @@
         </div>
       </div>
 
-      <div class="form-group row px-5 text-right">
-        <label class="col-2 col-form-label" for="floorname">フロアの名前 <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
+      <div class="form-group row px-5">
+        <label class="col-2 col-form-label text-right" for="floorname">フロアの名前 <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
         <div class="col-4">
-          <input id="floorname" type="text" class="form-control" placeholder="例)失われた森" value="失われた森">
+          <input id="floorname" type="text" class="form-control" placeholder="">
+        </div>
+        <div class="col-6">
+          <span id="floornameHelp" class="form-text">例： 失われた森</span>
         </div>
       </div>
 
-      <div class="form-group row px-5 text-right">
-        <label class="col-2 col-form-label" for="creator">作成者 <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
+      <div class="form-group row px-5">
+        <label class="col-2 col-form-label text-right" for="creator">作成者 <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
         <div class="col-4">
-          <input id="creator" type="text" class="form-control" placeholder="例)としあき" value="失われたとしあき">
+          <input id="creator" type="text" class="form-control" placeholder="">
+        </div>
+        <div class="col-6">
+          <span id="creatorHelp" class="form-text">例： としあき</span>
         </div>
       </div>
       

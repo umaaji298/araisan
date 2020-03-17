@@ -49,7 +49,7 @@ export default class FloorSelector extends Phaser.Scene {
 
     //event.jsonよりイベント呼び出し
     //this.spEvents = this.cache.json.get('events');
-    this.spEvents = this.cache.json.get('debugevents');
+    this.spEvents = this.cache.json.get('events');
 
     //gauge 数値データ置き換え
     this.numTag = ["１／２", "７", "５", "７７", "３", "１０", "０．１", "１", "千万", "２", "１２", "０", "数", "無", "百万", "０．０１"];
