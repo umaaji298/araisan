@@ -1,7 +1,35 @@
-/** tooltip表示 */
+
+
 $(function () {
+  /** tooltip表示 */
   $('[data-toggle="tooltip"]').tooltip();
 });
+
+//登録済みイベントデータ取得
+var events;
+var events_daily;
+
+fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events.json?alt=media')
+  .then(resp => { return resp.json(); })
+  .then(jsonObj => {
+    events = jsonObj;
+    console.log(events,typeof(events));
+  })
+  .catch(error => {
+    alert('ネットワークエラー発生中！管理人が復旧しないと無理そうです。code:10')
+    console.error(error)
+  });
+
+fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/daily.json?alt=media')
+  .then(resp => { return resp.json(); })
+  .then(jsonObj => {
+    events_daily = jsonObj;
+    console.log(events_daily);
+  })
+  .catch(error => {
+    alert('ネットワークエラー発生中！管理人が復旧しないと無理そうです。code:11')
+    console.error(error)
+  });
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -51,73 +79,94 @@ $('#submit').click(() => {
   const creator = $('#creator').val();
   const floorName = $('#floorname').val();
 
-  const { id, idString } = createFloorId();
-
-  console.log(creator, floorName, id, idString);
-
   // todo validation
 
-  // textdata to TRPCode //廃止
-  //const commands = scriptsToEvents(textdata)
-  
   // textdata \n to ,
   const text = textdata.split('\n').join(',')
 
-  const floorData = {
-    idString: idString, // todo decode to
-    //commands: commands,
-    text : text,
-    uid: uid,
-    author: creator,
-    imgUrl: "",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    floorName: floorName,
-    // favorite : 0 // pending
-  }
-
   if (isAnonymous && uid) {
 
+    //IDの決定
+    let idObj;
 
-    // const ref = db.collection('/floors/v1/datas/').doc('000000000001');
-    const ref = db.collection('/floors/v1/datas').doc(id);
-    console.log(ref);
+    try {
+      idObj = createFloorId();
+    } catch (err) {
+      console.log(err);
+      alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:20')
+      return;
+    }
+
+    console.log(creator, floorName, idObj.id, idObj.idString);
+
+    const floorData = {
+      idString: idObj.idString, // todo decode to
+      //commands: commands,
+      text: text,
+      uid: uid,
+      author: creator,
+      imgUrl: "",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      floorName: floorName,
+      // favorite : 0 // pending
+    }
+
+    const ref = db.collection('/floors/v1/datas').doc(idObj.id);
 
     ref.set(floorData)
       // ref.create({foo:'bar'})
       .then(function () {
-        console.log("Document written with ID: ", id);
+        console.log("Document written with ID: ", idObj.id);
       })
       .catch(function (error) {
+        alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:30');
         console.error("Error adding document: ", error);
+        return
       });
+
   }
   else {
+    alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:40');
     console.error('not logged in');
+    return
   }
-
 })
 
 // document.getElementById('submit').onclick = submit;
 
 function createFloorId() {
-  const id1 = rand28String();
-  const id2 = rand28String();
-  const id3 = rand28String();
-  const id4 = rand28String();
 
-  const id = id1 + id2 + id3 + id4;
+  let id, id_1, id_2, id_3, id_4;
 
-  const idString = idToPanelNo(id1) + idToPanelNo(id2) + idToPanelNo(id3) + idToPanelNo(id4);
+  //既存IDとかぶってないかチェックする
+  for (let i = 0; i < 5; i++) {
+    id_1 = rand28String();
+    id_2 = rand28String();
+    id_3 = rand28String();
+    id_4 = rand28String();
 
+    id = id_1 + id_2 + id_3 + id_4;
+
+    if (chekNewId(id)) {
+      break;
+    }
+
+    if (i === 4) {
+      //4回もやってダメならなんか変！
+      throw Error();
+    }
+  }
+
+  const idString = idToPanelNo(id_1) + idToPanelNo(id_2) + idToPanelNo(id_3) + idToPanelNo(id_4);
 
   return { id, idString }
 }
 
-
 function rand28String() {
   let result;
 
+  //while若干怖い
   while (true) {
     result = Math.floor(Math.random() * 29);
     if (result != 0 && result != 4) break;
@@ -127,6 +176,19 @@ function rand28String() {
   const resultStr = ('00' + result).slice(-2);
 
   return resultStr
+}
+
+function chekNewId(id) {
+  let isOk = true;
+
+  if (events.hasOwnProperty(id)) {
+    isOk = false;
+  }
+  if (events_daily.hasOwnProperty(id)) {
+    isOK = false;
+  }
+
+  return isOk;
 }
 
 const convertSWMap = new Map([['20', 'А'], ['21', 'Б'], ['22', 'В'], ['23', 'Г'], ['24', 'Д'], ['25', 'Е'], ['26', 'Ж'], ['27', 'з'], ['28', 'И']]);
