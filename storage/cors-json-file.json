@@ -1,0 +1,8 @@
+[
+  {
+    "origin": ["https://umaaji298.github.io","http://localhost:8000"],
+    "responseHeader": ["Content-Type"],
+    "method": ["GET"],
+    "maxAgeSeconds": 300
+  }
+]

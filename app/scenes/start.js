@@ -22,6 +22,7 @@ export default class Start extends Phaser.Scene {
         this.scene.start('game');
       }, [], this);
     }, this);
+
   }
 }
 

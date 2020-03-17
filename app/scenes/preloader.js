@@ -5,6 +5,17 @@ export default class Preloader extends Phaser.Scene {
   }
 
   preload() {
+
+    //loading
+    this.load.on('progress',(prgress)=>{
+      console.log(prgress)
+    });
+
+    //load comp
+    this.load.on('complete',()=>{
+      console.log('loadend');
+    });
+
     this.load.image('fullscreen', 'assets/fullscreen.png');
     this.load.image('title', 'assets/title.png');
     this.load.image('panel', 'assets/panel.png');
@@ -24,7 +35,10 @@ export default class Preloader extends Phaser.Scene {
     //scripts
     this.load.json('events', 'events/events.json');
 
+    this.load.json('debugevents', 'https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events.json?alt=media');
+
     //this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
+
   }
 
   create() {
@@ -34,7 +48,6 @@ export default class Preloader extends Phaser.Scene {
     // game.scale.onFullScreenChange(() => {
     //   console.log('change');
     // })
-
     this.scene.start('start');
     // this.scene.start('game');
   }

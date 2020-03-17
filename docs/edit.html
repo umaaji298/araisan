@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-159940516-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-159940516-1');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no,user-scalable=no">
+  <meta name="description" content="アライさんマンションのゲームです。最近のブラウザで動作します。これはHtml5とPhaserによって作られています。">
+  <meta name="author" content="toshiaki(umaaji298)">
+  <link rel="icon" sizes="any" href="icon/icon.svg" type="image/svg+xml">
+
+  <title>アライさんマンション - フロア作成</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <!-- <script src="//cdn.jsdelivr.net/npm/phaser@3.22.0/dist/phaser.js"></script> -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&family=Sawarabi+Mincho&display=swap" -->
+  <!-- rel="stylesheet"> -->
+
+  <link href="css/edit.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Begin page content -->
+  <main role="main" class="container-main mb-5">
+    <div class="text-center top">
+      <a class="navbar-brand-image" href="#"><img src="icon/icon.svg" width="48" height="48"></a>
+      <span class="text-light">アライさんマンション</span>
+    </div>
+
+    <h3 class="m-3 text-center">新しいフロアを作成するのだ！</h3>
+
+    <!-- <form> -->
+      <div class="form-group row px-5 py-2 text-right">
+        <label class="col-2 col-form-label" for="textarea">表示する文章<br>・1行24文字<br>・10行まで<br><span class="badge badge-info">必須</span></label>
+        <div class="col-10">
+          <textarea class="form-control" id="eventText" rows="5"
+            placeholder="">君は見た&#13;&#10;はちみつを舐める&#13;&#10;下半身裸の&#13;&#10;黄色いくまの怪異を…！</textarea>
+        </div>
+      </div>
+
+      <div class="form-group row px-5 text-right">
+        <label class="col-2 col-form-label" for="floorname">フロアの名前 <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
+        <div class="col-4">
+          <input id="floorname" type="text" class="form-control" placeholder="例)失われた森" value="失われた森">
+        </div>
+      </div>
+
+      <div class="form-group row px-5 text-right">
+        <label class="col-2 col-form-label" for="creator">作成者 <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
+        <div class="col-4">
+          <input id="creator" type="text" class="form-control" placeholder="例)としあき" value="失われたとしあき">
+        </div>
+      </div>
+      
+      <div class="form-group row px-5">
+        <div class="col-2">
+          <!-- <button type="submit" class="btn btn-danger">作成</button> -->
+        </div>
+        <div class="col-10">
+          <button id="submit" class="btn btn-primary">作成</button>
+        </div>
+      </div>
+
+    <!-- </form> -->
+
+    <div class="text-center">
+      <p class="mt-3 px-4">🔑マンションのフロアを新しく作成できます。</p>
+      <p class="px-4">投稿後に作成したフロアの番号が表示されます。</p>
+      <p class="px-4">ゲームへの反映には10分以上かかります。</p>
+    </div>
+    <!-- <p class="px-4">更新予定表</p>
+    <ul class="list-group">
+      <li class="list-group-item">階番号の指定</li>
+      <li class="list-group-item">画像の表示</li>
+      <li class="list-group-item">再編集・削除</li>
+      <li class="list-group-item">変数の利用</li>
+      <li class="list-group-item">表示タイミングの制御</li>
+      <li class="list-group-item">スクリプト制御用のタグ</li>
+    </ul> -->
+
+    <div class="text-center">
+      <small>更新情報</small>
+    </div>
+    <div class="news">
+      <div class="news-main mx-auto border mt-1 px-1">
+        <p class="news-item">03/1X 0.1 最小機能</p>
+      </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+  </main><!-- /.container -->
+
+  <nav id="footnavi" class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Links</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="https://github.com/umaaji298/araisan" target="_blank">🎉License</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href=http://www.2chan.net target="_blank">🌱ふたば★ちゃんねる</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="https://umaaji298.github.io/rituRPG/" target="_blank">🐈りつねぇ！RPG</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="js/jquery-3.4.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <!-- <script rel="javascript" type="text/javascript" src="game.js"></script> -->
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script defer src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.11.0/firebase-firestore.js"></script>
+
+  <script defer src="js/edit.js"></script>
+</body>
+
+</html>

@@ -32,7 +32,7 @@ export default class FloorSelector extends Phaser.Scene {
 
     this.ev1data = [
       ["0", "となりの", "ＴＳした", "ゼラチナス", "4", "狂気に飲まれた", "多脚の", "メスガキの", "健康的に日焼けした", "箱化した", "極限まで鍛えた", "デパートの", "奇妙な仮面を付けた", "ひどい匂いのする", "生まれたての", "有り金を溶かした", "モデル体型の", "あお向けに倒れた", "君の", "何かに操られた", "概念となった", "プロ野球選手の", "噛むとほろ苦い", "君を殴った", "脳を交換した", "妹の", "生まれたての", "爆発寸前の", "召喚に応じた"],
-      ["0","人型の","蟲型の","不定形の","4","神となった","\G人の","機械の","太った","植物の","影のような","小さい","巨大な","時を止めてくる","あなたは１４に向かった","異質の","古い書物に描かれた","夜の","頭が\G個ある","ふたなりの","水中の","空飛ぶ","発情した","ひからびた","首だけの","閉じ込められた","フレンズ化した","黒く塗りつぶされた","血まみれの"],
+      ["0", "人型の", "蟲型の", "不定形の", "4", "神となった", "\G人の", "機械の", "太った", "植物の", "影のような", "小さい", "巨大な", "時を止めてくる", "あなたは１４に向かった", "異質の", "古い書物に描かれた", "夜の", "頭が\G個ある", "ふたなりの", "水中の", "空飛ぶ", "発情した", "ひからびた", "首だけの", "閉じ込められた", "フレンズ化した", "黒く塗りつぶされた", "血まみれの"],
     ];
     this.ev2data = [
       ["0", "裸フレンズが", "ケルピーが", "ニセイさんが", "4", "クラウケンが", "異形が", "古狩人が", "ジャンレノが", "宇宙人が", "ボンドルド卿が", "霊体が", "かーさばが", "壁の絵が", "キタキツネが", "警察が", "ホオジロザメが", "狐ババアが", "ショタが", "ピザ屋が", "狂犬フレンズが", "ワシさんが", "「あけて」君が", "死体が", "\G人ミサキが", "光が", "闇が", "悪鬼が", "機械が"],
@@ -48,7 +48,8 @@ export default class FloorSelector extends Phaser.Scene {
     ];
 
     //event.jsonよりイベント呼び出し
-    this.spEvents = this.cache.json.get('events');
+    //this.spEvents = this.cache.json.get('events');
+    this.spEvents = this.cache.json.get('debugevents');
 
     //gauge 数値データ置き換え
     this.numTag = ["１／２", "７", "５", "７７", "３", "１０", "０．１", "１", "千万", "２", "１２", "０", "数", "無", "百万", "０．０１"];
@@ -58,17 +59,20 @@ export default class FloorSelector extends Phaser.Scene {
     console.log('%c floorSelector ', 'background: green; color: white; display: block;');
     console.log('floordata', data);
 
-    const commands = checkEvent(data.code, this)
+    const checkedCode = checkEvent(data.code, this)
 
-    if (commands) {
+    if (checkedCode) {
+
+      //イベントデコード : todo コスト重いか…！
       // todo 制御文字の構文解析はここでやる感じ
+      const event = this.spEvents[checkedCode];
+      const commands = scriptsToEvents(event.text, checkedCode);
+
       this.scene.start('floorEvent', { commands });
     } else {
       //normal event
 
       const evKey = (data.arraws[0] % 2).toString() + data.arraws[1];
-      console.log('evKey', evKey);
-
       const select = this.evSelector.get(evKey);
 
       const texts = new Array();
@@ -80,11 +84,10 @@ export default class FloorSelector extends Phaser.Scene {
       const gauge = data.gauge;
       const textsFix = new Array();
 
-      for(let i=0;i<texts.length;i++){
+      for (let i = 0; i < texts.length; i++) {
         const text = texts[i];
         const index = Math.floor((Number(evKey) + gauge + i) % this.numTag.length);
-        console.log('index',index);
-        textsFix.push(text.replace(/\G/g,this.numTag[index]));
+        textsFix.push(text.replace(/\G/g, this.numTag[index]));
       }
 
       //create TCRP commands
@@ -115,19 +118,82 @@ export default class FloorSelector extends Phaser.Scene {
 }
 
 function checkEvent(code, scene) {
-  let commands = 0; // No.0 is normal event
+  let resultCode = 0 // No.0 is normal event
+
   const code4 = code.slice(0, 8);
   const code6 = code.slice(0, 10);
 
-  // console.log(code,code4,code6);
+  console.log(code,code4,code6);
+  console.log(scene.spEvents);
 
   if (scene.spEvents.hasOwnProperty(code)) {
-    commands = scene.spEvents[code];
+    resultCode = code;
+    //    commands = scene.spEvents[code];
   } else if (scene.spEvents.hasOwnProperty(code6)) {
-    commands = scene.spEvents[code6];
+    resultCode = code6;
   } else if (scene.spEvents.hasOwnProperty(code4)) {
-    commands = scene.spEvents[code4];
+    resultCode = code4;
   }
 
+  return resultCode;
+}
+
+/**
+ * ここではやらない
+ * @param {*} textdata 
+ */
+function scriptsToEvents(textdata, id) {
+  const strings = textdata.split(',');
+
+  const baseX = 40;
+  const baseY = 117;
+  const fixY = (10 - strings.length) * 20 + baseY;
+
+  const commands = new Array();
+  commands.push([0, 'preText', 'エレベータを降りた\nとしあきは見た…']);
+
+  let wait = 3000; // 次の文章表示時間 : 
+
+  for (let i = 0; i < strings.length; i++) {
+
+    const lineWord = strings[i];
+    const waittimeClass = Math.floor(lineWord.length / 12);
+    const oneScript = [wait, 'text', strings[i], baseX, fixY + (40 * i)];
+
+    wait = 2000; // eye forcus time
+
+    switch (waittimeClass) {
+      case 0: {
+        wait += 1000;
+        break;
+      }
+      case 1: {
+        wait += 3000;
+        break;
+      }
+      case 2: {
+        wait += 4000;
+      }
+    }
+
+    commands.push(oneScript);
+  }
+
+  //special fix
+
+  if (id === '14141414') {
+    events[id] = commands.concat([[5000, "poneSE"], [1000, [["dooropenSE"], ["fadeOut", 6000]]], [6000, "toGameOver"]]);
+  } else if (id === '999999990000') {
+    commands.push([wait, 'next'])
+    events[id] = commands.slice(1);
+  }
+  else if (id === '999999990001') {
+    commands.push([wait, 'next'])
+    events[id] = commands.slice(1);
+  }
+  else {
+    commands.push([wait, 'next']) // 次へボタン表示
+  }
   return commands;
+
 }

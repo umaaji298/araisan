@@ -1,0 +1,28 @@
+[debug] [2020-03-16T07:16:52.284Z] ----------------------------------------------------------------------
+[debug] [2020-03-16T07:16:52.285Z] Command:       /usr/local/bin/node /home/vagrant/.yarn/bin/firebase login
+[debug] [2020-03-16T07:16:52.285Z] CLI Version:   7.12.1
+[debug] [2020-03-16T07:16:52.285Z] Platform:      linux
+[debug] [2020-03-16T07:16:52.285Z] Node Version:  v10.18.1
+[debug] [2020-03-16T07:16:52.286Z] Time:          Mon Mar 16 2020 16:16:52 GMT+0900 (GMT+09:00)
+[debug] [2020-03-16T07:16:52.286Z] ----------------------------------------------------------------------
+[debug] [2020-03-16T07:16:52.286Z] 
+[info] Already logged in as umityaahan@gmail.com
+[debug] [2020-03-16T07:16:52.944Z] Error: ETXTBSY: text file is busy, unlink '/home/vagrant/workspace/html5games/araisan/functions/firebase-debug.log'
+    at Object.unlinkSync (fs.js:956:3)
+    at process.<anonymous> (/home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/bin/firebase.js:68:12)
+    at process.emit (events.js:203:15)
+    at process.topLevelDomainCallback (domain.js:126:23)
+[debug] [2020-03-16T07:18:48.914Z] ----------------------------------------------------------------------
+[debug] [2020-03-16T07:18:48.916Z] Command:       /usr/local/bin/node /home/vagrant/.yarn/bin/firebase login
+[debug] [2020-03-16T07:18:48.916Z] CLI Version:   7.12.1
+[debug] [2020-03-16T07:18:48.916Z] Platform:      linux
+[debug] [2020-03-16T07:18:48.916Z] Node Version:  v10.18.1
+[debug] [2020-03-16T07:18:48.916Z] Time:          Mon Mar 16 2020 16:18:48 GMT+0900 (GMT+09:00)
+[debug] [2020-03-16T07:18:48.916Z] ----------------------------------------------------------------------
+[debug] [2020-03-16T07:18:48.916Z] 
+[info] Already logged in as umityaahan@gmail.com
+[debug] [2020-03-16T07:18:49.515Z] Error: ETXTBSY: text file is busy, unlink '/home/vagrant/workspace/html5games/araisan/functions/firebase-debug.log'
+    at Object.unlinkSync (fs.js:956:3)
+    at process.<anonymous> (/home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/bin/firebase.js:68:12)
+    at process.emit (events.js:203:15)
+    at process.topLevelDomainCallback (domain.js:126:23)

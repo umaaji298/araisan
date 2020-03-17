@@ -1,0 +1,3 @@
+firebase storage cors設定
+
+gsutil cors set storage/cors-json-file.json gs://araisan-ms.appspot.com
