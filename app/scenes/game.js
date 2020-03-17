@@ -22,94 +22,11 @@ export default class Game extends Phaser.Scene {
     //panel
     this.add.image(660, 300, 'panel');
 
-    //normal sw : this is darty code
-    this.switches.push({}); // 1 is null
-    // this.switches.push(this.add.sprite(563, 162, 'textures', 'buttons/1/1.png'));
-    this.switches.push(this.add.sprite(573, 162, 'textures', 'buttons/1/1.png'));
-    this.switches.push(this.add.sprite(573, 201, 'textures', 'buttons/2/1.png'));
-    this.switches.push(this.add.sprite(573, 239, 'textures', 'buttons/3/1.png'));
-    this.switches.push({}); // 4 is null
-    this.switches.push(this.add.sprite(573, 277, 'textures', 'buttons/5/1.png'));
-    this.switches.push(this.add.sprite(573, 316, 'textures', 'buttons/6/1.png'));
-    this.switches.push(this.add.sprite(573, 355, 'textures', 'buttons/7/1.png'));
-    this.switches.push(this.add.sprite(573, 394, 'textures', 'buttons/8/1.png'));
-    this.switches.push(this.add.sprite(573, 433, 'textures', 'buttons/9/1.png'));
-    this.switches.push(this.add.sprite(573, 471, 'textures', 'buttons/10/1.png'));
+    //normal sw
+    setupSwitches(this);
 
-    this.switches.push(this.add.sprite(622, 162, 'textures', 'buttons/11/1.png'));
-    this.switches.push(this.add.sprite(622, 201, 'textures', 'buttons/12/1.png'));
-    this.switches.push(this.add.sprite(622, 239, 'textures', 'buttons/13/1.png'));
-    this.switches.push(this.add.sprite(622, 277, 'textures', 'buttons/14/1.png'));
-    this.switches.push(this.add.sprite(622, 317, 'textures', 'buttons/15/1.png'));
-    this.switches.push(this.add.sprite(622, 355, 'textures', 'buttons/16/1.png'));
-    this.switches.push(this.add.sprite(622, 394, 'textures', 'buttons/17/1.png'));
-    this.switches.push(this.add.sprite(622, 433, 'textures', 'buttons/18/1.png'));
-    this.switches.push(this.add.sprite(622, 471, 'textures', 'buttons/19/1.png'));
-
-    this.switches.push(this.add.sprite(673, 162, 'textures', 'buttons/20/1.png'));
-    this.switches.push(this.add.sprite(673, 201, 'textures', 'buttons/21/1.png'));
-    this.switches.push(this.add.sprite(673, 239, 'textures', 'buttons/22/1.png'));
-    this.switches.push(this.add.sprite(673, 277, 'textures', 'buttons/23/1.png'));
-    this.switches.push(this.add.sprite(673, 317, 'textures', 'buttons/24/1.png'));
-    this.switches.push(this.add.sprite(673, 355, 'textures', 'buttons/25/1.png'));
-    this.switches.push(this.add.sprite(673, 394, 'textures', 'buttons/26/1.png'));
-    this.switches.push(this.add.sprite(673, 433, 'textures', 'buttons/27/1.png'));
-    this.switches.push(this.add.sprite(673, 471, 'textures', 'buttons/28/1.png'));
-
-    for (let i = 0; i < this.switches.length; i++) {
-      if (i === 0 || i === 4) {
-        continue;
-      }
-
-      var swobj = this.switches[i];
-      swobj.name = 'sw';
-      swobj.no = i;
-      var evname = 'sw' + i + 'on'
-      swobj.setInteractive();
-
-      const frameNames = this.anims.generateFrameNames('textures', { start: 1, end: 2, prefix: 'buttons/' + i + '/', suffix: '.png' });
-      this.anims.create({ key: evname, frames: frameNames, frameRate: 10, repeat: 0 });
-      swobj.anims.load(evname);
-    }
-
-    // //rotary sw
-    this.rswitches.push(this.add.sprite(731, 175, 'textures', 'rotarysw.png'));
-    this.rswitches.push(this.add.sprite(731, 239, 'textures', 'rotarysw.png'));
-    this.rswitches.push(this.add.sprite(731, 299, 'textures', 'rotarysw.png'));
-
-    for (let i = 0; i < this.rswitches.length; i++) {
-      var swobj = this.rswitches[i];
-      swobj.name = 'rsw';
-      swobj.no = i;
-      swobj.isLocked = false;
-      swobj.direction = 1;
-      swobj.setInteractive();
-
-      swobj.shake = this.plugins.get('rexShakePosition').add(swobj, {
-        mode: 0,
-        duration: 600,
-        magnitude: 3,
-        magnitudeMode: 1
-      });
-
-      //初期配置
-      if (i === 0) {
-        swobj.step = 2;
-        swobj.stepMax = 3;
-        swobj.stepMin = 0;
-      }
-      else if (i === 1) {
-        swobj.step = 1;
-        swobj.stepMax = 3;
-        swobj.stepMin = 0;
-      }
-      else if (i === 2) {
-        swobj.step = 5;
-        swobj.stepMax = 7;
-        swobj.stepMin = 3;
-      }
-    }
-    setRotarySw(this);
+    //rotary sw
+    setupRotarySw(this);
 
     // display arrow
     this.arraw1 = this.add.image(731, 58, 'arraw');
@@ -117,23 +34,9 @@ export default class Game extends Phaser.Scene {
     setArraw(this);
 
     //gauge
-    this.gauge = this.add.sprite(727, 342, 'textures', 'gauge.png');
-    this.gauge.name = 'gauge';
-    this.gauge.isLocked = false;
-    this.gauge.direction = 1; // 1 is down : 0 is up
-    this.gauge.step = 3; // 初期位置
-    this.gauge.shake = this.plugins.get('rexShakePosition').add(this.gauge, {
-      mode: 0,
-      duration: 600,
-      magnitude: 3,
-      magnitudeMode: 1
-    });
+    setupGauge(this);
 
-    setGauge(this);
-    let gaugeHitarea = this.gauge.setInteractive();
-    gaugeHitarea.input.hitArea.setTo(0, -15, 45, 11 + 40); // original size : 45,11 : 上15 下25
-    //this.input.enableDebug(this.gauge); // view hitbox
-
+    //Objectの反応をONにする
     this.input.on('gameobjectup', panelFeedBack, this);
 
     //audio
@@ -189,7 +92,7 @@ function panelFeedBack(pointer, obj) {
       const gauge = obj; // rename
 
       if (gauge.isLocked) {
-        if(!obj.shake.isRunning) obj.shake.shake();
+        if (!obj.shake.isRunning) obj.shake.shake();
         break;
       }
 
@@ -226,7 +129,7 @@ function panelFeedBack(pointer, obj) {
 
       //ロック中
       if (rsw.isLocked) {
-        if(!obj.shake.isRunning) obj.shake.shake();
+        if (!obj.shake.isRunning) obj.shake.shake();
         break;
       }
 
@@ -314,6 +217,132 @@ function panelFeedBack(pointer, obj) {
       console.error('unknown sw pushed!', obj);
     }
   }
+}
+
+function setupSwitches(scene){
+  const switches = scene.switches;
+
+  // this is darty code
+  switches.push({}); // 1 is null
+  // this.switches.push(this.add.sprite(563, 162, 'textures', 'buttons/1/1.png'));
+  switches.push(scene.add.sprite(573, 162, 'textures', 'buttons/1/1.png'));
+  switches.push(scene.add.sprite(573, 201, 'textures', 'buttons/2/1.png'));
+  switches.push(scene.add.sprite(573, 239, 'textures', 'buttons/3/1.png'));
+  switches.push({}); // 4 is null
+  switches.push(scene.add.sprite(573, 277, 'textures', 'buttons/5/1.png'));
+  switches.push(scene.add.sprite(573, 316, 'textures', 'buttons/6/1.png'));
+  switches.push(scene.add.sprite(573, 355, 'textures', 'buttons/7/1.png'));
+  switches.push(scene.add.sprite(573, 394, 'textures', 'buttons/8/1.png'));
+  switches.push(scene.add.sprite(573, 433, 'textures', 'buttons/9/1.png'));
+  switches.push(scene.add.sprite(573, 471, 'textures', 'buttons/10/1.png'));
+
+  switches.push(scene.add.sprite(622, 162, 'textures', 'buttons/11/1.png'));
+  switches.push(scene.add.sprite(622, 201, 'textures', 'buttons/12/1.png'));
+  switches.push(scene.add.sprite(622, 239, 'textures', 'buttons/13/1.png'));
+  switches.push(scene.add.sprite(622, 277, 'textures', 'buttons/14/1.png'));
+  switches.push(scene.add.sprite(622, 317, 'textures', 'buttons/15/1.png'));
+  switches.push(scene.add.sprite(622, 355, 'textures', 'buttons/16/1.png'));
+  switches.push(scene.add.sprite(622, 394, 'textures', 'buttons/17/1.png'));
+  switches.push(scene.add.sprite(622, 433, 'textures', 'buttons/18/1.png'));
+  switches.push(scene.add.sprite(622, 471, 'textures', 'buttons/19/1.png'));
+
+  switches.push(scene.add.sprite(673, 162, 'textures', 'buttons/20/1.png'));
+  switches.push(scene.add.sprite(673, 201, 'textures', 'buttons/21/1.png'));
+  switches.push(scene.add.sprite(673, 239, 'textures', 'buttons/22/1.png'));
+  switches.push(scene.add.sprite(673, 277, 'textures', 'buttons/23/1.png'));
+  switches.push(scene.add.sprite(673, 317, 'textures', 'buttons/24/1.png'));
+  switches.push(scene.add.sprite(673, 355, 'textures', 'buttons/25/1.png'));
+  switches.push(scene.add.sprite(673, 394, 'textures', 'buttons/26/1.png'));
+  switches.push(scene.add.sprite(673, 433, 'textures', 'buttons/27/1.png'));
+  switches.push(scene.add.sprite(673, 471, 'textures', 'buttons/28/1.png'));
+
+  for (let i = 0; i < switches.length; i++) {
+    if (i === 0 || i === 4) {
+      continue;
+    }
+
+    var swobj = switches[i];
+    swobj.name = 'sw';
+    swobj.no = i;
+    var evname = 'sw' + i + 'on'
+    swobj.setInteractive();
+
+    const frameNames = scene.anims.generateFrameNames('textures', { start: 1, end: 2, prefix: 'buttons/' + i + '/', suffix: '.png' });
+    scene.anims.create({ key: evname, frames: frameNames, frameRate: 10, repeat: 0 });
+    swobj.anims.load(evname);
+  }
+}
+
+function setupRotarySw(scene){
+  scene.rswitches.push(scene.add.sprite(731, 175, 'textures', 'rotarysw.png'));
+  scene.rswitches.push(scene.add.sprite(731, 239, 'textures', 'rotarysw.png'));
+  scene.rswitches.push(scene.add.sprite(731, 299, 'textures', 'rotarysw.png'));
+
+  const rswitches = scene.rswitches;
+
+  for (let i = 0; i < rswitches.length; i++) {
+    var swobj = rswitches[i];
+    swobj.name = 'rsw';
+    swobj.no = i;
+    swobj.isLocked = false;
+    swobj.setInteractive();
+
+    swobj.shake = scene.plugins.get('rexShakePosition').add(swobj, {
+      mode: 0,
+      duration: 600,
+      magnitude: 3,
+      magnitudeMode: 1
+    });
+
+    if (i === 2) {
+      // 3番目のrswだけ特殊
+      swobj.stepMin = 3;
+      swobj.stepMax = 7;
+    } else {
+      swobj.stepMin = 0;
+      swobj.stepMax = 3;
+    }
+    //初期状態をランダムで決定する
+    swobj.step = getRandomIntInclusive(swobj.stepMin, swobj.stepMax);
+
+    if(swobj.step === swobj.stemMax){
+      swobj.direction = 0;
+    }else{
+      swobj.direction = 1;
+    }
+    
+  }
+  setRotarySw(scene);
+}
+
+function setupGauge(scene){
+  scene.gauge = scene.add.sprite(727, 342, 'textures', 'gauge.png');
+  const gauge = scene.gauge;
+
+  gauge.name = 'gauge';
+  gauge.isLocked = false;
+  
+  gauge.stepMax = 15;
+  gauge.stepMin = 0;
+  gauge.step = getRandomIntInclusive(scene.gauge.stepMin, scene.gauge.stepMax); // 初期位置
+
+  if(gauge.step === 15){
+    gauge.direction = 0; // 1 is down : 0 is up
+  }else{
+    gauge.direction = 1;
+  }
+
+  gauge.shake = scene.plugins.get('rexShakePosition').add(scene.gauge, {
+    mode: 0,
+    duration: 600,
+    magnitude: 3,
+    magnitudeMode: 1
+  });
+
+  setGauge(scene);
+  let gaugeHitarea = scene.gauge.setInteractive();
+  gaugeHitarea.input.hitArea.setTo(0, -15, 45, 11 + 40); // original size : 45,11 : 上15 下25
+  //this.input.enableDebug(this.gauge); // view hitbox
 }
 
 function setRotarySw(scene) {
@@ -456,9 +485,9 @@ function startFloorEvent(scene) {
   if (checkClose(floorData.code)) {
     // close中
     const code6 = floorData.code.slice(0, 10);
-    if(code6 === "1606070204"){
+    if (code6 === "1606070204") {
       floorData.code = "999999990001"
-    }else{
+    } else {
       floorData.code = "999999990000"
     }
     scene.scene.launch('floorSelector', floorData);
@@ -525,4 +554,10 @@ function checkClose(code) {
   })
 
   return isClosed;
+}
+
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 }

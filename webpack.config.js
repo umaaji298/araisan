@@ -6,7 +6,7 @@ const pathToPhaser = path.join(__dirname, "/node_modules/phaser/");
 const phaser = path.join(pathToPhaser, "dist/phaser.js");
 
 module.exports = {
-  watch : true, // what?
+  watch : true,
   watchOptions: {
     poll: 500
   },

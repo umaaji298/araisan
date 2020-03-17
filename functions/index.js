@@ -19,8 +19,9 @@ exports.appendEventJson = functions
 
     // DB Event全て読み出し、jsonを作成する
     const writeData = new Object();
-
     const collectionData = await db.collection('floors/v1/datas').get();
+
+    //console.log('length' ,collectionData.docs.length);
 
     for(let i = 0;i<collectionData.docs.length;i++)
     {
@@ -34,11 +35,10 @@ exports.appendEventJson = functions
         author : data.author
       }
     }
-    
 
     //default bucket
     const bucket = admin.storage().bucket();
-    const file = bucket.file('test.json');
+    const file = bucket.file('events.json');
 
     const writeStream = file.createWriteStream({
       public: true, // ACL public

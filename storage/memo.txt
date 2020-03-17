@@ -1,3 +1,7 @@
 firebase storage cors設定
 
 gsutil cors set storage/cors-json-file.json gs://araisan-ms.appspot.com
+
+events.json確認(download)
+
+gsutil cp gs://araisan-ms.appspot.com/events.json storage/events.json
