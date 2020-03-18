@@ -52,12 +52,15 @@ export default class FloorSelector extends Phaser.Scene {
     this.spEvents = this.cache.json.get('events');
 
     //gauge 数値データ置き換え
-    this.numTag = ["１／２", "７", "５", "７７", "３", "１０", "０．１", "１", "千万", "２", "１２", "０", "数", "無", "百万", "０．０１"];
+    this.numTag = ["１／２", "７", "５", "７７", "３", "１０", "０．１", "１", "千万", "２", "１２", "０", "（検閲）", "無", "百万", "０．０１"];
   }
 
   create(data) {
     console.log('%c floorSelector ', 'background: green; color: white; display: block;');
     console.log('floordata', data);
+
+    const evKey = (data.arraws[0] % 2).toString() + data.arraws[1];
+    const gauge = data.gauge;
 
     const checkedCode = checkEvent(data.code, this)
 
@@ -66,13 +69,17 @@ export default class FloorSelector extends Phaser.Scene {
       //イベントデコード : todo コスト重いか…！
       // todo 制御文字の構文解析はここでやる感じ
       const event = this.spEvents[checkedCode];
-      const commands = scriptsToEvents(event.text, checkedCode);
+
+      //\Gの置き換え
+      const index = Math.floor((Number(evKey) + gauge) % this.numTag.length);
+      const fixevent = event.text.replace(/\G/g, this.numTag[index])
+
+      const commands = scriptsToEvents(fixevent, checkedCode);
 
       this.scene.start('floorEvent', { commands });
     } else {
       //normal event
 
-      const evKey = (data.arraws[0] % 2).toString() + data.arraws[1];
       const select = this.evSelector.get(evKey);
 
       const texts = new Array();
@@ -81,7 +88,6 @@ export default class FloorSelector extends Phaser.Scene {
       texts.push(this.ev3data[select[2]][data.inputNo[2]]);
       texts.push(this.ev4data[select[3]][data.inputNo[3]]);
 
-      const gauge = data.gauge;
       const textsFix = new Array();
 
       for (let i = 0; i < texts.length; i++) {
@@ -123,7 +129,7 @@ function checkEvent(code, scene) {
   const code4 = code.slice(0, 8);
   const code6 = code.slice(0, 10);
 
-  console.log(code,code4,code6);
+  console.log(code, code4, code6);
   console.log(scene.spEvents);
 
   if (scene.spEvents.hasOwnProperty(code)) {
@@ -182,18 +188,19 @@ function scriptsToEvents(textdata, id) {
   //special fix
 
   if (id === '14141414') {
-    events[id] = commands.concat([[5000, "poneSE"], [1000, [["dooropenSE"], ["fadeOut", 6000]]], [6000, "toGameOver"]]);
+    return commands.concat([[5000, "poneSE"], [1000, [["dooropenSE"], ["fadeOut", 6000]]], [6000, "toGameOver"]]);
   } else if (id === '999999990000') {
-    commands.push([wait, 'next'])
-    events[id] = commands.slice(1);
+    commands.push([wait, 'next']);
+    return commands.slice(1);
   }
   else if (id === '999999990001') {
-    commands.push([wait, 'next'])
-    events[id] = commands.slice(1);
+    commands.push([wait, 'next']);
+    return commands.slice(1);
   }
-  else {
-    commands.push([wait, 'next']) // 次へボタン表示
-  }
+
+  // 次へボタン表示
+  commands.push([wait, 'next']);
+
   return commands;
 
 }

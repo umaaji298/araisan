@@ -1,0 +1,118 @@
+[debug] [2020-03-18T00:55:59.670Z] ----------------------------------------------------------------------
+[debug] [2020-03-18T00:55:59.671Z] Command:       /usr/local/bin/node /home/vagrant/.yarn/bin/firebase functions:log
+[debug] [2020-03-18T00:55:59.671Z] CLI Version:   7.15.1
+[debug] [2020-03-18T00:55:59.671Z] Platform:      linux
+[debug] [2020-03-18T00:55:59.671Z] Node Version:  v10.18.1
+[debug] [2020-03-18T00:55:59.676Z] Time:          Wed Mar 18 2020 09:55:59 GMT+0900 (GMT+09:00)
+[debug] [2020-03-18T00:55:59.676Z] ----------------------------------------------------------------------
+[debug] [2020-03-18T00:55:59.676Z] 
+[debug] [2020-03-18T00:55:59.688Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-18T00:55:59.688Z] > authorizing via signed-in user
+[debug] [2020-03-18T00:55:59.688Z] [iam] checking project araisan-ms for permissions ["firebase.projects.get","logging.logEntries.list","logging.logs.list"]
+[debug] [2020-03-18T00:55:59.689Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-03-18T00:55:59.689Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-03-18T00:55:59.893Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-18T00:55:59.895Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/araisan-ms:testIamPermissions  
+
+[debug] [2020-03-18T00:56:00.729Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-18T00:56:00.730Z] >>> HTTP REQUEST POST https://logging.googleapis.com/v2beta1/entries:list  
+
+[debug] [2020-03-18T00:56:01.466Z] <<< HTTP RESPONSE 200
+[info] 2020-03-18T00:48:56.420680187Z D appendEventJson: Function execution took 260 ms, finished with status: 'ok'
+[info] 2020-03-18T00:48:56.424249428Z D appendEventJson: Function execution started
+[info] 2020-03-18T00:48:56.424268938Z D appendEventJson: Billing account not configured. External network is not accessible and quotas are severely limited. Configure billing account to remove these restrictions
+[info] 2020-03-18T00:48:56.472705720Z D appendEventJson: Function execution took 347 ms, finished with status: 'ok'
+[info] 2020-03-18T00:48:56.615Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:48:56.615Z I appendEventJson: done
+[info] 2020-03-18T00:48:56.631637921Z D appendEventJson: Function execution took 270 ms, finished with status: 'ok'
+[info] 2020-03-18T00:48:56.677Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:48:56.677Z I appendEventJson: done
+[info] 2020-03-18T00:48:56.770757386Z D appendEventJson: Function execution took 347 ms, finished with status: 'ok'
+[info] 2020-03-18T00:48:57.472647020Z D appendEventJson: Function execution started
+[info] 2020-03-18T00:48:57.472705618Z D appendEventJson: Billing account not configured. External network is not accessible and quotas are severely limited. Configure billing account to remove these restrictions
+[info] 2020-03-18T00:48:57.520450425Z D appendEventJson: Function execution started
+[info] 2020-03-18T00:48:57.520481039Z D appendEventJson: Billing account not configured. External network is not accessible and quotas are severely limited. Configure billing account to remove these restrictions
+[info] 2020-03-18T00:48:57.944635596Z D appendEventJson: Function execution started
+[info] 2020-03-18T00:48:57.944670451Z D appendEventJson: Billing account not configured. External network is not accessible and quotas are severely limited. Configure billing account to remove these restrictions
+[info] 2020-03-18T00:48:59.795Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:48:59.796Z I appendEventJson: done
+[info] 2020-03-18T00:48:59.816Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:48:59.817Z I appendEventJson: done
+[info] 2020-03-18T00:48:59.870152938Z D appendEventJson: Function execution took 2350 ms, finished with status: 'ok'
+[info] 2020-03-18T00:48:59.872331408Z D appendEventJson: Function execution took 2400 ms, finished with status: 'ok'
+[info] 2020-03-18T00:49:00.155Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:49:00.156Z I appendEventJson: done
+[info] 2020-03-18T00:49:00.204622806Z D appendEventJson: Function execution took 2261 ms, finished with status: 'ok'
+[info] 2020-03-18T00:49:21.256223963Z D appendEventJson: Function execution started
+[info] 2020-03-18T00:49:21.256252718Z D appendEventJson: Billing account not configured. External network is not accessible and quotas are severely limited. Configure billing account to remove these restrictions
+[info] 2020-03-18T00:49:23.168Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:49:23.169Z I appendEventJson: done
+[info] 2020-03-18T00:49:23.213300587Z D appendEventJson: Function execution took 1958 ms, finished with status: 'ok'
+[info] 2020-03-18T00:54:26.360759089Z D appendEventJson: Function execution started
+[info] 2020-03-18T00:54:26.360862488Z D appendEventJson: Billing account not configured. External network is not accessible and quotas are severely limited. Configure billing account to remove these restrictions
+[info] 2020-03-18T00:54:26.817Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:54:26.860Z I appendEventJson: done
+[info] 2020-03-18T00:54:26.905677522Z D appendEventJson: Function execution took 546 ms, finished with status: 'ok'
+[debug] [2020-03-18T00:56:01.683Z] Error: ETXTBSY: text file is busy, unlink '/home/vagrant/workspace/html5games/araisan/firebase-debug.log'
+    at Object.unlinkSync (fs.js:956:3)
+    at process.<anonymous> (/home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/bin/firebase.js:68:12)
+    at process.emit (events.js:203:15)
+    at process.topLevelDomainCallback (domain.js:126:23)
+[debug] [2020-03-18T00:56:07.693Z] ----------------------------------------------------------------------
+[debug] [2020-03-18T00:56:07.694Z] Command:       /usr/local/bin/node /home/vagrant/.yarn/bin/firebase functions:log
+[debug] [2020-03-18T00:56:07.694Z] CLI Version:   7.15.1
+[debug] [2020-03-18T00:56:07.694Z] Platform:      linux
+[debug] [2020-03-18T00:56:07.694Z] Node Version:  v10.18.1
+[debug] [2020-03-18T00:56:07.694Z] Time:          Wed Mar 18 2020 09:56:07 GMT+0900 (GMT+09:00)
+[debug] [2020-03-18T00:56:07.694Z] ----------------------------------------------------------------------
+[debug] [2020-03-18T00:56:07.694Z] 
+[debug] [2020-03-18T00:56:07.703Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-18T00:56:07.703Z] > authorizing via signed-in user
+[debug] [2020-03-18T00:56:07.704Z] [iam] checking project araisan-ms for permissions ["firebase.projects.get","logging.logEntries.list","logging.logs.list"]
+[debug] [2020-03-18T00:56:07.705Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/araisan-ms:testIamPermissions  
+
+[debug] [2020-03-18T00:56:07.974Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-18T00:56:07.975Z] >>> HTTP REQUEST POST https://logging.googleapis.com/v2beta1/entries:list  
+
+[debug] [2020-03-18T00:56:08.541Z] <<< HTTP RESPONSE 200
+[info] 2020-03-18T00:48:56.420680187Z D appendEventJson: Function execution took 260 ms, finished with status: 'ok'
+[info] 2020-03-18T00:48:56.424249428Z D appendEventJson: Function execution started
+[info] 2020-03-18T00:48:56.424268938Z D appendEventJson: Billing account not configured. External network is not accessible and quotas are severely limited. Configure billing account to remove these restrictions
+[info] 2020-03-18T00:48:56.472705720Z D appendEventJson: Function execution took 347 ms, finished with status: 'ok'
+[info] 2020-03-18T00:48:56.615Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:48:56.615Z I appendEventJson: done
+[info] 2020-03-18T00:48:56.631637921Z D appendEventJson: Function execution took 270 ms, finished with status: 'ok'
+[info] 2020-03-18T00:48:56.677Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:48:56.677Z I appendEventJson: done
+[info] 2020-03-18T00:48:56.770757386Z D appendEventJson: Function execution took 347 ms, finished with status: 'ok'
+[info] 2020-03-18T00:48:57.472647020Z D appendEventJson: Function execution started
+[info] 2020-03-18T00:48:57.472705618Z D appendEventJson: Billing account not configured. External network is not accessible and quotas are severely limited. Configure billing account to remove these restrictions
+[info] 2020-03-18T00:48:57.520450425Z D appendEventJson: Function execution started
+[info] 2020-03-18T00:48:57.520481039Z D appendEventJson: Billing account not configured. External network is not accessible and quotas are severely limited. Configure billing account to remove these restrictions
+[info] 2020-03-18T00:48:57.944635596Z D appendEventJson: Function execution started
+[info] 2020-03-18T00:48:57.944670451Z D appendEventJson: Billing account not configured. External network is not accessible and quotas are severely limited. Configure billing account to remove these restrictions
+[info] 2020-03-18T00:48:59.795Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:48:59.796Z I appendEventJson: done
+[info] 2020-03-18T00:48:59.816Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:48:59.817Z I appendEventJson: done
+[info] 2020-03-18T00:48:59.870152938Z D appendEventJson: Function execution took 2350 ms, finished with status: 'ok'
+[info] 2020-03-18T00:48:59.872331408Z D appendEventJson: Function execution took 2400 ms, finished with status: 'ok'
+[info] 2020-03-18T00:49:00.155Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:49:00.156Z I appendEventJson: done
+[info] 2020-03-18T00:49:00.204622806Z D appendEventJson: Function execution took 2261 ms, finished with status: 'ok'
+[info] 2020-03-18T00:49:21.256223963Z D appendEventJson: Function execution started
+[info] 2020-03-18T00:49:21.256252718Z D appendEventJson: Billing account not configured. External network is not accessible and quotas are severely limited. Configure billing account to remove these restrictions
+[info] 2020-03-18T00:49:23.168Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:49:23.169Z I appendEventJson: done
+[info] 2020-03-18T00:49:23.213300587Z D appendEventJson: Function execution took 1958 ms, finished with status: 'ok'
+[info] 2020-03-18T00:54:26.360759089Z D appendEventJson: Function execution started
+[info] 2020-03-18T00:54:26.360862488Z D appendEventJson: Billing account not configured. External network is not accessible and quotas are severely limited. Configure billing account to remove these restrictions
+[info] 2020-03-18T00:54:26.817Z I appendEventJson: writeEnd
+[info] 2020-03-18T00:54:26.860Z I appendEventJson: done
+[info] 2020-03-18T00:54:26.905677522Z D appendEventJson: Function execution took 546 ms, finished with status: 'ok'
+[debug] [2020-03-18T00:56:08.687Z] Error: ETXTBSY: text file is busy, unlink '/home/vagrant/workspace/html5games/araisan/firebase-debug.log'
+    at Object.unlinkSync (fs.js:956:3)
+    at process.<anonymous> (/home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/bin/firebase.js:68:12)
+    at process.emit (events.js:203:15)
+    at process.topLevelDomainCallback (domain.js:126:23)
