@@ -5,17 +5,41 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 
   /** すべて消す */
-  $('#allClear').click(()=>{
-    console.log('call');
+  $('#allClear').click(() => {
     $('#eventText').val("");
     $('#floorname').val("");
     $('#creator').val("");
   });
+
+  //続けて入力する
+  $('#modal_cotinue').click(() => {
+    $('#exampleModalCenter').modal('hide');
+    $('#eventText').val("");
+    $('#floorname').val("");
+  });
+
+  //ゲーム画面へ
+  $('#modal_next').click(() => {
+    window.location.href = '/'; // 通常の遷移
+  });
+
+
+  // $('#exampleModalCenter').on('show.bs.modal', function(e) {
+  //   const floorId = e.relatedTarget.floorId;
+  //   const _floorId = floorId.split(',').join('-');
+  //   console.log('modal event',_floorId);
+  //   $('#floorNo').val(_floorId);
+  // });
 });
+
+//modal用
+//modal用progressber
+var progress = 0;
+
 
 //登録済みイベントデータ取得
 var events;
-var events_daily;
+// var events_daily;
 
 fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events.json?alt=media')
   .then(resp => { return resp.json(); })
@@ -28,16 +52,16 @@ fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/even
     console.error(error)
   });
 
-fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/daily.json?alt=media')
-  .then(resp => { return resp.json(); })
-  .then(jsonObj => {
-    events_daily = jsonObj;
-    //console.log(events_daily);
-  })
-  .catch(error => {
-    alert('ネットワークエラー発生中！管理人が復旧しないと無理そうです。code:11')
-    console.error(error)
-  });
+// fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/daily.json?alt=media')
+//   .then(resp => { return resp.json(); })
+//   .then(jsonObj => {
+//     events_daily = jsonObj;
+//     //console.log(events_daily);
+//   })
+//   .catch(error => {
+//     alert('ネットワークエラー発生中！管理人が復旧しないと無理そうです。code:11')
+//     console.error(error)
+//   });
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -107,6 +131,23 @@ $('#submit').click(() => {
 
     console.log(creator, floorName, idObj.id, idObj.idString);
 
+    //modal呼び出し
+    $('#exampleModalCenter').modal();
+    //modal用プログレスバー
+    var counterBack = setInterval(function () {
+      progress++;
+      if (progress <= 100) {
+        $('.progress-bar').css('width', progress + '%');
+      } else {
+        clearInterval(counterBack);
+        $('#exampleModalLongTitle').text("更新完了");
+        $('#modal_spinner').hide();
+        $('#modal_next').prop("disabled", false);
+        $('#modal_next').text("ゲームへ行く");
+      }
+    
+    }, 700);
+
     const floorData = {
       idString: idObj.idString, // todo decode to
       //commands: commands,
@@ -126,6 +167,18 @@ $('#submit').click(() => {
       // ref.create({foo:'bar'})
       .then(function () {
         console.log("Document written with ID: ", idObj.id);
+
+        //現在のobjectも更新
+        events[idObj.id] = floorData;
+
+        //modalデータここで更新
+        const floorId = idObj.idString.split(',').join('-');
+        $('#floorNo').text(floorId);
+
+        $('#exampleModalLongTitle').text("ゲームデータを更新中");
+
+        if(progress < 40) progress = 40;
+
       })
       .catch(function (error) {
         alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:30');
@@ -140,6 +193,8 @@ $('#submit').click(() => {
     return
   }
 })
+
+
 
 function createFloorId() {
 
@@ -190,9 +245,9 @@ function chekNewId(id) {
   if (events.hasOwnProperty(id)) {
     isOk = false;
   }
-  if (events_daily.hasOwnProperty(id)) {
-    isOK = false;
-  }
+  // if (events_daily.hasOwnProperty(id)) {
+  //   isOK = false;
+  // }
 
   return isOk;
 }

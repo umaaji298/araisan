@@ -47,49 +47,52 @@
     </div>
 
     <!-- <form> -->
-      <div class="form-group row px-5 py-2 text-right">
-        <label class="col-2 col-form-label" for="textarea">表示する文章<br>・1行24文字<br>・10行まで<br><span class="badge badge-info">必須</span></label>
-        <div class="col-10">
-          <textarea class="form-control" id="eventText" rows="5"
-            placeholder="">君は見た&#13;&#10;はちみつを舐める&#13;&#10;下半身裸の&#13;&#10;黄色いくまの怪異を…！</textarea>
-        </div>
+    <div class="form-group row px-5 py-2 text-right">
+      <label class="col-2 col-form-label" for="textarea">表示する文章<br>・1行24文字<br>・10行まで<br><span
+          class="badge badge-info">必須</span></label>
+      <div class="col-10">
+        <textarea class="form-control" id="eventText" rows="5"
+          placeholder="">君は見た&#13;&#10;はちみつを舐める&#13;&#10;下半身裸の&#13;&#10;黄色いくまの怪異を…！</textarea>
       </div>
+    </div>
 
-      <div class="form-group row px-5">
-        <label class="col-2 col-form-label text-right" for="floorname">フロアの名前 <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
-        <div class="col-4">
-          <input id="floorname" type="text" class="form-control" placeholder="">
-        </div>
-        <div class="col-6">
-          <span id="floornameHelp" class="form-text">例： 失われた森</span>
-        </div>
+    <div class="form-group row px-5">
+      <label class="col-2 col-form-label text-right" for="floorname">フロアの名前 <span class="badge badge-secondary"
+          data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
+      <div class="col-4">
+        <input id="floorname" type="text" class="form-control" placeholder="">
       </div>
+      <div class="col-6">
+        <span id="floornameHelp" class="form-text">例： 失われた森</span>
+      </div>
+    </div>
 
-      <div class="form-group row px-5">
-        <label class="col-2 col-form-label text-right" for="creator">作成者 <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
-        <div class="col-4">
-          <input id="creator" type="text" class="form-control" placeholder="">
-        </div>
-        <div class="col-6">
-          <span id="creatorHelp" class="form-text">例： としあき</span>
-        </div>
+    <div class="form-group row px-5">
+      <label class="col-2 col-form-label text-right" for="creator">作成者 <span class="badge badge-secondary"
+          data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
+      <div class="col-4">
+        <input id="creator" type="text" class="form-control" placeholder="">
       </div>
-      
-      <div class="form-group row px-5">
-        <div class="col-2">
-          <!-- <button type="submit" class="btn btn-danger">作成</button> -->
-        </div>
-        <div class="col-10">
-          <button id="submit" class="btn btn-primary">作成</button>
-        </div>
+      <div class="col-6">
+        <span id="creatorHelp" class="form-text">例： としあき</span>
       </div>
+    </div>
+
+    <div class="form-group row px-5">
+      <div class="col-2">
+        <!-- <button type="submit" class="btn btn-danger">作成</button> -->
+      </div>
+      <div class="col-10">
+        <button id="submit" class="btn btn-primary">作成</button>
+      </div>
+    </div>
 
     <!-- </form> -->
 
     <div class="text-center">
       <p class="mt-3 px-4">🔑マンションのフロアを新しく作成できます。</p>
       <p class="px-4">投稿後に作成したフロアの番号が表示されます。</p>
-      <p class="px-4">ゲームへの反映には10分以上かかります。</p>
+      <p class="px-4">ゲームへの反映に再読み込みが必要になる場合があります。</p>
     </div>
     <!-- <p class="px-4">更新予定表</p>
     <ul class="list-group">
@@ -100,6 +103,41 @@
       <li class="list-group-item">表示タイミングの制御</li>
       <li class="list-group-item">スクリプト制御用のタグ</li>
     </ul> -->
+
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+      Launch demo modal
+    </button> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h5 class="modal-title" id="exampleModalLongTitle">フロアを登録中</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <h5>フロア番号</h5>
+              <p id="floorNo">0-0-0-0</p>
+            </div>
+            <hr>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="modal_cotinue" type="button" class="btn btn-secondary">続けてフロアを作成</button>
+            <button id="modal_next" type="button" class="btn btn-primary" disabled><span id="modal_spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <div class="text-center">
       <small>更新情報</small>
