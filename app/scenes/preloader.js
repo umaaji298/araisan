@@ -16,7 +16,6 @@ export default class Preloader extends Phaser.Scene {
       console.log('loadend');
     });
 
-    this.load.image('fullscreen', 'assets/fullscreen.png');
     this.load.image('title', 'assets/title.png');
     this.load.image('panel', 'assets/panel.png');
     this.load.image('next', 'assets/next.png');

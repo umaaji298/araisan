@@ -13,10 +13,12 @@ module.exports = {
   context: __dirname,
   entry:{
     'game': './app/game.js',
+    'editor': './app/editor.js',
   },
   output: {
     path: path.resolve(__dirname, './docs'),
-    filename: "game.js",
+    filename: '[name].js',
+    // filename: "game.js",
     publicPath:"/docs/"
   },
   module: {
