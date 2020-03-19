@@ -48,11 +48,14 @@
 
     <!-- <form> -->
     <div class="form-group row px-5 text-right">
-      <label class="col-2 col-form-label" for="textarea">表示する文章<br>・1行24文字<br>・10行まで<br><span
-          class="badge badge-info">必須</span></label>
+      <label class="col-2 col-form-label" for="textarea">表示する文章<br>・1行24文字<br>・10行まで<br>
+        ・<a
+          href="https://github.com/umaaji298/araisan/wiki/%E3%83%95%E3%83%AD%E3%82%A2%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E4%BB%95%E6%A7%98%E6%9B%B8"
+          target="_blank">仕様</a><br>
+        <span class="badge badge-info">必須</span></label>
       <div class="col-10">
         <textarea class="form-control" id="eventText" rows="5"
-          placeholder="">君は見た&#13;&#10;はちみつを舐める&#13;&#10;下半身裸の&#13;&#10;黄色いくまの怪異を…！</textarea>
+          placeholder="" maxlength="249" required>君は見た&#13;&#10;はちみつを舐める&#13;&#10;下半身裸の&#13;&#10;黄色いくまの怪異を…！</textarea>
       </div>
     </div>
 
@@ -73,7 +76,7 @@
       <label class="col-2 col-form-label text-right" for="floorname">フロアの名前 <span class="badge badge-secondary"
           data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
       <div class="col-4">
-        <input id="floorname" type="text" class="form-control" placeholder="">
+        <input id="floorname" type="text" class="form-control" placeholder="" maxlength="24">
       </div>
       <div class="col-6">
         <span id="floornameHelp" class="form-text">例： 失われた森</span>
@@ -84,7 +87,7 @@
       <label class="col-2 col-form-label text-right" for="creator">作成者 <span class="badge badge-secondary"
           data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
       <div class="col-4">
-        <input id="creator" type="text" class="form-control" placeholder="">
+        <input id="creator" type="text" class="form-control" placeholder="" maxlength="24">
       </div>
       <div class="col-6">
         <span id="creatorHelp" class="form-text">例： としあき</span>

@@ -112,9 +112,21 @@ $('#submit').click(() => {
   const floorName = $('#floorname').val();
 
   // todo validation
+  //文字長0チェック
+  if(textdata.length === 0){
+    alert('表示する文章がありません');
+    return;
+  }
+
 
   // textdata \n to ,
   const text = textdata.split('\n').join(',')
+  // サニタイズ : see : https://stackoverflow.com/questions/1787322/htmlspecialchars-equivalent-in-javascript
+  //const text = escapeHtml(_text);
+  if(testHtml(text)){
+    alert('使用禁止文字が含まれています ( & < > " \' ) ');
+    return;
+  }
 
   if (isAnonymous && uid) {
 
@@ -194,8 +206,6 @@ $('#submit').click(() => {
   }
 })
 
-
-
 function createFloorId() {
 
   let id, id_1, id_2, id_3, id_4;
@@ -267,3 +277,20 @@ function idToPanelNo(id) {
   return no;
 }
 
+function escapeHtml(text) {
+  var map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+
+  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
+function testHtml(text) {
+  let re = /[&<>"']/g;
+
+  return re.test(text);
+}
