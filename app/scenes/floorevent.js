@@ -1,3 +1,4 @@
+import TCRP from 'phaser3-rex-plugins/plugins/tcrp.js';
 import TcrpAction from '../class/tcrpAction';
 
 export default class FloorEvent extends Phaser.Scene {
@@ -54,7 +55,7 @@ export default class FloorEvent extends Phaser.Scene {
     //TCRP event
     var myCmds = new TcrpAction(this);
 
-    var player = this.plugins.get('rexTCRP').addPlayer(this);
+    var player = new TCRP.Player(this,{});
     player
       .load(data.commands, myCmds, {
         // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1

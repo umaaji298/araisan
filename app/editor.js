@@ -1,7 +1,6 @@
 import 'phaser';
 
 import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
-import TCRPPlugin from 'phaser3-rex-plugins/plugins/tcrp-plugin.js'
 
 import Scenes from './scenes_editor/scenes'
 
@@ -21,12 +20,6 @@ var config = {
     context: audioContext,
   },
   plugins: {
-    global: [
-    {
-      key: 'rexTCRP',
-      plugin: TCRPPlugin,
-      start: true // start timing?
-    }],
     scene: [{
       key: 'rexUI',
       plugin: UIPlugin,
@@ -50,6 +43,7 @@ $('#preview_close').click(()=>{
   console.log('preview_close clicked');
   $('#preview_close').hide();
   $('#preview').show();
+  game.plugins.removeScenePlugin('rexUI'); // needs remove scene plugin
   game.destroy(true);
 })
 

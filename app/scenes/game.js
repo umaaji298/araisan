@@ -1,3 +1,4 @@
+import ShakePosition from 'phaser3-rex-plugins/plugins/shakeposition.js';
 import * as util from '../util'
 export default class Game extends Phaser.Scene {
 
@@ -287,7 +288,7 @@ function setupRotarySw(scene){
     swobj.isLocked = false;
     swobj.setInteractive();
 
-    swobj.shake = scene.plugins.get('rexShakePosition').add(swobj, {
+    swobj.shake = new ShakePosition(swobj, {
       mode: 0,
       duration: 600,
       magnitude: 3,
@@ -332,7 +333,7 @@ function setupGauge(scene){
     gauge.direction = 1;
   }
 
-  gauge.shake = scene.plugins.get('rexShakePosition').add(scene.gauge, {
+  gauge.shake =  new ShakePosition(scene.gauge, {
     mode: 0,
     duration: 600,
     magnitude: 3,

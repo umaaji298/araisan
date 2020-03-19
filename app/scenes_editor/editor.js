@@ -1,3 +1,4 @@
+import TCRP from 'phaser3-rex-plugins/plugins/tcrp.js';
 import TcrpAction from '../class/tcrpAction';
 import * as util from '../util';
 
@@ -9,7 +10,7 @@ export default class Editor extends Phaser.Scene {
 
   preload() {
     //console.log('call game pleroad');
-    
+
     //gauge 数値データ置き換え
     this.numTag = ["１／２", "７", "５", "７７", "３", "１０", "０．１", "１", "千万", "２", "１２", "０", "（検閲）", "無", "百万", "０．０１"];
   }
@@ -17,7 +18,7 @@ export default class Editor extends Phaser.Scene {
   create() {
     console.log('%c editor ', 'background: green; color: white; display: block;');
     //console.log(this);
-    this.cameras.main.fadeIn(2000, 0, 0, 0);
+    //this.cameras.main.fadeIn(2000, 0, 0, 0);
 
     //panel
     this.add.image(660, 300, 'panel');
@@ -35,7 +36,7 @@ export default class Editor extends Phaser.Scene {
     let commands = util.scriptsToEvents(fixevent);
 
     //fade用の待ち時間を入れる？
-    commands.unshift([2000,'print','wait']);
+    //commands.unshift([2000,'print','wait']);
 
     //背景トーンダウン
     // todo scene - backgroundtypeなので動かない
@@ -61,7 +62,7 @@ export default class Editor extends Phaser.Scene {
 
     //TCRP event
     var myCmds = new TcrpAction(this);
-    var player = this.plugins.get('rexTCRP').addPlayer(this);
+    var player = new TCRP.Player(this,{});
     player
       .load(commands, myCmds, {
         // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
