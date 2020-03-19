@@ -48,7 +48,6 @@ export default class FloorSelector extends Phaser.Scene {
     ];
 
     //event.jsonよりイベント呼び出し
-    //this.spEvents = this.cache.json.get('events');
     this.spEvents = this.cache.json.get('events');
 
     //gauge 数値データ置き換え
@@ -72,7 +71,7 @@ export default class FloorSelector extends Phaser.Scene {
 
       //\Gの置き換え
       const index = Math.floor((Number(evKey) + gauge) % this.numTag.length);
-      const fixevent = event.text.replace(/\G/g, this.numTag[index])
+      const fixevent = event.text.replace(/\\G/g, this.numTag[index])
 
       const commands = scriptsToEvents(fixevent, checkedCode);
 
