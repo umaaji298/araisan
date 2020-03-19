@@ -1,4 +1,4 @@
-
+import * as util from '../util'
 export default class Game extends Phaser.Scene {
 
   constructor() {
@@ -303,7 +303,7 @@ function setupRotarySw(scene){
       swobj.stepMax = 3;
     }
     //初期状態をランダムで決定する
-    swobj.step = getRandomIntInclusive(swobj.stepMin, swobj.stepMax);
+    swobj.step = util.getRandomIntInclusive(swobj.stepMin, swobj.stepMax);
 
     if(swobj.step === swobj.stemMax){
       swobj.direction = 0;
@@ -324,7 +324,7 @@ function setupGauge(scene){
   
   gauge.stepMax = 15;
   gauge.stepMin = 0;
-  gauge.step = getRandomIntInclusive(scene.gauge.stepMin, scene.gauge.stepMax); // 初期位置
+  gauge.step = util.getRandomIntInclusive(scene.gauge.stepMin, scene.gauge.stepMax); // 初期位置
 
   if(gauge.step === 15){
     gauge.direction = 0; // 1 is down : 0 is up
@@ -554,10 +554,4 @@ function checkClose(code) {
   })
 
   return isClosed;
-}
-
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 }

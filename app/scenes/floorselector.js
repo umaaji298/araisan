@@ -70,12 +70,14 @@ export default class FloorSelector extends Phaser.Scene {
       const event = this.spEvents[checkedCode];
 
       //\Gの置き換え
+      // todo : 制御子の統一的な処理
       const index = Math.floor((Number(evKey) + gauge) % this.numTag.length);
       const fixevent = event.text.replace(/\\G/g, this.numTag[index])
 
-      const commands = scriptsToEvents(fixevent, checkedCode);
+      const commands = util.scriptsToEvents(fixevent, checkedCode);
+      const commands_fix = spCommandsFix(commands,checkedCode);
 
-      this.scene.start('floorEvent', { commands });
+      this.scene.start('floorEvent', { commands_fix });
     } else {
       //normal event
 
@@ -143,63 +145,16 @@ function checkEvent(code, scene) {
   return resultCode;
 }
 
-/**
- * ここではやらない
- * @param {*} textdata 
- */
-function scriptsToEvents(textdata, id) {
-  const strings = textdata.split(',');
-
-  const baseX = 40;
-  const baseY = 117;
-  const fixY = (10 - strings.length) * 20 + baseY;
-
-  const commands = new Array();
-  commands.push([0, 'preText', 'エレベータを降りた\nとしあきは見た…']);
-
-  let wait = 3000; // 次の文章表示時間 : 
-
-  for (let i = 0; i < strings.length; i++) {
-
-    const lineWord = strings[i];
-    const waittimeClass = Math.floor(lineWord.length / 12);
-    const oneScript = [wait, 'text', strings[i], baseX, fixY + (40 * i)];
-
-    wait = 2000; // eye forcus time
-
-    switch (waittimeClass) {
-      case 0: {
-        wait += 1000;
-        break;
-      }
-      case 1: {
-        wait += 3000;
-        break;
-      }
-      case 2: {
-        wait += 4000;
-      }
-    }
-
-    commands.push(oneScript);
-  }
-
-  //special fix
-
+function spCommandsFix(commands,id){
   if (id === '14141414') {
-    return commands.concat([[5000, "poneSE"], [1000, [["dooropenSE"], ["fadeOut", 6000]]], [6000, "toGameOver"]]);
+    const _commands = commands.slice(0,-1);
+    return _commands.concat([[5000, "poneSE"], [1000, [["dooropenSE"], ["fadeOut", 6000]]], [6000, "toGameOver"]]);
   } else if (id === '999999990000') {
-    commands.push([wait, 'next']);
     return commands.slice(1);
   }
   else if (id === '999999990001') {
-    commands.push([wait, 'next']);
     return commands.slice(1);
   }
 
-  // 次へボタン表示
-  commands.push([wait, 'next']);
-
   return commands;
-
 }
