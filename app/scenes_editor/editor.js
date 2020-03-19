@@ -17,23 +17,35 @@ export default class Editor extends Phaser.Scene {
 
   create() {
     console.log('%c editor ', 'background: green; color: white; display: block;');
-    //console.log(this);
-    //this.cameras.main.fadeIn(2000, 0, 0, 0);
+
+    this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+    //TCRP event
+    this.myCmds = new TcrpAction(this);
+    this.player = new TCRP.Player(this, {});
+
+    let commands = readEventsText(this);// form入力値
+
+    this.poneSE = this.sound.add('pone');
 
     //panel
-    this.add.image(660, 300, 'panel');
+    var panel = this.add.image(660, 300, 'panel');
+    panel.alpha = 0.5;
+    panel.setInteractive();
 
-    //formより読み込み
-    const event_raw = document.getElementById('eventText').value;
-    const event = event_raw.split('\n').join(',')
+    panel.on('pointerup', function () {
+      this.poneSE.play();
+      this.cameras.main.fadeOut(1000, 0, 0, 0);
+      this.time.delayedCall(1000, () => {
+        //commands = readEventsText(this);
+        //tcrpPlay(this, commands);
+        this.player.stop();
+        this.scene.restart();
+      }, [], this);
 
-    console.log('evet text', event);
+    }, this);
 
-    //\Gの置き換え
-    const index = util.getRandomIntInclusive(0, this.numTag.length - 1);
-    const fixevent = event.replace(/\\G/g, this.numTag[index]); // ランダム表示
 
-    let commands = util.scriptsToEvents(fixevent);
 
     //fade用の待ち時間を入れる？
     //commands.unshift([2000,'print','wait']);
@@ -60,17 +72,34 @@ export default class Editor extends Phaser.Scene {
     // this.next.setInteractive();
     this.next.setVisible(false);
 
-    //TCRP event
-    var myCmds = new TcrpAction(this);
-    var player = new TCRP.Player(this,{});
-    player
-      .load(commands, myCmds, {
-        // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
-        dtMode: 1           // 'abs'|'absolute'|0|'inc'|'increment'|1
-      })
-      .start()
-      .on('complete', function () {
-        console.log(player.now * 0.001);
-      });
+
+
+    tcrpPlay(this, commands);
   }
+}
+
+function readEventsText(scene) {
+  //formより読み込み
+  const event_raw = document.getElementById('eventText').value;
+  const event = event_raw.split('\n').join(',')
+
+  console.log('evet text', event);
+
+  //\Gの置き換え
+  const index = util.getRandomIntInclusive(0, scene.numTag.length - 1);
+  const fixevent = event.replace(/\\G/g, scene.numTag[index]); // ランダム表示
+
+  return util.scriptsToEvents(fixevent);
+}
+
+function tcrpPlay(scene, commands) {
+  scene.player
+    .load(commands, scene.myCmds, {
+      // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
+      dtMode: 1           // 'abs'|'absolute'|0|'inc'|'increment'|1
+    })
+    .start()
+    .on('complete', function () {
+      console.log(scene.player.now * 0.001);
+    });
 }
