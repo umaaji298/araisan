@@ -84,7 +84,24 @@ var db = firebase.firestore();
 var isAnonymous;
 var uid;
 
-firebase.auth().signInAnonymously().catch(function (error) {
+firebase.auth().signInAnonymously()
+.then(userCredential=>{
+  //初回はDBに登録する
+  // see : https://firebase.google.com/docs/reference/js/firebase.auth.Auth?hl=ja#sign-inanonymously
+  if(userCredential.additionalUserInfo.isNewUser){
+    console.log('this is new user');
+
+    // DB更新
+    let ref = db.collection("users").doc(userCredential.user.uid);
+
+    ref.set({
+      name:"Anonymous",
+      isAnonymous:true,
+      uid:userCredential.user.uid
+    })
+  }
+})
+.catch(function (error) {
   console.log(error);
 });
 
