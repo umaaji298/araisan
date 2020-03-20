@@ -1,8 +1,6 @@
 import 'phaser';
 
 import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
-import ShakePositionPlugin from 'phaser3-rex-plugins/plugins/shakeposition-plugin.js';
-
 import Scenes from './scenes/scenes'
 
 var audioContext = new ((window).AudioContext || (window).webkitAudioContext)();

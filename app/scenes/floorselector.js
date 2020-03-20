@@ -79,10 +79,10 @@ export default class FloorSelector extends Phaser.Scene {
       const index = Math.floor((Number(evKey) + gauge) % this.numTag.length);
       const fixevent = event.text.replace(/\\G/g, this.numTag[index])
 
-      const commands = util.scriptsToEvents(fixevent, checkedCode);
-      const commands_fix = spCommandsFix(commands,checkedCode);
+      const commands_raw = util.scriptsToEvents(fixevent, checkedCode);
+      const commands = spCommandsFix(commands_raw,checkedCode);
 
-      this.scene.start('floorEvent', { commands_fix });
+      this.scene.start('floorEvent', { commands });
     } else {
       //normal event
 

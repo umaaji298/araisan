@@ -1,6 +1,6 @@
 [
   {
-    "origin": ["https://umaaji298.github.io","http://localhost:8000"],
+    "origin": ["https://umaaji298.github.io","http://localhost:8000","http://192.168.10.101:8000"],
     "responseHeader": ["Content-Type"],
     "method": ["GET"],
     "maxAgeSeconds": 3000

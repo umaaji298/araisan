@@ -57,7 +57,7 @@ export default class FloorEvent extends Phaser.Scene {
 
     var player = new TCRP.Player(this,{});
     player
-      .load(data.commands_fix, myCmds, {
+      .load(data.commands, myCmds, {
         // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
         dtMode: 1           // 'abs'|'absolute'|0|'inc'|'increment'|1
       })
