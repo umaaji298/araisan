@@ -6,7 +6,7 @@ events.json確認(download)
 
 gsutil cp gs://araisan-ms.appspot.com/events.json storage/events.json
 
-gsutil cp gs://araisan-ms.appspot.com/events_daily.json storage/events_daily.json
+gsutil cp gs://araisan-ms.appspot.com/events_diff.json storage/events_diff.json
 
 daily.json 【upload】
 

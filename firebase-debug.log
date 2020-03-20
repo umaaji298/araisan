@@ -1,50 +1,664 @@
-[debug] [2020-03-20T03:23:02.528Z] ----------------------------------------------------------------------
-[debug] [2020-03-20T03:23:02.530Z] Command:       /usr/local/bin/node /home/vagrant/.yarn/bin/firebase deploy --only firestore:rules
-[debug] [2020-03-20T03:23:02.530Z] CLI Version:   7.15.1
-[debug] [2020-03-20T03:23:02.530Z] Platform:      linux
-[debug] [2020-03-20T03:23:02.530Z] Node Version:  v10.18.1
-[debug] [2020-03-20T03:23:02.530Z] Time:          Fri Mar 20 2020 12:23:02 GMT+0900 (GMT+09:00)
-[debug] [2020-03-20T03:23:02.530Z] ----------------------------------------------------------------------
-[debug] [2020-03-20T03:23:02.530Z] 
-[debug] [2020-03-20T03:23:02.544Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2020-03-20T03:23:02.544Z] > authorizing via signed-in user
-[debug] [2020-03-20T03:23:02.544Z] [iam] checking project araisan-ms for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]
-[debug] [2020-03-20T03:23:02.545Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/araisan-ms:testIamPermissions  
+[debug] [2020-03-20T07:01:39.597Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T07:01:39.607Z] Command:       /usr/local/bin/node /home/vagrant/.yarn/bin/firebase functions:log
+[debug] [2020-03-20T07:01:39.608Z] CLI Version:   7.15.1
+[debug] [2020-03-20T07:01:39.608Z] Platform:      linux
+[debug] [2020-03-20T07:01:39.608Z] Node Version:  v10.18.1
+[debug] [2020-03-20T07:01:39.609Z] Time:          Fri Mar 20 2020 16:01:39 GMT+0900 (GMT+09:00)
+[debug] [2020-03-20T07:01:39.610Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T07:01:39.610Z] 
+[debug] [2020-03-20T07:01:39.633Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-20T07:01:39.633Z] > authorizing via signed-in user
+[debug] [2020-03-20T07:01:39.634Z] [iam] checking project araisan-ms for permissions ["firebase.projects.get","logging.logEntries.list","logging.logs.list"]
+[debug] [2020-03-20T07:01:39.635Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/araisan-ms:testIamPermissions  
 
-[debug] [2020-03-20T03:23:03.430Z] <<< HTTP RESPONSE 200
-[info] 
-[info] === Deploying to 'araisan-ms'...
-[info] 
-[info] i  deploying firestore
-[info] i  cloud.firestore: checking firestore.rules for compilation errors...
-[debug] [2020-03-20T03:23:07.642Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/araisan-ms:test  
+[debug] [2020-03-20T07:01:40.411Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T07:01:40.412Z] >>> HTTP REQUEST POST https://logging.googleapis.com/v2beta1/entries:list  
 
-[debug] [2020-03-20T03:23:09.008Z] <<< HTTP RESPONSE 200
-[warn] ⚠  [W] 58:12 - Unused function: validateInt.
-[info] ✔  cloud.firestore: rules file firestore.rules compiled successfully
-[debug] [2020-03-20T03:23:09.013Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/araisan-ms/releases?pageSize=10&pageToken=  
- 
-[debug] [2020-03-20T03:23:10.313Z] <<< HTTP RESPONSE 200
-[debug] [2020-03-20T03:23:10.314Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/araisan-ms/rulesets/64a80169-49ad-47f3-a36e-f99fbd0acd05  
- 
-[debug] [2020-03-20T03:23:11.479Z] <<< HTTP RESPONSE 200
-[info] i  firestore: uploading rules firestore.rules...
-[debug] [2020-03-20T03:23:11.481Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/araisan-ms/rulesets  
-
-[debug] [2020-03-20T03:23:12.721Z] <<< HTTP RESPONSE 200
-[debug] [2020-03-20T03:23:12.721Z] [rules] created ruleset projects/araisan-ms/rulesets/ca4671c8-6ab7-4f16-b05b-5ae302e11a91
-[debug] [2020-03-20T03:23:12.721Z] [rules] releasing cloud.firestore with ruleset projects/araisan-ms/rulesets/ca4671c8-6ab7-4f16-b05b-5ae302e11a91
-[debug] [2020-03-20T03:23:12.722Z] >>> HTTP REQUEST PATCH https://firebaserules.googleapis.com/v1/projects/araisan-ms/releases/cloud.firestore  
-
-[debug] [2020-03-20T03:23:13.824Z] <<< HTTP RESPONSE 200
-[debug] [2020-03-20T03:23:13.824Z] [rules] updated release projects/araisan-ms/releases/cloud.firestore
-[info] ✔  firestore: released rules firestore.rules to cloud.firestore
-[info] 
-[info] ✔  Deploy complete!
-[info] 
-[info] Project Console: https://console.firebase.google.com/project/araisan-ms/overview
-[debug] [2020-03-20T03:23:13.989Z] Error: ETXTBSY: text file is busy, unlink '/home/vagrant/workspace/html5games/araisan/firebase-debug.log'
+[debug] [2020-03-20T07:01:41.458Z] <<< HTTP RESPONSE 200
+[info] 2020-03-20T05:46:42.859277651Z D createDailyEvents: Function execution took 2011 ms, finished with status: 'ok'
+[info] 2020-03-20T05:46:42.869Z E createDailyEvents: ReferenceError: Logger is not defined
+    at Pumpify.readStream.pipe.on (/srv/index.js:101:9)
+    at emitOne (events.js:121:20)
+    at Pumpify.emit (events.js:211:7)
+    at Pumpify.Duplexify._destroy (/srv/node_modules/pumpify/node_modules/duplexify/index.js:195:15)
+    at /srv/node_modules/pumpify/node_modules/duplexify/index.js:185:10
+    at _combinedTickCallback (internal/process/next_tick.js:132:7)
+    at process._tickDomainCallback (internal/process/next_tick.js:219:9)
+[info] 2020-03-20T05:46:42.873724965Z D createDailyEvents: Function execution took 1614 ms, finished with status: 'crash'
+[info] 2020-03-20T05:56:40.114571406Z D createDailyEvents: Function execution started
+[info] 2020-03-20T05:56:40.152151763Z D createDailyEvents: Function execution started
+[info] 2020-03-20T05:56:40.157Z I createDailyEvents: create event.json
+[info] 2020-03-20T05:56:40.453Z I createDailyEvents: create event.json
+[info] 2020-03-20T05:56:40.576Z I createDailyEvents: writeEnd
+[info] 2020-03-20T05:56:40.577Z I createDailyEvents: done
+[info] 2020-03-20T05:56:40.655467952Z D createDailyEvents: Function execution took 542 ms, finished with status: 'ok'
+[info] 2020-03-20T05:56:40.658488495Z D createDailyEvents: Function execution started
+[info] 2020-03-20T05:56:40.662Z I createDailyEvents: create event.json
+[info] 2020-03-20T05:56:40.804Z I createDailyEvents: writeEnd
+[info] 2020-03-20T05:56:40.805Z I createDailyEvents: done
+[info] 2020-03-20T05:56:40.811241049Z D createDailyEvents: Function execution took 660 ms, finished with status: 'ok'
+[info] 2020-03-20T05:56:40.898Z I createDailyEvents: writeEnd
+[info] 2020-03-20T05:56:40.899Z I createDailyEvents: done
+[info] 2020-03-20T05:56:40.904574424Z D createDailyEvents: Function execution took 247 ms, finished with status: 'ok'
+[info] 2020-03-20T06:58:55.490Z I : 
+[info] 2020-03-20T06:58:56.052Z I : 
+[info] 2020-03-20T06:59:14.845Z N createEventsJsonAPI: 
+[info] 2020-03-20T06:59:14.872Z N createDailyEvents: 
+[info] 2020-03-20T06:59:14.935Z N helloWorld: 
+[info] 2020-03-20T06:59:15.118Z N createEventsJsonAPI: 
+[info] 2020-03-20T06:59:15.525Z N helloWorld: 
+[info] 2020-03-20T06:59:22.943Z N createDailyEvents: 
+[info] 2020-03-20T06:59:50.576Z N helloWorld: 
+[info] 2020-03-20T07:00:00.572Z N createEventsJsonAPI: 
+[info] 2020-03-20T07:00:47.427699474Z D helloWorld: Function execution started
+[info] 2020-03-20T07:00:47.520494778Z D helloWorld: Function execution took 93 ms, finished with status code: 200
+[info] 2020-03-20T07:00:57.599454171Z D createEventsJsonAPI: Function execution started
+[info] 2020-03-20T07:00:57.647Z I createEventsJsonAPI: api create event.json
+[info] 2020-03-20T07:01:00.469Z I createEventsJsonAPI: writeEnd
+[info] 2020-03-20T07:01:00.896Z I createEventsJsonAPI: writeEnd
+[info] 2020-03-20T07:01:00.897Z I createEventsJsonAPI: done
+[debug] [2020-03-20T07:01:41.630Z] Error: ETXTBSY: text file is busy, unlink '/home/vagrant/workspace/html5games/araisan/firebase-debug.log'
     at Object.unlinkSync (fs.js:956:3)
     at process.<anonymous> (/home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/bin/firebase.js:68:12)
     at process.emit (events.js:203:15)
     at process.topLevelDomainCallback (domain.js:126:23)
+[debug] [2020-03-20T07:56:34.799Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T07:56:34.801Z] Command:       /usr/local/bin/node /home/vagrant/.yarn/bin/firebase deploy --only functions
+[debug] [2020-03-20T07:56:34.801Z] CLI Version:   7.15.1
+[debug] [2020-03-20T07:56:34.801Z] Platform:      linux
+[debug] [2020-03-20T07:56:34.801Z] Node Version:  v10.18.1
+[debug] [2020-03-20T07:56:34.801Z] Time:          Fri Mar 20 2020 16:56:34 GMT+0900 (GMT+09:00)
+[debug] [2020-03-20T07:56:34.801Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T07:56:34.801Z] 
+[debug] [2020-03-20T07:56:34.808Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-20T07:56:34.808Z] > authorizing via signed-in user
+[debug] [2020-03-20T07:56:34.808Z] [iam] checking project araisan-ms for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2020-03-20T07:56:34.809Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-03-20T07:56:34.809Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-03-20T07:56:35.029Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T07:56:35.031Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/araisan-ms:testIamPermissions  
+
+[debug] [2020-03-20T07:56:35.847Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'araisan-ms'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script.
+[debug] [2020-03-20T07:56:40.243Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "dependencies": {
+    "firebase-admin": "^8.6.0",
+    "firebase-functions": "^3.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "firebase-functions-test": "^0.1.6"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2020-03-20T07:56:40.245Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/araisan-ms/services/cloudfunctions.googleapis.com  
+ 
+[debug] [2020-03-20T07:56:40.245Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/araisan-ms/services/runtimeconfig.googleapis.com  
+ 
+[debug] [2020-03-20T07:56:41.315Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T07:56:41.378Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2020-03-20T07:56:41.378Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/araisan-ms/adminSdkConfig  
+ 
+[debug] [2020-03-20T07:56:41.821Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2020-03-20T07:56:41.824Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/araisan-ms/configs  
+ 
+[debug] [2020-03-20T07:56:42.248Z] <<< HTTP RESPONSE 200
+[error] 
+[error] Error: Error occurred while parsing your function triggers.
+
+TypeError: Cannot read property 'pubsub' of undefined
+    at Object.<anonymous> (/home/vagrant/workspace/html5games/araisan/functions/index.js:43:13)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at /home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/triggerParser.js:15:15
+    at Object.<anonymous> (/home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/triggerParser.js:53:3)
+[debug] [2020-03-20T07:56:44.854Z] Error: ETXTBSY: text file is busy, unlink '/home/vagrant/workspace/html5games/araisan/firebase-debug.log'
+    at Object.unlinkSync (fs.js:956:3)
+    at process.<anonymous> (/home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/bin/firebase.js:68:12)
+    at process.emit (events.js:203:15)
+    at process.exit (internal/process/per_thread.js:168:15)
+    at Timeout._onTimeout (/home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/errorOut.js:19:17)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2020-03-20T07:58:35.386Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T07:58:35.387Z] Command:       /usr/local/bin/node /home/vagrant/.yarn/bin/firebase deploy --only functions
+[debug] [2020-03-20T07:58:35.387Z] CLI Version:   7.15.1
+[debug] [2020-03-20T07:58:35.387Z] Platform:      linux
+[debug] [2020-03-20T07:58:35.387Z] Node Version:  v10.18.1
+[debug] [2020-03-20T07:58:35.388Z] Time:          Fri Mar 20 2020 16:58:35 GMT+0900 (GMT+09:00)
+[debug] [2020-03-20T07:58:35.388Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T07:58:35.388Z] 
+[debug] [2020-03-20T07:58:35.394Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-20T07:58:35.394Z] > authorizing via signed-in user
+[debug] [2020-03-20T07:58:35.394Z] [iam] checking project araisan-ms for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2020-03-20T07:58:35.395Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/araisan-ms:testIamPermissions  
+
+[debug] [2020-03-20T07:58:36.229Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'araisan-ms'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script.
+[debug] [2020-03-20T07:58:40.812Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "dependencies": {
+    "firebase-admin": "^8.6.0",
+    "firebase-functions": "^3.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "firebase-functions-test": "^0.1.6"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2020-03-20T07:58:40.813Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/araisan-ms/services/cloudfunctions.googleapis.com  
+ 
+[debug] [2020-03-20T07:58:40.813Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/araisan-ms/services/runtimeconfig.googleapis.com  
+ 
+[debug] [2020-03-20T07:58:41.873Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T07:58:41.884Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2020-03-20T07:58:41.885Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/araisan-ms/adminSdkConfig  
+ 
+[debug] [2020-03-20T07:58:42.283Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2020-03-20T07:58:42.287Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/araisan-ms/configs  
+ 
+[debug] [2020-03-20T07:58:42.624Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (85.81 KB) for uploading
+[debug] [2020-03-20T07:58:44.940Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/araisan-ms/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2020-03-20T07:58:45.948Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T07:58:45.949Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-76c9a9c3-bc4a-4276-9935-8c5174bfdeba/4b8e03ed-4034-431f-b213-fea3a4dd56bd.zip?GoogleAccessId=service-847938018391@gcf-admin-robot.iam.gserviceaccount.com&Expires=1584692925&Signature=iryHne52%2FrAiDQ9a93Pz8uIaGZEoLqzJdKSA0MWS%2BtAPL3hGouxGvwwftEQSFowUN%2FGygWm8sWhsS5h0p2jljtaxZFrBiSqdBHEpui0sMmT97bNTRclKsHeVkTOoM95r3vYdaRhk%2FtEEX8eESvGYfCcZwklgbAOpO%2FaOdhaTPnuotVXkeWAT2bLDeW%2Bv1%2FpPcAAkQLiQ6c5mDmpg3fxayaoUkjldgVPitqRf4K4vyw1tcW1AqyAeLls5lLPdeEEXSs%2BMoD5mdvyfY%2FX6P0AUQdwPlDT2nHXk1hQd%2BeMw6nXsMqdYkk0tj78L2l2rYVABan02UadirHMCSMkMGeVq%2Bw%3D%3D  
+ <request body omitted>
+[debug] [2020-03-20T07:58:46.742Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[debug] [2020-03-20T07:58:46.744Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/araisan-ms/locations/-/functions  
+ 
+[debug] [2020-03-20T07:58:47.433Z] <<< HTTP RESPONSE 200
+[info] i  functions: creating Node.js 8 function scheduledFunction(asia-northeast1)...
+[debug] [2020-03-20T07:58:47.434Z] Trigger is:  {"eventTrigger":{"resource":"projects/araisan-ms/topics/firebase-schedule-scheduledFunction-asia-northeast1","eventType":"google.pubsub.topic.publish","service":"pubsub.googleapis.com"}}
+[info] i  functions: updating Node.js 8 function createEventsJsonAPI(asia-northeast1)...
+[debug] [2020-03-20T07:58:47.435Z] Trigger is:  {"httpsTrigger":{}}
+[info] 
+The following functions are found in your project but do not exist in your local source code:
+	helloWorld(us-central1)
+
+If you are renaming a function or changing its region, it is recommended that you create the new function first before deleting the old one to prevent event loss. For more info, visit https://firebase.google.com/docs/functions/manage-functions#modify
+
+[info] i  functions: deleting function helloWorld(us-central1)...
+[info] i  scheduler: ensuring necessary APIs are enabled...
+[info] i  pubsub: ensuring necessary APIs are enabled...
+[debug] [2020-03-20T07:58:51.167Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/araisan-ms/services/cloudscheduler.googleapis.com  
+ 
+[debug] [2020-03-20T07:58:51.167Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/araisan-ms/services/pubsub.googleapis.com  
+ 
+[debug] [2020-03-20T07:58:52.160Z] <<< HTTP RESPONSE 200
+[info] ✔  scheduler: all necessary APIs are enabled
+[debug] [2020-03-20T07:58:52.200Z] <<< HTTP RESPONSE 200
+[info] ✔  pubsub: all necessary APIs are enabled
+[debug] [2020-03-20T07:58:52.200Z] >>> HTTP REQUEST GET https://cloudscheduler.googleapis.com/v1beta1/projects/araisan-ms/locations/asia-northeast1/jobs/firebase-schedule-scheduledFunction-asia-northeast1  
+ 
+[debug] [2020-03-20T08:00:16.763Z] <<< HTTP RESPONSE 404
+[debug] [2020-03-20T08:00:16.763Z] <<< HTTP RESPONSE BODY
+[debug] [2020-03-20T08:00:16.763Z] >>> HTTP REQUEST POST https://cloudscheduler.googleapis.com/v1beta1/projects/araisan-ms/locations/asia-northeast1/jobs  
+
+[debug] [2020-03-20T08:00:18.261Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: created scheduler job firebase-schedule-scheduledFunction-asia-northeast1
+[debug] [2020-03-20T08:00:18.262Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/araisan-ms/locations/asia-northeast1/functions  
+
+[debug] [2020-03-20T08:00:18.262Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/araisan-ms/locations/asia-northeast1/functions/createEventsJsonAPI {"updateMask":"sourceUploadUrl,name,labels,runtime,httpsTrigger"} 
+
+[debug] [2020-03-20T08:00:18.263Z] >>> HTTP REQUEST DELETE https://cloudfunctions.googleapis.com/v1/projects/araisan-ms/locations/us-central1/functions/helloWorld  
+ 
+[debug] [2020-03-20T08:00:18.772Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:18.824Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:18.982Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:18.983Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/araisan-ms/locations/-/functions  
+ 
+[debug] [2020-03-20T08:00:19.433Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:19.434Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:19.434Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:19.434Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy91cy1jZW50cmFsMS9oZWxsb1dvcmxkLzV6b0Y1RGNZenIw  
+ 
+[debug] [2020-03-20T08:00:19.774Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:19.804Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:19.961Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:21.777Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:21.804Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:21.929Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:21.962Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy91cy1jZW50cmFsMS9oZWxsb1dvcmxkLzV6b0Y1RGNZenIw  
+ 
+[debug] [2020-03-20T08:00:22.011Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:22.296Z] <<< HTTP RESPONSE 200
+[info] ✔  functions[helloWorld(us-central1)]: Successful delete operation. 
+[debug] [2020-03-20T08:00:23.932Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:24.013Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:24.074Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:24.172Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:26.080Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:26.175Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:26.228Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:26.344Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:28.238Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:28.344Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:28.401Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:28.513Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:30.402Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:30.514Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:30.560Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:30.658Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:32.564Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:32.661Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:32.713Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:32.793Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:34.719Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:34.795Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:34.883Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:34.931Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:36.885Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:36.931Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:37.019Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:37.120Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:39.022Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:39.122Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:39.157Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:39.269Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:41.159Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:41.272Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:41.287Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:41.495Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:43.292Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:43.429Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:43.496Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:43.640Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:45.441Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:45.611Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:45.642Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:45.785Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:47.613Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:47.765Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:47.785Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:47.964Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:49.771Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:49.921Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:49.965Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:50.097Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:51.928Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:52.072Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:52.098Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:52.238Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:54.074Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:54.239Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:54.277Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:54.391Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:56.280Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:56.393Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:56.479Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:56.539Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:58.482Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:00:58.541Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:00:58.625Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:00:58.722Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:01:00.627Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:01:00.723Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:01:00.780Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:01:00.877Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:01:02.783Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:01:02.880Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:01:02.928Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:01:03.070Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:01:04.931Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:01:05.063Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:01:05.071Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9yRklmQ2Q3bzRERQ  
+ 
+[debug] [2020-03-20T08:01:05.223Z] <<< HTTP RESPONSE 200
+[info] ✔  functions[createEventsJsonAPI(asia-northeast1)]: Successful update operation. 
+[debug] [2020-03-20T08:01:07.066Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:01:07.193Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:01:09.194Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:01:09.329Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:01:11.334Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:01:11.505Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:01:13.508Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:01:13.669Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:01:15.671Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:01:15.802Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:01:17.805Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:01:17.973Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:01:19.977Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:01:20.116Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:01:22.129Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vRS1UY1E1bnpLLUU  
+ 
+[debug] [2020-03-20T08:01:22.270Z] <<< HTTP RESPONSE 200
+[info] ✔  functions[scheduledFunction(asia-northeast1)]: Successful create operation. 
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/araisan-ms/overview
+[debug] [2020-03-20T08:01:22.415Z] Error: ETXTBSY: text file is busy, unlink '/home/vagrant/workspace/html5games/araisan/firebase-debug.log'
+    at Object.unlinkSync (fs.js:956:3)
+    at process.<anonymous> (/home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/bin/firebase.js:68:12)
+    at process.emit (events.js:203:15)
+    at process.topLevelDomainCallback (domain.js:126:23)
+[debug] [2020-03-20T08:06:10.832Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T08:06:10.833Z] Command:       /usr/local/bin/node /home/vagrant/.yarn/bin/firebase functions:log
+[debug] [2020-03-20T08:06:10.834Z] CLI Version:   7.15.1
+[debug] [2020-03-20T08:06:10.834Z] Platform:      linux
+[debug] [2020-03-20T08:06:10.834Z] Node Version:  v10.18.1
+[debug] [2020-03-20T08:06:10.834Z] Time:          Fri Mar 20 2020 17:06:10 GMT+0900 (GMT+09:00)
+[debug] [2020-03-20T08:06:10.834Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T08:06:10.834Z] 
+[debug] [2020-03-20T08:06:10.840Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-20T08:06:10.840Z] > authorizing via signed-in user
+[debug] [2020-03-20T08:06:10.840Z] [iam] checking project araisan-ms for permissions ["firebase.projects.get","logging.logEntries.list","logging.logs.list"]
+[debug] [2020-03-20T08:06:10.841Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/araisan-ms:testIamPermissions  
+
+[debug] [2020-03-20T08:06:11.673Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:06:11.675Z] >>> HTTP REQUEST POST https://logging.googleapis.com/v2beta1/entries:list  
+
+[debug] [2020-03-20T08:06:12.689Z] <<< HTTP RESPONSE 200
+[info] 2020-03-20T06:59:14.872Z N createDailyEvents: 
+[info] 2020-03-20T06:59:14.935Z N helloWorld: 
+[info] 2020-03-20T06:59:15.118Z N createEventsJsonAPI: 
+[info] 2020-03-20T06:59:15.525Z N helloWorld: 
+[info] 2020-03-20T06:59:22.943Z N createDailyEvents: 
+[info] 2020-03-20T06:59:50.576Z N helloWorld: 
+[info] 2020-03-20T07:00:00.572Z N createEventsJsonAPI: 
+[info] 2020-03-20T07:00:47.427699474Z D helloWorld: Function execution started
+[info] 2020-03-20T07:00:47.520494778Z D helloWorld: Function execution took 93 ms, finished with status code: 200
+[info] 2020-03-20T07:00:57.599454171Z D createEventsJsonAPI: Function execution started
+[info] 2020-03-20T07:00:57.647Z I createEventsJsonAPI: api create event.json
+[info] 2020-03-20T07:01:00.469Z I createEventsJsonAPI: writeEnd
+[info] 2020-03-20T07:01:00.896Z I createEventsJsonAPI: writeEnd
+[info] 2020-03-20T07:01:00.897Z I createEventsJsonAPI: done
+[info] 2020-03-20T07:01:57.601424392Z D createEventsJsonAPI: Function execution took 60003 ms, finished with status: 'timeout'
+[info] 2020-03-20T07:58:44.828Z I : 
+[info] 2020-03-20T07:58:45.242Z I : 
+[info] 2020-03-20T08:00:18.154Z N scheduledFunction: 
+[info] 2020-03-20T08:00:18.177Z N createEventsJsonAPI: 
+[info] 2020-03-20T08:00:18.260Z N helloWorld: 
+[info] 2020-03-20T08:00:20.204Z N helloWorld: 
+[info] 2020-03-20T08:01:03.730Z N createEventsJsonAPI: 
+[info] 2020-03-20T08:01:21.059Z N scheduledFunction: 
+[info] 2020-03-20T08:01:46.730309216Z D createEventsJsonAPI: Function execution started
+[info] 2020-03-20T08:01:46.832Z I createEventsJsonAPI: api create event.json
+[info] 2020-03-20T08:01:49.604Z I createEventsJsonAPI: writeEnd
+[info] 2020-03-20T08:01:49.921Z I createEventsJsonAPI: writeEnd
+[info] 2020-03-20T08:01:49.922Z I createEventsJsonAPI: done
+[info] 2020-03-20T08:01:49.923358052Z D createEventsJsonAPI: Function execution took 3193 ms, finished with status code: 200
+[info] 2020-03-20T08:05:03.380745730Z D scheduledFunction: Function execution started
+[info] 2020-03-20T08:05:03.566Z I scheduledFunction: scheduled create event.json
+[info] 2020-03-20T08:05:06.337Z I scheduledFunction: writeEnd
+[info] 2020-03-20T08:05:06.639Z I scheduledFunction: writeEnd
+[info] 2020-03-20T08:05:06.639Z I scheduledFunction: done
+[info] 2020-03-20T08:05:06.645584152Z D scheduledFunction: Function execution took 3266 ms, finished with status: 'ok'
+[debug] [2020-03-20T08:06:12.884Z] Error: ETXTBSY: text file is busy, unlink '/home/vagrant/workspace/html5games/araisan/firebase-debug.log'
+    at Object.unlinkSync (fs.js:956:3)
+    at process.<anonymous> (/home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/bin/firebase.js:68:12)
+    at process.emit (events.js:203:15)
+    at process.topLevelDomainCallback (domain.js:126:23)
+[debug] [2020-03-20T08:07:19.968Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T08:07:19.969Z] Command:       /usr/local/bin/node /home/vagrant/.yarn/bin/firebase deploy --only functions
+[debug] [2020-03-20T08:07:19.970Z] CLI Version:   7.15.1
+[debug] [2020-03-20T08:07:19.970Z] Platform:      linux
+[debug] [2020-03-20T08:07:19.970Z] Node Version:  v10.18.1
+[debug] [2020-03-20T08:07:19.970Z] Time:          Fri Mar 20 2020 17:07:19 GMT+0900 (GMT+09:00)
+[debug] [2020-03-20T08:07:19.970Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T08:07:19.970Z] 
+[debug] [2020-03-20T08:07:19.977Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-20T08:07:19.977Z] > authorizing via signed-in user
+[debug] [2020-03-20T08:07:19.977Z] [iam] checking project araisan-ms for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2020-03-20T08:07:19.978Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/araisan-ms:testIamPermissions  
+
+[debug] [2020-03-20T08:07:20.738Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'araisan-ms'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script.
+[debug] [2020-03-20T08:07:25.175Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "dependencies": {
+    "firebase-admin": "^8.6.0",
+    "firebase-functions": "^3.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "firebase-functions-test": "^0.1.6"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2020-03-20T08:07:25.176Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/araisan-ms/services/cloudfunctions.googleapis.com  
+ 
+[debug] [2020-03-20T08:07:25.177Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/araisan-ms/services/runtimeconfig.googleapis.com  
+ 
+[debug] [2020-03-20T08:07:26.308Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2020-03-20T08:07:26.328Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:26.328Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/araisan-ms/adminSdkConfig  
+ 
+[debug] [2020-03-20T08:07:26.857Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2020-03-20T08:07:26.860Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/araisan-ms/configs  
+ 
+[debug] [2020-03-20T08:07:27.437Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (85.81 KB) for uploading
+[debug] [2020-03-20T08:07:29.827Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/araisan-ms/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2020-03-20T08:07:31.162Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:31.163Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-76c9a9c3-bc4a-4276-9935-8c5174bfdeba/b3f21c75-88f1-4828-a2dd-5bea8f58f69f.zip?GoogleAccessId=service-847938018391@gcf-admin-robot.iam.gserviceaccount.com&Expires=1584693450&Signature=zlLbfgaqDnbZJGaKBLtxUlYEL76e27pgOj6iwiNtDQq7WyxjdBH%2BbnmNI6f4Gya8EulvpBOVoMCvgS1DKneKLaV6ivS%2B3RO61ozzTwQq0yik5xP4Q7B%2BPp6InX9h2bv8eNjP4Lpe9pKi4Me93A40V8jhRp54wXwMCs9Ku%2FVY%2FP6liO1%2F10doARwLpniXiFSTDkMPE5wh3vXL9wW8U3xU8k7ELzzObyyZpLwwB7nibK8z7grpy%2F87n%2FJa6SyJM1kLS7OqK7w7WO4duRSsIBeYS06omKKPY7z24v2%2B9TSW5H2WoZU8kON7Z0%2Fr5FdAajaXDSRH6wIMCoESbeGszgRDPg%3D%3D  
+ <request body omitted>
+[debug] [2020-03-20T08:07:31.809Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[debug] [2020-03-20T08:07:31.810Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/araisan-ms/locations/-/functions  
+ 
+[debug] [2020-03-20T08:07:32.263Z] <<< HTTP RESPONSE 200
+[info] i  functions: updating Node.js 8 function createEventsJsonAPI(asia-northeast1)...
+[debug] [2020-03-20T08:07:32.264Z] Trigger is:  {"httpsTrigger":{}}
+[info] i  functions: updating Node.js 8 function scheduledFunction(asia-northeast1)...
+[debug] [2020-03-20T08:07:32.265Z] Trigger is:  {"eventTrigger":{"resource":"projects/araisan-ms/topics/firebase-schedule-scheduledFunction-asia-northeast1","eventType":"google.pubsub.topic.publish","service":"pubsub.googleapis.com"}}
+[info] i  scheduler: ensuring necessary APIs are enabled...
+[info] i  pubsub: ensuring necessary APIs are enabled...
+[debug] [2020-03-20T08:07:32.265Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/araisan-ms/services/cloudscheduler.googleapis.com  
+ 
+[debug] [2020-03-20T08:07:32.266Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/araisan-ms/services/pubsub.googleapis.com  
+ 
+[debug] [2020-03-20T08:07:33.268Z] <<< HTTP RESPONSE 200
+[info] ✔  scheduler: all necessary APIs are enabled
+[debug] [2020-03-20T08:07:33.281Z] <<< HTTP RESPONSE 200
+[info] ✔  pubsub: all necessary APIs are enabled
+[debug] [2020-03-20T08:07:33.282Z] >>> HTTP REQUEST GET https://cloudscheduler.googleapis.com/v1beta1/projects/araisan-ms/locations/asia-northeast1/jobs/firebase-schedule-scheduledFunction-asia-northeast1  
+ 
+[debug] [2020-03-20T08:07:33.957Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:33.958Z] >>> HTTP REQUEST PATCH https://cloudscheduler.googleapis.com/v1beta1/projects/araisan-ms/locations/asia-northeast1/jobs/firebase-schedule-scheduledFunction-asia-northeast1  
+
+[debug] [2020-03-20T08:07:35.087Z] <<< HTTP RESPONSE 200
+[info] i  functions: updated scheduler job firebase-schedule-scheduledFunction-asia-northeast1
+[debug] [2020-03-20T08:07:35.088Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/araisan-ms/locations/asia-northeast1/functions/createEventsJsonAPI {"updateMask":"sourceUploadUrl,name,labels,runtime,httpsTrigger"} 
+
+[debug] [2020-03-20T08:07:35.089Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/araisan-ms/locations/asia-northeast1/functions/scheduledFunction {"updateMask":"sourceUploadUrl,name,labels,runtime,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service"} 
+
+[debug] [2020-03-20T08:07:35.336Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:35.423Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:35.423Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/araisan-ms/locations/-/functions  
+ 
+[debug] [2020-03-20T08:07:36.855Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:36.856Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:07:36.856Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:07:37.031Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:37.059Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:39.032Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:07:39.059Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:07:39.176Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:39.189Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:41.182Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:07:41.190Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:07:41.326Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:41.355Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:43.335Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:07:43.356Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:07:43.476Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:43.494Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:45.478Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:07:45.495Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:07:45.635Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:45.660Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:47.639Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:07:47.662Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:07:47.817Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:47.863Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:49.822Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:07:49.865Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:07:49.987Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:49.999Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:51.989Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:07:51.999Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:07:52.165Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:52.203Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:54.169Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:07:54.205Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:07:54.302Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:54.386Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:56.309Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:07:56.388Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:07:56.447Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:56.534Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:58.449Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:07:58.535Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:07:58.608Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:07:58.696Z] <<< HTTP RESPONSE 200
