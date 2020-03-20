@@ -142,7 +142,18 @@ $('#submit').click(() => {
   }
 
   // textdata \n to ,
-  const text = textdata.split('\n').join(',')
+  const textArray = textdata.split('\n');
+  if(textArray.length > 10){
+    alert('11行以上の入力があります。');
+    return;
+  }
+
+  if(!checkLineCount(textArray)){
+    alert('1行に25文字以上の入力があります。');
+    return;
+  }
+  
+  const text = textArray.join(',');
   // サニタイズ : see : https://stackoverflow.com/questions/1787322/htmlspecialchars-equivalent-in-javascript
   //const text = escapeHtml(_text);
   if(testHtml(text)){
@@ -320,4 +331,14 @@ function testHtml(text) {
   let re = /[&<>"']/g;
 
   return re.test(text);
+}
+
+function checkLineCount(textArray){
+  let isOk = true;
+
+  textArray.forEach(texts=>{
+    if(texts.length > 24) isOk = false;
+  })
+
+  return isOk;
 }

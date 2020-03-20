@@ -30,3 +30,7 @@ html {
 .bottom{
   background-color: #343a40;
 }
+
+textarea {
+  resize: horizontal;
+}

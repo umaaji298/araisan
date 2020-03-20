@@ -38,86 +38,56 @@
     <span class="text-light">アライさんマンション</span>
   </div>
 
-  <h3 class="m-3 text-center">新しいフロアを作成するのだ！</h3>
+  <h3 class="m-3 text-center mb-4">新しいフロアを作成するのだ！</h3>
 
   <div class="container">
 
-    <div class="row mt-4 mb-3 text-center">
-      <div class="col-12">
-
-      </div>
-    </div>
-
-    <div class="row mb-3">
-      <label class="col-3 col-form-label text-right" for="textarea">
-        <span class="badge badge-info">必須</span>
-        表示する文章<br>
-        ・<a
-          href="https://github.com/umaaji298/araisan/wiki/%E3%83%95%E3%83%AD%E3%82%A2%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E4%BB%95%E6%A7%98%E6%9B%B8"
-          target="_blank">仕様</a><br>
-        ・1行24文字<br>
-        ・10行まで<br>
-        <button id="allClear" class="btn btn-outline-danger btn-sm">すべて消す</button>
+    <div class="mb-3">
+      <label class="col-form-label-lg text-right" for="textarea">
+        <span class="badge badge-info">必須</span> 表示する文章
+        <button id="preview" class="btn btn-secondary ml-5">プレビュー</button>
+        <button id="preview_close" class="btn btn-outline-secondary ml-5" style="display:none;">プレビュー 閉じる</button>
       </label>
-      <div class="col-7">
-        <textarea class="form-control" id="eventText" rows="5" placeholder="" maxlength="249"
-          required>君は見た&#13;&#10;はちみつを舐める&#13;&#10;下半身裸の&#13;&#10;黄色いくまの怪異を…！</textarea>
-      </div>
-    </div>
 
-    <div class="row mb-3">
-      <label class="col-3 col-form-label text-right" for="preview">プレビュー <span class="badge badge-secondary"
-          data-toggle="tooltip" data-placement="top" title="入力した文字をゲーム上の表示で確認">?</span></label>
-      <div class="col-9">
-        <button id="preview" class="btn btn-secondary">プレビュー</button>
-        <button id="preview_close" class="btn btn-outline-secondary" style="display:none;">プレビュー 閉じる</button>
-      </div>
+      <textarea class="form-control" id="eventText" rows="5" placeholder="" maxlength="249"
+        required>君は見た&#13;&#10;はちみつを舐める&#13;&#10;下半身裸の&#13;&#10;黄色いくまの怪異を…！</textarea>
+      <span id="eventText_help" class="form-text text-muted"><a
+        href="https://github.com/umaaji298/araisan/wiki/%E3%83%95%E3%83%AD%E3%82%A2%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E4%BB%95%E6%A7%98%E6%9B%B8"
+        target="_blank">仕様書</a>/1行24文字/10行まで <span id="allClear" class="badge badge-danger ml-5">入力を全て消去</span></span>
     </div>
 
     <!-- preview -->
     <div id="phaser-editor" class="mx-auto"></div>
     <!-- endpreview -->
 
-    <div class="row mb-3">
-      <label class="col-3 col-form-label text-right" for="floorname">フロアの名前 <span class="badge badge-secondary"
+    <div class="mb-3">
+      <label class="col-form-label-lg text-right" for="floorname">フロアの名前 <span class="badge badge-secondary"
           data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
-      <div class="col-4">
-        <input id="floorname" type="text" class="form-control" placeholder="" maxlength="24">
-      </div>
-      <div class="col-5">
-        <span id="floornameHelp" class="form-text">例： 失われた森</span>
-      </div>
+      <input id="floorname" type="text" class="form-control" placeholder="" maxlength="24">
+      <span id="floorname_help" class="form-text text-muted">例： 失われた森</span>
     </div>
 
-    <div class="row mb-3">
-      <label class="col-3 col-form-label text-right" for="creator">作成者 <span class="badge badge-secondary"
+    <div class="mb-3">
+      <label class="col-form-label-lg text-right" for="creator">作成者 <span class="badge badge-secondary"
           data-toggle="tooltip" data-placement="top" title="メニュー画面(未実装)で表示されます">?</span></label>
-      <div class="col-4">
-        <input id="creator" type="text" class="form-control" placeholder="" maxlength="24">
-      </div>
-      <div class="col-5">
-        <span id="creatorHelp" class="form-text">例： としあき</span>
-      </div>
+      <input id="creator" type="text" class="form-control" placeholder="" maxlength="24">
+      <span id="creator_help" class="form-text text-muted">例： としあき</span>
     </div>
 
-    <div class="row mb-3">
-      <div class="col-3">
-        <!-- <button type="submit" class="btn btn-danger">作成</button> -->
-      </div>
-      <div class="col-9">
-        <button id="submit" class="btn btn-primary">フロアを作成</button>
-      </div>
+    <div class="mb-3 text-center">
+      <button id="submit" class="btn btn-primary btn-lg">フロアを作成</button>
     </div>
+
   </div>
   <!-- /container -->
 
   <hr>
 
   <div class="text-center">
-    <p class="mt-3 px-4">🔑マンションのフロアを新しく作成できます。</p>
-    <p class="px-4">投稿後に作成したフロアの番号が表示されます。</p>
+    <p class="mt-3 px-4">🔑マンションのフロアを新しく作成できます。<a href="/">ゲームに戻る。</a></p>
+    <p class="px-4">作成後にフロアの番号が表示されます。</p>
     <p class="px-4">-</p>
-    <p class="px-4">さしあたり文章のイベントのみ対応。</p>
+    <p class="px-4">文章のイベントのみ対応。</p>
     <p class="px-4">ちょっとだけ<a
         href="https://github.com/umaaji298/araisan/wiki/%E3%83%95%E3%83%AD%E3%82%A2%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E4%BB%95%E6%A7%98%E6%9B%B8"
         target="_blank">スクリプト</a>も使えます。</p>
@@ -133,8 +103,7 @@
   </div>
 
   <br>
-  <br>
-  <br>
+
 
   <!-- Button trigger modal -->
   <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
@@ -164,7 +133,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button id="modal_cotinue" type="button" class="btn btn-secondary">続けてフロアを作成</button>
+          <button id="modal_cotinue" type="button" class="btn btn-secondary">続けてフロアを作成(処理は勝手にやってて！)</button>
           <button id="modal_next" type="button" class="btn btn-primary" disabled><span id="modal_spinner"
               class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</button>
         </div>
@@ -172,7 +141,7 @@
     </div>
   </div>
 
-  <nav id="footnavi" class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+  <nav id="footnavi" class="navbar navbar-expand-sm navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Links</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

@@ -10,8 +10,7 @@ var config = {
   type: Phaser.AUTO,
   scale: {
     parent: 'phaser-editor',
-    // mode: Phaser.Scale.FIT,
-    mode:Phaser.Scale.NONE,
+    mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: 800,
     height: 600

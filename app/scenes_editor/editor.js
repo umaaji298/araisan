@@ -33,20 +33,6 @@ export default class Editor extends Phaser.Scene {
     panel.alpha = 0.5;
     panel.setInteractive();
 
-    panel.on('pointerup', function () {
-      this.poneSE.play();
-      this.cameras.main.fadeOut(1000, 0, 0, 0);
-      this.time.delayedCall(1000, () => {
-        //commands = readEventsText(this);
-        //tcrpPlay(this, commands);
-        this.player.stop();
-        this.scene.restart();
-      }, [], this);
-
-    }, this);
-
-
-
     //fade用の待ち時間を入れる？
     //commands.unshift([2000,'print','wait']);
 
@@ -69,8 +55,20 @@ export default class Editor extends Phaser.Scene {
     this.next = this.add.image(400, 553, 'next');
     this.next.setScale(0.8, 0.8);
     this.next.name = "next";
-    // this.next.setInteractive();
+    this.next.setInteractive();
     this.next.setVisible(false);
+
+    this.next.on('pointerup', function () {
+      this.poneSE.play();
+      this.cameras.main.fadeOut(1000, 0, 0, 0);
+      this.time.delayedCall(1000, () => {
+        //commands = readEventsText(this);
+        //tcrpPlay(this, commands);
+        this.player.stop();
+        this.scene.restart();
+      }, [], this);
+
+    }, this);
 
 
 
