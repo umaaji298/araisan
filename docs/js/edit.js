@@ -23,6 +23,11 @@ $(function () {
     window.location.href = '/'; // 通常の遷移
   });
 
+  $('#exampleModalCenter').on('hide.bs.modal', function (e) {
+    //progess reset
+    progress = 0;
+  })
+
   // $('#exampleModalCenter').on('show.bs.modal', function(e) {
   //   const floorId = e.relatedTarget.floorId;
   //   const _floorId = floorId.split(',').join('-');
@@ -31,7 +36,6 @@ $(function () {
   // });
 });
 
-//modal用
 //modal用progressber
 var progress = 0;
 

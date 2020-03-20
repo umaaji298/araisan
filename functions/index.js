@@ -65,44 +65,30 @@ exports.scheduledFunction = functions
  * DBの変更をトリガーに、events.jsonを生成する
  */
 
-// exports.createDailyEvents = functions
-//   .region('asia-northeast1')
-//   .firestore
-//   .document('floors/v1/datas/{dataid}')
-//   .onWrite(async (change, context) => {
+exports.createTodayJson = functions
+  .region('asia-northeast1')
+  .firestore
+  .document('today/v1/users/{userId}/todayDatas/{floorId}')
+  .onWrite(async (change, context) => {
 
-//     //書き込みデータ
-//     // const id = context.params.dataid;
-//     // const data = change.after.data();
-//     // console.log('document change',id,data);
+    console.log('create event_diff.json');
 
-//     console.log('create event.json');
+    //書き込みデータの参照
+    // const id = context.params.dataid;
+    // const data = change.after.data();
+    // console.log('document change',id,data);   
 
-//     await createEventsJson();
+    await createDiffJson();
 
-//     console.log('done');
+    console.log('done');
 
-//     return
-//   });
+    return
+  });
 
 async function createEventsJson() {
   // DB Event全て読み出し、jsonを作成する
   const writeData = new Object();
   const collectionData = await db.collectionGroup('datas').get();
-
-  //console.log('length' ,collectionData.docs.length);
-
-  // for (let i = 0; i < collectionData.docs.length; i++) {
-  //   const doc = collectionData.docs[i];
-  //   const data = doc.data();
-
-  //   writeData[doc.ref.id] = {
-  //     text: data.text,
-  //     imgUrl: data.imgUrl,
-  //     floorName: data.floorName,
-  //     author: data.author
-  //   }
-  // }
 
   collectionData.forEach(doc=>{
     const data = doc.data();
@@ -131,6 +117,38 @@ async function createEventsJson() {
   await writeHtmlCore(JSON.stringify(writeData), writeStream);
 
   return
+}
+
+async function createDiffJson(){
+  // todayDatasを全て読み出し、jsonを作成する
+  const writeData = new Object();
+  const collectionData = await db.collectionGroup('todayDatas').get();
+
+  collectionData.forEach(doc=>{
+    const data = doc.data();
+        writeData[doc.ref.id] = {
+      text: data.text,
+      imgUrl: data.imgUrl,
+      floorName: data.floorName,
+      author: data.author
+    }
+  })
+
+  //default bucket
+  const bucket = admin.storage().bucket();
+  const file = bucket.file('events_diff.json');
+
+  const writeStream = file.createWriteStream({
+    public: true, // ACL public
+    gzip: true,
+    metadata: {
+      cacheControl: "public, max-age=0, no-transform", // see :https://qiita.com/hkusu/items/d40aa8a70bacd2015dfa
+      contentType: 'application/json'
+    }
+  });
+
+  // //書き込み本体
+  await writeHtmlCore(JSON.stringify(writeData), writeStream);
 }
 
 function writeHtmlCore(data, writeStream) {
