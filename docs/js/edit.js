@@ -23,7 +23,6 @@ $(function () {
     window.location.href = '/'; // 通常の遷移
   });
 
-
   // $('#exampleModalCenter').on('show.bs.modal', function(e) {
   //   const floorId = e.relatedTarget.floorId;
   //   const _floorId = floorId.split(',').join('-');
@@ -39,7 +38,7 @@ var progress = 0;
 
 //登録済みイベントデータ取得
 var events;
-// var events_daily;
+var events_diff;
 
 fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events.json?alt=media')
   .then(resp => { return resp.json(); })
@@ -52,16 +51,19 @@ fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/even
     console.error(error)
   });
 
-// fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/daily.json?alt=media')
-//   .then(resp => { return resp.json(); })
-//   .then(jsonObj => {
-//     events_daily = jsonObj;
-//     //console.log(events_daily);
-//   })
-//   .catch(error => {
-//     alert('ネットワークエラー発生中！管理人が復旧しないと無理そうです。code:11')
-//     console.error(error)
-//   });
+function loadDiffJson(){
+fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events_diff.json?alt=media')
+  .then(resp => { return resp.json(); })
+  .then(jsonObj => {
+    events_diff = jsonObj;
+    //console.log(events_daily);
+  })
+  .catch(error => {
+    alert('ネットワークエラー発生中！管理人が復旧しないと無理そうです。code:11')
+    console.error(error)
+  });
+}
+loadDiffJson();
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -135,7 +137,6 @@ $('#submit').click(() => {
     return;
   }
 
-
   // textdata \n to ,
   const text = textdata.split('\n').join(',')
   // サニタイズ : see : https://stackoverflow.com/questions/1787322/htmlspecialchars-equivalent-in-javascript
@@ -162,6 +163,7 @@ $('#submit').click(() => {
 
     //modal呼び出し
     $('#exampleModalCenter').modal();
+
     //modal用プログレスバー
     var counterBack = setInterval(function () {
       progress++;
@@ -174,12 +176,10 @@ $('#submit').click(() => {
         $('#modal_next').prop("disabled", false);
         $('#modal_next').text("ゲームへ行く");
       }
-    
     }, 700);
 
     const floorData = {
       idString: idObj.idString, // todo decode to
-      //commands: commands,
       text: text,
       uid: uid,
       author: creator,
@@ -190,12 +190,17 @@ $('#submit').click(() => {
       // favorite : 0 // pending
     }
 
-    const ref = db.collection('/floors/v1/datas').doc(idObj.id);
+    //DB登録
+    let writeBatch = db.batch();
 
-    ref.set(floorData)
-      // ref.create({foo:'bar'})
-      .then(function () {
-        console.log("Document written with ID: ", idObj.id);
+    const refMain = db.collection(`/floors/v1/users/${uid}/datas`).doc(idObj.id);
+    writeBatch.set(refMain,floorData);
+    const refToday = db.collection(`/today/v1/users/${uid}/todayDatas`).doc(idObj.id);
+    writeBatch.set(refToday,floorData);
+
+    writeBatch.commit()
+      .then(()=>{
+        console.log("Document written");
 
         //現在のobjectも更新
         events[idObj.id] = floorData;
@@ -210,11 +215,12 @@ $('#submit').click(() => {
 
       })
       .catch(function (error) {
-        alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:30');
+        //todo errorcode
+        alert('ネットワーク混雑中。もう一度お試し下さい。code:30');
         console.error("Error adding document: ", error);
+        $('#exampleModalCenter').modal('hide');
         return
       });
-
   }
   else {
     alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:40');

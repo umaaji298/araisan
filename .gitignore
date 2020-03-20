@@ -2,3 +2,4 @@ node_modules
 edit_beta.html
 firestore.rules
 owner.json
+firebase-debug.log

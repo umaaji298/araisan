@@ -662,3 +662,167 @@ If you are renaming a function or changing its region, it is recommended that yo
  
 [debug] [2020-03-20T08:07:58.608Z] <<< HTTP RESPONSE 200
 [debug] [2020-03-20T08:07:58.696Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:08:00.611Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:08:00.699Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:08:00.753Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:08:00.892Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:08:02.757Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:08:02.892Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:08:02.900Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:08:03.077Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:08:04.905Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:08:05.054Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:08:05.077Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:08:05.261Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:08:07.058Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:08:07.191Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:08:07.264Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:08:07.435Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:08:09.197Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:08:09.338Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:08:09.435Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:08:09.578Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:08:11.347Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:08:11.481Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:08:11.581Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvc2NoZWR1bGVkRnVuY3Rpb24vTEZ3cHgtWXlNRkk  
+ 
+[debug] [2020-03-20T08:08:11.786Z] <<< HTTP RESPONSE 200
+[info] ✔  functions[scheduledFunction(asia-northeast1)]: Successful update operation. 
+[debug] [2020-03-20T08:08:13.483Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:08:13.619Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:08:15.623Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YXJhaXNhbi1tcy9hc2lhLW5vcnRoZWFzdDEvY3JlYXRlRXZlbnRzSnNvbkFQSS9ycV90TlF5cW1uaw  
+ 
+[debug] [2020-03-20T08:08:15.766Z] <<< HTTP RESPONSE 200
+[info] ✔  functions[createEventsJsonAPI(asia-northeast1)]: Successful update operation. 
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/araisan-ms/overview
+[debug] [2020-03-20T08:08:15.906Z] Error: ETXTBSY: text file is busy, unlink '/home/vagrant/workspace/html5games/araisan/firebase-debug.log'
+    at Object.unlinkSync (fs.js:956:3)
+    at process.<anonymous> (/home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/bin/firebase.js:68:12)
+    at process.emit (events.js:203:15)
+    at process.topLevelDomainCallback (domain.js:126:23)
+[debug] [2020-03-20T08:25:15.927Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T08:25:15.928Z] Command:       /usr/local/bin/node /home/vagrant/.yarn/bin/firebase deploy --only firestore:rules
+[debug] [2020-03-20T08:25:15.928Z] CLI Version:   7.15.1
+[debug] [2020-03-20T08:25:15.928Z] Platform:      linux
+[debug] [2020-03-20T08:25:15.928Z] Node Version:  v10.18.1
+[debug] [2020-03-20T08:25:15.928Z] Time:          Fri Mar 20 2020 17:25:15 GMT+0900 (GMT+09:00)
+[debug] [2020-03-20T08:25:15.928Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T08:25:15.928Z] 
+[debug] [2020-03-20T08:25:15.935Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-20T08:25:15.935Z] > authorizing via signed-in user
+[debug] [2020-03-20T08:25:15.935Z] [iam] checking project araisan-ms for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]
+[debug] [2020-03-20T08:25:15.936Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/araisan-ms:testIamPermissions  
+
+[debug] [2020-03-20T08:25:16.765Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'araisan-ms'...
+[info] 
+[info] i  deploying firestore
+[info] i  cloud.firestore: checking firestore.rules for compilation errors...
+[debug] [2020-03-20T08:25:18.574Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/araisan-ms:test  
+
+[debug] [2020-03-20T08:25:20.143Z] <<< HTTP RESPONSE 200
+[warn] ⚠  [W] 54:12 - Unused function: validateInt.
+[info] ✔  cloud.firestore: rules file firestore.rules compiled successfully
+[debug] [2020-03-20T08:25:20.145Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/araisan-ms/releases?pageSize=10&pageToken=  
+ 
+[debug] [2020-03-20T08:25:21.328Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:25:21.329Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/araisan-ms/rulesets/ca4671c8-6ab7-4f16-b05b-5ae302e11a91  
+ 
+[debug] [2020-03-20T08:25:22.504Z] <<< HTTP RESPONSE 200
+[info] i  firestore: uploading rules firestore.rules...
+[debug] [2020-03-20T08:25:22.505Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/araisan-ms/rulesets  
+
+[debug] [2020-03-20T08:25:23.821Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:25:23.821Z] [rules] created ruleset projects/araisan-ms/rulesets/61c6a708-d02f-4f8e-810c-fc57263f3a97
+[debug] [2020-03-20T08:25:23.821Z] [rules] releasing cloud.firestore with ruleset projects/araisan-ms/rulesets/61c6a708-d02f-4f8e-810c-fc57263f3a97
+[debug] [2020-03-20T08:25:23.822Z] >>> HTTP REQUEST PATCH https://firebaserules.googleapis.com/v1/projects/araisan-ms/releases/cloud.firestore  
+
+[debug] [2020-03-20T08:25:24.179Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T08:25:24.179Z] [rules] updated release projects/araisan-ms/releases/cloud.firestore
+[info] ✔  firestore: released rules firestore.rules to cloud.firestore
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/araisan-ms/overview
+[debug] [2020-03-20T08:25:24.346Z] Error: ETXTBSY: text file is busy, unlink '/home/vagrant/workspace/html5games/araisan/firebase-debug.log'
+    at Object.unlinkSync (fs.js:956:3)
+    at process.<anonymous> (/home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/bin/firebase.js:68:12)
+    at process.emit (events.js:203:15)
+    at process.topLevelDomainCallback (domain.js:126:23)
+[debug] [2020-03-20T10:52:23.358Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T10:52:23.359Z] Command:       /usr/local/bin/node /home/vagrant/.yarn/bin/firebase functions:log
+[debug] [2020-03-20T10:52:23.359Z] CLI Version:   7.15.1
+[debug] [2020-03-20T10:52:23.359Z] Platform:      linux
+[debug] [2020-03-20T10:52:23.359Z] Node Version:  v10.18.1
+[debug] [2020-03-20T10:52:23.359Z] Time:          Fri Mar 20 2020 19:52:23 GMT+0900 (GMT+09:00)
+[debug] [2020-03-20T10:52:23.359Z] ----------------------------------------------------------------------
+[debug] [2020-03-20T10:52:23.359Z] 
+[debug] [2020-03-20T10:52:23.366Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-20T10:52:23.366Z] > authorizing via signed-in user
+[debug] [2020-03-20T10:52:23.367Z] [iam] checking project araisan-ms for permissions ["firebase.projects.get","logging.logEntries.list","logging.logs.list"]
+[debug] [2020-03-20T10:52:23.368Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-03-20T10:52:23.368Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-03-20T10:52:23.573Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T10:52:23.575Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/araisan-ms:testIamPermissions  
+
+[debug] [2020-03-20T10:52:24.379Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-20T10:52:24.380Z] >>> HTTP REQUEST POST https://logging.googleapis.com/v2beta1/entries:list  
+
+[debug] [2020-03-20T10:52:25.935Z] <<< HTTP RESPONSE 200
+[info] 2020-03-20T07:00:00.572Z N createEventsJsonAPI: 
+[info] 2020-03-20T07:00:47.427699474Z D helloWorld: Function execution started
+[info] 2020-03-20T07:00:47.520494778Z D helloWorld: Function execution took 93 ms, finished with status code: 200
+[info] 2020-03-20T07:00:57.599454171Z D createEventsJsonAPI: Function execution started
+[info] 2020-03-20T07:00:57.647Z I createEventsJsonAPI: api create event.json
+[info] 2020-03-20T07:01:00.469Z I createEventsJsonAPI: writeEnd
+[info] 2020-03-20T07:01:00.896Z I createEventsJsonAPI: writeEnd
+[info] 2020-03-20T07:01:00.897Z I createEventsJsonAPI: done
+[info] 2020-03-20T07:01:57.601424392Z D createEventsJsonAPI: Function execution took 60003 ms, finished with status: 'timeout'
+[info] 2020-03-20T07:58:44.828Z I : 
+[info] 2020-03-20T07:58:45.242Z I : 
+[info] 2020-03-20T08:00:18.154Z N scheduledFunction: 
+[info] 2020-03-20T08:00:18.177Z N createEventsJsonAPI: 
+[info] 2020-03-20T08:00:18.260Z N helloWorld: 
+[info] 2020-03-20T08:00:20.204Z N helloWorld: 
+[info] 2020-03-20T08:01:03.730Z N createEventsJsonAPI: 
+[info] 2020-03-20T08:01:21.059Z N scheduledFunction: 
+[info] 2020-03-20T08:01:46.730309216Z D createEventsJsonAPI: Function execution started
+[info] 2020-03-20T08:01:46.832Z I createEventsJsonAPI: api create event.json
+[info] 2020-03-20T08:01:49.604Z I createEventsJsonAPI: writeEnd
+[info] 2020-03-20T08:01:49.921Z I createEventsJsonAPI: writeEnd
+[info] 2020-03-20T08:01:49.922Z I createEventsJsonAPI: done
+[info] 2020-03-20T08:01:49.923358052Z D createEventsJsonAPI: Function execution took 3193 ms, finished with status code: 200
+[info] 2020-03-20T08:05:03.380745730Z D scheduledFunction: Function execution started
+[info] 2020-03-20T08:05:03.566Z I scheduledFunction: scheduled create event.json
+[info] 2020-03-20T08:05:06.337Z I scheduledFunction: writeEnd
+[info] 2020-03-20T08:05:06.639Z I scheduledFunction: writeEnd
+[info] 2020-03-20T08:05:06.639Z I scheduledFunction: done
+[info] 2020-03-20T08:05:06.645584152Z D scheduledFunction: Function execution took 3266 ms, finished with status: 'ok'
+[info] 2020-03-20T08:07:29.750Z I : 
+[info] 2020-03-20T08:07:30.599Z I : 
+[info] 2020-03-20T08:07:34.785Z N scheduledFunction: 
+[info] 2020-03-20T08:07:34.810Z N createEventsJsonAPI: 
+[info] 2020-03-20T08:08:09.439Z N scheduledFunction: 
+[info] 2020-03-20T08:08:13.282Z N createEventsJsonAPI: 
+[debug] [2020-03-20T10:52:26.112Z] Error: ETXTBSY: text file is busy, unlink '/home/vagrant/workspace/html5games/araisan/firebase-debug.log'
+    at Object.unlinkSync (fs.js:956:3)
+    at process.<anonymous> (/home/vagrant/.config/yarn/global/node_modules/firebase-tools/lib/bin/firebase.js:68:12)
+    at process.emit (events.js:203:15)
+    at process.topLevelDomainCallback (domain.js:126:23)

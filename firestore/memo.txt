@@ -1,0 +1,3 @@
+# firestore rule deploy
+
+firebase deploy --only firestore:rules
