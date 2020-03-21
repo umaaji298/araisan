@@ -145,6 +145,12 @@ function spCommandsFix(commands, id) {
 }
 
 function getFloorRand(arrow1, arrow2, gauge) {
+
+  if(arrow1 === 8 || arrow2 === 8){
+    //特殊対応
+    return '0000';
+  }
+
   //max 80 - 0 : min 80 - 78 = 2
   const base = parseInt((arrow1 * 10 + arrow2), 8) + gauge;
   const reverse = 80 - base;
