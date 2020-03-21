@@ -49,11 +49,11 @@ export default class FloorSelector extends Phaser.Scene {
       ["0", "挨拶をしてきた。", "襲ってきた。", "帰れと警告してきた。", "4", "君の落とし物を届けてくれた。", "手打ちうどんをごちそうしてくれた。", "ずっと後をつけてくる…", "何かを探していた。", "フロアの物を破壊していた。", "君を殺しに来た。", "他の怪異から君を守った。", "君の大切なものを奪った。", "君にキスをした。", "君に決闘を申し込んだ。", "君を閉じ込めた。", "君と\G年ほど暮らした。", "君に寄生した。", "あたりに火を付けた。", "ベランダから飛び降りた！", "君を無視した。", "君を誘った。", "君を囮にして逃げた。", "壁に消えていった…", "君の服を脱がした。", "君の髪の毛を毟った！", "君に何かの魔法をかけたようだ…", "君の血を啜った。", "息絶えた…"],
     ];
 
-    //event.jsonよりイベント呼び出し
-    this.spEvents = this.cache.json.get('events');
-    let diffEvents = this.cache.json.get('events_diff');
+    //events.jsonよりイベント呼び出し
+    let mainArray = this.cache.json.get('events');
+    let diffArray = this.cache.json.get('events_diff');
 
-    Object.assign(this.spEvents,diffEvents)
+    this.spEvents = new Map(diffArray.concat(mainArray));
 
     //gauge 数値データ置き換え
     this.numTag = ["１／２", "７", "５", "７７", "３", "１０", "０．１", "１", "千万", "２", "１２", "０", "（検閲）", "無", "百万", "０．０１"];
@@ -72,7 +72,7 @@ export default class FloorSelector extends Phaser.Scene {
 
       //イベントデコード : todo コスト重いか…！
       // todo 制御文字の構文解析はここでやる感じ
-      const event = this.spEvents[checkedCode];
+      const event = this.spEvents.get(checkedCode);
 
       //\Gの置き換え
       // todo : 制御子の統一的な処理
@@ -138,12 +138,12 @@ function checkEvent(code, scene) {
   console.log(code, code4, code6);
   console.log(scene.spEvents);
 
-  if (scene.spEvents.hasOwnProperty(code)) {
+  //todo なんかうまい方法ないのか
+  if (scene.spEvents.has(code)) {
     resultCode = code;
-    //    commands = scene.spEvents[code];
-  } else if (scene.spEvents.hasOwnProperty(code6)) {
+  } else if (scene.spEvents.has(code6)) {
     resultCode = code6;
-  } else if (scene.spEvents.hasOwnProperty(code4)) {
+  } else if (scene.spEvents.has(code4)) {
     resultCode = code4;
   }
 

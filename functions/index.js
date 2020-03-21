@@ -64,7 +64,6 @@ exports.scheduledFunction = functions
 /**
  * DBの変更をトリガーに、events.jsonを生成する
  */
-
 exports.createTodayJson = functions
   .region('asia-northeast1')
   .firestore
@@ -87,18 +86,21 @@ exports.createTodayJson = functions
 
 async function createEventsJson() {
   // DB Event全て読み出し、jsonを作成する
-  const writeData = new Object();
-  const collectionData = await db.collectionGroup('datas').get();
+  const writeData = new Array();
+  const collectionData = await db.collectionGroup('datas').orderBy('updatedAt', 'desc').get();
 
-  collectionData.forEach(doc=>{
+  // 列挙順を日付降順で維持するため、forEachではなくfor
+  for (let i = 0; i < collectionData.docs.length; i++) {
+    const doc = collectionData.docs[i]
     const data = doc.data();
-        writeData[doc.ref.id] = {
+    const outdata = {
       text: data.text,
       imgUrl: data.imgUrl,
       floorName: data.floorName,
       author: data.author
     }
-  })
+    writeData.push([doc.ref.id,outdata]);
+  }
 
   //default bucket
   const bucket = admin.storage().bucket();
@@ -119,20 +121,28 @@ async function createEventsJson() {
   return
 }
 
-async function createDiffJson(){
+async function createDiffJson() {
   // todayDatasを全て読み出し、jsonを作成する
-  const writeData = new Object();
-  const collectionData = await db.collectionGroup('todayDatas').get();
+  const writeData = new Array();
+  const collectionData = await db.collectionGroup('todayDatas').orderBy('updatedAt', 'desc').get();
 
-  collectionData.forEach(doc=>{
+  if(collectionData.docs.length === 0){
+    //早期return
+    return
+  }
+
+  // 列挙順を日付降順で維持するため、forEachではなくfor
+  for (let i = 0; i < collectionData.docs.length; i++) {
+    const doc = collectionData.docs[i]
     const data = doc.data();
-        writeData[doc.ref.id] = {
+    const outdata = {
       text: data.text,
       imgUrl: data.imgUrl,
       floorName: data.floorName,
       author: data.author
     }
-  })
+    writeData.push([doc.ref.id,outdata]);
+  }
 
   //default bucket
   const bucket = admin.storage().bucket();
@@ -173,27 +183,27 @@ function writeHtmlCore(data, writeStream) {
   })
 }
 
-async function daleteDbToday(){
+async function daleteDbToday() {
   let writeBatch = db.batch();
 
-  let ss = await db.collectionGroup('todayDatas').get(); 
+  let ss = await db.collectionGroup('todayDatas').get();
 
-  ss.forEach(doc=>{
-    writeBatch.delete(doc.ref);    
+  ss.forEach(doc => {
+    writeBatch.delete(doc.ref);
   })
 
   let ss2 = await db.collection('/today/v1/users').get();
 
-  ss2.forEach(doc=>{
-    writeBatch.delete(doc.ref);    
+  ss2.forEach(doc => {
+    writeBatch.delete(doc.ref);
   })
 
   return await writeBatch.commit();
 }
 
-async function createEmptyDiffJson(){
+async function createEmptyDiffJson() {
 
-//default bucket
+  //default bucket
   const bucket = admin.storage().bucket();
   const file = bucket.file('events_diff.json');
 
@@ -206,8 +216,6 @@ async function createEmptyDiffJson(){
     }
   });
 
-  //書き込み本体
-  // 空データの書き込み
-  await writeHtmlCore("{}", writeStream);
-
+  //書き込み本体 // 空データの書き込み
+  await writeHtmlCore("[]", writeStream);
 }
