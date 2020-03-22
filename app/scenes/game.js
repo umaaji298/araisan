@@ -101,7 +101,6 @@ function panelFeedBack(pointer, obj) {
 
   switch (obj.name) {
     case 'menu': {
-      console.log('this is menu');
       this.menuSE.play();
 
       this.menu.setVisible(false);

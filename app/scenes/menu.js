@@ -142,7 +142,7 @@ export default class Menu extends Phaser.Scene {
         ease: 'Poser2',
         onCompleteScope: this,
         onComplete: function (tween, targets, param) {
-          console.log('conmplete');
+          //console.log('conmplete');
           this.scene.stop('menu');
         }
       }, this);

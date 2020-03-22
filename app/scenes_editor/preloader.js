@@ -7,9 +7,9 @@ export default class Preloader extends Phaser.Scene {
   preload() {
 
     //loading
-    this.load.on('progress',(prgress)=>{
-      console.log(prgress)
-    });
+    // this.load.on('progress',(prgress)=>{
+    //   console.log(prgress)
+    // });
 
     //load comp
     this.load.on('complete',()=>{

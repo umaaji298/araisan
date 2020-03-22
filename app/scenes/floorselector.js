@@ -115,8 +115,8 @@ function checkEvent(code, scene) {
   const code4 = code.slice(0, 8);
   const code6 = code.slice(0, 10);
 
-  console.log(code, code4, code6);
-  console.log(scene.spEvents);
+  //console.log(code, code4, code6);
+  //console.log(scene.spEvents);
 
   //todo なんかうまい方法ないのか
   if (scene.spEvents.has(code)) {
