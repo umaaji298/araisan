@@ -250,7 +250,7 @@ function createFloorId() {
 
   //既存IDとかぶってないかチェックする
   for (let i = 0; i < 5; i++) {
-    id_1 = rand28String();
+    id_1 = rand28String(14); // 14は即死
     id_2 = rand28String();
     id_3 = rand28String();
     id_4 = rand28String();
@@ -272,13 +272,13 @@ function createFloorId() {
   return { id, idString }
 }
 
-function rand28String() {
+function rand28String(exclude = -1) {
   let result;
 
   //while若干怖い
   while (true) {
     result = Math.floor(Math.random() * 29);
-    if (result != 0 && result != 4) break;
+    if (result != 0 && result != 4 && result != exclude) break;
   }
 
   //2桁あわせ
