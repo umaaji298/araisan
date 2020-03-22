@@ -31,6 +31,20 @@ export default class Menu extends Phaser.Scene {
       // background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_PRIMARY),
       background: this.add.image(0, 0, 'menu_back').setAlpha(0.3),
 
+      header: this.rexUI.add.label({
+        // background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
+        text: this.add.text(0, 0, 'ランダムに表示'),
+        // icon: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
+        align: 'center',
+        space: {
+          // left: 20,
+          // right: 20,
+          // top: 20,
+          // bottom: 20,
+          // icon: 10
+        }
+      }),
+
       table: {
         cellWidth: undefined,
         cellHeight: 60,
@@ -44,20 +58,21 @@ export default class Menu extends Phaser.Scene {
         reuseCellContainer: true,
       },
 
-      slider: {
-        track: this.rexUI.add.roundRectangle(0, 0, 16, 16, 0, COLOR_DARK),
-        thumb: this.rexUI.add.roundRectangle(0, 0, 16, 16, 0, COLOR_LIGHT),
-      },
+      // slider: {
+      //   track: this.rexUI.add.roundRectangle(0, 0, 16, 16, 0, COLOR_DARK),
+      //   thumb: this.rexUI.add.roundRectangle(0, 0, 16, 16, 0, COLOR_LIGHT),
+      // },
+      slider: false,
 
       space: {
         left: 20,
         right: 20,
-        top: 20,
+        top: 8,
         bottom: 20,
 
         table: 10,
-        header: 10,
-        footer: 10,
+        header: 5,
+        // footer: 10,
       },
 
       createCellContainerCallback: function (cell, cellContainer) {
@@ -109,7 +124,7 @@ export default class Menu extends Phaser.Scene {
         cellContainer.getElement('background')
           .setStrokeStyle(2, COLOR_LIGHT)
           .setDepth(1);
-        console.log(cellContainer);
+        // console.log(cellContainer);
       }, this)
       .on('cell.out', function (cellContainer, cellIndex) {
         cellContainer.getElement('background')
@@ -142,11 +157,16 @@ let getItems = function (count, scene) {
   for (let i = 0; i < count; i++) {
     const evNo = Phaser.Math.Between(0, scene.spEventArray.length - 1)
     const ev = scene.spEventArray[evNo];
-    console.log(evNo, ev);
+
+    if (ev[1].floorName === 'Under Maintenance') {
+      continue;
+    }
+
+    //console.log(evNo, ev);
     //todo コスト減らす？
     const [sw1, sw2, sw3, sw4, ...other] = ev[1].idString.split(',');
     const idString = `${sw1}-${sw2}-${sw3}-${sw4}${other.join('')}`
-    console.log(idString);
+    //console.log(idString);
 
     const text = `${idString} / ${ev[1].floorName}`
 
