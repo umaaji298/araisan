@@ -6,7 +6,6 @@ $(function () {
 
   /** すべて消す */
   $('#allClear').click(() => {
-    console.log('call');
     $('#eventText').val("");
     $('#floorname').val("");
     $('#creator').val("");
@@ -15,7 +14,7 @@ $(function () {
 
 //登録済みイベントデータ取得
 var events;
-var events_daily;
+var events_diff;
 
 fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events.json?alt=media')
   .then(resp => { return resp.json(); })
@@ -28,16 +27,19 @@ fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/even
     console.error(error)
   });
 
-fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/daily.json?alt=media')
-  .then(resp => { return resp.json(); })
+  function loadDiffJson(){
+    fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events_diff.json?alt=media')
+      .then(resp => { return resp.json(); })
   .then(jsonObj => {
-    events_daily = jsonObj;
+    events_diff = jsonObj;
     //console.log(events_daily);
   })
   .catch(error => {
     alert('ネットワークエラー発生中！管理人が復旧しないと無理そうです。code:11')
     console.error(error)
   });
+}
+loadDiffJson();
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -60,7 +62,24 @@ var db = firebase.firestore();
 var isAnonymous;
 var uid;
 
-firebase.auth().signInAnonymously().catch(function (error) {
+firebase.auth().signInAnonymously()
+.then(userCredential=>{
+  //初回はDBに登録する
+  // see : https://firebase.google.com/docs/reference/js/firebase.auth.Auth?hl=ja#sign-inanonymously
+  if(userCredential.additionalUserInfo.isNewUser){
+    console.log('this is new user');
+
+    // DB更新
+    let ref = db.collection("users").doc(userCredential.user.uid);
+
+    ref.set({
+      name:"Anonymous",
+      isAnonymous:true,
+      uid:userCredential.user.uid
+    })
+  }
+})
+.catch(function (error) {
   console.log(error);
 });
 
@@ -87,10 +106,32 @@ $('#submit').click(() => {
   const creator = $('#creator').val();
   const floorName = $('#floorname').val();
 
-  // todo validation
+
+  //文字長0チェック
+  if(textdata.length === 0){
+    alert('表示する文章がありません');
+    return;
+  }
 
   // textdata \n to ,
-  const text = textdata.split('\n').join(',')
+  const textArray = textdata.split('\n');
+  if(textArray.length > 10){
+    alert('11行以上の入力があります。');
+    return;
+  }
+
+  if(!checkLineCount(textArray)){
+    alert('1行に25文字以上の入力があります。');
+    return;
+  }
+  
+  const text = textArray.join(',');
+  // サニタイズ : see : https://stackoverflow.com/questions/1787322/htmlspecialchars-equivalent-in-javascript
+  //const text = escapeHtml(_text);
+  if(testHtml(text)){
+    alert('使用禁止文字が含まれています ( & < > " \' ) ');
+    return;
+  }
 
   if (isAnonymous && uid) {
 
@@ -110,7 +151,6 @@ $('#submit').click(() => {
 
     const floorData = {
       idString: idObj.idString, // todo decode to
-      //commands: commands,
       text: text,
       uid: uid,
       author: creator,
@@ -118,10 +158,10 @@ $('#submit').click(() => {
       createdAt: new Date(),
       updatedAt: new Date(),
       floorName: floorName,
-      // favorite : 0 // pending
+      // like : 0 // pending
     }
 
-    const ref = db.collection('/floors/v1/datas').doc(idObj.id);
+    const ref = db.collection('/floors/v1/origins/v1/datas').doc(idObj.id);
 
     ref.set(floorData)
       // ref.create({foo:'bar'})
@@ -141,7 +181,7 @@ $('#submit').click(() => {
   }
 })
 
-const convertMap = new Map([["A", "20"], ["Б", "21"], ["В", "22"], ["Г", "23"], ["Д", "24"], ["Е", "25"], ["Ж", "26"], ["з", "27"], ["И", "28"], ["↑", "0"], ["↗", "1"], ["→", "2"], ["↘", "3"], ["↓", "4"], ["↙", "5"], ["←", "6"], ["↖", "7"], ["|", "00"], ["||", "01"], ["|||", "02"], ["||||", "03"], ["|||||", "04"], ["||||||", "05"], ["|||||||", "06"], ["||||||||", "07"], ["|||||||||", "08"], ["||||||||||", "09"], ["|||||||||||", "10"], ["||||||||||||", "11"], ["|||||||||||||", "12"], ["||||||||||||||", "13"], ["|||||||||||||||", "14"]]);
+const convertMap = new Map([["A", "20"], ["Б", "21"], ["В", "22"], ["Г", "23"], ["Д", "24"], ["Е", "25"], ["Ж", "26"], ["з", "27"], ["И", "28"], ["↑", "0"], ["↗", "1"], ["→", "2"], ["↘", "3"], ["↓", "4"], ["↙", "5"], ["←", "6"], ["↖", "7"], ["|=0", "00"], ["|=1", "01"], ["|=2", "02"], ["|=3", "03"], ["|=4", "04"], ["|=5", "05"], ["|=6", "06"], ["|=7", "07"], ["|=8", "08"], ["|=9", "09"], ["|=10", "10"], ["|=11", "11"], ["|=12", "12"], ["|=13", "13"], ["|=14", "14"],["|=15", "15"]]);
 
 function createFloorIdSp(input) {
   const array = input.split(',');
@@ -185,14 +225,14 @@ function chekNewId(id) {
   if (events.hasOwnProperty(id)) {
     isOk = false;
   }
-  if (events_daily.hasOwnProperty(id)) {
+  if (events_diff.hasOwnProperty(id)) {
     isOK = false;
   }
 
   return isOk;
 }
 
-const convertSWMap = new Map([['20', 'A'], ['21', 'Б'], ['22', 'В'], ['23', 'Г'], ['24', 'Д'], ['25', 'Е'], ['26', 'Ж'], ['27', 'з'], ['28', 'И']]);
+const convertSWMap = new Map([['20', 'А'], ['21', 'Б'], ['22', 'В'], ['23', 'Г'], ['24', 'Д'], ['25', 'Е'], ['26', 'Ж'], ['27', 'з'], ['28', 'И']]);
 
 function idToPanelNo(id) {
   let no = convertSWMap.get(id);
@@ -207,3 +247,30 @@ function idToPanelNo(id) {
   return no;
 }
 
+function escapeHtml(text) {
+  var map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+
+  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
+function testHtml(text) {
+  let re = /[&<>"']/g;
+
+  return re.test(text);
+}
+
+function checkLineCount(textArray){
+  let isOk = true;
+
+  textArray.forEach(texts=>{
+    if(texts.length > 24) isOk = false;
+  })
+
+  return isOk;
+}

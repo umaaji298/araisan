@@ -134,7 +134,7 @@ $('#submit').click(() => {
   const creator = $('#creator').val();
   const floorName = $('#floorname').val();
 
-  // todo validation
+
   //文字長0チェック
   if(textdata.length === 0){
     alert('表示する文章がありません');
@@ -202,7 +202,7 @@ $('#submit').click(() => {
       createdAt: new Date(),
       updatedAt: new Date(),
       floorName: floorName,
-      // favorite : 0 // pending
+      // like : 0 // pending
     }
 
     //DB登録
@@ -293,9 +293,9 @@ function chekNewId(id) {
   if (events.hasOwnProperty(id)) {
     isOk = false;
   }
-  // if (events_daily.hasOwnProperty(id)) {
-  //   isOK = false;
-  // }
+  if (events_diff.hasOwnProperty(id)) {
+    isOK = false;
+  }
 
   return isOk;
 }
