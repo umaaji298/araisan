@@ -37,6 +37,12 @@ export default class Game extends Phaser.Scene {
     //gauge
     setupGauge(this);
 
+    //menu
+    this.menu = this.add.image(40, 550, 'menu');
+    this.menu.name = "menu";
+    this.menu.setInteractive();
+    menuSetup(this, 3000);
+
     //Objectの反応をONにする
     this.input.on('gameobjectup', panelFeedBack, this);
 
@@ -44,6 +50,8 @@ export default class Game extends Phaser.Scene {
     this.clickSE = this.sound.add('click');
     this.rswSE = this.sound.add('rsw');
     this.gaugeSE = this.sound.add('gauge');
+    this.menuSE = this.sound.add('menuse');
+    this.menuSE.setVolume(0.4);
 
     this.evMoveBGM = this.sound.add('evmove');
     this.poneSE = this.sound.add('pone');
@@ -74,6 +82,9 @@ export default class Game extends Phaser.Scene {
       //locksw解除
       unlockSwitches(this);
 
+      //menu再表示
+      menuSetup(this, 300);
+
     }, this);
 
     eventScene.events.on('toGameOver', () => {
@@ -89,6 +100,14 @@ export default class Game extends Phaser.Scene {
 function panelFeedBack(pointer, obj) {
 
   switch (obj.name) {
+    case 'menu': {
+      console.log('this is menu');
+      this.menuSE.play();
+
+      this.menu.setVisible(false);
+      this.scene.launch('menu', {});
+      break;
+    }
     case 'gauge': {
       const gauge = obj; // rename
 
@@ -220,7 +239,7 @@ function panelFeedBack(pointer, obj) {
   }
 }
 
-function setupSwitches(scene){
+function setupSwitches(scene) {
   const switches = scene.switches;
 
   // this is darty code
@@ -274,7 +293,7 @@ function setupSwitches(scene){
   }
 }
 
-function setupRotarySw(scene){
+function setupRotarySw(scene) {
   scene.rswitches.push(scene.add.sprite(731, 175, 'textures', 'rotarysw.png'));
   scene.rswitches.push(scene.add.sprite(731, 239, 'textures', 'rotarysw.png'));
   scene.rswitches.push(scene.add.sprite(731, 299, 'textures', 'rotarysw.png'));
@@ -304,36 +323,36 @@ function setupRotarySw(scene){
       swobj.stepMax = 3;
     }
     //初期状態をランダムで決定する
-    swobj.step = util.getRandomIntInclusive(swobj.stepMin, swobj.stepMax);
+    swobj.step = Phaser.Math.Between(swobj.stepMin, swobj.stepMax);
 
-    if(swobj.step === swobj.stemMax){
+    if (swobj.step === swobj.stemMax) {
       swobj.direction = 0;
-    }else{
+    } else {
       swobj.direction = 1;
     }
-    
+
   }
   setRotarySw(scene);
 }
 
-function setupGauge(scene){
+function setupGauge(scene) {
   scene.gauge = scene.add.sprite(727, 342, 'textures', 'gauge.png');
   const gauge = scene.gauge;
 
   gauge.name = 'gauge';
   gauge.isLocked = false;
-  
+
   gauge.stepMax = 15;
   gauge.stepMin = 0;
-  gauge.step = util.getRandomIntInclusive(scene.gauge.stepMin, scene.gauge.stepMax); // 初期位置
+  gauge.step = Phaser.Math.Between(scene.gauge.stepMin, scene.gauge.stepMax);// 初期位置
 
-  if(gauge.step === 15){
+  if (gauge.step === 15) {
     gauge.direction = 0; // 1 is down : 0 is up
-  }else{
+  } else {
     gauge.direction = 1;
   }
 
-  gauge.shake =  new ShakePosition(scene.gauge, {
+  gauge.shake = new ShakePosition(scene.gauge, {
     mode: 0,
     duration: 600,
     magnitude: 3,
@@ -481,6 +500,11 @@ function getGeugeYpos(index) {
 
 function startFloorEvent(scene) {
 
+  //UI scene stop
+  scene.menu.setVisible(false);
+  const menuScene = scene.scene.get('menu');
+  menuScene.events.emit('evmove');
+
   //暫定 closecheck
   let floorData = getFloorData(scene)
   if (checkClose(floorData.code)) {
@@ -555,4 +579,17 @@ function checkClose(code) {
   })
 
   return isClosed;
+}
+
+function menuSetup(scene, delay) {
+  scene.menu.setAlpha(0);
+  scene.menu.setVisible(true);
+
+  scene.tweens.add({
+    targets: scene.menu,
+    alpha: 0.7,
+    ease: 'Power1',
+    duration: 1000,
+    delay: delay
+  });
 }

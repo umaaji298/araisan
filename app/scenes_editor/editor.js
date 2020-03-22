@@ -84,7 +84,7 @@ function readEventsText(scene) {
   console.log('evet text', event);
 
   //\Gの置き換え
-  const index = util.getRandomIntInclusive(0, scene.numTag.length - 1);
+  const index = Phaser.Math.Between(0, scene.numTag.length - 1);
   const fixevent = event.replace(/\\G/g, scene.numTag[index]); // ランダム表示
 
   return util.scriptsToEvents(fixevent);

@@ -95,11 +95,12 @@ async function createEventsJson() {
     const data = doc.data();
     const outdata = {
       text: data.text,
+      idString: data.idString,
       imgUrl: data.imgUrl,
       floorName: data.floorName,
       author: data.author
     }
-    writeData.push([doc.ref.id,outdata]);
+    writeData.push([doc.ref.id, outdata]);
   }
 
   //default bucket
@@ -126,7 +127,7 @@ async function createDiffJson() {
   const writeData = new Array();
   const collectionData = await db.collectionGroup('todayDatas').orderBy('updatedAt', 'desc').get();
 
-  if(collectionData.docs.length === 0){
+  if (collectionData.docs.length === 0) {
     //早期return
     return
   }
@@ -137,11 +138,12 @@ async function createDiffJson() {
     const data = doc.data();
     const outdata = {
       text: data.text,
+      idString: data.idString,
       imgUrl: data.imgUrl,
       floorName: data.floorName,
       author: data.author
     }
-    writeData.push([doc.ref.id,outdata]);
+    writeData.push([doc.ref.id, outdata]);
   }
 
   //default bucket

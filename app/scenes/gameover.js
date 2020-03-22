@@ -32,7 +32,7 @@ export default class GameOver extends Phaser.Scene {
       "",
       "素材",
       "",
-      "illustAC@アトリエウパ",
+      "ICOON MONO",
       "",
       "",
       "Plugin",

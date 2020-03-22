@@ -18,6 +18,8 @@ export default class Preloader extends Phaser.Scene {
 
     this.load.image('title', 'assets/title.png');
     this.load.image('panel', 'assets/panel.png');
+    this.load.image('menu', 'assets/menu.png');
+    this.load.image('menu_back', 'assets/menu_back.png');
     this.load.image('next', 'assets/next.png');
     this.load.image('arraw', 'assets/arraw.png');
     this.load.multiatlas('textures', 'assets/texture/textures.json', 'assets/texture');
@@ -29,6 +31,7 @@ export default class Preloader extends Phaser.Scene {
     this.load.audio('evmove', 'assets/audio/elevetor_6sec.mp3');
     this.load.audio('pone', 'assets/audio/ariplane-chime_one.mp3');
     this.load.audio('dooropen', 'assets/audio/elevetordoor.mp3');
+    this.load.audio('menuse', 'assets/audio/enter8.mp3');
     this.load.audio('ending', 'assets/audio/taiju_43sec.mp3');
 
     //scripts

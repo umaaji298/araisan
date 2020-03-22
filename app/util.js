@@ -1,16 +1,4 @@
 /**
- * ランダム整数値を生成する
- * @param {*} min ランダム最小値
- * @param {*} max ランダム最大値
- */
-
-export function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
-}
-
-/**
  * ","で区切られた文字列をTCPRコードに変換する
  * 先頭に、preTextが必ず含まれる
  * 最後に、nextが必ず含まれる
