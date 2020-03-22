@@ -20,7 +20,7 @@ $(function () {
 
   //ゲーム画面へ
   $('#modal_next').click(() => {
-    window.location.href = '/'; // 通常の遷移
+    window.location.href = '/araisan/'; // 通常の遷移
   });
 
   $('#exampleModalCenter').on('hide.bs.modal', function (e) {
