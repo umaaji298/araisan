@@ -34,3 +34,14 @@ html {
 textarea {
   resize: horizontal;
 }
+
+.video-center{
+  text-align:center;
+  position: relative;
+}
+
+.mute{
+  position: absolute;
+  top: 0;
+  left: 40%;
+}

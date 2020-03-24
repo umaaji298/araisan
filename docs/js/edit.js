@@ -18,14 +18,28 @@ $(function () {
     $('#floorname').val("");
   });
 
+  //video音声の再生
+  $('#minfiary').click(()=>{
+    const video = $('#minfiary').get(0);
+    video.muted = video.muted ? false : true;
+    if(!video.muted){
+      $('#muteicon').hide(1000);
+    }else{
+      $('#muteicon').show();
+    }
+  });
+
   //ゲーム画面へ
   $('#modal_next').click(() => {
+    // progress = 0;
+    // $('.progress-bar').css('width', progress + '%');
     window.location.href = '/araisan/'; // 通常の遷移
   });
 
   $('#exampleModalCenter').on('hide.bs.modal', function (e) {
     //progess reset
     progress = 0;
+    $('.progress-bar').css('width', progress + '%');
   })
 
   // $('#exampleModalCenter').on('show.bs.modal', function(e) {
