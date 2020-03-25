@@ -36,7 +36,7 @@ export default class FloorSelector extends Phaser.Scene {
     this.spEvents = new Map(diffArray.concat(mainArray));
 
     //gauge 数値データ置き換え
-    this.numTag = ["１／２", "７", "５", "７７", "３", "１０", "０．１", "１", "千万", "２", "１２", "０", "（検閲）", "無", "百万", "０．０１"];
+    this.numTag = ["１／２", "７", "５", "７７", "３", "１０", "０．１", "１", "千万", "２", "１２", "０", "（検閲）", "無", "百万", "０．０１","５０００兆"];
   }
 
   create(data) {

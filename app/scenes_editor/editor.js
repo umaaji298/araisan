@@ -12,7 +12,7 @@ export default class Editor extends Phaser.Scene {
     //console.log('call game pleroad');
 
     //gauge 数値データ置き換え
-    this.numTag = ["１／２", "７", "５", "７７", "３", "１０", "０．１", "１", "千万", "２", "１２", "０", "（検閲）", "無", "百万", "０．０１"];
+    this.numTag = ["１／２", "７", "５", "７７", "３", "１０", "０．１", "１", "千万", "２", "１２", "０", "（検閲）", "無", "百万", "０．０１","５０００兆"];
   }
 
   create() {
