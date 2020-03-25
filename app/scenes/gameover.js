@@ -27,6 +27,7 @@ export default class GameOver extends Phaser.Scene {
       "BGM/SE",
       "",
       "遊句@夢に見た緑",
+      "エクシエ@nc138283",
       "ポケットサウンド@https://pocket-se.info/",
       "",
       "",
@@ -66,9 +67,18 @@ export default class GameOver extends Phaser.Scene {
 
     this.endingBGM.play();
 
-    this.endingBGM.on('complete', () => {
-      this.cameras.main.fadeOut(3000, 0, 0, 0);
-    }, this);
+    // this.endingBGM.on('complete', () => {
+    //   this.cameras.main.fadeOut(3000, 0, 0, 0);
+    // }, this);
+
+    this.time.delayedCall(52000, (_this) => {
+      _this.cameras.main.fadeOut(7000, 0, 0, 0);
+      _this.tweens.add({
+        targets: _this.endingBGM,
+        volume: 0,
+        duration: 5000
+      });
+    }, [this]);
 
     this.input.once('pointerup', function (event) {
       this.cameras.main.fadeOut(7000, 0, 0, 0);
