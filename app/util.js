@@ -14,10 +14,20 @@ export function getAngleFromStep(step) {
  * 先頭に、preTextが必ず含まれる
  * 最後に、nextが必ず含まれる
  * 文字表示速度は自動: 3sec / 5sec / 6secc
- * @param {*} textdata 
+ * TCRP commands
+ *     const commands = [
+ *        ['// ??'],               // [NaN, ...] -> ignored
+ *        [0, 'print', 'hello'],        // [dt, fnName, param0, param1, ...]
+ *        [1000, ['print', 'world']],   // [dt, [fnName, param0, param1, ...]]
+ *        [3000, [                      // [dt, [command0, command1, ...]]
+ *            ['print', '--'],
+ *            ['print', 'phaser3'],
+ *        ]]
+ *      ];
+ * @param {*} script 
  */
-export function scriptsToEvents(textdata) {
-  const strings = textdata.split(',');
+export function scriptsToEvents(script) {
+  const strings = script.split(',');
 
   const baseX = 40;
   const baseY = 117;
