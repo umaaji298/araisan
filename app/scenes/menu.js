@@ -71,7 +71,7 @@ export default class Menu extends Phaser.Scene {
       },
 
       createCellContainerCallback: function (cell, cellContainer) {
-        var scene = cell.scene,
+        const scene = cell.scene,
           width = cell.width,
           height = cell.height,
           item = cell.item,

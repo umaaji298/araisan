@@ -43,7 +43,6 @@ export default class FloorSelector extends Phaser.Scene {
     console.log('%c floorSelector ', 'background: green; color: white; display: block;');
     console.log('floordata', data);
 
-    const evKey = (data.arraws[0] % 2).toString() + data.arraws[1];
     const gauge = data.gauge;
     const floorRand = getFloorRand(data.arraws[0], data.arraws[1], gauge);
 

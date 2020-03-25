@@ -15,13 +15,15 @@ export default class FloorEvent extends Phaser.Scene {
     console.log('%c floorEvent ', 'background: green; color: white; display: block;');
 
     //背景トーンダウン
-    var cameras = this.cameras.main;
-    this.tweens.addCounter({
+    // var cameras = this.cameras.main;
+
+    this.tw_1 = this.tweens.addCounter({
       targets: this,
       from: 0.0,
       to: 0.5,
       duration: 500,
-      onUpdate: function (tween, targets) {
+      onUpdateParams:this.cameras.main,
+      onUpdate: function (tween, targets,cameras) {
         const opacity = tween.getValue();
         const color = `rgba(50,50,50,${opacity})`;
         cameras.setBackgroundColor(color);
@@ -47,23 +49,40 @@ export default class FloorEvent extends Phaser.Scene {
     this.textBoxConf =
       this.next.on('pointerup', () => {
         console.log('restart');
-        //gameシーンからこのシーンを削除する？
         this.events.emit('restert');
+        destructor(this);
         this.scene.stop('floorEvent');
       }, this);
 
     //TCRP event
-    var myCmds = new TcrpAction(this);
+    this.myCmds = new TcrpAction(this);
 
-    var player = new TCRP.Player(this,{});
-    player
-      .load(data.commands, myCmds, {
+    this.player = new TCRP.Player(this, {});
+    this.player
+      .load(data.commands, this.myCmds, {
         // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
         dtMode: 1           // 'abs'|'absolute'|0|'inc'|'increment'|1
       })
-      .start()
-      .on('complete', function () {
-        console.log(player.now * 0.001);
-      });
+      .start();
+    // .on('complete', function () {
+    //   console.log(player.now * 0.001);
+    // });
   }
+}
+
+function destructor(scene) {
+  scene.tweens.remove(scene.tw_1);
+
+  scene.next.off('pointerup');
+  scene.next.removeInteractive();
+  scene.next.destroy();
+
+  //object削除
+  scene.evMoveBGM.destroy();
+  scene.poneSE.destroy();
+  scene.dooropenSE.destroy();
+  scene.rswSE.destroy();
+
+  scene.myCmds = null;
+  scene.player = null;
 }
