@@ -25,7 +25,7 @@ function goFS() {
   if (target.requestFullscreen) {
 
     //special fix(よくない)
-    footnavi.disabled = true;    
+    footnavi.disabled = true;
 
     //変更前の値を取得
     styleBeforeW = target.firstChild.style.width;
