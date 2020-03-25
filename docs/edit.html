@@ -44,7 +44,7 @@
     <div class="mb-3">
       <label class="col-form-label-lg text-right" for="textarea">
         <span class="badge badge-info">必須</span> 表示する文章
-        <button id="preview" class="btn btn-secondary ml-5">プレビュー</button>
+        <button id="preview" class="btn btn-secondary btn-sm ml-5">プレビュー</button>
         <button id="preview_close" class="btn btn-outline-secondary ml-5" style="display:none;">プレビュー 閉じる</button>
       </label>
 
@@ -52,8 +52,17 @@
         required>君は見た&#13;&#10;はちみつを舐める&#13;&#10;下半身裸の&#13;&#10;黄色いくまの怪異を…！</textarea>
       <span id="eventText_help" class="form-text text-muted"><a
           href="https://github.com/umaaji298/araisan/wiki/%E3%83%95%E3%83%AD%E3%82%A2%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E4%BB%95%E6%A7%98%E6%9B%B8"
-          target="_blank">仕様書</a>/1行24文字/10行まで/利用可能なタグ：「\G」ランダム数値表現 </span>
-      <span id="allClear" class="badge badge-danger">入力を全て消去</span>
+          target="_blank">仕様書</a>/1行24文字/10行まで/ <span id="allClear" class="badge badge-danger">入力を全て消去</span></span>
+      <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapseExample"
+        aria-expanded="false" aria-controls="collapseExample">
+        利用可能なタグ
+      </button>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          <p>「\G」ランダム数値表現  「\C」ランダム人物 </p>
+          <small>⚠ランダム系のタグは、同じタグを複数使うと全て同じ結果になります。<s>クソ仕様では？</s></small>
+        </div>
+      </div>
     </div>
 
     <!-- preview -->
