@@ -175,6 +175,13 @@ $('#submit').click(() => {
     return;
   }
 
+  if(text === "君は見た,はちみつを舐める,下半身裸の,黄色いくまの怪異を…！"){
+    ret = confirm("入力データが初期のままですが、本当に登録するのですか？");
+    if(!ret){
+      return;
+    }
+  }
+
   if (isAnonymous && uid) {
 
     //IDの決定
