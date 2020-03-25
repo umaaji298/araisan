@@ -47,6 +47,7 @@ export function scriptsToEvents(textdata) {
       }
       case 2: {
         wait += 4000;
+        break;
       }
     }
 
