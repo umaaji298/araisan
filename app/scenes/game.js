@@ -61,8 +61,8 @@ export default class Game extends Phaser.Scene {
      * Scene events
      */
     //restart scene : イベントの再登録なし
-    const eventScene = this.scene.get('floorEvent');
-    eventScene.events.on('restert', () => {
+    this.eventObj = this.scene.get('floorEvent');
+    this.eventObj.events.on('restert', () => {
       console.log('call restert');
 
       this.inputNo = new Array();
@@ -73,24 +73,24 @@ export default class Game extends Phaser.Scene {
           sw.anims.previousFrame();
         }
       });
-
       //display表示消去
       this.evDisplay.forEach(disp => {
         disp.destroy();
       });
-
       //locksw解除
       unlockSwitches(this);
-
       //menu再表示
       menuSetup(this, 300);
-
     }, this);
 
-    eventScene.events.on('toGameOver', () => {
+    this.eventObj.events.on('toGameOver', () => {
       console.log('call togameover');
+      destructor_game(this);
       this.scene.start('gameover');
     }, this);
+
+    //create end
+    // destructor_game(this);
   }
 }
 
@@ -175,7 +175,7 @@ function panelFeedBack(pointer, obj) {
                 rsw.step -= 1;
               }
             }
-            rsw.rotation = getAngleFromStep(rsw.step);
+            rsw.rotation = util.getAngleFromStep(rsw.step);
             break;
           }
         default: {
@@ -280,15 +280,15 @@ function setupSwitches(scene) {
       continue;
     }
 
-    var swobj = switches[i];
+    const swobj = switches[i];
     swobj.name = 'sw';
     swobj.no = i;
-    var evname = 'sw' + i + 'on'
+    swobj.evname = 'sw' + i + 'on'
     swobj.setInteractive();
 
     const frameNames = scene.anims.generateFrameNames('textures', { start: 1, end: 2, prefix: 'buttons/' + i + '/', suffix: '.png' });
-    scene.anims.create({ key: evname, frames: frameNames, frameRate: 10, repeat: 0 });
-    swobj.anims.load(evname);
+    scene.anims.create({ key: swobj.evname, frames: frameNames, frameRate: 10, repeat: 0 });
+    swobj.anims.load(swobj.evname);
   }
 }
 
@@ -300,7 +300,7 @@ function setupRotarySw(scene) {
   const rswitches = scene.rswitches;
 
   for (let i = 0; i < rswitches.length; i++) {
-    var swobj = rswitches[i];
+    const swobj = rswitches[i];
     swobj.name = 'rsw';
     swobj.no = i;
     swobj.isLocked = false;
@@ -366,7 +366,7 @@ function setupGauge(scene) {
 
 function setRotarySw(scene) {
   scene.rswitches.forEach(swobj => {
-    swobj.rotation = getAngleFromStep(swobj.step);
+    swobj.rotation = util.getAngleFromStep(swobj.step);
   });
   return;
 }
@@ -427,14 +427,14 @@ function setArraw(scene) {
     scene.arraw1.setVisible(false);
   } else {
     scene.arraw1.setVisible(true);
-    scene.arraw1.rotation = getAngleFromStep(arraw1step);
+    scene.arraw1.rotation = util.getAngleFromStep(arraw1step);
   }
   //arraw viwe 確定
   if (arraw2step === 8) {
     scene.arraw2.setVisible(false);
   } else {
     scene.arraw2.setVisible(true);
-    scene.arraw2.rotation = getAngleFromStep(arraw2step);
+    scene.arraw2.rotation = util.getAngleFromStep(arraw2step);
   }
 
   return
@@ -483,12 +483,6 @@ function getFloorData(scene) {
   }
 }
 
-function getAngleFromStep(step) {
-  //angle // is this utils?
-  const angles = [0, 0.785, 1.570, 2.356, 3.141, -2.35, -1.57, -0.78]; // see https://phaser.io/examples/v3/view/game-objects/sprites/sprite-rotation
-  return angles[step];
-}
-
 function getGeugeYpos(index) {
   //gauge step // bad system...
   const geugeYpos = [342, 351, 361, 371, 381, 390, 400, 410, 420, 430, 440, 449, 459, 469, 478, 488];
@@ -517,6 +511,7 @@ function startFloorEvent(scene) {
     scene.scene.launch('floorSelector', floorData);
 
   } else {
+    //todo bgm chain
     scene.evMoveBGM.play();
     scene.time.delayedCall(6000, (_this) => {
       _this.poneSE.play();
@@ -591,4 +586,49 @@ function menuSetup(scene, delay) {
     duration: 1000,
     delay: delay
   });
+}
+
+function destructor_game(scene) {
+  scene.tweens.getAllTweens().forEach((tw) => {
+    tw.destroy();
+  });
+
+  scene.inputNo = null;
+  scene.evDisplay = null;
+
+  //sw all destroy
+  scene.switches.forEach((sw) => {
+    if (sw.hasOwnProperty(name)) {
+      sw.removeInteractive();
+      sw.anims.remove();
+    }
+  });
+  scene.switches = null;
+
+  //sw all destroy
+  scene.rswitches.forEach((rsw) => {
+    rsw.removeInteractive();
+    rsw.shake = null;
+  });
+  scene.rswitches = null;
+
+  //gauge destory
+  scene.gauge.removeInteractive();
+  scene.gauge.shake = null;
+
+  scene.input.off('gameobjectup');
+
+  // scene.anims.destroy();
+
+  scene.clickSE.destroy();
+  scene.rswSE.destroy();
+  scene.gaugeSE.destroy();
+  scene.menuSE.destroy();
+
+  scene.evMoveBGM.destroy();
+  scene.poneSE.destroy();
+  scene.dooropenSE.destroy();
+
+  scene.eventObj.events.off('restert');
+  scene.eventObj.events.off('toGameOver');
 }

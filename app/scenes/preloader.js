@@ -50,3 +50,5 @@ export default class Preloader extends Phaser.Scene {
     // this.scene.start('gameover');
   }
 }
+
+//const content = `ENTERING WONDER ELEVATOR\nOF THE ARAISAN's MANSION`;

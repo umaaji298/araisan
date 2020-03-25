@@ -330,7 +330,7 @@ function idToPanelNo(id) {
 }
 
 function escapeHtml(text) {
-  var map = {
+  const map = {
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;',

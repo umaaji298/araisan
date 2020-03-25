@@ -1,5 +1,5 @@
 var target = document.getElementById('phaser-game');
-var btn = document.getElementById('fullscreenSwitch');
+// const btn = document.getElementById('fullscreenSwitch');
 var footnavi = document.getElementById('footnavi');
 
 var styleBeforeW = 800;

@@ -1,4 +1,15 @@
 /**
+ * ArrawのStepからradに変換する
+ * @param {*} step 
+ */
+
+export function getAngleFromStep(step) {
+  //angle // is this utils?
+  const angles = [0, 0.785, 1.570, 2.356, 3.141, -2.35, -1.57, -0.78]; // see https://phaser.io/examples/v3/view/game-objects/sprites/sprite-rotation
+  return angles[step];
+}
+
+/**
  * ","で区切られた文字列をTCPRコードに変換する
  * 先頭に、preTextが必ず含まれる
  * 最後に、nextが必ず含まれる

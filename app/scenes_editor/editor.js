@@ -29,7 +29,7 @@ export default class Editor extends Phaser.Scene {
     this.poneSE = this.sound.add('pone');
 
     //panel
-    var panel = this.add.image(660, 300, 'panel');
+    const panel = this.add.image(660, 300, 'panel');
     panel.alpha = 0.5;
     panel.setInteractive();
 
@@ -38,18 +38,6 @@ export default class Editor extends Phaser.Scene {
 
     //背景トーンダウン
     // todo scene - backgroundtypeなので動かない
-    // var cameras = this.cameras.main;
-    // this.tweens.addCounter({
-    //   targets: this,
-    //   from: 0.0,
-    //   to: 0.5,
-    //   duration: 500,
-    //   onUpdate: function (tween, targets) {
-    //     const opacity = tween.getValue();
-    //     const color = `rgba(50,50,50,${opacity})`;
-    //     cameras.setBackgroundColor(color);
-    //   }
-    // })
 
     //next button 
     this.next = this.add.image(400, 553, 'next');

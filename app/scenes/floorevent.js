@@ -15,8 +15,6 @@ export default class FloorEvent extends Phaser.Scene {
     console.log('%c floorEvent ', 'background: green; color: white; display: block;');
 
     //背景トーンダウン
-    // var cameras = this.cameras.main;
-
     this.tw_1 = this.tweens.addCounter({
       targets: this,
       from: 0.0,

@@ -8,7 +8,7 @@ export default class GameOver extends Phaser.Scene {
   create() {
     console.log('%c GameOver ', 'background: green; color: white; display: block;');
 
-    var content = [
+    const content = [
       "credit",
       "",
       "",

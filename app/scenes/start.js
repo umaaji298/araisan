@@ -26,7 +26,6 @@ export default class Start extends Phaser.Scene {
   }
 }
 
-//var content = `ENTERING WONDER ELEVATOR\nOF THE ARAISAN's MANSION`;
 function destructor(scene){
   scene.bg.removeInteractive();
 
@@ -34,5 +33,3 @@ function destructor(scene){
   scene.poneSE.destroy();
   scene.bg.destroy();
 }
-
-

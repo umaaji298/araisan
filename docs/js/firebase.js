@@ -1,5 +1,5 @@
 // Your web app's Firebase configuration
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyAU58Q3dGjp60YosKVPqwE3GUy_BHQuld0",
   authDomain: "araisan-ms.firebaseapp.com",
   databaseURL: "https://araisan-ms.firebaseio.com",
@@ -11,7 +11,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-var db = firebase.firestore();
+const db = firebase.firestore();
 
 firebase.auth().signInAnonymously().catch(function (error) {
   console.log(error);
@@ -20,8 +20,8 @@ firebase.auth().signInAnonymously().catch(function (error) {
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     // User is signed in.
-    var isAnonymous = user.isAnonymous;
-    var uid = user.uid;
+    const isAnonymous = user.isAnonymous;
+    const uid = user.uid;
 
     console.log('loggedin',isAnonymous,uid);
 
