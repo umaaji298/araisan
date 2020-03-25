@@ -44,10 +44,6 @@ export default class Preloader extends Phaser.Scene {
   create() {
     console.log('%c Preloader ', 'background: green; color: white; display: block;');
 
-    // game??? : 取得方法が分からなくなった
-    // game.scale.onFullScreenChange(() => {
-    //   console.log('change');
-    // })
     this.scene.start('start');
     // this.scene.start('game');
   }

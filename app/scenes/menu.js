@@ -1,15 +1,12 @@
-const COLOR_PRIMARY = 0x4e342e;
-const COLOR_LIGHT = 0xaaaaaa;
-const COLOR_DARK = 0xffffff;
-
-const FONT_SYS = { fontSize: '20px', color: '#fff', maxLines: 2, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
-
 export default class Menu extends Phaser.Scene {
   constructor() {
     super({ key: 'menu' })
   }
 
   preload() {
+
+    this.fontsys = { fontSize: '20px', color: '#fff', maxLines: 2, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
+
     //events.jsonよりイベント呼び出し
     let mainArray = this.cache.json.get('events');
     let diffArray = this.cache.json.get('events_diff');
@@ -20,7 +17,7 @@ export default class Menu extends Phaser.Scene {
   create() {
     console.log('%c menu ', 'background: green; color: white; display: block;');
 
-    var gridTable = this.rexUI.add.gridTable({
+    this.gridTable = this.rexUI.add.gridTable({
       x: 270,
       y: 282,
       width: 500,
@@ -28,18 +25,16 @@ export default class Menu extends Phaser.Scene {
 
       scrollMode: 0,
 
-      // background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_PRIMARY),
       background: this.add.image(0, 0, 'menu_back').setAlpha(0.3),
 
       header: this.rexUI.add.label({
         // background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
         text: this.add.text(0, 0, 'ランダムに表示'),
-        // icon: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
         align: 'center',
         space: {
           // left: 20,
           // right: 20,
-          // top: 20,
+          top: 0,
           // bottom: 20,
           // icon: 10
         }
@@ -67,7 +62,7 @@ export default class Menu extends Phaser.Scene {
       space: {
         left: 20,
         right: 20,
-        top: 8,
+        top: 5,
         bottom: 20,
 
         table: 10,
@@ -91,9 +86,9 @@ export default class Menu extends Phaser.Scene {
             height: height,
 
             orientation: 0,
-            background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK),
+            background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, 0xffffff),
             icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, 0x0),
-            text: scene.add.text(0, 0, '', FONT_SYS),
+            text: scene.add.text(0, 0, '', scene.fontsys),
 
             space: {
               icon: 10,
@@ -110,7 +105,7 @@ export default class Menu extends Phaser.Scene {
         cellContainer.setMinSize(width, height); // Size might changed in this demo
         cellContainer.getElement('text').setText(item.text); // Set text of text object
         cellContainer.getElement('icon').setFillStyle(item.color); // Set fill color of round rectangle object
-        cellContainer.getElement('background').setStrokeStyle(2, COLOR_DARK).setDepth(0);
+        cellContainer.getElement('background').setStrokeStyle(2, 0xffffff).setDepth(0);
         return cellContainer;
       },
 
@@ -119,30 +114,31 @@ export default class Menu extends Phaser.Scene {
       .layout()
     //.drawBounds(this.add.graphics(), 0xff0000);
 
-    gridTable
+    this.gridTable
       .on('cell.over', function (cellContainer, cellIndex) {
         cellContainer.getElement('background')
-          .setStrokeStyle(2, COLOR_LIGHT)
+          .setStrokeStyle(2, 0xaaaaaa)
           .setDepth(1);
         // console.log(cellContainer);
       }, this)
       .on('cell.out', function (cellContainer, cellIndex) {
         cellContainer.getElement('background')
-          .setStrokeStyle(2, COLOR_DARK)
+          .setStrokeStyle(2, 0xffffff)
           .setDepth(0);
       }, this)
 
     this.events.on('evmove', () => {
       console.log('call evmove');
 
-      this.tweens.add({
-        targets: gridTable,
+      this.tw_1 = this.tweens.add({
+        targets: this.gridTable,
         alpha: 0,
         dulation: 300,
         ease: 'Poser2',
         onCompleteScope: this,
         onComplete: function (tween, targets, param) {
-          //console.log('conmplete');
+          console.log('conmplete');
+          destructor(this);
           this.scene.stop('menu');
         }
       }, this);
@@ -159,6 +155,7 @@ let getItems = function (count, scene) {
     const ev = scene.spEventArray[evNo];
 
     if (ev[1].floorName === 'Under Maintenance') {
+      i--;
       continue;
     }
 
@@ -176,4 +173,12 @@ let getItems = function (count, scene) {
     });
   }
   return data;
+}
+
+function destructor(scene) {
+  scene.gridTable.removeAllListeners();
+  scene.gridTable.destroy(); // also destroy all children. : see https://rexrainbow.github.io/phaser3-rex-notes/docs/site/containerlite/#compare-with-official-container
+  scene.tweens.remove(scene.tw_1);
+  scene.events.off('evmove');
+  // scene.events.destroy(); // do not work : scene.event全体がおかしくなる
 }

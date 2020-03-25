@@ -4,7 +4,6 @@ export default class Start extends Phaser.Scene {
 
   constructor() {
     super({ key: 'start' });
-    // window.MENU = this;// whats?
   }
 
   create() {
@@ -12,13 +11,14 @@ export default class Start extends Phaser.Scene {
 
     this.poneSE = this.sound.add('pone');
 
-    var bg = this.add.image(400, 300, 'title');
-    bg.setInteractive();
+    this.bg = this.add.image(400, 300, 'title');
+    this.bg.setInteractive();
 
-    bg.once('pointerup', function () {
+    this.bg.once('pointerup', function () {
       this.poneSE.play();
       this.cameras.main.fadeOut(2000, 0, 0, 0);
       this.time.delayedCall(2000, () => {
+        destructor(this);
         this.scene.start('game');
       }, [], this);
     }, this);
@@ -27,6 +27,12 @@ export default class Start extends Phaser.Scene {
 }
 
 //var content = `ENTERING WONDER ELEVATOR\nOF THE ARAISAN's MANSION`;
+function destructor(scene){
+  scene.bg.removeInteractive();
 
+  //object削除
+  scene.poneSE.destroy();
+  scene.bg.destroy();
+}
 
 

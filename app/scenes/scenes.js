@@ -7,4 +7,4 @@ import FloorEvent from './floorevent'
 import Menu from './menu'
 
 export default [Preloader, Start, GameOver, Game, FloorSelector, FloorEvent, Menu]
-export { Preloader, Start, GameOver, Game, FloorSelector, FloorEvent, Menu }
+//export { Preloader, Start, GameOver, Game, FloorSelector, FloorEvent, Menu }
