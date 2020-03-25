@@ -2,8 +2,7 @@
 export default class GameOver extends Phaser.Scene {
 
   constructor() {
-    super({ key: 'gameover' })
-    window.OVER = this; // whats?
+    super({ key: 'gameover' });
   }
 
   create() {
@@ -54,26 +53,26 @@ export default class GameOver extends Phaser.Scene {
       "",
     ];
 
+    //中央の紫の線
     this.graphics = this.add.graphics();
-
     this.graphics.lineStyle(5, 0x3e153b, 1);
     this.graphics.lineBetween(400, 0, 400, 600);
 
 
     this.fontopt = { fontSize: '26px', color: '#fff', align: 'center' };
     this.scrolltext = this.add.text(110, 650, content, this.fontopt);
+
+    //sound
     this.endingBGM = this.sound.add('ending');
     this.endingBGM.setVolume(0.6);
-
     this.endingBGM.play();
-
     // this.endingBGM.on('complete', () => {
     //   this.cameras.main.fadeOut(3000, 0, 0, 0);
     // }, this);
 
     this.time.delayedCall(52000, (_this) => {
       _this.cameras.main.fadeOut(7000, 0, 0, 0);
-      _this.tweens.add({
+      _this.tw_1 = _this.tweens.add({
         targets: _this.endingBGM,
         volume: 0,
         duration: 5000
@@ -89,8 +88,10 @@ export default class GameOver extends Phaser.Scene {
       });
     }, this);
 
+
     this.cameras.main.once('camerafadeoutcomplete', function (camera) {
       this.sound.stopAll();
+      destructor(this);
       this.scene.start('start');
     }, this);
 
@@ -100,4 +101,14 @@ export default class GameOver extends Phaser.Scene {
   update() {
     this.scrolltext.y -= 0.5;
   }
+}
+
+function destructor(scene){
+  scene.endingBGM.destroy();
+  scene.input.off('pointerup');
+  scene.tweens.getAllTweens().forEach((tw)=>{
+    tw.destroy();
+  });
+  
+  scene.graphics.destroy();
 }

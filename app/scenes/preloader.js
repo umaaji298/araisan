@@ -45,6 +45,8 @@ export default class Preloader extends Phaser.Scene {
     console.log('%c Preloader ', 'background: green; color: white; display: block;');
 
     this.scene.start('start');
+
     // this.scene.start('game');
+    // this.scene.start('gameover');
   }
 }
