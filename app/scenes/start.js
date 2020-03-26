@@ -9,6 +9,8 @@ export default class Start extends Phaser.Scene {
   create() {
     console.log('%c Start ', 'background: green; color: white; display: block;');
 
+    this.cameras.main.fadeIn(1000, 0, 0, 0);
+
     this.poneSE = this.sound.add('pone');
 
     this.bg = this.add.image(400, 300, 'title');

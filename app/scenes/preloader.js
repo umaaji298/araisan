@@ -6,15 +6,45 @@ export default class Preloader extends Phaser.Scene {
 
   preload() {
 
-    //loading
-    // this.load.on('progress',(prgress)=>{
-    //   console.log(prgress)
-    // });
+    //const content = `ENTERING WONDER ELEVATOR\nOF THE ARAISAN's MANSION`;
+
+    //Loading TEXT
+    var width = this.cameras.main.width;
+    var height = this.cameras.main.height;
+    var loadingText = this.make.text({
+      x: width / 2,
+      y: height / 2 - 50,
+      text: 'Loading...',
+      style: {
+        font: '30px monospace',
+        fill: '#ffffff'
+      }
+    });
+    loadingText.setOrigin(0.5, 0.5);
+
+    // loading
+    var progressBar = this.add.graphics();
+    var progressBox = this.add.graphics();
+    progressBox.fillStyle(0x222222, 0.8);
+    progressBox.fillRect(240, 270, 320, 50);
+
+    this.load.on('progress', (progress) => {
+      console.log(progress);
+
+      progressBar.clear();
+      progressBar.fillStyle(0xffffff, 1);
+      progressBar.fillRect(250, 280, 300 * progress, 30);
+    });
 
     //load comp
-    this.load.on('complete',()=>{
+    this.load.on('complete', () => {
       console.log('loadend');
-    });
+      progressBar.destroy();
+      progressBox.destroy();
+      this.load.off('progress');
+      this.load.off('complete');
+      this.scene.start('start');
+    },);
 
     this.load.image('title', 'assets/title.png');
     this.load.image('panel', 'assets/panel.png');
@@ -43,12 +73,7 @@ export default class Preloader extends Phaser.Scene {
 
   create() {
     console.log('%c Preloader ', 'background: green; color: white; display: block;');
-
-    this.scene.start('start');
-
     // this.scene.start('game');
     // this.scene.start('gameover');
   }
 }
-
-//const content = `ENTERING WONDER ELEVATOR\nOF THE ARAISAN's MANSION`;
