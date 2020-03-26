@@ -195,6 +195,7 @@ $('#submit').click(async () => {
       return;
     }
     console.log(validated.creator, validated.floorName, idObj.id, idObj.idString);
+    console.log(validated.file);
 
     //modal呼び出し
     viewModal();
@@ -203,6 +204,7 @@ $('#submit').click(async () => {
     if (validated.file != null) {
       try {
         validated.fileName = await uploadFile(validated.file);
+        validated.fileType = validated.file.type;
       } catch (err) {
         console.log(err);
         alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:21');
@@ -211,6 +213,7 @@ $('#submit').click(async () => {
       }
     } else {
       validated.fileName = "";
+      validated.fileType = "";
     }
 
     // DBデータ作成
@@ -219,7 +222,8 @@ $('#submit').click(async () => {
       text: validated.text,
       uid: uid,
       author: validated.creator,
-      imgUrl: validated.fileName,
+      fileName: validated.fileName,
+      fileType: validated.fileType,
       createdAt: new Date(),
       updatedAt: new Date(),
       floorName: validated.floorName,
@@ -236,7 +240,7 @@ $('#submit').click(async () => {
       return
     }
 
-    updateModal();
+    updateModal(idObj.idString);
 
     console.log('done');
   }
@@ -292,11 +296,19 @@ function validateInputs(input) {
   }
 
   //file validate
-  if (input.file != null && !validFileType(input.file)) {
-    validation.result = false;
-    validation.reason = '画像形式に対応していません';
-    return validation;
-  }
+  if (input.file != null){
+    if(!validFileType(input.file)) {
+      validation.result = false;
+      validation.reason = '画像形式に対応していません';
+      return validation;
+    }
+    if(input.file.size > 1048576){
+      const sizeMbyte = (input.file.size/1048576).toFixed(1);
+      validation.result = false;
+      validation.reason = `画像のサイズは1Mbyteまでです。\n(これは${sizeMbyte}Mbyte)`;
+      return validation;
+    }
+  } 
 
   // 行数のチェック
   if (textArray.length > 10) {
