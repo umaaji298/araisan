@@ -1,5 +1,6 @@
 node_modules
 edit_beta.html
 firestore.rules
+storage.rules
 owner.json
 firebase-debug.log

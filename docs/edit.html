@@ -65,6 +65,14 @@
       </div>
     </div>
 
+    <div class="mb-3">
+      <label class="col-form-label-lg text-right" for="fileupload">表示する画像</label>
+      <input id="fileupload" type="file" class="form-control-file" accept="image/png, image/jpeg">
+      <span id="fileupload_help" class="form-text text-muted">png/jpg 1MBまで/仕様</span>
+    </div>
+
+    <!-- <div id="imagePrev"></div> -->
+
     <!-- preview -->
     <div id="phaser-editor" class="mx-auto"></div>
     <!-- endpreview -->
@@ -192,6 +200,8 @@
   <script defer src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/7.11.0/firebase-firestore.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.11.0/firebase-storage.js"></script>
+
 
   <script defer src="js/edit.js"></script>
 </body>

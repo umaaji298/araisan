@@ -1,13 +1,17 @@
-firebase storage cors設定
+# firebase storage cors設定
 
 gsutil cors set storage/cors-json-file.json gs://araisan-ms.appspot.com
 
-events.json確認(download)
+# events.json確認(download)
 
 gsutil cp gs://araisan-ms.appspot.com/events.json storage/events.json
 
 gsutil cp gs://araisan-ms.appspot.com/events_diff.json storage/events_diff.json
 
-daily.json 【upload】
+# daily.json 【upload】
 
 gsutil cp storage/events_diff.json gs://araisan-ms.appspot.com/events_diff.json
+
+# rules deploy
+
+firebase deploy --only storage

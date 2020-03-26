@@ -1,14 +1,23 @@
-//modal用progressber
+// modal用progressber
 var progress = 0;
-var progress_counterBack;
+var progress_counterBack; // callback
 
-//登録済みイベントデータ
+// 登録済みイベントデータ
 var events;
 var events_diff;
 
 $(function () {
   /** tooltip表示 */
   $('[data-toggle="tooltip"]').tooltip();
+
+  /** fileupload : image表示 */
+  // document.getElementById('fileupload').addEventListener('change', (event) => {
+  //   console.log(event);
+  //   file = event.target.files[0]
+  //   var image = document.createElement('img');
+  //   image.src = window.URL.createObjectURL(file);
+  //   $('#imagePrev').append(image);
+  // })
 
   /** すべて消す */
   $('#allClear').click(() => {
@@ -25,12 +34,12 @@ $(function () {
   });
 
   //video音声の再生
-  $('#minfiary').click(()=>{
+  $('#minfiary').click(() => {
     const video = $('#minfiary').get(0);
     video.muted = video.muted ? false : true;
-    if(!video.muted){
+    if (!video.muted) {
       $('#muteicon').hide(1000);
-    }else{
+    } else {
       $('#muteicon').show();
     }
   });
@@ -65,8 +74,6 @@ $(function () {
     $('#exampleModalLongTitle').text("フロアを登録中");
     $('#modal_next').show();
     $('#modal_next_go').hide();
-
-    
   })
 
 });
@@ -82,17 +89,17 @@ fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/even
     console.error(error)
   });
 
-function loadDiffJson(){
-fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events_diff.json?alt=media')
-  .then(resp => { return resp.json(); })
-  .then(jsonObj => {
-    events_diff = jsonObj;
-    //console.log(events_daily);
-  })
-  .catch(error => {
-    alert('ネットワークエラー発生中！管理人が復旧しないと無理そうです。code:11')
-    console.error(error)
-  });
+function loadDiffJson() {
+  fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events_diff.json?alt=media')
+    .then(resp => { return resp.json(); })
+    .then(jsonObj => {
+      events_diff = jsonObj;
+      //console.log(events_daily);
+    })
+    .catch(error => {
+      alert('ネットワークエラー発生中！管理人が復旧しないと無理そうです。code:11')
+      console.error(error)
+    });
 }
 loadDiffJson();
 
@@ -110,6 +117,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 var db = firebase.firestore();
+var storage = firebase.storage();
 
 /**
  * Anonymous singnin
@@ -118,25 +126,25 @@ var isAnonymous;
 var uid;
 
 firebase.auth().signInAnonymously()
-.then(userCredential=>{
-  //初回はDBに登録する
-  // see : https://firebase.google.com/docs/reference/js/firebase.auth.Auth?hl=ja#sign-inanonymously
-  if(userCredential.additionalUserInfo.isNewUser){
-    console.log('this is new user');
+  .then(userCredential => {
+    //初回はDBに登録する
+    // see : https://firebase.google.com/docs/reference/js/firebase.auth.Auth?hl=ja#sign-inanonymously
+    if (userCredential.additionalUserInfo.isNewUser) {
+      console.log('this is new user');
 
-    // DB更新
-    let ref = db.collection("users").doc(userCredential.user.uid);
+      // DB更新
+      let ref = db.collection("users").doc(userCredential.user.uid);
 
-    ref.set({
-      name:"Anonymous",
-      isAnonymous:true,
-      uid:userCredential.user.uid
-    })
-  }
-})
-.catch(function (error) {
-  console.log(error);
-});
+      ref.set({
+        name: "Anonymous",
+        isAnonymous: true,
+        uid: userCredential.user.uid
+      })
+    }
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
@@ -154,52 +162,31 @@ firebase.auth().onAuthStateChanged(function (user) {
 /**
  * form入力
  */
-$('#submit').click(() => {
+$('#submit').click(async () => {
 
   console.log('call submit');
-  const textdata = $('#eventText').val();
-  const creator = $('#creator').val();
-  const floorName = $('#floorname').val();
 
+  const input = createInputObj();
 
-  //文字長0チェック
-  if(textdata.length === 0){
-    alert('表示する文章がありません');
+  //input validation
+  const validated = validateInputs(input);
+
+  //validation error
+  if (!validated.result) {
+    alert(validated.reason);
     return;
   }
 
-  // textdata \n to ,
-  const textArray = textdata.split('\n');
-  if(textArray.length > 10){
-    alert('11行以上の入力があります。');
-    return;
-  }
-
-  if(!checkLineCount(textArray)){
-    alert('1行に25文字以上の入力があります。');
-    return;
-  }
-  
-  const text = textArray.join(',');
-  // サニタイズ : see : https://stackoverflow.com/questions/1787322/htmlspecialchars-equivalent-in-javascript
-  //const text = escapeHtml(_text);
-  if(testHtml(text)){
-    alert('使用禁止文字が含まれています ( & < > " \' ) ');
-    return;
-  }
-
-  if(text === "君は見た,はちみつを舐める,下半身裸の,黄色いくまの怪異を…！"){
-    ret = confirm("入力データが初期のままですが、本当に登録するのですか？");
-    if(!ret){
-      return;
-    }
+  // text is default?
+  if (validated.text === "君は見た,はちみつを舐める,下半身裸の,黄色いくまの怪異を…！") {
+    const ret = confirm("入力データが初期のままですが、本当に登録するのですか？");
+    if (!ret) return;
   }
 
   if (isAnonymous && uid) {
 
     //IDの決定
     let idObj;
-
     try {
       idObj = createFloorId();
     } catch (err) {
@@ -207,68 +194,51 @@ $('#submit').click(() => {
       alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:20')
       return;
     }
-
-    console.log(creator, floorName, idObj.id, idObj.idString);
+    console.log(validated.creator, validated.floorName, idObj.id, idObj.idString);
 
     //modal呼び出し
-    $('#exampleModalCenter').modal();
+    viewModal();
 
-    //modal用プログレスバー
-    progress_counterBack = setInterval(function () {      
-      progress++;
-      if (progress <= 100) {
-        $('.progress-bar').css('width', progress + '%');
-      } else {
-        clearInterval(progress_counterBack);
-        $('#exampleModalLongTitle').text("更新完了");
-        $('#modal_next').hide();
-        $('#modal_next_go').show();
+    // fileupload
+    if (validated.file != null) {
+      try {
+        validated.fileName = await uploadFile(validated.file);
+      } catch (err) {
+        console.log(err);
+        alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:21');
+        $('#exampleModalCenter').modal('hide');
+        return;
       }
-    }, 700);
+    } else {
+      validated.fileName = "";
+    }
 
+    // DBデータ作成
     const floorData = {
-      idString: idObj.idString, // todo decode to
-      text: text,
+      idString: idObj.idString, // todo decode to -
+      text: validated.text,
       uid: uid,
-      author: creator,
-      imgUrl: "",
+      author: validated.creator,
+      imgUrl: validated.fileName,
       createdAt: new Date(),
       updatedAt: new Date(),
-      floorName: floorName,
-      // like : 0 // pending
+      floorName: validated.floorName,
+      // like : 0 // todo pending
     }
 
     //DB登録
-    let writeBatch = db.batch();
+    try {
+      await dbWrite(floorData, idObj, id);
+    } catch (err) {
+      console.log(err);
+      alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:30');
+      $('#exampleModalCenter').modal('hide');
+      return
+    }
 
-    const refMain = db.collection(`/floors/v1/users/${uid}/datas`).doc(idObj.id);
-    writeBatch.set(refMain,floorData);
-    const refToday = db.collection(`/today/v1/users/${uid}/todayDatas`).doc(idObj.id);
-    writeBatch.set(refToday,floorData);
+    updateModal();
 
-    writeBatch.commit()
-      .then(()=>{
-        console.log("Document written");
-
-        //現在のobjectも更新
-        events[idObj.id] = floorData;
-
-        //modalデータここで更新
-        const floorId = idObj.idString.split(',').join('-');
-        $('#floorNo').text(floorId);
-
-        $('#exampleModalLongTitle').text("ゲームデータを更新中");
-
-        if(progress < 40) progress = 40;
-
-      })
-      .catch(function (error) {
-        //todo errorcode
-        alert('ネットワーク混雑中。もう一度お試し下さい。code:30');
-        console.error("Error adding document: ", error);
-        $('#exampleModalCenter').modal('hide');
-        return
-      });
+    console.log('done');
   }
   else {
     alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:40');
@@ -277,6 +247,158 @@ $('#submit').click(() => {
   }
 })
 
+/** inputdata to Object */
+function createInputObj() {
+  const input = {
+    text: "",
+    creator: "",
+    floorName: "",
+    file: null
+  }
+
+  input.text = $('#eventText').val();
+  input.creator = $('#creator').val();
+  input.floorName = $('#floorname').val();
+
+  const fileDatas = document.getElementById('fileupload').files;
+  input.file = fileDatas.length > 0 ? fileDatas[0] : null;
+
+  return input
+}
+
+/**
+ * Validation
+ * @param {*} input 
+ */
+function validateInputs(input) {
+  const validation = {
+    result: true,
+    reason: "",
+    text: "",
+    creator: "",
+    floorName: "",
+    file: null
+  }
+
+  const textArray = input.text.split('\n');
+  const fixedtext = textArray.join(',');
+
+  //文字長0チェック
+  if (input.text.length === 0) {
+    // todo : 画像がある場合は許容される
+    validation.result = false;
+    validation.reason = '表示する文章がありません';
+    return validation;
+  }
+
+  //file validate
+  if (input.file != null && !validFileType(input.file)) {
+    validation.result = false;
+    validation.reason = '画像形式に対応していません';
+    return validation;
+  }
+
+  // 行数のチェック
+  if (textArray.length > 10) {
+    validation.result = false;
+    validation.reason = '１１行以上の入力があります';
+    return validation;
+  }
+
+  // １行文字数のチェック
+  if (isLineCountNG(textArray)) {
+    validation.result = false;
+    validation.reason = '１つの行に25文字以上の入力があります';
+    return validation;
+  }
+
+  console.log(input.creator.length, input.floorName.length);
+  if (input.creator.length > 24 || input.floorName.length > 24) {
+    validation.result = false;
+    validation.reason = 'フロア名・作成者は24文字以下です';
+    return validation;
+  }
+
+  // サニタイズ : see : https://stackoverflow.com/questions/1787322/htmlspecialchars-equivalent-in-javascript
+  if (testHtml(fixedtext)) {
+    validation.result = false;
+    validation.reason = '使用禁止文字が含まれています ( & < > " \' ) ';
+    return validation;
+  }
+
+  if (testHtmlFull(input.creator) || testHtmlFull(input.floorName)) {
+    validation.result = false;
+    validation.reason = '使用禁止文字が含まれています ( & < > " \' \\ ) ';
+    return validation;
+  }
+
+  //念の為サニタイズ処理に通す
+  validation.text = escapeHtml(fixedtext);
+  validation.creator = escapeHtmlFull(input.creator);
+  validation.floorName = escapeHtmlFull(input.floorName);
+  validation.file = input.file;
+
+  return validation;
+}
+
+var fileTypes = [
+  'image/jpeg',
+  'image/png'
+]
+
+function validFileType(file) {
+  for (var i = 0; i < fileTypes.length; i++) {
+    if (file.type === fileTypes[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function testHtml(text) {
+  let re = /[&<>"']/g;
+  return re.test(text);
+}
+
+function testHtmlFull(text) {
+  let re = /[&<>"'\\]/g;
+  return re.test(text);
+}
+
+function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, function (m) { return map[m]; });
+}
+
+function escapeHtmlFull(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;',
+    "/": ''
+  };
+  return text.replace(/[&<>"'/]/g, function (m) { return map[m]; });
+}
+
+function isLineCountNG(textArray) {
+  let isNG = false;
+
+  textArray.forEach(texts => {
+    if (texts.length > 24) isNG = true;
+  })
+
+  return isNG;
+}
+
+/** FloorId random create */
 function createFloorId() {
 
   let id, id_1, id_2, id_3, id_4;
@@ -348,30 +470,70 @@ function idToPanelNo(id) {
   return no;
 }
 
-function escapeHtml(text) {
-  const map = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
-  };
+function viewModal() {
+  $('#exampleModalCenter').modal();
 
-  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+  //modal用プログレスバー
+  progress_counterBack = setInterval(function () {
+    progress++;
+    if (progress <= 100) {
+      $('.progress-bar').css('width', progress + '%');
+    } else {
+      clearInterval(progress_counterBack);
+      $('#exampleModalLongTitle').text("更新完了");
+      $('#modal_next').hide();
+      $('#modal_next_go').show();
+    }
+  }, 700);
 }
 
-function testHtml(text) {
-  let re = /[&<>"']/g;
-
-  return re.test(text);
+function updateModal(idString) {
+  //modalデータここで更新
+  const floorId = idString.split(',').join('-');
+  $('#floorNo').text(floorId);
+  $('#exampleModalLongTitle').text("ゲームデータを更新中");
+  if (progress < 40) progress = 40;
 }
 
-function checkLineCount(textArray){
-  let isOk = true;
+/** fileUpload */
+async function uploadFile(file) {
+  const storageRef = storage.ref();
+  const filename = generateUuid();
 
-  textArray.forEach(texts=>{
-    if(texts.length > 24) isOk = false;
-  })
+  await storageRef.child(`medias/${filename}`).put(file);
+  return filename;
+}
 
-  return isOk;
+function generateUuid() {
+  // https://qiita.com/psn/items/d7ac5bdb5b5633bae165
+  // https://github.com/GoogleChrome/chrome-platform-analytics/blob/master/src/internal/identifier.js
+  // const FORMAT: string = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
+  let chars = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("");
+  for (let i = 0, len = chars.length; i < len; i++) {
+    switch (chars[i]) {
+      case "x":
+        chars[i] = Math.floor(Math.random() * 16).toString(16);
+        break;
+      case "y":
+        chars[i] = (Math.floor(Math.random() * 4) + 8).toString(16);
+        break;
+    }
+  }
+  return chars.join("");
+}
+
+/** DB write */
+async function dbWrite(floorData, id) {
+
+  let writeBatch = db.batch();
+
+  const refMain = db.collection(`/floors/v1/users/${floorData.uid}/datas`).doc(id);
+  writeBatch.set(refMain, floorData);
+  const refToday = db.collection(`/today/v1/users/${floorData.uid}/todayDatas`).doc(id);
+  writeBatch.set(refToday, floorData);
+
+  await writeBatch.commit();
+
+  //現在のobjectも更新 : global
+  events[id] = floorData;
 }
