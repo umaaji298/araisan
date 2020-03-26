@@ -45,3 +45,7 @@ textarea {
   top: 0;
   left: 40%;
 }
+
+#modal_next_go{
+  display:none;
+}

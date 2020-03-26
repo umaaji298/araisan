@@ -1,4 +1,10 @@
+//modal用progressber
+var progress = 0;
+var progress_counterBack;
 
+//登録済みイベントデータ
+var events;
+var events_diff;
 
 $(function () {
   /** tooltip表示 */
@@ -36,27 +42,34 @@ $(function () {
     window.location.href = '/araisan/'; // 通常の遷移
   });
 
+  //modal show
+  $('#exampleModalCenter').on('show.bs.modal', function (e) {
+    //console.log('modal show');
+    $('#minfiary').get(0).play();
+  });
+
+  //modal hide
   $('#exampleModalCenter').on('hide.bs.modal', function (e) {
+    //console.log('modal hide');
+
+    //video stop
+    $('#minfiary').get(0).pause();
+    $('#minfiary').get(0).currentTime = 0;
+
     //progess reset
+    clearInterval(progress_counterBack);
     progress = 0;
     $('.progress-bar').css('width', progress + '%');
+
+    //modal reset
+    $('#exampleModalLongTitle').text("フロアを登録中");
+    $('#modal_next').show();
+    $('#modal_next_go').hide();
+
+    
   })
 
-  // $('#exampleModalCenter').on('show.bs.modal', function(e) {
-  //   const floorId = e.relatedTarget.floorId;
-  //   const _floorId = floorId.split(',').join('-');
-  //   console.log('modal event',_floorId);
-  //   $('#floorNo').val(_floorId);
-  // });
 });
-
-//modal用progressber
-var progress = 0;
-
-
-//登録済みイベントデータ取得
-var events;
-var events_diff;
 
 fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events.json?alt=media')
   .then(resp => { return resp.json(); })
@@ -201,16 +214,15 @@ $('#submit').click(() => {
     $('#exampleModalCenter').modal();
 
     //modal用プログレスバー
-    var counterBack = setInterval(function () {
+    progress_counterBack = setInterval(function () {      
       progress++;
       if (progress <= 100) {
         $('.progress-bar').css('width', progress + '%');
       } else {
-        clearInterval(counterBack);
+        clearInterval(progress_counterBack);
         $('#exampleModalLongTitle').text("更新完了");
-        $('#modal_spinner').hide();
-        $('#modal_next').prop("disabled", false);
-        $('#modal_next').text("ゲームへ行く");
+        $('#modal_next').hide();
+        $('#modal_next_go').show();
       }
     }, 700);
 
