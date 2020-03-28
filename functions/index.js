@@ -93,10 +93,15 @@ async function createEventsJson() {
   for (let i = 0; i < collectionData.docs.length; i++) {
     const doc = collectionData.docs[i]
     const data = doc.data();
+    let fileName = "";
+    if(Object.prototype.hasOwnProperty.call(data, "fileName")){
+      fileName = data.fileName;
+    }    
+
     const outdata = {
       text: data.text,
       idString: data.idString,
-      imgUrl: data.imgUrl,
+      fileName : fileName,
       floorName: data.floorName,
       author: data.author
     }
@@ -136,10 +141,15 @@ async function createDiffJson() {
   for (let i = 0; i < collectionData.docs.length; i++) {
     const doc = collectionData.docs[i]
     const data = doc.data();
+    let fileName = "";
+    if(Object.prototype.hasOwnProperty.call(data, "fileName")){
+      fileName = data.fileName;
+    }   
+
     const outdata = {
       text: data.text,
       idString: data.idString,
-      imgUrl: data.imgUrl,
+      fileName : fileName,
       floorName: data.floorName,
       author: data.author
     }
