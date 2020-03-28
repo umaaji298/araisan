@@ -15,9 +15,9 @@ $(function () {
   //   console.log(event);
   //   file = event.target.files[0];
   //   console.log(file);
-    // var image = document.createElement('img');
-    // image.src = window.URL.createObjectURL(file);
-    // $('#imagePrev').append(image);
+  // var image = document.createElement('img');
+  // image.src = window.URL.createObjectURL(file);
+  // $('#imagePrev').append(image);
   // })
 
   /** すべて消す */
@@ -234,7 +234,7 @@ $('#submit').click(async () => {
 
     //DB登録
     try {
-      await dbWrite(floorData, idObj, id);
+      await dbWrite(floorData, idObj.id);
     } catch (err) {
       console.log(err);
       alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:30');
@@ -298,19 +298,19 @@ function validateInputs(input) {
   }
 
   //file validate
-  if (input.file != null){
-    if(!validFileType(input.file)) {
+  if (input.file != null) {
+    if (!validFileType(input.file)) {
       validation.result = false;
       validation.reason = '画像形式に対応していません';
       return validation;
     }
-    if(input.file.size > 1048576){
-      const sizeMbyte = (input.file.size/1048576).toFixed(1);
+    if (input.file.size > 1048576) {
+      const sizeMbyte = (input.file.size / 1048576).toFixed(1);
       validation.result = false;
       validation.reason = `画像のサイズは1Mbyteまでです。\n(これは${sizeMbyte}Mbyte)`;
       return validation;
     }
-  } 
+  }
 
   // 行数のチェック
   if (textArray.length > 10) {
@@ -513,7 +513,7 @@ function updateModal(idString) {
 async function uploadFile(file) {
   const storageRef = storage.ref();
   const ext = file.name.split('.').pop();
-  const filename = generateUuid() + ext;
+  const filename = generateUuid() + '.' + ext;
 
   await storageRef.child(`medias/${filename}`).put(file);
   return filename;
