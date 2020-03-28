@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Making your first Phaser 3 Game - Part 3</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.22.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+
+        const config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+
+        const game = new Phaser.Game(config);
+        var count = 0;
+        var image;
+        var line;
+        var scene = this;
+        var rect;
+
+        function preload() {
+            this.load.image('sky', 'assets/sky.png');
+            this.load.image('ground', 'assets/platform.png');
+            this.load.image('star', 'assets/star.png');
+            this.load.image('bomb', 'assets/bomb.png');
+
+            this.load.audio('evmove', 'assets/audio/elevetor_6sec.mp3');
+            this.load.audio('pone', 'assets/audio/ariplane-chime_one.mp3');
+            this.load.audio('dooropen', 'assets/audio/elevetordoor.mp3');
+        }
+
+        function create() {
+            var star = this.add.image(400, 300, 'star').setInteractive();
+
+            this.evmoveBGM = this.sound.add('evmove');
+            this.poneSE = this.sound.add('pone');
+            this.doorSE = this.sound.add('dooropen');
+            
+            this.evmoveBGM.once('complete',()=>{
+                this.poneSE.play();
+            });
+            this.poneSE.once('complete',()=>{
+                this.doorSE.play();
+            })
+            
+
+            star.on('pointerup', doSound, this);
+
+        }
+
+        function update() { }
+
+        function doSound() {
+            this.evmoveBGM.play();
+        }
+
+
+    </script>
+
+</body>
+
+</html>

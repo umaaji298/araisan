@@ -511,21 +511,22 @@ function startFloorEvent(scene) {
     scene.scene.launch('floorSelector', floorData);
 
   } else {
-    //todo bgm chain
-    scene.evMoveBGM.play();
-    scene.time.delayedCall(6000, (_this) => {
-      _this.poneSE.play();
-    }, [scene]);
 
-    scene.time.delayedCall(7500, (_this) => {
-      _this.dooropenSE.play();
-    }, [scene]);
-
-    scene.time.delayedCall(12500, (_this) => {
+    //set event chain
+    scene.evMoveBGM.once('complete', () => {
+      scene.poneSE.play();
+    });
+    scene.poneSE.once('complete', () => {
+      scene.dooropenSE.play();
+    });
+    scene.dooropenSE.once('complete', () => {
       console.log('to next scene');
       //ここで入力が確定する : overload sw input 対応
-      _this.scene.launch('floorSelector', getFloorData(_this));
-    }, [scene]);
+      console.log(scene);
+      scene.scene.launch('floorSelector', getFloorData(scene));
+    },scene)
+
+    scene.evMoveBGM.play();
   }
 }
 

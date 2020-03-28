@@ -1,53 +1,192 @@
-<!doctype html> 
-<html lang="en"> 
-<head> 
+<!doctype html>
+<html lang="en">
+
+<head>
     <meta charset="UTF-8" />
     <title>Making your first Phaser 3 Game - Part 3</title>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.22.0/dist/phaser.js"></script>
     <style type="text/css">
         body {
             margin: 0;
         }
     </style>
 </head>
+
 <body>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    const config = {
-        type: Phaser.AUTO,
-        width: 800,
-        height: 600,
-        scene: {
-            preload: preload,
-            create: create,
-            update: update
+        const config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+
+        const game = new Phaser.Game(config);
+        var count = 0;
+        var image;
+        var line;
+        var scene = this;
+        var rect;
+
+        function preload() {
+            this.load.image('sky', 'assets/sky.png');
+            this.load.image('ground', 'assets/platform.png');
+            this.load.image('star', 'assets/star.png');
+            this.load.image('bomb', 'assets/bomb.png');
+            this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+
+            this.load.image('light','assets/light.png');
+
+            // Enable the Lights Manager because it is disabled by default
+            // this.lights.enable();
+            // this.lights.setAmbientColor(0xff0000);
+
+            // Create a Light at [400, 300] with a radius of 200
+            // this.lights.addLight(400, 150, 200);
         }
-    };
 
-    const game = new Phaser.Game(config);
+        function create() {
+            // this.add.image(400, 300, 'sky').setPipeline('Light2D');
+            // this.add.image(400, 300, 'sky');
 
-    function preload ()
-    {
-        this.load.image('sky', 'assets/sky.png');
-        this.load.image('ground', 'assets/platform.png');
-        this.load.image('star', 'assets/star.png');
-        this.load.image('bomb', 'assets/bomb.png');
-        this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-    }
+            // this.container = this.add.container(0, 0);
 
-    function create ()
-    {
-        this.add.image(400, 300, 'sky');
+            graphics = this.add.graphics();
 
-        console.log(Phaser.Math.Between(0, 100));
-    }
+            // line = new Phaser.Geom.Line(100, 100, 200, 200);
+            // graphics.strokeLineShape(line);
 
-    function update ()
-    {
-    }
+            // graphics = this.add.graphics();
+            // graphics.lineStyle(1, 0x00ff00);
 
-</script>
+            var star = this.add.image(400, 300, 'star').setInteractive();
+
+            star.on('pointerup', loadImage, this);
+
+        }
+
+        function update() { }
+
+        function loadImage() {
+            // count++;
+            count = 1;
+            console.log('call', count);
+
+            this.load.once('complete', addSprites, this);
+
+            switch (count) {
+                case 1: {
+                    this.load.image('pic', 'https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/medias%2F4388bd6d-81a6-4a28-a4ed-3dc72cb7d0c6?alt=media');
+                    this.load.start();
+                    break;
+                }
+                // case 2: {
+                //     image.destroy();
+                //     this.textures.remove('pic');
+                //     this.load.image('pic', 'https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/medias%2Fabbacbcf-03f3-4664-b5ee-66606c4caf62?alt=media');
+                //     this.load.start();
+
+                //     break;
+                // }
+                default: {
+                    break;
+                }
+            }
+        }
+
+        function addSprites() {
+            // image = this.add.image(Phaser.Math.Between(0, 800), Phaser.Math.Between(0, 600), 'pic');
+            image = this.add.image(400, 150, 'pic');
+            image.setCrop(0, 0, 0, 0); // all cropped
+
+            // light = this.add.image(-100,-100,'light');
+            light_left = this.add.tileSprite(-100, -100, 41, image.height, 'light');
+            light_right = this.add.tileSprite(-100, -100, 41, image.height, 'light');
+            light_right.setAngle(180);
+            // light_right.rotation = 180;
+
+            // graphics.clear();
+            // graphics.fillStyle(0xffffff, 1);
+            // rect = new Phaser.Geom.Rectangle(0, 0, image.width, image.height);
+            // Phaser.Geom.Rectangle.CenterOn(rect, 400, 150);  // rect.x = x - (rect.width / 2), rect.y = y - (rect.height / 2)
+            // graphics.fillRectShape(rect);
+            // graphics.setDepth(1);
+
+
+            // this.container.add(image);
+            // this.container.add(graphics);
+
+            // this.container.setCrop(0,0,0,0);
+
+            const centerX = Math.ceil(image.width / 2);
+            const centerY = Math.ceil(image.height / 2);
+
+            var eases = [
+                'Quad.easeInOut',//0
+                'Cubic.easeInOut',//1
+                'Quart.easeInOut',//2
+                'Quint.easeInOut',//3
+                'Sine.easeInOut',//4 // ng
+                'Expo.easeInOut',//5 //ng
+                'Circ.easeInOut',//6 // ng
+                'Back.easeInOut',//7 // ng
+                'Bounce.easeInOut'//8 // ng
+            ];
+
+            this.tweens.addCounter({
+                targets: image,
+                from: 1.0,
+                to: 0.0,
+                ease: eases[0],
+                duration: 3000,
+                onUpdate: function (tween, targets) {
+
+                    const x = centerX * tween.getValue();
+                    const y = 0;
+                    const w = (centerX - x) * 2;
+                    const h = image.height;
+                    image.setCrop(x, y, w, h);
+
+                    const lineX = image.x + x - centerX;
+                    const lineX2 = image.x + centerX - x;
+                    const lineY = image.y - centerY;
+                    rect = new Phaser.Geom.Rectangle(lineX, lineY, w, h);
+
+                    light_left.x = lineX - light_left.width/2;
+                    light_left.y = lineY + light_left.height/2;
+
+                    light_right.x = lineX2 + light_right.width/2;
+                    light_right.y = lineY + light_right.height/2;
+                }
+            })
+
+
+            this.tweens.addCounter({
+                targets: image,
+                from: 1.0,
+                to: 0.0,
+                ease: 'Expo.easeIn',
+                duration: 3000,
+                onUpdate: function (tween, targets) {
+                    graphics.clear();
+                    graphics.fillStyle(0xffffff, tween.getValue());
+                    graphics.fillRectShape(rect);
+                    graphics.setDepth(1);
+
+                    light_left.setAlpha(tween.getValue());
+                    light_right.setAlpha(tween.getValue());
+                }
+            })
+        }
+
+    </script>
 
 </body>
+
 </html>

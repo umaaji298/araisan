@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Making your first Phaser 3 Game - Part 3</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+
+        const config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+
+        const game = new Phaser.Game(config);
+        var count = 0;
+        var image;
+
+        function preload() {
+            this.load.image('sky', 'assets/sky.png');
+            this.load.image('ground', 'assets/platform.png');
+            this.load.image('star', 'assets/star.png');
+            this.load.image('bomb', 'assets/bomb.png');
+            this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+        }
+
+        function create() {
+            this.add.image(400, 300, 'sky');
+
+            var star = this.add.image(400, 300, 'star').setInteractive();
+
+            star.on('pointerup', loadImage, this);
+
+        }
+
+        function update() { }
+
+        function loadImage() {
+            count++;
+            console.log('call', count);
+
+            this.load.once('complete', addSprites, this);
+
+            switch (count) {
+                case 1: {
+                    this.load.image('pic', 'https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/medias%2F4388bd6d-81a6-4a28-a4ed-3dc72cb7d0c6?alt=media');
+                    this.load.start();
+                    break;
+                }
+                case 2: {
+                    image.destroy();
+                    this.textures.remove('pic');
+                    this.load.image('pic', 'https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/medias%2Fabbacbcf-03f3-4664-b5ee-66606c4caf62?alt=media');
+                    this.load.start();
+
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+        }
+
+        function addSprites() {
+            image = this.add.image(Phaser.Math.Between(0, 800), Phaser.Math.Between(0, 600), 'pic');
+        }
+
+    </script>
+
+</body>
+
+</html>
