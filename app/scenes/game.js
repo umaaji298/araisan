@@ -12,7 +12,7 @@ export default class Game extends Phaser.Scene {
     this.ev1data = [
       ["0", "人型の", "蟲型の", "不定形の", "4", "神となった", "\\G人の", "機械の", "太った", "植物の", "影のような", "小さい", "巨大な", "時を止めてくる", "あなたは１４に向かった", "異質の", "古い書物に描かれた", "夜の", "頭が\\G個ある", "ふたなりの", "水中の", "空飛ぶ", "発情した", "ひからびた", "首だけの", "閉じ込められた", "フレンズ化した", "黒く塗りつぶされた", "血まみれの"],
       ["0", "となりの", "ＴＳした", "ゼラチナス", "4", "狂気に飲まれた", "多脚の", "メスガキの", "健康的に日焼けした", "箱化した", "極限まで鍛えた", "デパートの", "奇妙な仮面を付けた", "ひどい匂いのする", "生まれたての", "有り金を溶かした", "\\G等身の", "あお向けに倒れた", "君の", "何かに操られた", "概念となった", "プロ野球選手の", "噛むとほろ苦い", "君を殴った", "脳を交換した", "妹の", "生まれたての", "爆発寸前の", "召喚に応じた"],
-      ["0", "音声だけの", "ケイ素生命の", "致命傷を負った", "4", "毛だらけの", "RTAの", "セガ信者の", "サメの", "シュレーディンガーの", "石化した", "最後の生き残りの", "ラビ化した", "外宇宙の", "ゲーミング", "心の", "\\G英雄の", "野生を取り戻した", "発情期の", "乳房が\\G個ある", "朝\\G時", "現場の", "モトラド乗りの", "世界を救った", "配信中の", "電動の", "むちむちの", "壁尻の", "にこにこした"],
+      ["0", "音声だけの", "ケイ素生命の", "致命傷を負った", "4", "毛だらけの", "ＲＴＡの", "セガ信者の", "サメの", "シュレーディンガーの", "石化した", "最後の生き残りの", "ラビ化した", "外宇宙の", "ゲーミング", "心の", "\\G英雄の", "野生を取り戻した", "発情期の", "乳房が\\G個ある", "朝\\G時", "現場の", "モトラド乗りの", "世界を救った", "配信中の", "電動の", "むちむちの", "壁尻の", "にこにこした"],
     ];
     this.ev2data = [
       ["無が", "みんみが", "オオカワウソが", "ガチおじが", "死が", "怪異が", "おじぞうさんが", "かたまりが", "人形が", "全裸の異性が", "としあきが", "地下ラッコが", "コツメカワウソが", "荒耶宗蓮が", "メリーさんが", "探索者が", "ギンギツネが", "アライさんが", "フェネックが", "きんたまが", "モブフレンズが", "肉食ちゃんが", "草食ちゃんが", "木魚マンが", "お稲荷様が", "目玉が", "ネズミボトルが", "待機カワウソが", "じごくボスが"],
@@ -108,6 +108,16 @@ export default class Game extends Phaser.Scene {
       this.evDisplay.forEach(disp => {
         disp.destroy();
       });
+
+      //evImage消去
+      if (this.hasOwnProperty('evImage')) {
+        this.evImage.destroy();
+        this.textures.remove('evImage');
+        this.light_l.destroy();
+        this.light_r.destroy();
+        this.flashGraphics.destroy();
+      }
+
       //locksw解除
       unlockSwitches(this);
       //menu再表示
@@ -546,18 +556,129 @@ function startFloorEvent(scene) {
       scene.poneSE.play();
     });
     scene.poneSE.once('complete', () => {
+      if (scene.commands.fileName != "") {
+        viewEventImage(scene);
+      }
+
       scene.dooropenSE.play();
-    });
+    }, scene);
     scene.dooropenSE.once('complete', () => {
       console.log('to next scene');
       // console.log(scene);
-      scene.scene.launch('floorEvent', { commands: scene.commands });
+
+      const delay = (scene.commands.fileName != "") ? 2000 : 0;
+
+      const eventData = {
+        commands: scene.commands.data,
+        delay
+      }
+
+      scene.scene.launch('floorEvent', eventData);
     }, scene)
 
     scene.evMoveBGM.play();
     //ここで入力が確定する : todo overload sw input
     scene.commands = tcrp.toCommands(scene, getFloorData(scene));
+    //debug
+    //const filename = "900x900.png"
+    // const filename = "4388bd6d-81a6-4a28-a4ed-3dc72cb7d0c6"
+    //scene.commands.fileName = filename;
+
+    if (scene.commands.fileName != "") {
+      scene.load.image('evImage', `https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/medias%2F${scene.commands.fileName}?alt=media`);
+      scene.load.start();
+    }
   }
+}
+
+// event image
+function viewEventImage(scene) {
+  //todo this.load 'complete' check
+
+  // 本体画像
+  scene.evImage = scene.add.image(280, 310, 'evImage');
+  const image = scene.evImage;
+
+  if(image.width >= image.height){
+    if(image.width > 480){
+      // scale
+      image.setScale(480/image.width);
+    }
+  }else{
+    if(image.height > 520){
+      // scale
+      image.setScale(520/image.height);
+    }
+  }
+  image.setCrop(0, 0, 0, 0); // all cropped
+
+  const centerX = Math.ceil(image.width / 2);
+  const centerY = Math.ceil(image.height / 2);
+
+  const dispX = Math.ceil(image.displayWidth / 2);
+  const dispY = Math.ceil(image.displayHeight / 2);
+
+  // //左右ライト
+  scene.light_l = scene.add.tileSprite(-100, -100, 41, image.displayHeight, 'light');
+  scene.light_r = scene.add.tileSprite(-100, -100, 41, image.displayWidth, 'light');
+
+  const light_l = scene.light_l;
+  const light_r = scene.light_r;
+  light_r.setAngle(180);
+
+  //フラッシュ
+  let rect;
+  scene.flashGraphics = scene.add.graphics();
+  const flashGraphics = scene.flashGraphics;
+
+  scene.tweens.addCounter({
+    targets: image,
+    from: 1.0,
+    to: 0.0,
+    ease: 'Quad.easeInOut',
+    duration: 3000,
+    onUpdate: function (tween, targets) {
+
+      const x = centerX * tween.getValue();
+      const y = 0;
+      const w = (centerX - x) * 2;
+      const h = image.height;
+      image.setCrop(x, y, w, h);
+
+      // todo scale計算必要
+      const scaledX = dispX * tween.getValue();
+      const lineX = image.x - dispX + scaledX;
+      const lineY = image.y - dispY;
+      const lineX2 = image.x + dispX - scaledX;
+      const scaledW = (dispX - scaledX) * 2;
+      const scaledH = image.displayHeight;
+      rect = new Phaser.Geom.Rectangle(lineX, lineY, scaledW, scaledH);
+
+      light_l.x = lineX - light_l.width / 2;
+      light_l.y = lineY + light_l.height / 2;
+
+      light_r.x = lineX2 + light_r.width / 2;
+      light_r.y = lineY + light_r.height / 2;
+    }
+  });
+
+  scene.tweens.addCounter({
+    targets: image,
+    from: 1.0,
+    to: 0.0,
+    ease: 'Expo.easeIn',
+    duration: 3000,
+    onUpdate: function (tween, targets) {
+      flashGraphics.clear();
+      flashGraphics.fillStyle(0xffffff, tween.getValue());
+      flashGraphics.fillRectShape(rect);
+      flashGraphics.setDepth(1);
+
+      light_l.setAlpha(tween.getValue());
+      light_r.setAlpha(tween.getValue());
+    }
+  })
+
 }
 
 //special event

@@ -34,7 +34,7 @@ export function scriptsToEvents(script) {
   const fixY = (10 - strings.length) * 20 + baseY;
 
   const commands = new Array();
-  commands.push([0, 'preText', 'エレベータを降りた\nとしあきは見た…']);
+  commands.push([0, 'roundText', 'エレベータを降りた\nとしあきは見た…', 280, 77, 20, 10]);
 
   let wait = 3000; // 次の文章表示時間 : 
 
@@ -65,7 +65,7 @@ export function scriptsToEvents(script) {
   }
 
   // 次へボタン表示
-  commands.push([wait, 'next']);
+  commands.push([wait, 'next', '次の階へ', 400, 553, 20, 16]);
 
   return commands;
 }

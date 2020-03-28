@@ -1,6 +1,10 @@
 import * as util from './etc';
 
 export function toCommands(scene, data) {
+  let commands = {
+    data: "",
+    fileName: ""
+  }
 
   console.log('convert command');
   //console.log('floordata', data);
@@ -19,6 +23,9 @@ export function toCommands(scene, data) {
     //debug
     //event = { "text": "こんにちは！\\G,ハロー\\C,タグのテスト\\G", "idString": "19,12,Г,Ж", "imgUrl": "", "floorName": "君の半身", "author": "としあき！" }
     script = event.text;
+    if(event.hasOwnProperty('fileName')){
+      commands.fileName = event.fileName;
+    }
   } else {
     //normal event
     const select = floorRand.split('');
@@ -35,8 +42,11 @@ export function toCommands(scene, data) {
   } while (tagCheck(script));
 
   //RCRPに変換
-  let commands = util.scriptsToEvents(script, checkedCode);
-  return spCommandsFix(commands, checkedCode);
+  let commands_text = util.scriptsToEvents(script, checkedCode);
+
+  commands.data = spCommandsFix(commands_text, checkedCode);
+
+  return commands
 }
 
 function checkEvent(code, scene) {
