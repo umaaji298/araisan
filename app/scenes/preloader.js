@@ -29,7 +29,7 @@ export default class Preloader extends Phaser.Scene {
     progressBox.fillRect(240, 270, 320, 50);
 
     this.load.on('progress', (progress) => {
-      console.log(progress);
+      // console.log(progress);
 
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
@@ -38,7 +38,7 @@ export default class Preloader extends Phaser.Scene {
 
     //load comp
     this.load.on('complete', () => {
-      console.log('loadend');
+      // console.log('loadend');
       progressBar.destroy();
       progressBox.destroy();
       this.load.off('progress');

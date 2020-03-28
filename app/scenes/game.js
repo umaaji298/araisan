@@ -1,5 +1,5 @@
 import ShakePosition from 'phaser3-rex-plugins/plugins/shakeposition.js';
-import * as util from '../util'
+import * as util from '../util/etc'
 export default class Game extends Phaser.Scene {
 
   constructor() {
@@ -522,7 +522,6 @@ function startFloorEvent(scene) {
     scene.dooropenSE.once('complete', () => {
       console.log('to next scene');
       //ここで入力が確定する : overload sw input 対応
-      console.log(scene);
       scene.scene.launch('floorSelector', getFloorData(scene));
     },scene)
 

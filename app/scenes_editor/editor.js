@@ -1,6 +1,6 @@
 import TCRP from 'phaser3-rex-plugins/plugins/tcrp.js';
 import TcrpAction from '../class/tcrpAction';
-import * as util from '../util';
+import * as util from '../util/etc';
 
 export default class Editor extends Phaser.Scene {
 
