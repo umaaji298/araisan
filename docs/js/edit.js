@@ -11,13 +11,14 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 
   /** fileupload : image表示 */
-  // document.getElementById('fileupload').addEventListener('change', (event) => {
-  //   console.log(event);
-  //   file = event.target.files[0]
-  //   var image = document.createElement('img');
-  //   image.src = window.URL.createObjectURL(file);
-  //   $('#imagePrev').append(image);
-  // })
+  document.getElementById('fileupload').addEventListener('change', (event) => {
+    console.log(event);
+    file = event.target.files[0];
+    console.log(file);
+    // var image = document.createElement('img');
+    // image.src = window.URL.createObjectURL(file);
+    // $('#imagePrev').append(image);
+  })
 
   /** すべて消す */
   $('#allClear').click(() => {
@@ -510,7 +511,8 @@ function updateModal(idString) {
 /** fileUpload */
 async function uploadFile(file) {
   const storageRef = storage.ref();
-  const filename = generateUuid();
+  const ext = file.name.split('.').pop();
+  const filename = generateUuid() + ext;
 
   await storageRef.child(`medias/${filename}`).put(file);
   return filename;
