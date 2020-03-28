@@ -42,7 +42,7 @@ export default class Editor extends Phaser.Scene {
 
     this.eventObj = this.scene.get('floorEvent');
     this.eventObj.events.once('restert', () => {
-      this.eventObj.off('restert');
+      this.eventObj.events.off('restert');
       console.log('call restert');
       this.poneSE.play();
       this.cameras.main.fadeOut(1000, 0, 0, 0);
