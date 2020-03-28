@@ -1,5 +1,5 @@
 import Preloader from './preloader.js'
 import Editor from './editor.js'
+import FloorEvent from './floorevent'
 
-export default [Preloader, Editor]
-export { Preloader, Editor }
+export default [Preloader, Editor, FloorEvent]

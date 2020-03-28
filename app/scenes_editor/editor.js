@@ -24,74 +24,93 @@ export default class Editor extends Phaser.Scene {
   create() {
     console.log('%c editor ', 'background: green; color: white; display: block;');
 
+    //special var
+    var scene = this;
+
     this.cameras.main.fadeIn(1000, 0, 0, 0);
 
     this.randDatas = getRandData({}, this);
 
-    //TCRP event
-    this.myCmds = new TcrpAction(this);
-    this.player = new TCRP.Player(this, {});
-
     let commands = readEventsText(this);// form入力値
 
     this.poneSE = this.sound.add('pone');
+    this.dooropenSE = this.sound.add('dooropen');
 
     //panel
     const panel = this.add.image(660, 300, 'panel');
-    panel.alpha = 0.5;
-    panel.setInteractive();
 
-    //fade用の待ち時間を入れる？
-    //commands.unshift([2000,'print','wait']);
 
-    //背景トーンダウン
-    // todo scene - backgroundtypeなので動かない
-
-    //next button 
-    this.next = this.add.image(400, 553, 'next');
-    this.next.setScale(0.8, 0.8);
-    this.next.name = "next";
-    this.next.setInteractive();
-    this.next.setVisible(false);
-
-    this.next.on('pointerup', function () {
+    this.eventObj = this.scene.get('floorEvent');
+    this.eventObj.events.once('restert', () => {
+      this.eventObj.off('restert');
+      console.log('call restert');
       this.poneSE.play();
       this.cameras.main.fadeOut(1000, 0, 0, 0);
       this.time.delayedCall(1000, () => {
-        //commands = readEventsText(this);
-        //tcrpPlay(this, commands);
-        this.player.stop();
-        this.scene.restart();
-      }, [], this);
+        this.evImage.destroy();
+        this.textures.once('removetexture', () => {
+          console.log('wahahahaha');
+          this.scene.restart();
+        });
+        this.textures.remove('evImage');
+      })
+    });
 
-    }, this);
+    if (commands.file === null) {
+      const eventData = {
+        commands: commands.data,
+        delay: 0,
+      }
+      this.scene.launch('floorEvent', eventData);
 
+    } else {
+      //画像の読み出し
+      const reader = new FileReader();
+      reader.onload = function () {
+        scene.textures.once('onload', () => {
+          console.log('texture load end');
+          scene.events.emit('imageEvent');
+        })
+        scene.textures.addBase64('evImage', reader.result);
+      }
+      reader.readAsDataURL(commands.file);
 
+      this.events.once('imageEvent', () => {
+        console.log('call');
+        viewEventImage(scene);
+        scene.dooropenSE.play();
+      });
 
-    tcrpPlay(this, commands);
+      this.dooropenSE.once('complete', () => {
+        const eventData = {
+          commands: commands.data,
+          delay: 2000,
+        }
+        this.scene.launch('floorEvent', eventData);
+      });
+    }
   }
 }
 
 function readEventsText(scene) {
+  let retObj = {
+    data: "",
+    file: null
+  }
+
   //formより読み込み
   const event_raw = document.getElementById('eventText').value;
   let script = event_raw.split('\n').join(',')
   console.log('evet text', script);
   script = tagReplace(script, scene);
 
-  return util.scriptsToEvents(script);
-}
+  retObj.data = util.scriptsToEvents(script);
 
-function tcrpPlay(scene, commands) {
-  scene.player
-    .load(commands, scene.myCmds, {
-      // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
-      dtMode: 1           // 'abs'|'absolute'|0|'inc'|'increment'|1
-    })
-    .start()
-    .on('complete', function () {
-      console.log(scene.player.now * 0.001);
-    });
+  //image
+  const fileDatas = document.getElementById('fileupload').files;
+  retObj.file = fileDatas.length > 0 ? fileDatas[0] : null;
+
+  return retObj
 }
 
 function getRandData(floorRand, scene) {
@@ -131,4 +150,94 @@ function replacer(match) {
     }
   }
   return replacedStr;
+}
+
+// event image
+function viewEventImage(scene) {
+  //todo this.load 'complete' check
+
+  // 本体画像
+  scene.evImage = scene.add.image(280, 310, 'evImage');
+  const image = scene.evImage;
+
+  if (image.width >= image.height) {
+    if (image.width > 480) {
+      // scale
+      image.setScale(480 / image.width);
+    }
+  } else {
+    if (image.height > 520) {
+      // scale
+      image.setScale(520 / image.height);
+    }
+  }
+  image.setCrop(0, 0, 0, 0); // all cropped
+
+  const centerX = Math.ceil(image.width / 2);
+  const centerY = Math.ceil(image.height / 2);
+
+  const dispX = Math.ceil(image.displayWidth / 2);
+  const dispY = Math.ceil(image.displayHeight / 2);
+
+  // //左右ライト
+  scene.light_l = scene.add.tileSprite(-100, -100, 41, image.displayHeight, 'light');
+  scene.light_r = scene.add.tileSprite(-100, -100, 41, image.displayHeight, 'light');
+
+  const light_l = scene.light_l;
+  const light_r = scene.light_r;
+  light_r.setAngle(180);
+
+  //フラッシュ
+  let rect;
+  scene.flashGraphics = scene.add.graphics();
+  const flashGraphics = scene.flashGraphics;
+
+  scene.tweens.addCounter({
+    targets: image,
+    from: 1.0,
+    to: 0.0,
+    ease: 'Quad.easeInOut',
+    duration: 3000,
+    onUpdate: function (tween, targets) {
+
+      const x = centerX * tween.getValue();
+      const y = 0;
+      const w = (centerX - x) * 2;
+      const h = image.height;
+      image.setCrop(x, y, w, h);
+
+      // todo scale計算必要
+      const scaledX = dispX * tween.getValue();
+      const lineX = image.x - dispX + scaledX;
+      const lineY = image.y - dispY;
+      const lineX2 = image.x + dispX - scaledX;
+      const scaledW = (dispX - scaledX) * 2;
+      const scaledH = image.displayHeight;
+      rect = new Phaser.Geom.Rectangle(lineX, lineY, scaledW, scaledH);
+
+      light_l.x = lineX - light_l.width / 2;
+      light_l.y = lineY + light_l.height / 2;
+
+      light_r.x = lineX2 + light_r.width / 2;
+      light_r.y = lineY + light_r.height / 2;
+    }
+  });
+
+  scene.tweens.addCounter({
+    targets: image,
+    from: 1.0,
+    to: 0.0,
+    ease: 'Expo.easeIn',
+    duration: 3000,
+    onUpdate: function (tween, targets) {
+      flashGraphics.clear();
+      flashGraphics.fillStyle(0xffffff, tween.getValue());
+      flashGraphics.fillRectShape(rect);
+      flashGraphics.setDepth(1);
+
+      light_l.setAlpha(tween.getValue());
+      light_r.setAlpha(tween.getValue());
+    }
+  })
+
 }

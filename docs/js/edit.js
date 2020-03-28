@@ -11,19 +11,20 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 
   /** fileupload : image表示 */
-  document.getElementById('fileupload').addEventListener('change', (event) => {
-    console.log(event);
-    file = event.target.files[0];
-    console.log(file);
+  // document.getElementById('fileupload').addEventListener('change', (event) => {
+  //   console.log(event);
+  //   file = event.target.files[0];
+  //   console.log(file);
     // var image = document.createElement('img');
     // image.src = window.URL.createObjectURL(file);
     // $('#imagePrev').append(image);
-  })
+  // })
 
   /** すべて消す */
   $('#allClear').click(() => {
     $('#eventText').val("");
     $('#floorname').val("");
+    $('#fileupload').val("");
     $('#creator').val("");
   });
 

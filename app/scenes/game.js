@@ -86,7 +86,7 @@ export default class Game extends Phaser.Scene {
 
     this.evMoveBGM = this.sound.add('evmove');
     this.poneSE = this.sound.add('pone');
-    this.dooropenSE = this.sound.add('dooropen')
+    this.dooropenSE = this.sound.add('dooropen');
 
     /**
      * Scene events
@@ -564,10 +564,8 @@ function startFloorEvent(scene) {
     }, scene);
     scene.dooropenSE.once('complete', () => {
       console.log('to next scene');
-      // console.log(scene);
 
       const delay = (scene.commands.fileName != "") ? 2000 : 0;
-
       const eventData = {
         commands: scene.commands.data,
         delay
@@ -620,7 +618,7 @@ function viewEventImage(scene) {
 
   // //左右ライト
   scene.light_l = scene.add.tileSprite(-100, -100, 41, image.displayHeight, 'light');
-  scene.light_r = scene.add.tileSprite(-100, -100, 41, image.displayWidth, 'light');
+  scene.light_r = scene.add.tileSprite(-100, -100, 41, image.displayHeight, 'light');
 
   const light_l = scene.light_l;
   const light_r = scene.light_r;
