@@ -132,7 +132,7 @@ firebase.auth().signInAnonymously()
     //初回はDBに登録する
     // see : https://firebase.google.com/docs/reference/js/firebase.auth.Auth?hl=ja#sign-inanonymously
     if (userCredential.additionalUserInfo.isNewUser) {
-      console.log('this is new user');
+      //console.log('this is new user');
 
       // DB更新
       let ref = db.collection("users").doc(userCredential.user.uid);
@@ -154,7 +154,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     isAnonymous = user.isAnonymous;
     uid = user.uid;
 
-    console.log('loggedin', isAnonymous, uid);
+    //console.log('loggedin', isAnonymous, uid);
   } else {
     // User is signed out.
     // ...
@@ -166,7 +166,7 @@ firebase.auth().onAuthStateChanged(function (user) {
  */
 $('#submit').click(async () => {
 
-  console.log('call submit');
+  //console.log('call submit');
 
   const input = createInputObj();
 
@@ -196,8 +196,8 @@ $('#submit').click(async () => {
       alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:20')
       return;
     }
-    console.log(validated.creator, validated.floorName, idObj.id, idObj.idString);
-    console.log(validated.file);
+    //console.log(validated.creator, validated.floorName, idObj.id, idObj.idString);
+    //console.log(validated.file);
 
     //modal呼び出し
     viewModal();
@@ -244,7 +244,7 @@ $('#submit').click(async () => {
 
     updateModal(idObj.idString);
 
-    console.log('done');
+    //console.log('done');
   }
   else {
     alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:40');
@@ -326,7 +326,7 @@ function validateInputs(input) {
     return validation;
   }
 
-  console.log(input.creator.length, input.floorName.length);
+  //console.log(input.creator.length, input.floorName.length);
   if (input.creator.length > 24 || input.floorName.length > 24) {
     validation.result = false;
     validation.reason = 'フロア名・作成者は24文字以下です';

@@ -4,3 +4,4 @@ firestore.rules
 storage.rules
 owner.json
 firebase-debug.log
+redlist.json
