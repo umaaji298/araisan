@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-159940516-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-159940516-1');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no,user-scalable=no">
+  <meta name="description" content="アライさんマンションのゲームです。最近のブラウザで動作します。これはHtml5とPhaserによって作られています。">
+  <meta name="author" content="toshiaki(umaaji298)">
+  <link rel="icon" sizes="any" href="icon/icon.svg" type="image/svg+xml">
+
+  <title>アライさんマンション - フロア作成</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <link href="css/faq.css" rel="stylesheet">
+</head>
+
+<body>
+  <main role="main" class="container-main text-center mb-5">
+    <div class="text-center top">
+      <a class="navbar-brand-image" href="/araisan/index.html"><img src="icon/icon.svg" width="48" height="48"></a>
+      <span class="text-light">アライさんマンション</span>
+    </div>
+
+
+    <section class="accordion-section clearfix mt-3" aria-label="Question Accordions">
+      <div class="container">
+
+        <h2>ご質問と回答</h2>
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <div class="panel-heading p-3 mb-3" role="tab" id="heading0">
+              <h4 class="panel-title text-left">
+                <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion"
+                  href="#collapse0" aria-expanded="true" aria-controls="collapse0">
+                  初めまして、エレベーターゲームを基にした絵を描かせて頂いております！
+                  pixvに絵の投稿をしたいのですが、文章など画像の使用は可能でしょうか？
+                  もしよりしければご検討よろしくお願いします。
+                </a>
+              </h4>
+            </div>
+            <div id="collapse0" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading0">
+              <div class="panel-body px-3 mb-4 text-left">
+                <ul>
+                <li>文字イベントについては問題ないです。</li>
+                <li>エレベーターパネルは管理人(umaaji298)が新規に描き起こしていますので必要ならそちらもOKです</li>
+                <li>（補足）画像つきイベント（二次裏の手書きなどのやつ）は権利関係が難しいのでやめたほうが無難でしょう…。</li>
+                <li>（補足）なんか怒る人が居たらあまやっときます。</li>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading p-3 mb-3" role="tab" id="heading1">
+              <h4 class="panel-title text-left">
+                <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion"
+                  href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                  フロア作成をしようとした所
+                  ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:40
+                  と表示され作成出来ません。面白そうな企画是非参加させて頂きたいので、大変だとは思いますが可能であれば対応をお願いします。
+                </a>
+              </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
+              <div class="panel-body px-3 mb-4 text-left">
+                <p>企画参加してくれてありがとう！code40はサーバーに保存する処理がダメな時に発生します。</p>
+                <p>こちらの環境で2020/03/29にて普通に投稿できたので、幾つか原因があるかも…以下を確認してみて！</p>
+                <ul>
+                  <li>不思議な力でダメだった…：タイミング良くイカれてたのかも。時間を置いてもう一度試してみて！</li>
+                  <li>ブラウザが原因：ブラウザはChromeやSafariの最新版じゃないと多分無理！こう見えても最新技術使いまくりなんだ。</li>
+                  <li>アドブロックが原因：お試しで解除してみて！広告などは無いよー。</li>
+                  <li>それでも動かんぞ：code 40 が発生している場合に警告を出すようにエディタを改造します。しばし待ってね。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </section>
+
+    <div class="p-3">
+      <p><a href="/araisan/">戻る</a></p>
+    </div>
+
+    <nav id="footnavi" class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Links</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="https://github.com/umaaji298/araisan" target="_blank">🎉License</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="https://forms.gle/mVBXgXKBbfBtYa5q8" target="_blank">😸連絡フォーム</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href=http://www.2chan.net target="_blank">🌱ふたば★ちゃんねる</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="https://umaaji298.github.io/rituRPG/" target="_blank">🐈りつねぇ！RPG</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script rel="javascript" type="text/javascript" src="editor.js"></script>
+</body>
+
+</html>

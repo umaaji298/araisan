@@ -1,0 +1,65 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.container-main{
+  width:100%;
+}
+
+.news{
+  height:3.3em;
+  text-align: center;
+  overflow-y: scroll;
+}
+
+.news-main{
+  display: inline-block;
+  background-color: lightsteelblue;
+  text-align: left;
+}
+
+.news-item{
+  margin:0;
+  padding:0;
+}
+
+.top{
+  background-color: #343a40;
+}
+.bottom{
+  background-color: #343a40;
+}
+
+
+h2 {
+  font-family: Arial, Verdana;
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: #091f2f;
+  text-transform: uppercase;
+}
+.accordion-section .panel-default > .panel-heading {
+  border: 0;
+  background: #f4f4f4;
+  padding: 0;
+}
+.accordion-section .panel-default .panel-title a {
+  display: block;
+  font-style: italic;
+  font-size: 1.2rem;
+}
+.accordion-section .panel-default .panel-title a:after {
+  font-style: normal;
+  font-size: 2rem;
+  content: "📖";
+  color: #1f7de2;
+  float: right;
+  margin-top: -12px;
+}
+.accordion-section .panel-default .panel-title a.collapsed:after {
+  content: "💡";
+}
+.accordion-section .panel-default .panel-body {
+  font-size: 1.2rem;
+}
