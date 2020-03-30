@@ -83,6 +83,7 @@ export default class Game extends Phaser.Scene {
     this.gaugeSE = this.sound.add('gauge');
     this.menuSE = this.sound.add('menuse');
     this.menuSE.setVolume(0.4);
+    this.autoSE = this.sound.add('autoFloor');
 
     this.evMoveBGM = this.sound.add('evmove');
     this.poneSE = this.sound.add('pone');
@@ -129,6 +130,16 @@ export default class Game extends Phaser.Scene {
       destructor_game(this);
       this.scene.start('gameover');
     }, this);
+
+    this.events.on('autoFloor', (id) => {
+      // console.log('autofloor call', id);
+      if (this.inputNo.length > 0) {
+        //自動入力できない
+        this.menuSE.play();
+      } else {
+        autoEvent_view(this, id);
+      }
+    })
 
     //create end
     // destructor_game(this);
@@ -516,6 +527,8 @@ function getFloorData(scene) {
   const fixgauge = ('00' + scene.gauge.step).slice(-2);
   code = code + scene.arraw1.step + scene.arraw2.step + fixgauge;
 
+  // console.log('floorcode-main', code);
+
   return {
     inputNo: scene.inputNo,
     arraws: [scene.arraw1.step, scene.arraw2.step], // reversed
@@ -538,7 +551,7 @@ function startFloorEvent(scene) {
   const menuScene = scene.scene.get('menu');
   menuScene.events.emit('evmove');
 
-  //暫定 closecheck
+  //ここで入力が確定する : todo overload sw input
   let floorData = getFloorData(scene)
   if (checkClose(floorData.code)) {
     // close中
@@ -548,7 +561,7 @@ function startFloorEvent(scene) {
     } else {
       floorData.code = "999999990000"
     }
-    scene.commands = tcrp.toCommands(scene, getFloorData(scene));
+    scene.commands = tcrp.toCommands(scene, floorData);
     scene.scene.launch('floorEvent', { commands: scene.commands });
   } else {
     //set event chain
@@ -575,8 +588,7 @@ function startFloorEvent(scene) {
     }, scene)
 
     scene.evMoveBGM.play();
-    //ここで入力が確定する : todo overload sw input
-    scene.commands = tcrp.toCommands(scene, getFloorData(scene));
+    scene.commands = tcrp.toCommands(scene, floorData);
     //debug
     //const filename = "900x900.png"
     // const filename = "4388bd6d-81a6-4a28-a4ed-3dc72cb7d0c6"
@@ -597,15 +609,15 @@ function viewEventImage(scene) {
   scene.evImage = scene.add.image(280, 310, 'evImage');
   const image = scene.evImage;
 
-  if(image.width >= image.height){
-    if(image.width > 480){
+  if (image.width >= image.height) {
+    if (image.width > 480) {
       // scale
-      image.setScale(480/image.width);
+      image.setScale(480 / image.width);
     }
-  }else{
-    if(image.height > 520){
+  } else {
+    if (image.height > 520) {
       // scale
-      image.setScale(520/image.height);
+      image.setScale(520 / image.height);
     }
   }
   image.setCrop(0, 0, 0, 0); // all cropped
@@ -679,17 +691,94 @@ function viewEventImage(scene) {
 
 }
 
+//menu event
+function autoEvent_view(scene, id) {
+  lockSwitches(scene);
+
+  const idArray = new Array();
+  const idNumArray = new Array();
+
+  //data setup
+  for (let i = 0; i < id.length - 1; i += 2) {
+    const id_s = id.substring(i, i + 2);
+    idArray.push(id_s);
+    idNumArray.push(Number(id_s));
+  }
+
+  //sw
+  scene.switches[idNumArray[0]].anims.nextFrame();
+  scene.switches[idNumArray[1]].anims.nextFrame();
+  scene.switches[idNumArray[2]].anims.nextFrame();
+  scene.switches[idNumArray[3]].anims.nextFrame();
+
+  //display
+  scene.evDisplay.push(scene.add.sprite(595, 75, 'textures', `evfont/${idNumArray[0]}.png`));
+  scene.evDisplay.push(scene.add.sprite(613, 75, 'textures', 'evfont/haifun.png'));
+  scene.evDisplay.push(scene.add.sprite(631, 75, 'textures', `evfont/${idNumArray[1]}.png`));
+  scene.evDisplay.push(scene.add.sprite(649, 75, 'textures', 'evfont/haifun.png'));
+  scene.evDisplay.push(scene.add.sprite(667, 75, 'textures', `evfont/${idNumArray[2]}.png`));
+  scene.evDisplay.push(scene.add.sprite(685, 75, 'textures', 'evfont/haifun.png'));
+  scene.evDisplay.push(scene.add.sprite(703, 75, 'textures', `evfont/${idNumArray[3]}.png`));
+
+  if (id.length > 8) {
+    //rank2 : set rsw
+    const rswArray = idArray[4].split('');
+
+    let step_0 = Number(rswArray[0]);
+    let step_1 = Number(rswArray[1]);
+
+    // rsw3の設定 : rswのstep状態から逆算する
+    // step1が通常0,反転1 / step0が通常0,反転2 
+    const step_2_list = [3, 5, 6, 7];
+    let step_2_index = 0;
+
+    //rsw1 : rsw1が優先（パネル表示上の上）
+    const step_1isRev = step_1 > 3 ? true : false;
+    if (step_1isRev) {
+      step_1 = step_1 - 4;
+      step_2_index += 1;
+    }
+
+    //rsw0 : rsw0があと（パネル表示上の下）
+    const step_0isRev = step_0 > 3 ? true : false;
+    if (step_0isRev) {
+      step_0 = step_0 - 4;
+      step_2_index += 2;
+    }
+
+    scene.rswitches[1].step = step_0; // 表示が反転している
+    scene.rswitches[0].step = step_1;
+    scene.rswitches[2].step = step_2_list[step_2_index];
+    setRotarySw(scene);
+    setArraw(scene);
+  }
+
+  if (id.length > 10) {
+    //gauge移動
+    scene.gauge.step = idNumArray[5];
+    setGauge(scene);
+  }
+
+  scene.inputNo = [idArray[0], idArray[1], idArray[2], idArray[3]];
+
+  scene.rswSE.once('complete', () => {
+    // scene.autoSE.play();
+    startFloorEvent(scene);
+  })
+  scene.rswSE.play();
+}
+
 //special event
 function all14event_view(scene) {
   lockSwitches(scene);
 
-  scene.add.sprite(595, 75, 'textures', `evfont/14.png`);
-  scene.add.sprite(613, 75, 'textures', 'evfont/haifun.png');
-  scene.add.sprite(631, 75, 'textures', `evfont/14.png`);
-  scene.add.sprite(649, 75, 'textures', 'evfont/haifun.png');
-  scene.add.sprite(667, 75, 'textures', `evfont/14.png`);
-  scene.add.sprite(685, 75, 'textures', 'evfont/haifun.png');
-  scene.add.sprite(703, 75, 'textures', `evfont/14.png`);
+  scene.evDisplay.push(scene.add.sprite(595, 75, 'textures', `evfont/14.png`));
+  scene.evDisplay.push(scene.add.sprite(613, 75, 'textures', 'evfont/haifun.png'));
+  scene.evDisplay.push(scene.add.sprite(631, 75, 'textures', `evfont/14.png`));
+  scene.evDisplay.push(scene.add.sprite(649, 75, 'textures', 'evfont/haifun.png'));
+  scene.evDisplay.push(scene.add.sprite(667, 75, 'textures', `evfont/14.png`));
+  scene.evDisplay.push(scene.add.sprite(685, 75, 'textures', 'evfont/haifun.png'));
+  scene.evDisplay.push(scene.add.sprite(703, 75, 'textures', `evfont/14.png`));
 
   //rsw移動
   scene.rswSE.play();

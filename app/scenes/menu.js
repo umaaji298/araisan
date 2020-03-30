@@ -29,7 +29,7 @@ export default class Menu extends Phaser.Scene {
 
       header: this.rexUI.add.label({
         // background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
-        text: this.add.text(0, 0, 'ランダムに表示'),
+        text: this.add.text(0, 0, 'ランダムに表示 / クリックで自動入力'),
         align: 'center',
         space: {
           // left: 20,
@@ -106,6 +106,7 @@ export default class Menu extends Phaser.Scene {
         cellContainer.getElement('text').setText(item.text); // Set text of text object
         cellContainer.getElement('icon').setFillStyle(item.color); // Set fill color of round rectangle object
         cellContainer.getElement('background').setStrokeStyle(2, 0xffffff).setDepth(0);
+        cellContainer.id = item.id;
         return cellContainer;
       },
 
@@ -115,21 +116,26 @@ export default class Menu extends Phaser.Scene {
     //.drawBounds(this.add.graphics(), 0xff0000);
 
     this.gridTable
-      .on('cell.over', function (cellContainer, cellIndex) {
-        cellContainer.getElement('background')
-          .setStrokeStyle(2, 0xaaaaaa)
-          .setDepth(1);
-        // console.log(cellContainer);
-      }, this)
-      .on('cell.out', function (cellContainer, cellIndex) {
-        cellContainer.getElement('background')
-          .setStrokeStyle(2, 0xffffff)
-          .setDepth(0);
-      }, this)
+      .on('cell.click', (cellContainer, cellIndex) => {
+        // console.log(cellContainer.id);
+        this.eventObj.events.emit('autoFloor',cellContainer.id)
+      });
+    // .on('cell.over', function (cellContainer, cellIndex) {
+    //   cellContainer.getElement('background')
+    //     .setStrokeStyle(2, 0xaaaaaa)
+    //     .setDepth(1);
+    //   // console.log(cellContainer);
+    // }, this)
+    // .on('cell.out', function (cellContainer, cellIndex) {
+    //   cellContainer.getElement('background')
+    //     .setStrokeStyle(2, 0xffffff)
+    //     .setDepth(0);
+    // }, this)
+
+    this.eventObj = this.scene.get('game');
 
     this.events.on('evmove', () => {
       console.log('call evmove');
-
       this.tw_1 = this.tweens.add({
         targets: this.gridTable,
         alpha: 0,
@@ -175,6 +181,7 @@ let getItems = function (count, scene) {
     const text = `${idString} / ${ev[1].floorName}`
 
     data.push({
+      id: ev[0],
       text: text,
       color: Phaser.Math.Between(0, 0xffffff)
     });
