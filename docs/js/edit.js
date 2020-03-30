@@ -63,6 +63,9 @@ $(function () {
   $('#exampleModalCenter').on('hide.bs.modal', function (e) {
     //console.log('modal hide');
 
+    $('#eventText').val("");
+    $('#floorname').val("");
+
     //video stop
     $('#minfiary').get(0).pause();
     $('#minfiary').get(0).currentTime = 0;
