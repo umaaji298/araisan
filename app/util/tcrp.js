@@ -16,6 +16,7 @@ export function toCommands(scene, data) {
 
   const checkedCode = checkEvent(data.code, scene);
   let script;
+  let autoText = true;
 
   if (checkedCode) {
     //registered event
@@ -28,12 +29,14 @@ export function toCommands(scene, data) {
     }
   } else {
     //normal event
+    autoText = false;
     const select = floorRand.split('');
 
     script = scene.ev1data[select[0]][data.inputNo[0]] + ','
       + scene.ev2data[select[1]][data.inputNo[1]] + ','
       + scene.ev3data[select[2]][data.inputNo[2]] + ','
       + scene.ev4data[select[3]][data.inputNo[3]];
+
   }
 
   //タグを置き換え : 置き換え後にタグが発生する場合があるのでdo-while
@@ -42,7 +45,7 @@ export function toCommands(scene, data) {
   } while (tagCheck(script));
 
   //RCRPに変換
-  let commands_text = util.scriptsToEvents(script, checkedCode);
+  let commands_text = util.scriptsToEvents(script,autoText);
 
   commands.data = spCommandsFix(commands_text, checkedCode);
 

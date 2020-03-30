@@ -26,7 +26,7 @@ export function getAngleFromStep(step) {
  *      ];
  * @param {*} script 
  */
-export function scriptsToEvents(script) {
+export function scriptsToEvents(script, autoText) {
   const strings = script.split(',');
 
   const baseX = 40;
@@ -45,24 +45,27 @@ export function scriptsToEvents(script) {
     const oneScript = [wait, 'text', strings[i], baseX, fixY + (40 * i)];
 
     //next wait 
-    if (lineWord === "") {
-      wait = 100;
+    if(autoText === false){
+      wait = 3000;
+    }
+    else if (lineWord === "") {
+      wait = 500;
     } else {
       wait = 2000; // eye forcus time
-    }
 
-    switch (waittimeClass) {
-      case 0: {
-        wait += 1000;
-        break;
-      }
-      case 1: {
-        wait += 3000;
-        break;
-      }
-      case 2: {
-        wait += 4000;
-        break;
+      switch (waittimeClass) {
+        case 0: {
+          wait += 1000;
+          break;
+        }
+        case 1: {
+          wait += 3000;
+          break;
+        }
+        case 2: {
+          wait += 4000;
+          break;
+        }
       }
     }
 
