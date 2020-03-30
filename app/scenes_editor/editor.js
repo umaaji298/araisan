@@ -46,15 +46,19 @@ export default class Editor extends Phaser.Scene {
       console.log('call restert');
       this.poneSE.play();
       this.cameras.main.fadeOut(1000, 0, 0, 0);
-      this.time.delayedCall(1000, () => {
+
+      if (!this.hasOwnProperty('evImage')) {
+        this.scene.restart();
+      } else {
         this.evImage.destroy();
+
         this.textures.once('removetexture', () => {
           console.log('wahahahaha');
           this.scene.restart();
         });
         this.textures.remove('evImage');
-      })
-    });
+      }
+    })
 
     if (commands.file === null) {
       const eventData = {

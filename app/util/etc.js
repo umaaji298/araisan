@@ -44,7 +44,12 @@ export function scriptsToEvents(script) {
     const waittimeClass = Math.floor(lineWord.length / 12);
     const oneScript = [wait, 'text', strings[i], baseX, fixY + (40 * i)];
 
-    wait = 2000; // eye forcus time
+    //next wait 
+    if (lineWord === "") {
+      wait = 100;
+    } else {
+      wait = 2000; // eye forcus time
+    }
 
     switch (waittimeClass) {
       case 0: {
