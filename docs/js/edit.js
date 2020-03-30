@@ -87,7 +87,7 @@ fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/even
     //console.log(events,typeof(events));
   })
   .catch(error => {
-    alert('ネットワークエラー発生中！管理人が復旧しないと無理そうです。code:10')
+    alert('ネットワークエラー発生中。しばらく時間を置いてから試して下さい。code:10')
     console.error(error)
   });
 
@@ -99,7 +99,7 @@ function loadDiffJson() {
       //console.log(events_daily);
     })
     .catch(error => {
-      alert('ネットワークエラー発生中！管理人が復旧しないと無理そうです。code:11')
+      alert('ネットワークエラー発生中。しばらく時間を置いてから試してください。code:11')
       console.error(error)
     });
 }
@@ -145,6 +145,7 @@ firebase.auth().signInAnonymously()
     }
   })
   .catch(function (error) {
+    alert('ネットワークエラー発生中。しばらく時間を置いてから試して下さい。code:16')
     console.log(error);
   });
 
