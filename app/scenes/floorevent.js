@@ -14,6 +14,8 @@ export default class FloorEvent extends Phaser.Scene {
 
     console.log('%c floorEvent ', 'background: green; color: white; display: block;');
 
+    this.eventObjs = new Array(); // player で生成するtextureへの参照を保存
+
     this.evMoveBGM = this.sound.add('evmove');
     this.poneSE = this.sound.add('pone');
     this.dooropenSE = this.sound.add('dooropen');
@@ -21,6 +23,32 @@ export default class FloorEvent extends Phaser.Scene {
 
     this.myCmds = new TcrpAction(this);
     this.player = new TCRP.Player(this, {});
+
+    this.menu = this.add.image(40, 560, 'eye_close');
+    this.menu_close = this.add.image(40, 550, 'eye_open');
+
+    this.menu.setVisible(false);
+    this.menu.on('pointerup',()=>{
+      this.menu.setVisible(false);
+      // イベント表示消す
+      this.eventObjs.forEach(obj=>{
+        obj.setVisible(false);
+      });
+      this.cameras.main.setBackgroundColor('rgba(0,0,0,0)');
+      this.menu_close.setVisible(true);
+    })
+    this.menu.setInteractive();
+
+    this.menu_close.setVisible(false);
+    this.menu_close.on('pointerup',()=>{
+      this.menu_close.setVisible(false);
+      this.eventObjs.forEach(obj=>{
+        obj.setVisible(true);
+      });
+      this.cameras.main.setBackgroundColor('rgba(50,50,50,0.5)');
+      this.menu.setVisible(true);
+    })
+    this.menu_close.setInteractive();
 
     //next event
     this.events.once('next', () => {
@@ -52,7 +80,12 @@ export default class FloorEvent extends Phaser.Scene {
           .load(data.commands, this.myCmds, { dtMode: 1 })
           .start();
       },
-    })
+    });
+
+    this.player.on('complete', function (player) {
+      // view eye image
+      this.menu.setVisible(true);
+    },this);
 
   }
 }
@@ -62,6 +95,11 @@ function destructor(scene) {
 
   scene.textBox.removeInteractive();
   scene.textBox.destroy();
+
+  scene.menu.removeInteractive();
+  scene.menu.destroy();
+  scene.menu_close.removeInteractive();
+  scene.menu.destroy();
 
   //object削除
   scene.evMoveBGM.destroy();

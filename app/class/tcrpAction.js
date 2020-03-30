@@ -61,11 +61,14 @@ export default class TcrpAction {
 
     textBox.start(text, 0);
 
+    this.scene.eventObjs.push(textBox);
+
     return textBox;
   }
 
   text(text, x, y) {
-    this.scene.add.text(x, y, text, this.fontev);
+    const textImage = this.scene.add.text(x, y, text, this.fontev);
+    this.scene.eventObjs.push(textImage);
   }
 
   textRed(text, x, y) {
@@ -74,6 +77,7 @@ export default class TcrpAction {
 
   next(text, x, y, px, py) {
     this.scene.textBox = this.roundText(text, x, y, px, py);
+    this.scene.eventObjs.pop(); // 次へは非表示にならない
     this.scene.textBox.setInteractive();
     this.scene.textBox.once('pointerup', () => {
       console.log('click next');

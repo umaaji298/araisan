@@ -52,6 +52,8 @@ export default class Preloader extends Phaser.Scene {
     this.load.image('menu_back', 'assets/menu_back.png');
     this.load.image('arraw', 'assets/arraw.png');
     this.load.image('light', 'assets/light.png');
+    this.load.image('eye_open', 'assets/eye_open.png');
+    this.load.image('eye_close', 'assets/eye_close.png');
     this.load.multiatlas('textures', 'assets/texture/textures.json', 'assets/texture');
 
     //this.load.audio('click', 'assets/audio/click2.ogg');
