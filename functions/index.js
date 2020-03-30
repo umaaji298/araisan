@@ -35,9 +35,55 @@ exports.createEventsJsonAPI = functions
   });
 
 /**
+ * テスト用 : redlist delete function
+ */
+exports.redListAPI = functions
+  .region('asia-northeast1')
+  .https
+  .onRequest(async (request, response) => {
+
+    console.log('api redlist');
+
+    //redlist read
+    const obj = await readRedJson();
+    const redlist = obj.uids;
+
+    const collectionData = await db.collectionGroup('todayDatas').get();
+    if (collectionData.docs.length === 0) {
+      //早期return
+      return
+    }
+
+    const deleteList = new Array();
+
+    for (let i = 0; i < collectionData.docs.length; i++) {
+      const doc = collectionData.docs[i];
+      const data = doc.data();
+      const uid = data.uid;
+
+      if (redlist.includes(uid)) {
+        console.log('found', uid, doc.ref.id);
+        //document path
+        const mainpath = `/floors/v1/users/${uid}/datas/${doc.ref.id}`;
+        const todaypath = `/today/v1/users/${uid}/todayDatas/${doc.ref.id}`;
+        deleteList.push(mainpath);
+        deleteList.push(todaypath);
+      }
+    }
+
+    if (deleteList.length > 0) {
+      console.log(deleteList);
+      await deleteRedDB(deleteList);
+    }
+
+    console.log('done');
+
+    response.send("OK");
+  });
+
+/**
  * 毎日1度実行される、events.jsonを生成する
  */
-
 exports.scheduledFunction = functions
   .region('asia-northeast1')
   // .pubsub.schedule('every 5 minutes') // for test
@@ -55,6 +101,55 @@ exports.scheduledFunction = functions
 
     //events_diff.json to empty
     await createEmptyDiffJson();
+
+    console.log('done');
+
+    return null;
+  });
+
+/**
+ * 毎時実行される、redlistデータの削除
+ */
+exports.scheduledRedlistDelete = functions
+  .region('asia-northeast1')
+  // .pubsub.schedule('every 5 minutes') // for test
+  .pubsub.schedule('55 * * * *') // This will be run every day at 4:05 AM
+  .timeZone('Asia/Tokyo')
+  .onRun(async (context) => {
+
+    console.log('scheduled delete redlist');
+
+    //redlist read
+    const obj = await readRedJson();
+    const redlist = obj.uids;
+
+    const collectionData = await db.collectionGroup('todayDatas').get();
+    if (collectionData.docs.length === 0) {
+      //早期return
+      return
+    }
+
+    const deleteList = new Array();
+
+    for (let i = 0; i < collectionData.docs.length; i++) {
+      const doc = collectionData.docs[i];
+      const data = doc.data();
+      const uid = data.uid;
+
+      if (redlist.includes(uid)) {
+        console.log('found', uid, doc.ref.id);
+        //document path
+        const mainpath = `/floors/v1/users/${uid}/datas/${doc.ref.id}`;
+        const todaypath = `/today/v1/users/${uid}/todayDatas/${doc.ref.id}`;
+        deleteList.push(mainpath);
+        deleteList.push(todaypath);
+      }
+    }
+
+    if (deleteList.length > 0) {
+      console.log(deleteList);
+      await deleteRedDB(deleteList);
+    }
 
     console.log('done');
 
@@ -94,14 +189,14 @@ async function createEventsJson() {
     const doc = collectionData.docs[i]
     const data = doc.data();
     let fileName = "";
-    if(Object.prototype.hasOwnProperty.call(data, "fileName")){
+    if (Object.prototype.hasOwnProperty.call(data, "fileName")) {
       fileName = data.fileName;
-    }    
+    }
 
     const outdata = {
       text: data.text,
       idString: data.idString,
-      fileName : fileName,
+      fileName: fileName,
       floorName: data.floorName,
       author: data.author
     }
@@ -142,14 +237,14 @@ async function createDiffJson() {
     const doc = collectionData.docs[i]
     const data = doc.data();
     let fileName = "";
-    if(Object.prototype.hasOwnProperty.call(data, "fileName")){
+    if (Object.prototype.hasOwnProperty.call(data, "fileName")) {
       fileName = data.fileName;
-    }   
+    }
 
     const outdata = {
       text: data.text,
       idString: data.idString,
-      fileName : fileName,
+      fileName: fileName,
       floorName: data.floorName,
       author: data.author
     }
@@ -230,4 +325,24 @@ async function createEmptyDiffJson() {
 
   //書き込み本体 // 空データの書き込み
   await writeHtmlCore("[]", writeStream);
+}
+
+async function readRedJson() {
+  const bucket = admin.storage().bucket();
+  const file = bucket.file('redlist.json');
+
+  const data = await file.download();
+
+  return JSON.parse(data[0].toString());
+}
+
+async function deleteRedDB(deleteList) {
+  let writeBatch = db.batch();
+
+  deleteList.forEach(path => {
+    const ref = db.doc(path);
+    writeBatch.delete(ref);
+  });
+
+  await writeBatch.commit();
 }
