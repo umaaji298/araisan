@@ -104,7 +104,10 @@ function readEventsText(scene) {
 
   //formより読み込み
   const event_raw = document.getElementById('eventText').value;
-  let script = event_raw.split('\n').join(',')
+  let text_temp = cleanText(event_raw);
+  text_temp = cleanLine(text_temp);
+
+  let script = text_temp.split('\n').join(',')
   console.log('evet text', script);
   script = tagReplace(script, scene);
 
@@ -244,4 +247,20 @@ function viewEventImage(scene) {
     }
   })
 
+}
+
+/** clean input data */
+function cleanText(text) {
+  //複数空行をまとめる
+  return text.replace(/[ 　]+/g, " ");
+}
+
+function cleanLine(text) {
+  //空行つき改行は改行のみ
+  let text_temp = text.replace(/^ \n/g, "\n");
+
+  //連続改行をひとつに
+  text_temp = text_temp.replace(/\n\n+/g, "\n\n");
+
+  return text_temp
 }

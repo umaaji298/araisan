@@ -149,14 +149,21 @@ export default class Menu extends Phaser.Scene {
 
 let getItems = function (count, scene) {
   let data = [];
+  let selectedEvno = [];
 
   for (let i = 0; i < count; i++) {
-    const evNo = Phaser.Math.Between(0, scene.spEventArray.length - 1)
+    let evNo;
+    do {
+      evNo = Phaser.Math.Between(0, scene.spEventArray.length - 1)
+    } while (selectedEvno.includes(evNo))
+
     const ev = scene.spEventArray[evNo];
 
-    if (ev[1].floorName === 'Under Maintenance') {
+    if (ev[1].floorName === 'Under Maintenance' || ev[1].author === 'debug') {
       i--;
       continue;
+    } else {
+      selectedEvno.push(evNo);
     }
 
     //console.log(evNo, ev);

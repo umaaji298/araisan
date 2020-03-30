@@ -266,14 +266,32 @@ function createInputObj() {
     file: null
   }
 
-  input.text = $('#eventText').val();
-  input.creator = $('#creator').val();
-  input.floorName = $('#floorname').val();
+  const text = cleanText($('#eventText').val());
+  input.text = cleanLine(text);
+
+  input.creator = cleanText($('#creator').val());
+  input.floorName = cleanText($('#floorname').val());
 
   const fileDatas = document.getElementById('fileupload').files;
   input.file = fileDatas.length > 0 ? fileDatas[0] : null;
 
   return input
+}
+
+/** clean input data */
+function cleanText(text) {
+  //複数空行をまとめる
+  return text.replace(/[ 　]+/g, " ");
+}
+
+function cleanLine(text) {
+  //空行つき改行は改行のみ
+  let text_temp = text.replace(/^ \n/g, "\n");
+
+  //連続改行をひとつに
+  text_temp = text_temp.replace(/\n\n+/g, "\n\n");
+
+  return text_temp
 }
 
 /**
@@ -294,7 +312,7 @@ function validateInputs(input) {
   const fixedtext = textArray.join(',');
 
   //文字長0チェック
-  if (input.text.length === 0) {
+  if (input.text.length === 0 || input.text === "\n" || input.text === "\n\n") {
     // todo : 画像がある場合は許容される
     validation.result = false;
     validation.reason = '表示する文章がありません';
