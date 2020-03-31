@@ -52,11 +52,16 @@ export default class Editor extends Phaser.Scene {
       } else {
         this.evImage.destroy();
 
-        this.textures.once('removetexture', () => {
-          console.log('wahahahaha');
+        if(!this.textures.checkKey('evImage')) {
+          this.textures.once('removetexture', () => {
+            console.log('wahahahaha');
+            this.scene.restart();
+          });
+          this.textures.remove('evImage');
+        }
+        else {
           this.scene.restart();
-        });
-        this.textures.remove('evImage');
+        }
       }
     })
 
