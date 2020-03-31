@@ -319,6 +319,13 @@ function validateInputs(input) {
     return validation;
   }
 
+  //文字長0チェック
+  if (input.floorName.length === 0) {
+    validation.result = false;
+    validation.reason = 'フロア名が必要です\nv1.1より必須になりました';
+    return validation;
+  }
+
   //file validate
   if (input.file != null) {
     if (!validFileType(input.file)) {
