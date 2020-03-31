@@ -14,10 +14,7 @@ export default class FloorEvent extends Phaser.Scene {
 
     console.log('%c floorEvent ', 'background: green; color: white; display: block;');
 
-    // this.evMoveBGM = this.sound.add('evmove');
-    // this.poneSE = this.sound.add('pone');
-    // this.dooropenSE = this.sound.add('dooropen');
-    // this.rswSE = this.sound.add('rsw');
+    this.eventObjs = new Array(); // player で生成するtextureへの参照を保存
 
     this.myCmds = new TcrpAction(this);
     this.player = new TCRP.Player(this, {});
@@ -52,7 +49,7 @@ export default class FloorEvent extends Phaser.Scene {
           .load(data.commands, this.myCmds, { dtMode: 1 })
           .start();
       },
-    })
+    });
 
   }
 }

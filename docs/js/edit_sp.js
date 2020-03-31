@@ -183,17 +183,39 @@ $('#submit').click(async () => {
 
     //特権用ID
     let idObj = new Object();
-    idObj.idString = $('#floorNo').val();
+    let inputFNo = "";
+
+    inputFNo = $('#fNo_1').val() + ',' + $('#fNo_2').val() + ','
+      + $('#fNo_3').val() + ',' + $('#fNo_4').val();
+
+    idObj.idString = $('#fNo_1 option:selected').text() + ',' 
+    + $('#fNo_2 option:selected').text() + ','
+    + $('#fNo_3 option:selected').text() + ',' 
+    + $('#fNo_4 option:selected').text();
+
+    if ($('#fA_1').val() != "" && $('#fA_2').val() != "") {
+      inputFNo += ',' + $('#fA_1').val();
+      idObj.idString += ',' +  $('#fA_1 option:selected').text();
+
+      inputFNo += $('#fA_2').val();
+      idObj.idString += ',' + $('#fA_2 option:selected').text();
+
+      if ($('#fG_1').val() != "") {
+        inputFNo += ',' + $('#fG_1').val();
+        idObj.idString += ',' +  $('#fG_1 option:selected').text();
+      }
+    }
 
     try {
-      idObj.id = createFloorIdSp(idObj.idString);
+      idObj.id = createFloorIdSp(inputFNo);
     } catch (err) {
       console.log(err);
       alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:20')
       return;
     }
+
     console.log(validated.creator, validated.floorName, idObj.id, idObj.idString);
-    console.log(validated.file);
+    console.log("file", validated.file);
 
     //modal呼び出し
     viewModal();
@@ -237,9 +259,6 @@ $('#submit').click(async () => {
       $('#exampleModalCenter').modal('hide');
       return
     }
-    
-    
-    
     console.log('done');
   }
   else {
@@ -249,19 +268,12 @@ $('#submit').click(async () => {
   }
 })
 
-const convertMap = new Map([["A", "20"], ["Б", "21"], ["В", "22"], ["Г", "23"], ["Д", "24"], ["Е", "25"], ["Ж", "26"], ["з", "27"], ["И", "28"], ["↑", "0"], ["↗", "1"], ["→", "2"], ["↘", "3"], ["↓", "4"], ["↙", "5"], ["←", "6"], ["↖", "7"], ["|=0", "00"], ["|=1", "01"], ["|=2", "02"], ["|=3", "03"], ["|=4", "04"], ["|=5", "05"], ["|=6", "06"], ["|=7", "07"], ["|=8", "08"], ["|=9", "09"], ["|=10", "10"], ["|=11", "11"], ["|=12", "12"], ["|=13", "13"], ["|=14", "14"], ["|=15", "15"]]);
-
 function createFloorIdSp(input) {
   const array = input.split(',');
   let result = ""
 
   for (let i = 0; i < array.length; i++) {
-    if (convertMap.has(array[i])) {
-      // console.log('hit of',array[i]);
-      result += convertMap.get(array[i]);
-    } else {
-      result += ('00' + array[i]).slice(-2); // 2桁揃え
-    }
+    result += ('00' + array[i]).slice(-2); // 2桁揃え
   }
 
   if (!chekNewId(result)) {
@@ -345,7 +357,6 @@ function validateInputs(input) {
     return validation;
   }
 
-  console.log(input.creator.length, input.floorName.length);
   if (input.creator.length > 24 || input.floorName.length > 24) {
     validation.result = false;
     validation.reason = 'フロア名・作成者は24文字以下です';
@@ -523,7 +534,7 @@ function viewModal() {
 function updateModal(idString) {
   //modalデータここで更新
   const floorId = idString.split(',').join('-');
-  $('#floorNo').text(floorId);
+  //$('#floorNo').text(floorId);
   $('#exampleModalLongTitle').text("ゲームデータを更新中");
   if (progress < 40) progress = 40;
 }
@@ -565,7 +576,7 @@ async function dbWriteSp(floorData, id) {
   writeBatch.set(refMain, floorData);
 
 
-  
+
   await writeBatch.commit();
 
   //現在のobjectも更新 : global
