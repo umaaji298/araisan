@@ -14,7 +14,7 @@ export default class Menu extends Phaser.Scene {
     this.spEventArray = diffArray.concat(mainArray);
   }
 
-  create() {
+  create(data) {
     console.log('%c menu ', 'background: green; color: white; display: block;');
 
     this.gridTable = this.rexUI.add.gridTable({
@@ -110,7 +110,7 @@ export default class Menu extends Phaser.Scene {
         return cellContainer;
       },
 
-      items: getItems(6, this)
+      items: data.menuItems,
     })
       .layout()
     //.drawBounds(this.add.graphics(), 0xff0000);
@@ -151,42 +151,6 @@ export default class Menu extends Phaser.Scene {
     }, this);
 
   }
-}
-
-let getItems = function (count, scene) {
-  let data = [];
-  let selectedEvno = [];
-
-  for (let i = 0; i < count; i++) {
-    let evNo;
-    do {
-      evNo = Phaser.Math.Between(0, scene.spEventArray.length - 1)
-    } while (selectedEvno.includes(evNo))
-
-    const ev = scene.spEventArray[evNo];
-
-    if (ev[1].floorName === 'Under Maintenance' || ev[1].author === 'debug') {
-      i--;
-      continue;
-    } else {
-      selectedEvno.push(evNo);
-    }
-
-    //console.log(evNo, ev);
-    //todo コスト減らす？
-    const [sw1, sw2, sw3, sw4, ...other] = ev[1].idString.split(',');
-    const idString = `${sw1}-${sw2}-${sw3}-${sw4}${other.join('')}`
-    //console.log(idString);
-
-    const text = `${idString} / ${ev[1].floorName}`
-
-    data.push({
-      id: ev[0],
-      text: text,
-      color: Phaser.Math.Between(0, 0xffffff)
-    });
-  }
-  return data;
 }
 
 function destructor(scene) {

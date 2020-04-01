@@ -37,8 +37,8 @@ export default class Game extends Phaser.Scene {
     //events.jsonよりイベント呼び出し
     let mainArray = this.cache.json.get('events');
     let diffArray = this.cache.json.get('events_diff');
-
     this.spEvents = new Map(diffArray.concat(mainArray));
+    this.spEventKeys = Array.from(this.spEvents.keys());
 
     //gauge 数値データ置き換え
     this.numTag = ["１／２", "８", "１０", "７７", "３", "７", "０．１", "１", "１００", "２", "１２", "０", "（検閲）", "無", "百万", "０．０１", "５０００兆", "８"];
@@ -159,7 +159,8 @@ function panelFeedBack(pointer, obj) {
       this.menuSE.play();
 
       this.menu.setVisible(false);
-      this.scene.launch('menu', {});
+      const menuItems = getMenuItems(6,this); // 表示用に６個取得する
+      this.scene.launch('menu', {menuItems});
       break;
     }
     case 'gauge': {
@@ -827,6 +828,44 @@ function menuSetup(scene, delay) {
     duration: 1000,
     delay: delay
   });
+}
+
+function getMenuItems(count, scene) {
+  let data = [];
+  let selectedKeyIndex = [];
+
+  for (let i = 0; i < count; i++) {
+    let keyIndex;
+    do {
+      keyIndex = Phaser.Math.Between(0, scene.spEventKeys.length - 1)
+    } while (selectedKeyIndex.includes(keyIndex))
+
+    const evKey = scene.spEventKeys[keyIndex];
+    const ev = scene.spEvents.get(evKey);
+
+    //ev : event data Obj / evKey : evId
+    if (ev.floorName === 'Under Maintenance' || ev.author === 'debug') {
+      i--;
+      continue;
+    } else {
+      selectedKeyIndex.push(keyIndex);
+    }
+
+    //console.log(evNo, ev);
+    //todo コスト減らす？
+    const [sw1, sw2, sw3, sw4, ...other] = ev.idString.split(',');
+    const idString = `${sw1}-${sw2}-${sw3}-${sw4}${other.join('')}`
+    //console.log(idString);
+
+    const text = `${idString} / ${ev.floorName}`
+
+    data.push({
+      id: evKey,
+      text: text,
+      color: Phaser.Math.Between(0, 0xffffff)
+    });
+  }
+  return data;
 }
 
 function destructor_game(scene) {
