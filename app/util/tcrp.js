@@ -119,10 +119,10 @@ function randFactory(floorRand, scene) {
   // numtag Indexを返す : 初回のみ再現値をもとにした値
   const f_getRandNumTagId = function () {
     if (!f_getRandNumTagId.hasOwnProperty('data')) {
-      console.log('first call');
+      // console.log('first call');
       f_getRandNumTagId.data = Math.floor(num % scene.numTag.length);
     } else {
-      console.log('normal call');
+      // console.log('normal call');
       f_getRandNumTagId.data = Phaser.Math.Between(0, scene.numTag.length - 1);
     }
     return f_getRandNumTagId.data;
@@ -131,10 +131,10 @@ function randFactory(floorRand, scene) {
   // npc indexを返す
   const f_getNpcTableId = function () {
     if (!f_getNpcTableId.hasOwnProperty('data')) {
-      console.log('first call');
+      // console.log('first call');
       f_getNpcTableId.data = Math.floor( (num / 2) / scene.ev2data[0].length);
     } else {
-      console.log('normal call');
+      // console.log('normal call');
       f_getNpcTableId.data = Phaser.Math.Between(0, scene.ev2data.length - 1);
     }
     return f_getNpcTableId.data;
@@ -143,10 +143,10 @@ function randFactory(floorRand, scene) {
   // npc id を返す
   const f_getNpcId = function () {
     if (!f_getNpcId.hasOwnProperty('data')) {
-      console.log('first call');
+      // console.log('first call');
       f_getNpcId.data = Math.floor(num % scene.ev2data[0].length);
     } else {
-      console.log('normal call');
+      // console.log('normal call');
       f_getNpcId.data = Phaser.Math.Between(0, scene.ev2data[0].length - 1);
     }
     return f_getNpcId.data;
