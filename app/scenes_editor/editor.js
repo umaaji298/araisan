@@ -29,7 +29,7 @@ export default class Editor extends Phaser.Scene {
 
     this.cameras.main.fadeIn(1000, 0, 0, 0);
 
-    this.randDatas = getRandData({}, this);
+    scene.randFuncs = randFactory({}, scene);
 
     let commands = readEventsText(this);// form入力値
 
@@ -125,6 +125,31 @@ function readEventsText(scene) {
   return retObj
 }
 
+function randFactory(floorRand, scene) {
+  const retObj = new Object();
+
+  // numtag Indexを返す : 初回のみ再現値をもとにした値
+  const f_getRandNumTagId = function () {
+    return Phaser.Math.Between(0, scene.numTag.length - 1);
+  };
+
+  // npc indexを返す
+  const f_getNpcTableId = function () {
+    return Phaser.Math.Between(0, scene.ev2data.length - 1);
+  }
+
+  // npc id を返す
+  const f_getNpcId = function () {
+    return Phaser.Math.Between(0, scene.ev2data[0].length - 1);
+  }
+
+  retObj.getRandNumTagId = f_getRandNumTagId;
+  retObj.getNpcTableId = f_getNpcTableId;
+  retObj.getNpcId = f_getNpcId;
+
+  return retObj;
+}
+
 function getRandData(floorRand, scene) {
   const retObj = new Object();
 
@@ -141,18 +166,16 @@ function tagReplace(text, scene) {
 }
 
 function replacer(match) {
-  //console.log(match,this.randDatas.tebleId,this.randDatas.npcId);
 
   let replacedStr = "";
   switch (match) {
     case "\\G": {
       //floorRand is var
-      replacedStr = this.numTag[this.randDatas.numtagId];
+      replacedStr = this.numTag[this.randFuncs.getRandNumTagId()];
       break;
     }
     case "\\C": {
-
-      replacedStr = this.ev2data[this.randDatas.tebleId][this.randDatas.npcId].slice(0, -1);
+      replacedStr = this.ev2data[this.randFuncs.getNpcTableId()][this.randFuncs.getNpcId()].slice(0, -1);
       break;
     }
     default: {

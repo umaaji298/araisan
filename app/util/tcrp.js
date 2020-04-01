@@ -12,7 +12,7 @@ export function toCommands(scene, data) {
   const gauge = data.gauge;
 
   const floorRand = getFloorRand(data.arraws[0], data.arraws[1], gauge);
-  scene.randDatas = getRandData(floorRand, scene);
+  scene.randFuncs = randFactory(floorRand, scene);
 
   const checkedCode = checkEvent(data.code, scene);
   let script;
@@ -21,8 +21,13 @@ export function toCommands(scene, data) {
   if (checkedCode) {
     //registered event
     const event = scene.spEvents.get(checkedCode);
-    //debug
-    //event = { "text": "こんにちは！\\G,ハロー\\C,タグのテスト\\G", "idString": "19,12,Г,Ж", "imgUrl": "", "floorName": "君の半身", "author": "としあき！" }
+    
+    //debug detas
+    // const event = { "text": "こんにちは！\\G,ハロー\\C,タグのテスト\\G", "idString": "19,12,Г,Ж", "imgUrl": "", "floorName": "君の半身", "author": "としあき！" }
+    // const event = { "text": "ハロー\\C,ハロー\\C,ハロー\\C,ハロー\\C,ハロー\\C,ハロー\\C", "idString": "19,12,Г,Ж", "imgUrl": "", "floorName": "君の半身", "author": "としあき！" };
+    // const event = { "text": "ハロー\\G,ハロー\\G,ハロー\\G,ハロー\\G,ハロー\\G,ハロー\\G", "idString": "19,12,Г,Ж", "imgUrl": "", "floorName": "君の半身", "author": "としあき！" };
+    // debug end
+
     script = event.text;
     if (event.hasOwnProperty('fileName')) {
       commands.fileName = event.fileName;
@@ -97,16 +102,52 @@ function getFloorRand(arrow1, arrow2, gauge) {
   //max 80 - 0 : min 80 - 78 = 2
   const base = parseInt((arrow1 * 10 + arrow2), 8) + gauge;
   const reverse = 80 - base;
-  return ('0000' + reverse.toString(3)).slice(-4);
+  return ('0000' + reverse.toString(3)).slice(-4); // 3進数4桁
 }
 
-function getRandData(floorRand, scene) {
+function randFactory(floorRand, scene) {
   const retObj = new Object();
   const num = parseInt(floorRand, 3); // 3進数to 10進数 : range : 2 - 80
 
-  retObj.numtagId = Math.floor(num % scene.numTag.length);
-  retObj.tebleId = Math.floor(num / scene.ev3data[0].length);
-  retObj.npcId = Math.floor(num % scene.ev3data[0].length);
+  // numtag Indexを返す : 初回のみ再現値をもとにした値
+  const f_getRandNumTagId = function () {
+    if (!f_getRandNumTagId.hasOwnProperty('data')) {
+      console.log('first call');
+      f_getRandNumTagId.data = Math.floor(num % scene.numTag.length);
+    } else {
+      console.log('normal call');
+      f_getRandNumTagId.data = Phaser.Math.Between(0, scene.numTag.length - 1);
+    }
+    return f_getRandNumTagId.data;
+  };
+
+  // npc indexを返す
+  const f_getNpcTableId = function () {
+    if (!f_getNpcTableId.hasOwnProperty('data')) {
+      console.log('first call');
+      f_getNpcTableId.data = Math.floor(num / scene.ev2data[0].length);
+    } else {
+      console.log('normal call');
+      f_getNpcTableId.data = Phaser.Math.Between(0, scene.ev2data.length - 1);
+    }
+    return f_getNpcTableId.data;
+  }
+
+  // npc id を返す
+  const f_getNpcId = function () {
+    if (!f_getNpcId.hasOwnProperty('data')) {
+      console.log('first call');
+      f_getNpcId.data = Math.floor(num % scene.ev2data[0].length);
+    } else {
+      console.log('normal call');
+      f_getNpcId.data = Phaser.Math.Between(0, scene.ev2data[0].length - 1);
+    }
+    return f_getNpcId.data;
+  }
+
+  retObj.getRandNumTagId = f_getRandNumTagId;
+  retObj.getNpcTableId = f_getNpcTableId;
+  retObj.getNpcId = f_getNpcId;
 
   return retObj;
 }
@@ -122,17 +163,16 @@ function tagReplace(text, scene) {
 }
 
 function replacer(match) {
-  //console.log(match,this.randDatas.tebleId,this.randDatas.npcId);
 
   let replacedStr = "";
   switch (match) {
     case "\\G": {
       //floorRand is var
-      replacedStr = this.numTag[this.randDatas.numtagId];
+      replacedStr = this.numTag[this.randFuncs.getRandNumTagId()];
       break;
     }
     case "\\C": {
-      replacedStr = this.ev2data[this.randDatas.tebleId][this.randDatas.npcId].slice(0, -1);
+      replacedStr = this.ev2data[this.randFuncs.getNpcTableId()][this.randFuncs.getNpcId()].slice(0, -1);
       break;
     }
     default: {
