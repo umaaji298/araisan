@@ -97,8 +97,7 @@ export default class Game extends Phaser.Scene {
      * Scene events
      */
     //restart scene : イベントの再登録なし
-    this.eventObj = this.scene.get('floorEvent');
-    this.eventObj.events.on('restert', () => {
+    this.events.on('restert', () => {
       console.log('call restert');
 
       this.inputNo = new Array();
@@ -129,7 +128,7 @@ export default class Game extends Phaser.Scene {
       menuSetup(this, 300);
     }, this);
 
-    this.eventObj.events.on('toGameOver', () => {
+    this.events.once('toGameOver', () => {
       console.log('call togameover');
       destructor_game(this);
       this.scene.start('gameover');
@@ -871,6 +870,6 @@ function destructor_game(scene) {
   scene.poneSE.destroy();
   scene.dooropenSE.destroy();
 
-  scene.eventObj.events.off('restert');
-  scene.eventObj.events.off('toGameOver');
+  scene.events.off('restert');
+  scene.events.off('autoFloor');
 }

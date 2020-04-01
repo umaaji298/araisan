@@ -14,6 +14,8 @@ export default class FloorEvent extends Phaser.Scene {
 
     console.log('%c floorEvent ', 'background: green; color: white; display: block;');
 
+    this.gameEvents = this.scene.get('game');
+
     this.eventObjs = new Array(); // player で生成するtextureへの参照を保存
 
     this.evMoveBGM = this.sound.add('evmove');
@@ -53,7 +55,7 @@ export default class FloorEvent extends Phaser.Scene {
     //next event
     this.events.once('next', () => {
       console.log('call next');
-      this.events.emit('restert');
+      this.gameEvents.events.emit('restert');
       destructor(this);
       this.scene.stop('floorEvent');
     });
@@ -109,4 +111,8 @@ function destructor(scene) {
 
   scene.myCmds = null;
   scene.player = null;
+
+  scene.events.off('next');
+
+  scene.gameEvents = null;
 }

@@ -87,7 +87,7 @@ export default class TcrpAction {
 
   toGameOver() {
     console.log('player call to Gameover')
-    this.scene.events.emit('toGameOver');
+    this.scene.gameEvents.events.emit('toGameOver');
     this.scene.scene.stop('floorEvent');
   }
 
