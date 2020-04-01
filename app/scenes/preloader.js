@@ -65,7 +65,6 @@ export default class Preloader extends Phaser.Scene {
     this.load.audio('dooropen', 'assets/audio/elevetordoor.mp3');
     this.load.audio('menuse', 'assets/audio/enter8.mp3');
     this.load.audio('ending', 'assets/audio/taiju_63sec.mp3');
-    this.load.audio('autoFloor', 'assets/audio/camera2.mp3')
 
     //scripts
     this.load.json('events', 'https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events.json?alt=media');

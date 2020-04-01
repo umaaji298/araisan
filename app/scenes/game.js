@@ -87,7 +87,6 @@ export default class Game extends Phaser.Scene {
     this.gaugeSE = this.sound.add('gauge');
     this.menuSE = this.sound.add('menuse');
     this.menuSE.setVolume(0.4);
-    this.autoSE = this.sound.add('autoFloor');
 
     this.evMoveBGM = this.sound.add('evmove');
     this.poneSE = this.sound.add('pone');
@@ -766,7 +765,6 @@ function autoEvent_view(scene, id) {
   scene.inputNo = [idArray[0], idArray[1], idArray[2], idArray[3]];
 
   scene.rswSE.once('complete', () => {
-    // scene.autoSE.play();
     startFloorEvent(scene);
   })
   scene.rswSE.play();
