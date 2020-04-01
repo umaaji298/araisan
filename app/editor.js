@@ -46,6 +46,13 @@ $('#preview_close').click(()=>{
   game.destroy(true);
 })
 
+$('#submit').click(()=>{
+  console.log('preview_close of submit clicked');
+  $('#preview_close').hide();
+  $('#preview').show();
+  game.plugins.removeScenePlugin('rexUI'); // needs remove scene plugin
+  game.destroy(true);
+})
 
 // for ios
 window.addEventListener('focus', function (event) {

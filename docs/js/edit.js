@@ -31,8 +31,6 @@ $(function () {
   //続けて入力する
   $('#modal_cotinue').click(() => {
     $('#exampleModalCenter').modal('hide');
-    $('#eventText').val("");
-    $('#floorname').val("");
   });
 
   //video音声の再生
@@ -65,6 +63,7 @@ $(function () {
 
     $('#eventText').val("");
     $('#floorname').val("");
+    $('#fileupload').val("");
 
     //video stop
     $('#minfiary').get(0).pause();
@@ -77,6 +76,7 @@ $(function () {
 
     //modal reset
     $('#exampleModalLongTitle').text("フロアを登録中");
+    $('#floorNo').text("取得中...");
     $('#modal_next').show();
     $('#modal_next_go').hide();
   })
@@ -90,7 +90,7 @@ fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/even
     //console.log(events,typeof(events));
   })
   .catch(error => {
-    alert('ネットワークエラー発生中。\n一度ブラウザを閉じてしばらくあとにまた試してください。code:10')
+    alert('ネットワークエラー発生中。\n一度ブラウザを閉じてしばらくあとにまた試してください。code:10');
     console.error(error)
   });
 
@@ -102,7 +102,7 @@ function loadDiffJson() {
       //console.log(events_daily);
     })
     .catch(error => {
-      alert('ネットワークエラー発生中。\n一度ブラウザを閉じてしばらくあとにまた試してください。code:11')
+      alert('ネットワークエラー発生中。\n一度ブラウザを閉じてしばらくあとにまた試してください。code:11');
       console.error(error)
     });
 }
@@ -135,7 +135,6 @@ firebase.auth().signInAnonymously()
     //初回はDBに登録する
     // see : https://firebase.google.com/docs/reference/js/firebase.auth.Auth?hl=ja#sign-inanonymously
     if (userCredential.additionalUserInfo.isNewUser) {
-      //console.log('this is new user');
 
       // DB更新
       let ref = db.collection("users").doc(userCredential.user.uid);
@@ -148,7 +147,7 @@ firebase.auth().signInAnonymously()
     }
   })
   .catch(function (error) {
-    alert('ネットワークエラー発生中。\n一度ブラウザを閉じてしばらくあとにまた試してください。code:16')
+    alert('ネットワークエラー発生中。\n一度ブラウザを閉じてしばらくあとにまた試してください。code:16');
     console.log(error);
   });
 
@@ -169,8 +168,6 @@ firebase.auth().onAuthStateChanged(function (user) {
  * form入力
  */
 $('#submit').click(async () => {
-
-  //console.log('call submit');
 
   const input = createInputObj();
 

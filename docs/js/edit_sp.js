@@ -31,8 +31,6 @@ $(function () {
   //続けて入力する
   $('#modal_cotinue').click(() => {
     $('#exampleModalCenter').modal('hide');
-    $('#eventText').val("");
-    $('#floorname').val("");
   });
 
   //video音声の再生
@@ -63,6 +61,10 @@ $(function () {
   $('#exampleModalCenter').on('hide.bs.modal', function (e) {
     //console.log('modal hide');
 
+    $('#eventText').val("");
+    $('#floorname').val("");
+    $('#fileupload').val("");
+
     //video stop
     $('#minfiary').get(0).pause();
     $('#minfiary').get(0).currentTime = 0;
@@ -74,6 +76,7 @@ $(function () {
 
     //modal reset
     $('#exampleModalLongTitle').text("フロアを登録中");
+    $('#floorNo').text("取得中...");
     $('#modal_next').show();
     $('#modal_next_go').hide();
   })
@@ -87,7 +90,7 @@ fetch('https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/even
     //console.log(events,typeof(events));
   })
   .catch(error => {
-    alert('ネットワークエラー発生中！管理人が復旧しないと無理そうです。code:10')
+    alert('ネットワークエラー発生中。\n一度ブラウザを閉じてしばらくあとにまた試してください。code:10');
     console.error(error)
   });
 
@@ -99,7 +102,7 @@ function loadDiffJson() {
       //console.log(events_daily);
     })
     .catch(error => {
-      alert('ネットワークエラー発生中！管理人が復旧しないと無理そうです。code:11')
+      alert('ネットワークエラー発生中。\n一度ブラウザを閉じてしばらくあとにまた試してください。code:11');
       console.error(error)
     });
 }
@@ -132,7 +135,6 @@ firebase.auth().signInAnonymously()
     //初回はDBに登録する
     // see : https://firebase.google.com/docs/reference/js/firebase.auth.Auth?hl=ja#sign-inanonymously
     if (userCredential.additionalUserInfo.isNewUser) {
-      console.log('this is new user');
 
       // DB更新
       let ref = db.collection("users").doc(userCredential.user.uid);
@@ -145,6 +147,7 @@ firebase.auth().signInAnonymously()
     }
   })
   .catch(function (error) {
+    alert('ネットワークエラー発生中。\n一度ブラウザを閉じてしばらくあとにまた試してください。code:16');
     console.log(error);
   });
 
@@ -166,8 +169,6 @@ firebase.auth().onAuthStateChanged(function (user) {
  */
 $('#submit').click(async () => {
 
-  console.log('call submit');
-
   const input = createInputObj();
 
   //input validation
@@ -188,21 +189,21 @@ $('#submit').click(async () => {
     inputFNo = $('#fNo_1').val() + ',' + $('#fNo_2').val() + ','
       + $('#fNo_3').val() + ',' + $('#fNo_4').val();
 
-    idObj.idString = $('#fNo_1 option:selected').text() + ',' 
-    + $('#fNo_2 option:selected').text() + ','
-    + $('#fNo_3 option:selected').text() + ',' 
-    + $('#fNo_4 option:selected').text();
+    idObj.idString = $('#fNo_1 option:selected').text() + ','
+      + $('#fNo_2 option:selected').text() + ','
+      + $('#fNo_3 option:selected').text() + ','
+      + $('#fNo_4 option:selected').text();
 
     if ($('#fA_1').val() != "" && $('#fA_2').val() != "") {
       inputFNo += ',' + $('#fA_1').val();
-      idObj.idString += ',' +  $('#fA_1 option:selected').text();
+      idObj.idString += ',' + $('#fA_1 option:selected').text();
 
       inputFNo += $('#fA_2').val();
       idObj.idString += ',' + $('#fA_2 option:selected').text();
 
       if ($('#fG_1').val() != "") {
         inputFNo += ',' + $('#fG_1').val();
-        idObj.idString += ',' +  $('#fG_1 option:selected').text();
+        idObj.idString += ',' + $('#fG_1 option:selected').text();
       }
     }
 
@@ -213,7 +214,6 @@ $('#submit').click(async () => {
       alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:20')
       return;
     }
-
     console.log(validated.creator, validated.floorName, idObj.id, idObj.idString);
     console.log("file", validated.file);
 
@@ -325,6 +325,13 @@ function validateInputs(input) {
     // todo : 画像がある場合は許容される
     validation.result = false;
     validation.reason = '表示する文章がありません';
+    return validation;
+  }
+
+  //文字長0チェック
+  if (input.floorName.length === 0) {
+    validation.result = false;
+    validation.reason = 'フロア名が必要です\nv1.1より必須になりました';
     return validation;
   }
 
@@ -534,7 +541,7 @@ function viewModal() {
 function updateModal(idString) {
   //modalデータここで更新
   const floorId = idString.split(',').join('-');
-  //$('#floorNo').text(floorId);
+  $('#floorNo').text(floorId);
   $('#exampleModalLongTitle').text("ゲームデータを更新中");
   if (progress < 40) progress = 40;
 }
