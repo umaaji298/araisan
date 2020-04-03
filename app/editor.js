@@ -39,7 +39,6 @@ $('#preview').click(()=>{
 })
 
 $('#preview_close').click(()=>{
-  console.log('preview_close clicked');
   $('#preview_close').hide();
   $('#preview').show();
   game.plugins.removeScenePlugin('rexUI'); // needs remove scene plugin
@@ -47,7 +46,6 @@ $('#preview_close').click(()=>{
 })
 
 $('#submit').click(()=>{
-  console.log('preview_close of submit clicked');
   $('#preview_close').hide();
   $('#preview').show();
   game.plugins.removeScenePlugin('rexUI'); // needs remove scene plugin
