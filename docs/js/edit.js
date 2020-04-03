@@ -221,7 +221,7 @@ $('#submit').click(async () => {
 
     // DBデータ作成
     const floorData = {
-      idString: idObj.idString, // todo decode to -
+      idString: idObj.idString,
       text: validated.text,
       uid: uid,
       author: validated.creator,
@@ -462,7 +462,7 @@ function createFloorId() {
     }
   }
 
-  const idString = `${idToPanelNo(id_1)},${idToPanelNo(id_2)},${idToPanelNo(id_3)},${idToPanelNo(id_4)}`;
+  const idString = `${idToPanelNo(id_1)}-${idToPanelNo(id_2)}-${idToPanelNo(id_3)}-${idToPanelNo(id_4)}`;
 
   return { id, idString }
 }
@@ -529,8 +529,7 @@ function viewModal() {
 
 function updateModal(idString) {
   //modalデータここで更新
-  const floorId = idString.split(',').join('-');
-  $('#floorNo').text(floorId);
+  $('#floorNo').text(idString);
   $('#exampleModalLongTitle').text("ゲームデータを更新中");
   if (progress < 40) progress = 40;
 }

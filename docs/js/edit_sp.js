@@ -189,21 +189,21 @@ $('#submit').click(async () => {
     inputFNo = $('#fNo_1').val() + ',' + $('#fNo_2').val() + ','
       + $('#fNo_3').val() + ',' + $('#fNo_4').val();
 
-    idObj.idString = $('#fNo_1 option:selected').text() + ','
-      + $('#fNo_2 option:selected').text() + ','
-      + $('#fNo_3 option:selected').text() + ','
+    idObj.idString = $('#fNo_1 option:selected').text() + '-'
+      + $('#fNo_2 option:selected').text() + '-'
+      + $('#fNo_3 option:selected').text() + '-'
       + $('#fNo_4 option:selected').text();
 
     if ($('#fA_1').val() != "" && $('#fA_2').val() != "") {
       inputFNo += ',' + $('#fA_1').val();
-      idObj.idString += ',' + $('#fA_1 option:selected').text();
+      idObj.idString += $('#fA_1 option:selected').text();
 
       inputFNo += $('#fA_2').val();
-      idObj.idString += ',' + $('#fA_2 option:selected').text();
+      idObj.idString += $('#fA_2 option:selected').text();
 
       if ($('#fG_1').val() != "") {
         inputFNo += ',' + $('#fG_1').val();
-        idObj.idString += ',' + $('#fG_1 option:selected').text();
+        idObj.idString +=  $('#fG_1 option:selected').text();
       }
     }
 
@@ -238,7 +238,7 @@ $('#submit').click(async () => {
 
     // DBデータ作成
     const floorData = {
-      idString: idObj.idString, // todo decode to -
+      idString: idObj.idString,
       text: validated.text,
       uid: uid,
       author: validated.creator,
@@ -473,7 +473,7 @@ function createFloorId() {
     }
   }
 
-  const idString = `${idToPanelNo(id_1)},${idToPanelNo(id_2)},${idToPanelNo(id_3)},${idToPanelNo(id_4)}`;
+  const idString = `${idToPanelNo(id_1)}-${idToPanelNo(id_2)}-${idToPanelNo(id_3)}-${idToPanelNo(id_4)}`;
 
   return { id, idString }
 }
@@ -540,8 +540,7 @@ function viewModal() {
 
 function updateModal(idString) {
   //modalデータここで更新
-  const floorId = idString.split(',').join('-');
-  $('#floorNo').text(floorId);
+  $('#floorNo').text(idString);
   $('#exampleModalLongTitle').text("ゲームデータを更新中");
   if (progress < 40) progress = 40;
 }
