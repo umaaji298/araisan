@@ -127,12 +127,14 @@ export default class Game extends Phaser.Scene {
       menuSetup(this, 300);
     }, this);
 
+    //Gameover event
     this.events.once('toGameOver', () => {
       console.log('call togameover');
       destructor_game(this);
       this.scene.start('gameover');
     }, this);
 
+    //自動入力
     this.events.on('autoFloor', (id) => {
       // console.log('autofloor call', id);
       if (this.inputNo.length > 0) {
@@ -142,6 +144,20 @@ export default class Game extends Phaser.Scene {
         autoEvent_view(this, id);
       }
     })
+
+    //背景画像隠す
+    this.events.on('hideImage',()=>{
+      if(this.hasOwnProperty('evImage')){
+        this.evImage.setVisible(false);
+      }
+    });
+
+    //背景画像再表示
+    this.events.on('showImage',()=>{
+      if(this.hasOwnProperty('evImage')){
+        this.evImage.setVisible(true);
+      }
+    });
 
     //create end
     // destructor_game(this);

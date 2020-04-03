@@ -14,7 +14,7 @@ export default class FloorEvent extends Phaser.Scene {
 
     console.log('%c floorEvent ', 'background: green; color: white; display: block;');
 
-    this.gameEvents = this.scene.get('game');
+    this.gameEvents = this.scene.get('game').events;
 
     this.eventObjs = new Array(); // player で生成するtextureへの参照を保存
 
@@ -28,11 +28,12 @@ export default class FloorEvent extends Phaser.Scene {
 
     this.menu = this.add.image(40, 560, 'eye_close');
     this.menu_close = this.add.image(40, 550, 'eye_open');
+    this.menu_focus = this.add.image(40, 550, 'eye_focus');
 
+    //メニュークリック: 文字表示を消す
     this.menu.setVisible(false);
     this.menu.on('pointerup',()=>{
       this.menu.setVisible(false);
-      // イベント表示消す
       this.eventObjs.forEach(obj=>{
         obj.setVisible(false);
       });
@@ -41,21 +42,38 @@ export default class FloorEvent extends Phaser.Scene {
     })
     this.menu.setInteractive();
 
+    //メニュークリック: 文字表示のみ : 画像消し
     this.menu_close.setVisible(false);
     this.menu_close.on('pointerup',()=>{
       this.menu_close.setVisible(false);
+      // send event to game
+      this.gameEvents.emit('hideImage');
       this.eventObjs.forEach(obj=>{
         obj.setVisible(true);
       });
       this.cameras.main.setBackgroundColor('rgba(50,50,50,0.5)');
-      this.menu.setVisible(true);
+      this.menu_focus.setVisible(true);
     })
     this.menu_close.setInteractive();
+
+    //メニュークリック: 通常表示に戻す
+    this.menu_focus.setVisible(false);
+    this.menu_focus.on('pointerup',()=>{
+      this.menu_focus.setVisible(false);
+      // send event to game
+      this.gameEvents.emit('showImage');
+      // this.eventObjs.forEach(obj=>{
+      //   obj.setVisible(true);
+      // });
+      // this.cameras.main.setBackgroundColor('rgba(50,50,50,0.5)');
+      this.menu.setVisible(true);
+    })
+    this.menu_focus.setInteractive();
 
     //next event
     this.events.once('next', () => {
       console.log('call next');
-      this.gameEvents.events.emit('restert');
+      this.gameEvents.emit('restert');
       destructor(this);
       this.scene.stop('floorEvent');
     });
@@ -101,7 +119,9 @@ function destructor(scene) {
   scene.menu.removeInteractive();
   scene.menu.destroy();
   scene.menu_close.removeInteractive();
-  scene.menu.destroy();
+  scene.menu_close.destroy();
+  scene.menu_focus.removeInteractive();
+  scene.menu_focus.destroy();
 
   //object削除
   scene.evMoveBGM.destroy();
