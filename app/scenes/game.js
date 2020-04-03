@@ -616,6 +616,12 @@ function startFloorEvent(scene) {
     if (scene.commands.fileName != "") {
       scene.load.image('evImage', `https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/medias%2F${scene.commands.fileName}?alt=media`);
       scene.load.start();
+    }else{
+      //画像指定がない場合は、ランダム背景表示
+      const backNumber = Phaser.Math.Between(0,19);
+      scene.commands.fileName = `${backNumber}.jpg`
+      scene.load.image('evImage', `assets/background/${backNumber}.jpg`);
+      scene.load.start();
     }
   }
 }
