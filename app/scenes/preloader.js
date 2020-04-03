@@ -57,7 +57,6 @@ export default class Preloader extends Phaser.Scene {
     this.load.image('eye_focus', 'assets/eye_focus.png');
     this.load.multiatlas('textures', 'assets/texture/textures.json', 'assets/texture');
 
-    //this.load.audio('click', 'assets/audio/click2.ogg');
     this.load.audio('click', 'assets/audio/click2.mp3');
     this.load.audio('rsw', 'assets/audio/switch1.mp3');
     this.load.audio('gauge', 'assets/audio/kachi4.mp3');
@@ -65,7 +64,7 @@ export default class Preloader extends Phaser.Scene {
     this.load.audio('pone', 'assets/audio/ariplane-chime_one.mp3');
     this.load.audio('dooropen', 'assets/audio/elevetordoor.mp3');
     this.load.audio('menuse', 'assets/audio/enter8.mp3');
-    this.load.audio('ending', 'assets/audio/taiju_63sec.mp3');
+    //this.load.audio('ending', 'assets/audio/taiju_63sec.mp3');
 
     //scripts
     this.load.json('events', 'https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events.json?alt=media');

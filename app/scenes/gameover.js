@@ -8,6 +8,9 @@ export default class GameOver extends Phaser.Scene {
   create() {
     console.log('%c GameOver ', 'background: green; color: white; display: block;');
 
+    this.load.image('title', `assets/title.png`);
+    this.load.start();
+
     const content = [
       "credit",
       "",
@@ -63,9 +66,14 @@ export default class GameOver extends Phaser.Scene {
     this.scrolltext = this.add.text(110, 650, content, this.fontopt);
 
     //sound
-    this.endingBGM = this.sound.add('ending');
-    this.endingBGM.setVolume(0.6);
-    this.endingBGM.play();
+    this.load.audio('ending', 'assets/audio/taiju_63sec.mp3');
+    this.load.start();
+    this.load.on('complete',()=>{
+      this.endingBGM = this.sound.add('ending');
+      this.endingBGM.setVolume(0.6);
+      this.endingBGM.play();
+    });
+
     // this.endingBGM.on('complete', () => {
     //   this.cameras.main.fadeOut(3000, 0, 0, 0);
     // }, this);
@@ -105,6 +113,8 @@ export default class GameOver extends Phaser.Scene {
 
 function destructor(scene){
   scene.endingBGM.destroy();
+  scene.sound.removeByKey('ending');
+
   scene.input.off('pointerup');
   scene.tweens.getAllTweens().forEach((tw)=>{
     tw.destroy();

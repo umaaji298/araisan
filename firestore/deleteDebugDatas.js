@@ -21,11 +21,11 @@ async function main(){
     const data = doc.data();
     if(data.floorName === "debug"){
       console.log('delete id',doc.ref.id);
-      //writeBatch.delete(doc.ref);
+      writeBatch.delete(doc.ref);
     }   
   })
 
-  //await writeBatch.commit();
+  await writeBatch.commit();
 }
 
 main().then(()=>{

@@ -30,6 +30,8 @@ export default class Start extends Phaser.Scene {
 
 function destructor(scene){
   scene.bg.removeInteractive();
+  scene.bg.destroy();
+  scene.textures.remove('title');
 
   //object削除
   scene.poneSE.destroy();
