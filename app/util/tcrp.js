@@ -23,15 +23,14 @@ export function toCommands(scene, data) {
     const event = scene.spEvents.get(checkedCode);
 
     //debug detas
-    // const event = { "text": "こんにちは！\\G,ハロー\\C,タグのテスト\\G", "idString": "19-12-Г-Ж", "imgUrl": "", "floorName": "君の半身", "author": "としあき！" }
-    // const event = { "text": "ハロー\\C,ハロー\\C,ハロー\\C,ハロー\\C,ハロー\\C,ハロー\\C", "idString": "19-12-Г-Ж", "imgUrl": "", "floorName": "君の半身", "author": "としあき！" };
-    // const event = { "text": "ハロー\\G,ハロー\\G,ハロー\\G,ハロー\\G,ハロー\\G,ハロー\\G", "idString": "19-12-Г-Ж", "imgUrl": "", "floorName": "君の半身", "author": "としあき！" };
+    // const event = { "text": "こんにちは！\\G,ハロー\\C,タグのテスト\\G", "idString": "19-12-Г-Ж", "fileName": "", "fileType":"", "floorName": "君の半身", "author": "としあき！" }
+    // const event = { "text": "ハロー\\C,ハロー\\C,ハロー\\C,ハロー\\C,ハロー\\C,ハロー\\C", "idString": "19-12-Г-Ж", "fileName": "", "fileType":"",  "floorName": "君の半身", "author": "としあき！" };
+    // const event = { "text": "ハロー\\G,ハロー\\G,ハロー\\G,ハロー\\G,ハロー\\G,ハロー\\G", "idString": "19-12-Г-Ж", "fileName": "", "fileType":"",  "floorName": "君の半身", "author": "としあき！" };
     // debug end
 
     script = event.text;
-    if (event.hasOwnProperty('fileName')) {
-      commands.fileName = event.fileName;
-    }
+    commands.fileName = event.fileName;
+    
   } else {
     //normal event
     autoText = false;

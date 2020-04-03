@@ -26,19 +26,14 @@ async function main() {
     const data = doc.data();
     const objdata = {
       text: data.text,
-      imgUrl: data.imgUrl,
+      fileName : data.fileName,
+      fileType : data.fileType,
       floorName: data.floorName,
       author: data.author
     }
 
     writeData.set(doc.ref.id,objdata);
 
-    // writeData[doc.ref.id] = {
-    //   text: data.text,
-    //   imgUrl: data.imgUrl,
-    //   floorName: data.floorName,
-    //   author: data.author
-    // }
   }
 
   const jsondata = JSON.stringify([...writeData])
