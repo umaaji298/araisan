@@ -868,8 +868,12 @@ function getMenuItems(count, scene) {
     //console.log(evNo, ev);
     //todo コスト減らす？
     const [sw1, sw2, sw3, sw4, ...other] = ev.idString.split(',');
-    const idString = `${sw1}-${sw2}-${sw3}-${sw4}${other.join('')}`
-    //console.log(idString);
+    let idString;
+    if(sw2 === undefined){
+      idString = sw1;
+    }else{
+      idString = `${sw1}-${sw2}-${sw3}-${sw4}${other.join('')}`
+    }
 
     const text = `${idString} / ${ev.floorName}`
 
