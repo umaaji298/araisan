@@ -6,12 +6,6 @@ export default class Menu extends Phaser.Scene {
   preload() {
 
     this.fontsys = { fontSize: '20px', color: '#fff', maxLines: 2, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
-
-    //events.jsonよりイベント呼び出し
-    let mainArray = this.cache.json.get('events');
-    let diffArray = this.cache.json.get('events_diff');
-
-    this.spEventArray = diffArray.concat(mainArray);
   }
 
   create(data) {
