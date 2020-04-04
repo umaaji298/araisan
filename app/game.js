@@ -9,8 +9,9 @@ var config = {
   type: Phaser.AUTO,
   scale: {
     parent: 'phaser-game',
-    mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_VERTICALLY,
+    // mode: Phaser.Scale.FIT,
+    mode:Phaser.Scale.NONE,
+    //autoCenter: Phaser.Scale.CENTER_VERTICALLY,
     width: 800,
     height: 600
   },

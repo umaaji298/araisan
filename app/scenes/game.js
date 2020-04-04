@@ -110,10 +110,16 @@ export default class Game extends Phaser.Scene {
           sw.anims.previousFrame();
         }
       });
+
       //display表示消去
       this.evDisplay.forEach(disp => {
         disp.destroy();
       });
+
+      //oveflow消去
+      if(this.hasOwnProperty('overflow')){
+        this.overflow.destroy();
+      }
 
       //evImage消去
       if (this.hasOwnProperty('evImage')) {
@@ -299,6 +305,13 @@ function panelFeedBack(pointer, obj) {
           setupTimeoutBarFast(this);
 
           break;
+        }
+        case 6: {
+          this.evDisplay.forEach(img => {
+            img.setVisible(false);
+          })
+          //overflow
+          this.overflow = this.add.image(660, 70, 'overflow');
         }
         default: {
           timeOutBarStart(this);
@@ -580,7 +593,7 @@ function getFloorData(scene) {
   if (inputNo.length < 4) {
     for (let i = inputNo.length; i < 4; i++) {
       inputNo.push(0); // 0埋め
-      scene.inputNo.push(Phaser.Math.Between(0,28)); // 実体には乱数設定する。
+      scene.inputNo.push(Phaser.Math.Between(0, 28)); // 実体には乱数設定する。
     }
   }
 
@@ -864,7 +877,7 @@ function checkClose(code) {
   let isClosed = false;
   const code6 = code.slice(0, 10);
 
-  const closeList = ["2424222042", "1606070204", "0202202522", "2403102024", "2807182225", "2120191004","0919260076","05081111220662"];
+  const closeList = ["2424222042", "1606070204", "0202202522", "2403102024", "2807182225", "2120191004", "0919260076", "05081111220662"];
 
   closeList.forEach(num => {
     if (num === code6) {
