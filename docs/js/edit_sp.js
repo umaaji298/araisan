@@ -183,32 +183,10 @@ $('#submit').click(async () => {
   if (isAnonymous && uid) {
 
     //特権用ID
-    let idObj = new Object();
-    let inputFNo = "";
-
-    inputFNo = $('#fNo_1').val() + ',' + $('#fNo_2').val() + ','
-      + $('#fNo_3').val() + ',' + $('#fNo_4').val();
-
-    idObj.idString = $('#fNo_1 option:selected').text() + '-'
-      + $('#fNo_2 option:selected').text() + '-'
-      + $('#fNo_3 option:selected').text() + '-'
-      + $('#fNo_4 option:selected').text();
-
-    if ($('#fA_1').val() != "" && $('#fA_2').val() != "") {
-      inputFNo += ',' + $('#fA_1').val();
-      idObj.idString += $('#fA_1 option:selected').text();
-
-      inputFNo += $('#fA_2').val();
-      idObj.idString += $('#fA_2 option:selected').text();
-
-      if ($('#fG_1').val() != "") {
-        inputFNo += ',' + $('#fG_1').val();
-        idObj.idString +=  $('#fG_1 option:selected').text();
-      }
-    }
+    let idObj = getInputFloorId();
 
     try {
-      idObj.id = createFloorIdSp(inputFNo);
+      idObj.id = createFloorIdSp(idObj.inputFNo);
     } catch (err) {
       console.log(err);
       alert('ネットワークエラー発生中。管理人が復旧しないと無理そうです。code:20')
@@ -268,12 +246,55 @@ $('#submit').click(async () => {
   }
 })
 
+function getInputFloorId() {
+  const retObj = {
+    inputFNo: "",
+    id: "",
+    idString: ""
+  }
+
+  if ($('input[name=floorIdMethod]:checked').val() === "1") {
+
+    retObj.inputFNo = $('#fNo_1').val() + ',' + $('#fNo_2').val() + ','
+      + $('#fNo_3').val() + ',' + $('#fNo_4').val();
+
+    retObj.idString = $('#fNo_1 option:selected').text() + '-'
+      + $('#fNo_2 option:selected').text() + '-'
+      + $('#fNo_3 option:selected').text() + '-'
+      + $('#fNo_4 option:selected').text();
+
+    if ($('#fA_1').val() != "" && $('#fA_2').val() != "") {
+      retObj.inputFNo += ',' + $('#fA_1').val();
+      retObj.idString += $('#fA_1 option:selected').text();
+
+      retObj.inputFNo += $('#fA_2').val();
+      retObj.idString += $('#fA_2 option:selected').text();
+
+      if ($('#fG_1').val() != "") {
+        retObj.inputFNo += ',' + $('#fG_1').val();
+        retObj.idString += $('#fG_1 option:selected').text();
+      }
+    }
+  } else {
+    console.log('2');
+    retObj.inputFNo = $('#floorIdDirect').val();
+    retObj.idString = $('#floorIdStringDirect').val();
+  }
+
+  return retObj
+}
+
 function createFloorIdSp(input) {
-  const array = input.split(',');
   let result = ""
 
-  for (let i = 0; i < array.length; i++) {
-    result += ('00' + array[i]).slice(-2); // 2桁揃え
+  if ($('input[name=floorIdMethod]:checked').val() === "1") {
+    const array = input.split(',');
+
+    for (let i = 0; i < array.length; i++) {
+      result += ('00' + array[i]).slice(-2); // 2桁揃え
+    }
+  }else{
+    result = input; // そのまま
   }
 
   if (!chekNewId(result)) {

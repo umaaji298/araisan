@@ -864,7 +864,7 @@ function checkClose(code) {
   let isClosed = false;
   const code6 = code.slice(0, 10);
 
-  const closeList = ["2424222042", "1606070204", "0202202522", "2403102024", "2807182225", "2120191004","0919260076"];
+  const closeList = ["2424222042", "1606070204", "0202202522", "2403102024", "2807182225", "2120191004","0919260076","05081111220662"];
 
   closeList.forEach(num => {
     if (num === code6) {

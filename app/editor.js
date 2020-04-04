@@ -31,25 +31,29 @@ var config = {
 
 var game;
 
-$('#preview').click(()=>{
+$('#preview').click(() => {
   console.log('preview clicked');
   $('#preview').hide();
   $('#preview_close').show();
   game = new Phaser.Game(config);
 })
 
-$('#preview_close').click(()=>{
+$('#preview_close').click(() => {
   $('#preview_close').hide();
   $('#preview').show();
-  game.plugins.removeScenePlugin('rexUI'); // needs remove scene plugin
-  game.destroy(true);
+  if(game) {
+    game.plugins.removeScenePlugin('rexUI'); // needs remove scene plugin
+    game.destroy(true);
+  }
 })
 
-$('#submit').click(()=>{
+$('#submit').click(() => {
   $('#preview_close').hide();
   $('#preview').show();
-  game.plugins.removeScenePlugin('rexUI'); // needs remove scene plugin
-  game.destroy(true);
+  if(game) {
+    game.plugins.removeScenePlugin('rexUI'); // needs remove scene plugin
+    game.destroy(true);
+  }
 })
 
 // for ios
