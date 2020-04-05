@@ -341,13 +341,13 @@ function validateInputs(input) {
   const textArray = input.text.split('\n');
   const fixedtext = textArray.join(',');
 
-  //文字長0チェック
-  if (input.text.length === 0) {
-    // todo : 画像がある場合は許容される
-    validation.result = false;
-    validation.reason = '表示する文章がありません';
-    return validation;
-  }
+  //文字長0チェック : 特権環境なし
+  // if (input.text.length === 0) {
+  //   // todo : 画像がある場合は許容される
+  //   validation.result = false;
+  //   validation.reason = '表示する文章がありません';
+  //   return validation;
+  // }
 
   //文字長0チェック
   if (input.floorName.length === 0) {

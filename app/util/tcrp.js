@@ -8,7 +8,7 @@ export function toCommands(scene, data) {
   }
 
   console.log('convert command');
-  //console.log('floordata', data);
+  console.log('floordata', data);
 
   const gauge = data.gauge;
 
@@ -61,8 +61,9 @@ export function toCommands(scene, data) {
 function checkEvent(code, scene) {
   let resultCode = 0 // No.0 is normal event
 
-  const code4 = code.slice(0, 8);
-  const code6 = code.slice(0, 10);
+  const code_nogauge = code.slice(0, -2);
+
+  const code_swonly = code.slice(0, -4);
 
   // console.log(code, code4, code6);
   // console.log(scene.spEvents);
@@ -70,10 +71,10 @@ function checkEvent(code, scene) {
   //todo なんかうまい方法ないのか
   if (scene.spEvents.has(code)) {
     resultCode = code;
-  } else if (scene.spEvents.has(code6)) {
-    resultCode = code6;
-  } else if (scene.spEvents.has(code4)) {
-    resultCode = code4;
+  } else if (scene.spEvents.has(code_nogauge)) {
+    resultCode = code_nogauge;
+  } else if (scene.spEvents.has(code_swonly)) {
+    resultCode = code_swonly;
   }
 
   return resultCode;
