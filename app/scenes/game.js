@@ -705,16 +705,18 @@ function startFloorEvent(scene) {
 
         // for medias // todo 最低再生時間の指定？？
         scene.load.on('complete', () => {
-          console.log('load complete');
-          scene.evMoveBGM.stop();
-          scene.poneSE.play();
+          scene.evMoveBGM.setLoop(false);
+          scene.evMoveBGM.once('complete',()=>{
+            scene.poneSE.play();
+          });
+          // scene.evMoveBGM.stop();
+          // scene.poneSE.play();
         });
 
         break;
       }
       case 'image/png':
       case 'image/jpg': {
-        console.log('call');
         scene.load.image('evImage', `https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/medias%2F${tcrpEventData.fileName}?alt=media`);
         scene.load.start();
 
@@ -735,9 +737,10 @@ function startFloorEvent(scene) {
 
         // for medias // todo 最低再生時間の指定？？
         scene.load.on('complete', () => {
-          console.log('load complete');
-          scene.evMoveBGM.stop();
-          scene.poneSE.play();
+          scene.evMoveBGM.setLoop(false);
+          scene.evMoveBGM.once('complete',()=>{
+            scene.poneSE.play();
+          });
         });
         break;
       }
@@ -756,7 +759,6 @@ function startFloorEvent(scene) {
         }, scene)
 
         scene.time.delayedCall(5000, () => {
-          console.log('delay call');
           scene.evMoveBGM.stop();
           scene.poneSE.play();
         });
