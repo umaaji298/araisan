@@ -193,6 +193,7 @@ async function createEventsJson() {
       text: data.text,
       idString: data.idString,
       fileName: data.fileName,
+      fileType: data.fileType,
       floorName: data.floorName,
       author: data.author
     }
@@ -237,6 +238,7 @@ async function createDiffJson() {
       text: data.text,
       idString: data.idString,
       fileName: data.fileName,
+      fileType: data.fileType,
       floorName: data.floorName,
       author: data.author
     }

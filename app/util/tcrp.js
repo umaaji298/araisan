@@ -1,9 +1,10 @@
 import * as util from './etc';
 
 export function toCommands(scene, data) {
-  let commands = {
-    data: "",
-    fileName: ""
+  let dataObj = {
+    commands: "",
+    fileName: "",
+    fileType: "",
   }
 
   console.log('convert command');
@@ -29,8 +30,9 @@ export function toCommands(scene, data) {
     // debug end
 
     script = event.text;
-    commands.fileName = event.fileName;
-    
+    dataObj.fileName = event.fileName;
+    dataObj.fileType = event.fileType;
+
   } else {
     //normal event
     autoText = false;
@@ -51,9 +53,9 @@ export function toCommands(scene, data) {
   //RCRPに変換
   let commands_text = util.scriptsToEvents(script, autoText);
 
-  commands.data = spCommandsFix(commands_text, checkedCode);
+  dataObj.commands = spCommandsFix(commands_text, checkedCode, dataObj.fileType);
 
-  return commands
+  return dataObj
 }
 
 function checkEvent(code, scene) {
@@ -77,20 +79,6 @@ function checkEvent(code, scene) {
   return resultCode;
 }
 
-function spCommandsFix(commands, id) {
-  if (id === '14141414') {
-    const _commands = commands.slice(0, -1);
-    return _commands.concat([[5000, "poneSE"], [1000, [["dooropenSE"], ["fadeOut", 6000]]], [6000, "toGameOver"]]);
-  } else if (id === '999999990000') {
-    return commands.slice(1);
-  }
-  else if (id === '999999990001') {
-    return commands.slice(1);
-  }
-
-  return commands;
-}
-
 function getFloorRand(arrow1, arrow2, gauge) {
 
   if (arrow1 === 8 || arrow2 === 8) {
@@ -101,14 +89,14 @@ function getFloorRand(arrow1, arrow2, gauge) {
   // normal拡張レベル4 : 4 * 4 * 4 * 4 = 256パターン(0-255)を構築する
   // rsw 8進数を10進数に変換(63通り) * gaugeから4通り作成 = 252通り
   const base = parseInt((arrow1 * 10 + arrow2), 8) + (gauge % 5);
-  
+
   //RandTableに入れて数字を変換する
-  const randTable = [211,119,238,158,177,126,60,9,116,32,191,82,163,49,58,41,61,185,186,64,21,226,246,194,201,173,28,206,165,56,67,93,175,209,48,63,31,111,180,3,76,178,55,27,129,88,138,42,139,71,102,197,14,176,85,7,230,169,250,179,225,205,52,181,148,207,120,189,130,45,77,135,224,212,223,110,215,79,65,68,16,188,156,234,34,217,19,44,101,117,38,66,23,22,213,122,89,227,37,50,125,193,80,78,187,11,30,18,91,218,84,100,220,6,159,231,83,162,96,144,253,183,5,243,73,123,198,26,86,127,195,0,190,244,172,47,51,53,25,94,237,40,98,155,203,208,114,232,142,221,240,219,160,4,239,24,131,105,146,134,210,54,132,75,236,214,252,112,140,228,74,154,166,170,128,70,72,92,106,242,103,17,99,235,151,152,59,229,109,46,241,164,161,200,168,133,153,249,15,90,137,147,107,118,222,184,13,167,254,182,87,145,136,97,57,69,216,124,20,2,245,95,157,149,115,29,81,12,248,36,247,141,33,108,104,233,196,39,251,121,150,171,62,199,8,35,174,1,204,192,113,202,10,43,143,255];
+  const randTable = [211, 119, 238, 158, 177, 126, 60, 9, 116, 32, 191, 82, 163, 49, 58, 41, 61, 185, 186, 64, 21, 226, 246, 194, 201, 173, 28, 206, 165, 56, 67, 93, 175, 209, 48, 63, 31, 111, 180, 3, 76, 178, 55, 27, 129, 88, 138, 42, 139, 71, 102, 197, 14, 176, 85, 7, 230, 169, 250, 179, 225, 205, 52, 181, 148, 207, 120, 189, 130, 45, 77, 135, 224, 212, 223, 110, 215, 79, 65, 68, 16, 188, 156, 234, 34, 217, 19, 44, 101, 117, 38, 66, 23, 22, 213, 122, 89, 227, 37, 50, 125, 193, 80, 78, 187, 11, 30, 18, 91, 218, 84, 100, 220, 6, 159, 231, 83, 162, 96, 144, 253, 183, 5, 243, 73, 123, 198, 26, 86, 127, 195, 0, 190, 244, 172, 47, 51, 53, 25, 94, 237, 40, 98, 155, 203, 208, 114, 232, 142, 221, 240, 219, 160, 4, 239, 24, 131, 105, 146, 134, 210, 54, 132, 75, 236, 214, 252, 112, 140, 228, 74, 154, 166, 170, 128, 70, 72, 92, 106, 242, 103, 17, 99, 235, 151, 152, 59, 229, 109, 46, 241, 164, 161, 200, 168, 133, 153, 249, 15, 90, 137, 147, 107, 118, 222, 184, 13, 167, 254, 182, 87, 145, 136, 97, 57, 69, 216, 124, 20, 2, 245, 95, 157, 149, 115, 29, 81, 12, 248, 36, 247, 141, 33, 108, 104, 233, 196, 39, 251, 121, 150, 171, 62, 199, 8, 35, 174, 1, 204, 192, 113, 202, 10, 43, 143, 255];
   const fixBase = randTable[base];
 
   // normal event の各evのindex決定 : 4進数4桁を作成し分割することで、indexを決定するのじゃ。
   // ev1[0-3] , ev2[0-3],  ev3[0-3], ev4[0-3]
-  return ('0000' + fixBase.toString(4)).slice(-4); 
+  return ('0000' + fixBase.toString(4)).slice(-4);
 }
 
 function randFactory(floorRand, scene) {
@@ -131,7 +119,7 @@ function randFactory(floorRand, scene) {
   const f_getNpcTableId = function () {
     if (!f_getNpcTableId.hasOwnProperty('data')) {
       // console.log('first call');
-      f_getNpcTableId.data = Math.floor( (num / 2) / scene.ev2data[0].length);
+      f_getNpcTableId.data = Math.floor(num % scene.ev2data.length); // fixme : 乱数生成がnpcid と同期している
     } else {
       // console.log('normal call');
       f_getNpcTableId.data = Phaser.Math.Between(0, scene.ev2data.length - 1);
@@ -188,4 +176,38 @@ function replacer(match) {
     }
   }
   return replacedStr;
+}
+
+/**
+ * 通常のコマンド処理を改変する
+ * @param {*} commands 
+ * @param {*} id 
+ * @param {*} fileType 
+ */
+function spCommandsFix(commands, id, fileType) {
+  if (id === '14141414') {
+    return commandFixEnding(commands);
+  } else if (id === '999999990000' || id === '999999990001') {
+    return commandFixNoPretext(commands);
+  }
+  if (fileType === 'video/mp4' || fileType === 'video/webm') {
+    return commandFixNoPretext(commands);
+  }
+
+  return commands;
+}
+
+/** 
+ * としあきは見た　無し
+ */
+function commandFixNoPretext(commands) {
+  return commands.slice(1);
+}
+
+/**
+ * ENDING表示用コマンド処理
+ */
+function commandFixEnding(commands) {
+  const _commands = commands.slice(0, -1);
+  return _commands.concat([[5000, "poneSE"], [1000, [["dooropenSE"], ["fadeOut", 6000]]], [6000, "toGameOver"]]);
 }

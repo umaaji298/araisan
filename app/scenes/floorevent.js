@@ -32,9 +32,9 @@ export default class FloorEvent extends Phaser.Scene {
 
     //メニュークリック: 文字表示を消す
     this.menu.setVisible(false);
-    this.menu.on('pointerup',()=>{
+    this.menu.on('pointerup', () => {
       this.menu.setVisible(false);
-      this.eventObjs.forEach(obj=>{
+      this.eventObjs.forEach(obj => {
         obj.setVisible(false);
       });
       this.cameras.main.setBackgroundColor('rgba(0,0,0,0)');
@@ -44,11 +44,11 @@ export default class FloorEvent extends Phaser.Scene {
 
     //メニュークリック: 文字表示のみ : 画像消し
     this.menu_close.setVisible(false);
-    this.menu_close.on('pointerup',()=>{
+    this.menu_close.on('pointerup', () => {
       this.menu_close.setVisible(false);
       // send event to game
       this.gameEvents.emit('hideImage');
-      this.eventObjs.forEach(obj=>{
+      this.eventObjs.forEach(obj => {
         obj.setVisible(true);
       });
       this.cameras.main.setBackgroundColor('rgba(50,50,50,0.5)');
@@ -58,7 +58,7 @@ export default class FloorEvent extends Phaser.Scene {
 
     //メニュークリック: 通常表示に戻す
     this.menu_focus.setVisible(false);
-    this.menu_focus.on('pointerup',()=>{
+    this.menu_focus.on('pointerup', () => {
       this.menu_focus.setVisible(false);
       // send event to game
       this.gameEvents.emit('showImage');
@@ -88,9 +88,11 @@ export default class FloorEvent extends Phaser.Scene {
       // backgraound fade
       onUpdateParams: this.cameras.main,
       onUpdate: function (tween, targets, cameras) {
-        const opacity = tween.getValue();
-        const color = `rgba(50,50,50,${opacity})`;
-        cameras.setBackgroundColor(color);
+        if (data.useToneDown) {
+          const opacity = tween.getValue();
+          const color = `rgba(50,50,50,${opacity})`;
+          cameras.setBackgroundColor(color);
+        }
       },
       //TCRP Player
       onCompleteScope: this,
@@ -105,7 +107,7 @@ export default class FloorEvent extends Phaser.Scene {
     this.player.on('complete', function (player) {
       // view eye image
       this.menu.setVisible(true);
-    },this);
+    }, this);
 
   }
 }

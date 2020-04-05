@@ -363,12 +363,12 @@ function validateInputs(input) {
       validation.reason = '画像形式に対応していません';
       return validation;
     }
-    if (input.file.size > 1048576) {
-      const sizeMbyte = (input.file.size / 1048576).toFixed(1);
-      validation.result = false;
-      validation.reason = `画像のサイズは1Mbyteまでです。\n(これは${sizeMbyte}Mbyte)`;
-      return validation;
-    }
+    // if (input.file.size > 1048576) {
+    //   const sizeMbyte = (input.file.size / 1048576).toFixed(1);
+    //   validation.result = false;
+    //   validation.reason = `画像のサイズは1Mbyteまでです。\n(これは${sizeMbyte}Mbyte)`;
+    //   return validation;
+    // }
   }
 
   // 行数のチェック
@@ -415,7 +415,9 @@ function validateInputs(input) {
 
 var fileTypes = [
   'image/jpeg',
-  'image/png'
+  'image/png',
+  'video/mp4',
+  'video/webm'
 ]
 
 function validFileType(file) {

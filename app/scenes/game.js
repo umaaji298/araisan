@@ -91,7 +91,7 @@ export default class Game extends Phaser.Scene {
     this.menuSE = this.sound.add('menuse');
     this.menuSE.setVolume(0.4);
 
-    this.evMoveBGM = this.sound.add('evmove');
+    this.evMoveBGM = this.sound.add('evmove', { loop: true });
     this.poneSE = this.sound.add('pone');
     this.dooropenSE = this.sound.add('dooropen');
 
@@ -117,7 +117,7 @@ export default class Game extends Phaser.Scene {
       });
 
       //oveflow消去
-      if(this.hasOwnProperty('overflow')){
+      if (this.hasOwnProperty('overflow')) {
         this.overflow.destroy();
       }
 
@@ -269,6 +269,9 @@ function panelFeedBack(pointer, obj) {
     }
     case 'sw': {
       const sw = obj;//rename
+      if(sw.isLocked){
+         return; //早期return
+      }
       sw.anims.nextFrame();
       this.clickSE.play();
 
@@ -301,7 +304,6 @@ function panelFeedBack(pointer, obj) {
         case 4: {
           this.evDisplay.push(this.add.sprite(685, 75, 'textures', 'evfont/haifun.png'));
           this.evDisplay.push(this.add.sprite(703, 75, 'textures', `evfont/${sw.no}.png`));
-          lockSwitches(this);
           setupTimeoutBarFast(this);
 
           break;
@@ -341,6 +343,7 @@ function setupTimeoutBar(scene) {
     },
     onComplete: function (tween, targets, param) {
       //イベント開始の起点
+      lockSwitches(scene);
       startFloorEvent(scene);
     }
   });
@@ -360,6 +363,7 @@ function setupTimeoutBarFast(scene) {
     },
     onComplete: function (tween, targets, param) {
       //イベント開始の起点
+      lockSwitches(scene);
       startFloorEvent(scene);
     }
   });
@@ -414,6 +418,7 @@ function setupSwitches(scene) {
     const swobj = switches[i];
     swobj.name = 'sw';
     swobj.no = i;
+    swobj.isLocked = false;
     swobj.evname = 'sw' + i + 'on'
     swobj.setInteractive();
 
@@ -572,6 +577,11 @@ function setArraw(scene) {
 }
 
 function lockSwitches(scene) {
+
+  scene.switches.forEach(obj=>{
+    obj.isLocked = true;
+  })
+
   scene.rswitches.forEach(obj => {
     obj.isLocked = true;
   })
@@ -579,6 +589,10 @@ function lockSwitches(scene) {
 }
 
 function unlockSwitches(scene) {
+  scene.switches.forEach(obj=>{
+    obj.isLocked = false;
+  })
+
   scene.rswitches.forEach(obj => {
     obj.isLocked = false;
   })
@@ -625,14 +639,25 @@ function getGeugeYpos(index) {
 
 /** Events */
 function startFloorEvent(scene) {
+  // eventSceneに渡すデータ
+  let tcrpEventData = {
+    commands: "",
+    fileName: "",
+    fileType: "",
+    isVideo: false,
+    delay: 0,
+    useToneDown: true
+  };
 
   //UI scene stop
   scene.menu.setVisible(false);
   const menuScene = scene.scene.get('menu');
   menuScene.events.emit('evmove');
 
-  //ここで入力が確定する : todo overload sw input
+  //ここで入力が確定する
   let floorData = getFloorData(scene)
+
+  //封印チェック
   if (checkClose(floorData.code)) {
     // close中
     const code6 = floorData.code.slice(0, 10);
@@ -641,66 +666,138 @@ function startFloorEvent(scene) {
     } else {
       floorData.code = "999999990000"
     }
-    scene.commands = tcrp.toCommands(scene, floorData);
-    scene.scene.launch('floorEvent', { commands: scene.commands.data });
+
+    Object.assign(tcrpEventData, tcrp.toCommands(scene, floorData));
+    tcrpEventData.delay = 0;
+    tcrpEventData.useToneDown = false;
+
+    scene.scene.launch('floorEvent', tcrpEventData);
   } else {
-    //set event chain
-    scene.evMoveBGM.once('complete', () => {
-      scene.poneSE.play();
-    });
-    scene.poneSE.once('complete', () => {
-      if (scene.commands.fileName != "") {
-        viewEventImage(scene);
-      }
-
-      scene.dooropenSE.play();
-    }, scene);
-    scene.dooropenSE.once('complete', () => {
-      console.log('to next scene');
-
-      const delay = (scene.commands.fileName != "") ? 2000 : 0;
-      const eventData = {
-        commands: scene.commands.data,
-        delay
-      }
-
-      scene.scene.launch('floorEvent', eventData);
-    }, scene)
-
+    //EV音声再生 : loop
     scene.evMoveBGM.play();
-    scene.commands = tcrp.toCommands(scene, floorData);
-    //debug
-    //const filename = "900x900.png"
-    // const filename = "4388bd6d-81a6-4a28-a4ed-3dc72cb7d0c6"
-    //scene.commands.fileName = filename;
 
-    if (scene.commands.fileName != "") {
-      scene.load.image('evImage', `https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/medias%2F${scene.commands.fileName}?alt=media`);
-      scene.load.start();
+    //floorNoからコマンドを作成
+    Object.assign(tcrpEventData, tcrp.toCommands(scene, floorData));
+
+    console.log('evDatas', tcrpEventData);
+
+    switch (tcrpEventData.fileType) {
+      case 'video/mp4':
+      case 'video/webm': {
+        scene.load.setCORS('anonymous');
+        scene.load.video('evImage', `https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/medias%2F${tcrpEventData.fileName}?alt=media`, 'loadeddata', false, true);
+        scene.load.start();
+
+        tcrpEventData.delay = 10000;
+        tcrpEventData.useToneDown = false;
+        const isVideo = true;
+
+        //sound events
+        scene.poneSE.once('complete', () => {
+          viewEventImage(scene,isVideo);
+          scene.dooropenSE.play();
+        }, scene);
+
+        scene.dooropenSE.once('complete', () => {
+          console.log('to next scene');
+          scene.scene.launch('floorEvent', tcrpEventData);
+        }, scene)
+
+        // for medias // todo 最低再生時間の指定？？
+        scene.load.on('complete', () => {
+          console.log('load complete');
+          scene.evMoveBGM.stop();
+          scene.poneSE.play();
+        });
+
+        break;
+      }
+      case 'image/png':
+      case 'image/jpg': {
+        console.log('call');
+        scene.load.image('evImage', `https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/medias%2F${tcrpEventData.fileName}?alt=media`);
+        scene.load.start();
+
+        tcrpEventData.delay = 2000;
+        tcrpEventData.useToneDown = true;
+        const isVideo = false;
+
+        //sound events
+        scene.poneSE.once('complete', () => {
+          viewEventImage(scene,isVideo);
+          scene.dooropenSE.play();
+        }, scene);
+
+        scene.dooropenSE.once('complete', () => {
+          console.log('to next scene');
+          scene.scene.launch('floorEvent', tcrpEventData);
+        }, scene)
+
+        // for medias // todo 最低再生時間の指定？？
+        scene.load.on('complete', () => {
+          console.log('load complete');
+          scene.evMoveBGM.stop();
+          scene.poneSE.play();
+        });
+        break;
+      }
+      default: {
+        tcrpEventData.delay = 0;
+        tcrpEventData.useToneDown = true;
+
+        //sound events
+        scene.poneSE.once('complete', () => {
+          scene.dooropenSE.play();
+        }, scene);
+
+        scene.dooropenSE.once('complete', () => {
+          console.log('to next scene');
+          scene.scene.launch('floorEvent', tcrpEventData);
+        }, scene)
+
+        scene.time.delayedCall(5000, () => {
+          console.log('delay call');
+          scene.evMoveBGM.stop();
+          scene.poneSE.play();
+        });
+        break;
+      }
     }
   }
 }
 
 // event image
-function viewEventImage(scene) {
+function viewEventImage(scene, isVideo) {
   //todo this.load 'complete' check
 
-  // 本体画像
-  scene.evImage = scene.add.image(280, 310, 'evImage');
-  const image = scene.evImage;
+  let image;
 
-  if (image.width >= image.height) {
-    if (image.width > 480) {
-      // scale
-      image.setScale(480 / image.width);
-    }
+  if (isVideo) {
+    //video
+    scene.evImage = scene.add.video(400, 300, 'evImage');
+    //console.log('vid', this.vid.getDuration());
+    scene.evImage.setDepth(100);
+    image = scene.evImage;
   } else {
-    if (image.height > 520) {
-      // scale
-      image.setScale(520 / image.height);
+    //画像ファイル
+    scene.evImage = scene.add.image(280, 310, 'evImage');
+    image = scene.evImage;
+
+    if (image.width >= image.height) {
+      if (image.width > 480) {
+        // scale
+        image.setScale(480 / image.width);
+      }
+    } else {
+      if (image.height > 520) {
+        // scale
+        image.setScale(520 / image.height);
+      }
     }
   }
-  image.setCrop(0, 0, 0, 0); // all cropped
+
+  // all cropped
+  image.setCrop(0, 0, 0, 0);
 
   const centerX = Math.ceil(image.width / 2);
   const centerY = Math.ceil(image.height / 2);
@@ -748,7 +845,12 @@ function viewEventImage(scene) {
 
       light_r.x = lineX2 + light_r.width / 2;
       light_r.y = lineY + light_r.height / 2;
-    }
+    },
+    onComplete: function (tween, targets) {
+      if (isVideo) {
+        image.play();
+      }
+    },
   });
 
   scene.tweens.addCounter({
