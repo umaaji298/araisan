@@ -101,6 +101,7 @@ export default class Menu extends Phaser.Scene {
         cellContainer.getElement('icon').setFillStyle(item.color); // Set fill color of round rectangle object
         cellContainer.getElement('background').setStrokeStyle(2, 0xffffff).setDepth(0);
         cellContainer.id = item.id;
+        cellContainer.idString = item.idString;
         return cellContainer;
       },
 
@@ -112,7 +113,7 @@ export default class Menu extends Phaser.Scene {
     this.gridTable
       .on('cell.click', (cellContainer, cellIndex) => {
         // console.log(cellContainer.id);
-        this.eventObj.events.emit('autoFloor',cellContainer.id)
+        this.eventObj.events.emit('autoFloor', cellContainer.id, cellContainer.idString)
       });
     // .on('cell.over', function (cellContainer, cellIndex) {
     //   cellContainer.getElement('background')

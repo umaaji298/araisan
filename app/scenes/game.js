@@ -144,13 +144,13 @@ export default class Game extends Phaser.Scene {
     }, this);
 
     //自動入力
-    this.events.on('autoFloor', (id) => {
-      // console.log('autofloor call', id);
+    this.events.on('autoFloor', (id, idString) => {
+      // console.log('autofloor call', id, idString);
       if (this.inputNo.length > 0) {
         //自動入力できない
         this.menuSE.play();
       } else {
-        autoEvent_view(this, id);
+        autoEvent_view(this, id, idString);
       }
     })
 
@@ -656,6 +656,7 @@ function startFloorEvent(scene) {
 
   //ここで入力が確定する
   let floorData = getFloorData(scene)
+  // console.log('floorData', floorData);
 
   //封印チェック
   if (checkClose(floorData.code)) {
@@ -869,15 +870,39 @@ function viewEventImage(scene, isVideo) {
 }
 
 //menu event
-function autoEvent_view(scene, id) {
+function autoEvent_view(scene, id, idString) {
   lockSwitches(scene);
+
+  // let tempString = idString;
+  let tempid = id;
+
+  let hasGauge = false;
+  let gauge = 0;
+
+  let hasArraw = false;
+  let arraw1 = 0;
+  let arraw2 = 0;
+
+  if (/\|=/.test(idString)) {
+    hasGauge = true;
+    gauge = Number(tempid.slice(-2));
+    tempid = tempid.slice(0, -2);
+  }
+
+  if (/[↑↗→↘↓↙←↖]/.test(idString)) {
+    hasArraw = true;
+    const arraws = tempid.slice(-2).slice('');
+    arraw1 = Number(arraws[0]);
+    arraw2 = Number(arraws[1]);
+    tempid = tempid.slice(0, -2);
+  }
 
   const idArray = new Array();
   const idNumArray = new Array();
 
   //data setup
-  for (let i = 0; i < id.length - 1; i += 2) {
-    const id_s = id.substring(i, i + 2);
+  for (let i = 0; i < tempid.length - 1; i += 2) {
+    const id_s = tempid.substring(i, i + 2);
     idArray.push(id_s);
     idNumArray.push(Number(id_s));
   }
@@ -897,12 +922,9 @@ function autoEvent_view(scene, id) {
   scene.evDisplay.push(scene.add.sprite(685, 75, 'textures', 'evfont/haifun.png'));
   scene.evDisplay.push(scene.add.sprite(703, 75, 'textures', `evfont/${idNumArray[3]}.png`));
 
-  if (id.length > 8) {
-    //rank2 : set rsw
-    const rswArray = idArray[4].split('');
-
-    let step_0 = Number(rswArray[0]);
-    let step_1 = Number(rswArray[1]);
+  if (hasArraw) {
+    let step_0 = arraw1;
+    let step_1 = arraw2;
 
     // rsw3の設定 : rswのstep状態から逆算する
     // step1が通常0,反転1 / step0が通常0,反転2 
@@ -930,13 +952,13 @@ function autoEvent_view(scene, id) {
     setArraw(scene);
   }
 
-  if (id.length > 10) {
+  if (hasGauge) {
     //gauge移動
-    scene.gauge.step = idNumArray[5];
+    scene.gauge.step = gauge;
     setGauge(scene);
   }
 
-  scene.inputNo = [idArray[0], idArray[1], idArray[2], idArray[3]];
+  scene.inputNo = idNumArray;
 
   scene.rswSE.once('complete', () => {
     startFloorEvent(scene);
@@ -1028,6 +1050,7 @@ function getMenuItems(count, scene) {
 
     data.push({
       id: evKey,
+      idString: ev.idString,
       text: text,
       color: Phaser.Math.Between(0, 0xffffff)
     });
