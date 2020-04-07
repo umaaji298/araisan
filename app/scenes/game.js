@@ -1041,11 +1041,10 @@ function getMenuItems(count, scene) {
   let data = [];
   let selectedKeyIndex = [];
 
-  for (let i = 13; i < 18; i++) {
+  for (let i = 0; i < count; i++) {
     let keyIndex;
     do {
-      keyIndex = i;
-      // keyIndex = Phaser.Math.Between(0, scene.spEventKeys.length - 1)
+      keyIndex = Phaser.Math.Between(0, scene.spEventKeys.length - 1)
     } while (selectedKeyIndex.includes(keyIndex))
 
     const evKey = scene.spEventKeys[keyIndex];
