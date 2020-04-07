@@ -712,34 +712,36 @@ function startFloorEvent(scene) {
         break;
       }
       case 'image/png':
-      case 'image/jpg': {
-        scene.load.image('evImage', `https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/medias%2F${tcrpEventData.fileName}?alt=media`);
-        scene.load.start();
+      case 'image/jpg':
+      case 'image/jpeg':
+        {
+          scene.load.image('evImage', `https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/medias%2F${tcrpEventData.fileName}?alt=media`);
+          scene.load.start();
 
-        tcrpEventData.delay = 2000;
-        tcrpEventData.useToneDown = true;
-        const isVideo = false;
+          tcrpEventData.delay = 2000;
+          tcrpEventData.useToneDown = true;
+          const isVideo = false;
 
-        //sound events
-        scene.poneSE.once('complete', () => {
-          viewEventImage(scene, isVideo);
-          scene.dooropenSE.play();
-        }, scene);
+          //sound events
+          scene.poneSE.once('complete', () => {
+            viewEventImage(scene, isVideo);
+            scene.dooropenSE.play();
+          }, scene);
 
-        scene.dooropenSE.once('complete', () => {
-          console.log('to next scene');
-          scene.scene.launch('floorEvent', tcrpEventData);
-        }, scene)
+          scene.dooropenSE.once('complete', () => {
+            console.log('to next scene');
+            scene.scene.launch('floorEvent', tcrpEventData);
+          }, scene)
 
-        // for medias // todo 最低再生時間の指定？？
-        scene.load.on('complete', () => {
-          scene.evMoveBGM.setLoop(false);
-          scene.evMoveBGM.once('complete', () => {
-            scene.poneSE.play();
+          // for medias // todo 最低再生時間の指定？？
+          scene.load.on('complete', () => {
+            scene.evMoveBGM.setLoop(false);
+            scene.evMoveBGM.once('complete', () => {
+              scene.poneSE.play();
+            });
           });
-        });
-        break;
-      }
+          break;
+        }
       default: {
         tcrpEventData.delay = 0;
         tcrpEventData.useToneDown = true;
@@ -897,30 +899,42 @@ function autoEvent_view(scene, id, idString) {
     tempid = tempid.slice(0, -2);
   }
 
-  const idArray = new Array();
   const idNumArray = new Array();
 
   //data setup
   for (let i = 0; i < tempid.length - 1; i += 2) {
     const id_s = tempid.substring(i, i + 2);
-    idArray.push(id_s);
-    idNumArray.push(Number(id_s));
+    if (id_s != "00") {
+      idNumArray.push(Number(id_s));
+    }
   }
 
   //sw
-  scene.switches[idNumArray[0]].anims.nextFrame();
-  scene.switches[idNumArray[1]].anims.nextFrame();
-  scene.switches[idNumArray[2]].anims.nextFrame();
-  scene.switches[idNumArray[3]].anims.nextFrame();
+  for (let i = 0; i < idNumArray.length; i++) {
+    if (i > 3) break;
+    scene.switches[idNumArray[i]].anims.nextFrame();
 
-  //display
-  scene.evDisplay.push(scene.add.sprite(595, 75, 'textures', `evfont/${idNumArray[0]}.png`));
-  scene.evDisplay.push(scene.add.sprite(613, 75, 'textures', 'evfont/haifun.png'));
-  scene.evDisplay.push(scene.add.sprite(631, 75, 'textures', `evfont/${idNumArray[1]}.png`));
-  scene.evDisplay.push(scene.add.sprite(649, 75, 'textures', 'evfont/haifun.png'));
-  scene.evDisplay.push(scene.add.sprite(667, 75, 'textures', `evfont/${idNumArray[2]}.png`));
-  scene.evDisplay.push(scene.add.sprite(685, 75, 'textures', 'evfont/haifun.png'));
-  scene.evDisplay.push(scene.add.sprite(703, 75, 'textures', `evfont/${idNumArray[3]}.png`));
+    switch(i){
+      case 0:{
+        scene.evDisplay.push(scene.add.sprite(595, 75, 'textures', `evfont/${idNumArray[0]}.png`));
+        break;
+      }
+      case 1:{
+        scene.evDisplay.push(scene.add.sprite(613, 75, 'textures', 'evfont/haifun.png'));
+        scene.evDisplay.push(scene.add.sprite(631, 75, 'textures', `evfont/${idNumArray[1]}.png`));
+        break;
+      }
+      case 2:{
+        scene.evDisplay.push(scene.add.sprite(649, 75, 'textures', 'evfont/haifun.png'));
+        scene.evDisplay.push(scene.add.sprite(667, 75, 'textures', `evfont/${idNumArray[2]}.png`));
+        break;        
+      }
+      case 3:{
+        scene.evDisplay.push(scene.add.sprite(685, 75, 'textures', 'evfont/haifun.png'));
+        scene.evDisplay.push(scene.add.sprite(703, 75, 'textures', `evfont/${idNumArray[3]}.png`));
+      }
+    }
+  }
 
   if (hasArraw) {
     let step_0 = arraw1;
@@ -1027,10 +1041,11 @@ function getMenuItems(count, scene) {
   let data = [];
   let selectedKeyIndex = [];
 
-  for (let i = 0; i < count; i++) {
+  for (let i = 13; i < 18; i++) {
     let keyIndex;
     do {
-      keyIndex = Phaser.Math.Between(0, scene.spEventKeys.length - 1)
+      keyIndex = i;
+      // keyIndex = Phaser.Math.Between(0, scene.spEventKeys.length - 1)
     } while (selectedKeyIndex.includes(keyIndex))
 
     const evKey = scene.spEventKeys[keyIndex];
