@@ -1084,11 +1084,8 @@ function menuSetup(scene, delay) {
 function getMenuItems(count, scene) {
   let data = [];
 
-  const randG = new Phaser.Math.RandomDataGenerator();
-  let shuffledKeys = randG.shuffle(scene.spEventsKeys);
-
   //表示するものがない
-  if (shuffledKeys.length === 0) {
+  if (scene.spEventsKeys.length === 0) {
     data.push({
       id: "-100",
       idString: "01010101",
@@ -1097,6 +1094,10 @@ function getMenuItems(count, scene) {
     });
     return data;
   }
+
+  const randG = new Phaser.Math.RandomDataGenerator();
+  // shuffleは元の配列を参照するため、popすると破壊される
+  let shuffledKeys = randG.shuffle(Object.assign([], scene.spEventsKeys));
 
   if (shuffledKeys.length < count) {
     count = shuffledKeys.length;

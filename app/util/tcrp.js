@@ -35,6 +35,12 @@ export function toCommands(scene, data) {
 
     //既読削除処理
     scene.endEvents.set(checkedCode, event);
+    scene.endMenuItems.push({
+      id: checkedCode,
+      idString: event.idString,
+      text: `${event.idString} / ${event.floorName}`,
+      color: Phaser.Math.Between(0, 0xffffff)
+    })
     const delIndex = scene.spEventsKeys.indexOf(checkedCode);
     if (delIndex >= 0) {
       scene.spEventsKeys.splice(delIndex, 1);

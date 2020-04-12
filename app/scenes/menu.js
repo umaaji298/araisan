@@ -60,6 +60,7 @@ export default class Menu extends Phaser.Scene {
         // console.log(this.grid);
         if (index === 0) {
           this.grid.setItems(getMenuItems(data.menuItems));
+          this.grid.scrollToTop();
           this.grid.setScrollerEnable = false;
           this.grid.setSliderEnable = false;
           this.grid.getElement('slider').setVisible(false);
