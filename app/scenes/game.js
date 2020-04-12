@@ -40,23 +40,32 @@ export default class Game extends Phaser.Scene {
     let totalArray = diffArray.concat(mainArray);
     this.spEvents = new Map(totalArray);
     this.endEvents = new Map();
+    this.endMenuItems = new Array(); // 既読リスト用
     this.spEventsKeys;
 
     //Load LocalStorage
     this.useLocalStorage = false;
     if (storageAvailable('localStorage')) {
-      console.log('call');
       this.useLocalStorage = true;
       const json = localStorage.getItem('endEvents');
       if (json) {
         this.endEvents = new Map(JSON.parse(json));
         let tempEvents = new Map(totalArray);
-        this.endEvents.forEach( (v, k) => {
-          tempEvents.delete(k);
+
+        this.endEvents.forEach((ev, evkey) => {
+          tempEvents.delete(evkey);
+
+          this.endMenuItems.push({
+            id: evkey,
+            idString: ev.idString,
+            text: `${ev.idString} / ${ev.floorName}`,
+            color: Phaser.Math.Between(0, 0xffffff)
+          })
         });
+
+        //未確認リスト排除のために作成
         this.spEventsKeys = Array.from(tempEvents.keys());
-        //console.log(this.endEvents); //debug
-      }else{
+      } else {
         this.spEventsKeys = Array.from(this.spEvents.keys());
       }
     } else {
@@ -213,11 +222,13 @@ function panelFeedBack(pointer, obj) {
 
       this.menu.setVisible(false);
       const menuItems = getMenuItems(6, this); // 表示用に６個取得する
-      this.scene.launch('menu', { 
+      this.scene.launch('menu', {
         menuItems,
-        evTotal:this.spEvents.size,
-        evCount:this.spEventsKeys.length
-       });
+        evTotal: this.spEvents.size,
+        evCount: this.spEventsKeys.length,
+        endItems: this.endMenuItems,
+        endCount: this.endEvents.size,
+      });
       break;
     }
     case 'gauge': {
@@ -1077,7 +1088,7 @@ function getMenuItems(count, scene) {
   let shuffledKeys = randG.shuffle(scene.spEventsKeys);
 
   //表示するものがない
-  if(shuffledKeys.length === 0){
+  if (shuffledKeys.length === 0) {
     data.push({
       id: "-100",
       idString: "01010101",
@@ -1105,12 +1116,10 @@ function getMenuItems(count, scene) {
 
     //console.log(evNo, ev);
 
-    const text = `${ev.idString} / ${ev.floorName}`
-
     data.push({
       id: evKey,
       idString: ev.idString,
-      text: text,
+      text: `${ev.idString} / ${ev.floorName}`,
       color: Phaser.Math.Between(0, 0xffffff)
     });
   }
