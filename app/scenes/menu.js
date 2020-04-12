@@ -23,8 +23,7 @@ export default class Menu extends Phaser.Scene {
 
       header: this.rexUI.add.label({
         // background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
-        text: this.add.text(0, 0, 'ランダムに表示 / クリックで自動入力'),
-        align: 'center',
+        text: this.add.text(0, 0, `ランダム表示 / クリックで自動入力`),
         space: {
           // left: 20,
           // right: 20,
@@ -34,12 +33,27 @@ export default class Menu extends Phaser.Scene {
         }
       }),
 
+      footer: this.rexUI.add.sizer({
+        //x: 400, y: 300,
+        //width: 400, height: 40,
+        orientation: 'x',
+      })
+        .add(
+          this.add.zone(),             // child
+          1,              // proportion, fixed width
+          'center'                     // align vertically
+        )
+        .add(
+          this.add.text(0, 0, `${data.evCount}/${data.evTotal}`),// child
+          0,                           // proportion, fixed width
+          'right'                     // align vertically
+        )
+        .layout(),
+
       table: {
         cellWidth: undefined,
         cellHeight: 60,
-
         columns: 1,
-
         mask: {
           padding: 2,
         },
@@ -56,12 +70,12 @@ export default class Menu extends Phaser.Scene {
       space: {
         left: 20,
         right: 20,
-        top: 5,
-        bottom: 20,
+        top: 6,
+        bottom: 5,
 
         table: 10,
         header: 5,
-        // footer: 10,
+        footer: 0,
       },
 
       createCellContainerCallback: function (cell, cellContainer) {

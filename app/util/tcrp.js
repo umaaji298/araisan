@@ -33,6 +33,18 @@ export function toCommands(scene, data) {
     dataObj.fileName = event.fileName;
     dataObj.fileType = event.fileType;
 
+    //既読削除処理
+    scene.endEvents.set(checkedCode, event);
+    const delIndex = scene.spEventsKeys.indexOf(checkedCode);
+    if (delIndex >= 0) {
+      scene.spEventsKeys.splice(delIndex, 1);
+    }
+
+    //localStorage保存
+    if (scene.useLocalStorage) {
+      localStorage.setItem('endEvents', JSON.stringify([...scene.endEvents]));
+    }
+
   } else {
     //normal event
     autoText = false;

@@ -37,8 +37,36 @@ export default class Game extends Phaser.Scene {
     //events.jsonよりイベント呼び出し
     let mainArray = this.cache.json.get('events');
     let diffArray = this.cache.json.get('events_diff');
-    this.spEvents = new Map(diffArray.concat(mainArray));
-    this.spEventKeys = Array.from(this.spEvents.keys());
+    let totalArray = diffArray.concat(mainArray);
+    this.spEvents = new Map(totalArray);
+    this.endEvents = new Map();
+    this.spEventsKeys;
+
+    //Load LocalStorage
+    this.useLocalStorage = false;
+    if (storageAvailable('localStorage')) {
+      console.log('call');
+      this.useLocalStorage = true;
+      const json = localStorage.getItem('endEvents');
+      if (json) {
+        this.endEvents = new Map(JSON.parse(json));
+        let tempEvents = new Map(totalArray);
+        this.endEvents.forEach( (v, k) => {
+          tempEvents.delete(k);
+        });
+        this.spEventsKeys = Array.from(tempEvents.keys());
+        //console.log(this.endEvents); //debug
+      }else{
+        this.spEventsKeys = Array.from(this.spEvents.keys());
+      }
+    } else {
+      this.spEventsKeys = Array.from(this.spEvents.keys());
+    }
+
+    // clean
+    mainArray = null;
+    diffArray = null;
+    totalArray = null;
 
     //gauge 数値データ置き換え
     this.numTag = ["１／２", "８", "１０", "７７", "３", "７", "０．１", "１", "１００", "２", "１２", "０", "（検閲）", "無", "百万", "０．０１", "５０００兆", "８"];
@@ -146,13 +174,14 @@ export default class Game extends Phaser.Scene {
     //自動入力
     this.events.on('autoFloor', (id, idString) => {
       // console.log('autofloor call', id, idString);
-      if (this.inputNo.length > 0) {
-        //自動入力できない
+      // SW入力済みのため、自動入力不可 or 全て表示されている場合は何もしない
+      if (this.inputNo.length > 0 || id === "-100") {
         this.menuSE.play();
-      } else {
-        autoEvent_view(this, id, idString);
+        return;
       }
-    })
+
+      autoEvent_view(this, id, idString);
+    });
 
     //背景画像隠す
     this.events.on('hideImage', () => {
@@ -184,7 +213,11 @@ function panelFeedBack(pointer, obj) {
 
       this.menu.setVisible(false);
       const menuItems = getMenuItems(6, this); // 表示用に６個取得する
-      this.scene.launch('menu', { menuItems });
+      this.scene.launch('menu', { 
+        menuItems,
+        evTotal:this.spEvents.size,
+        evCount:this.spEventsKeys.length
+       });
       break;
     }
     case 'gauge': {
@@ -914,22 +947,22 @@ function autoEvent_view(scene, id, idString) {
     if (i > 3) break;
     scene.switches[idNumArray[i]].anims.nextFrame();
 
-    switch(i){
-      case 0:{
+    switch (i) {
+      case 0: {
         scene.evDisplay.push(scene.add.sprite(595, 75, 'textures', `evfont/${idNumArray[0]}.png`));
         break;
       }
-      case 1:{
+      case 1: {
         scene.evDisplay.push(scene.add.sprite(613, 75, 'textures', 'evfont/haifun.png'));
         scene.evDisplay.push(scene.add.sprite(631, 75, 'textures', `evfont/${idNumArray[1]}.png`));
         break;
       }
-      case 2:{
+      case 2: {
         scene.evDisplay.push(scene.add.sprite(649, 75, 'textures', 'evfont/haifun.png'));
         scene.evDisplay.push(scene.add.sprite(667, 75, 'textures', `evfont/${idNumArray[2]}.png`));
-        break;        
+        break;
       }
-      case 3:{
+      case 3: {
         scene.evDisplay.push(scene.add.sprite(685, 75, 'textures', 'evfont/haifun.png'));
         scene.evDisplay.push(scene.add.sprite(703, 75, 'textures', `evfont/${idNumArray[3]}.png`));
       }
@@ -1039,23 +1072,35 @@ function menuSetup(scene, delay) {
 
 function getMenuItems(count, scene) {
   let data = [];
-  let selectedKeyIndex = [];
 
+  const randG = new Phaser.Math.RandomDataGenerator();
+  let shuffledKeys = randG.shuffle(scene.spEventsKeys);
+
+  //表示するものがない
+  if(shuffledKeys.length === 0){
+    data.push({
+      id: "-100",
+      idString: "01010101",
+      text: "YOU VISITED ALL FLOOR",
+      color: 0xffff00
+    });
+    return data;
+  }
+
+  if (shuffledKeys.length < count) {
+    count = shuffledKeys.length;
+  }
+
+  // count数分だけランダムにevent keyを抽出する
   for (let i = 0; i < count; i++) {
-    let keyIndex;
-    do {
-      keyIndex = Phaser.Math.Between(0, scene.spEventKeys.length - 1)
-    } while (selectedKeyIndex.includes(keyIndex))
-
-    const evKey = scene.spEventKeys[keyIndex];
+    //ev : event data Obj / evKey : evId 
+    const evKey = shuffledKeys.pop();
     const ev = scene.spEvents.get(evKey);
 
-    //ev : event data Obj / evKey : evId
+    // todo 微妙処理 削除
     if (ev.floorName === 'Under Maintenance' || ev.author === 'debug') {
-      i--;
+      // i--; // 永久ループ回避のため無効化
       continue;
-    } else {
-      selectedKeyIndex.push(keyIndex);
     }
 
     //console.log(evNo, ev);
@@ -1070,6 +1115,31 @@ function getMenuItems(count, scene) {
     });
   }
   return data;
+}
+
+function storageAvailable(type) {
+  let storage;
+  try {
+    storage = window[type];
+    let x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  }
+  catch (e) {
+    return e instanceof DOMException && (
+      // everything except Firefox
+      e.code === 22 ||
+      // Firefox
+      e.code === 1014 ||
+      // test name field too, because code might not be present
+      // everything except Firefox
+      e.name === 'QuotaExceededError' ||
+      // Firefox
+      e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      (storage && storage.length !== 0);
+  }
 }
 
 function destructor_game(scene) {
