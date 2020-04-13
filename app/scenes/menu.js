@@ -14,7 +14,7 @@ export default class Menu extends Phaser.Scene {
     // //Layouts
     this.tabs = this.rexUI.add.tabs({
       x: 270,
-      y: 282,
+      y: 302,
 
       //background: this.rexUI.add.roundRectangle(0, 0, 10, 10, 0, 0x333333),
 
@@ -81,6 +81,8 @@ export default class Menu extends Phaser.Scene {
 
     this.grid = this.tabs.getElement('panel');
     this.grid.getElement('slider').setVisible(false);
+    this.grid.setScrollerEnable = false;
+    this.grid.setSliderEnable = false;
     this.footer = this.grid.getElement('footer').getChildren()[1];
 
     this.currentTabIndex = 0;
@@ -126,21 +128,18 @@ function createGridTable(scene, data) {
     // x: 270,
     // y: 282,
     width: 500,
-    height: 407,
+    height: 410,
 
     scrollMode: 0,
 
     background: scene.add.image(0, 0, 'menu_back').setAlpha(0.3),
 
     header: scene.rexUI.add.label({
-      text: scene.add.text(0, 0, `クリックで自動入力`),
-      space: {
-        // left: 20,
-        // right: 20,
-        top: 0,
-        // bottom: 20,
-        // icon: 10
-      }
+      text: scene.add.text(0, 0, `クリックで自動入力`, {
+        padding: {
+          top: 5,
+        },
+      }),
     }),
 
     footer: scene.rexUI.add.sizer({
@@ -185,12 +184,12 @@ function createGridTable(scene, data) {
     space: {
       left: 20,
       right: 10,
-      top: 6,
-      bottom: 5,
+      top: 0,
+      bottom: 3,
 
       table: 10,
-      header: 5,
-      footer: 3,
+      header: 0,
+      footer: 0,
     },
 
     createCellContainerCallback: function (cell, cellContainer) {

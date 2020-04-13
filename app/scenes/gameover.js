@@ -9,6 +9,7 @@ export default class GameOver extends Phaser.Scene {
     console.log('%c GameOver ', 'background: green; color: white; display: block;');
 
     this.load.image('title', `assets/title.png`);
+    this.load.image('settings', 'assets/settings.png');
     this.load.start();
 
     const content = [

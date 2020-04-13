@@ -4,11 +4,11 @@ export default class TcrpAction {
     this.objs = new Map();
 
     //font
-    this.fontopt = { fontSize: '16px', color: '#fff', backgroundColor: '#f00', padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
-    this.fontsys = { fontSize: '30px', color: '#fff', maxLines: 2, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
-    this.fontsysSmall = { fontSize: '16px', color: '#fff', maxLines: 2, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
-    this.fontev = { fontSize: '30px', color: '#fff', stroke: '#000', strokeThickness: 8, maxLines: 4, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
-    this.fontevRed = { fontSize: '30px', color: '#f00', maxLines: 4, padding: { x: 10, y: 10, left: 0, right: 0, top: 0, buttonm: 0 } };
+    this.fontopt = { fontSize: '16px', color: '#fff', backgroundColor: '#f00', padding: { x: 10, y: 10, left: 0, right: 0, top: 5, buttonm: 0 } };
+    this.fontsys = { fontSize: '30px', color: '#fff', maxLines: 2, padding: { x: 10, y: 10, left: 0, right: 0, top: 5, buttonm: 0 } };
+    this.fontsysSmall = { fontSize: '16px', color: '#fff', maxLines: 2, padding: { x: 10, y: 10, left: 0, right: 0, top: 5, buttonm: 0 } };
+    this.fontev = { fontSize: '30px', color: '#fff', stroke: '#000', strokeThickness: 8, maxLines: 4, padding: { x: 10, y: 10, left: 0, right: 0, top: 5, buttonm: 0 } };
+    this.fontevRed = { fontSize: '30px', color: '#f00', maxLines: 4, padding: { x: 10, y: 10, left: 0, right: 0, top: 5, buttonm: 0 } };
   }
 
   // commands
@@ -101,6 +101,7 @@ export default class TcrpAction {
         mode: 'word',
         width: wrapWidth
       },
+      padding: { top: 5 },
       maxLines: 3
     })
   }
