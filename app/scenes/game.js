@@ -50,6 +50,11 @@ export default class Game extends Phaser.Scene {
       const json = localStorage.getItem('endEvents');
       if (json) {
         this.endEvents = new Map(JSON.parse(json));
+        //特別対応！: 封印回が履歴に残る不具合 v2.0で消去すること
+        if(this.endEvents.has("999999990000")){
+          this.endEvents.delete("999999990000");
+          localStorage.setItem('endEvents', JSON.stringify([...this.endEvents]));
+        }
         let tempEvents = new Map(totalArray);
 
         this.endEvents.forEach((ev, evkey) => {
@@ -705,11 +710,19 @@ function startFloorEvent(scene) {
   //封印チェック
   if (checkClose(floorData.code)) {
     // close中
-    floorData.code = "999999990000"
 
-    Object.assign(tcrpEventData, tcrp.toCommands(scene, floorData));
-    tcrpEventData.delay = 0;
-    tcrpEventData.useToneDown = false;
+    let tcrpEventData = {
+      commands: [[3000, "text", "…？", 40, 237],
+      [3000, "text", "珍しくエレベーターが動かない。", 40, 277],
+      [5000, "text", "どうやら目的の階は、封印されているらしい。", 40, 317],
+      [5000, "text", "いずれまた試してみよう。", 40, 357],
+      [5000, "next", "次の階へ", 400, 553, 20, 16]],
+      fileName:"",
+      fileType:"",
+      isVideo:false,
+      delay:0,
+      useToneDown:false
+    }
 
     scene.scene.launch('floorEvent', tcrpEventData);
   } else {
