@@ -41,6 +41,28 @@
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
           <div class="panel panel-default">
+            <div class="panel-heading p-3 mb-3" role="tab" id="heading6">
+              <h4 class="panel-title text-left">
+                <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion"
+                  href="#collapse6" aria-expanded="true" aria-controls="collapse6">
+                  <p>封印中のフロア（Д-Д-В-А↓→や2-2-А-Е→→など）を選ぶと、探索済リストの中に「99-99-99-99↑↑|=0 Under Mainten...」という、クリック不能のフロアが現れます。
+                  </p>
+                  <p>それから、他の探索済フロアを選ぶと、一時的にリストの中に重複のフロアが現れ、リロードすれば消えます。</p>
+                </a>
+              </h4>
+            </div>
+            <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
+              <div class="panel-body px-3 mb-4 text-left">
+                <p>2020/4/16 直しました！スミマセン。封印階はほったらかしてたらバグの温床でした…。</p>
+                <ul>
+                  <li>封印フロアは既読に乗らないようにしました。封印は擬似的にイベント化していましたが、専用処理に変更しました。</li>
+                  <li>既読が重複して表示されないようにしました。既読から呼び出し時に既読化する処理が動いていたせいでした。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
             <div class="panel-heading p-3 mb-3" role="tab" id="heading5">
               <h4 class="panel-title text-left">
                 <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion"
