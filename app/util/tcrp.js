@@ -33,22 +33,23 @@ export function toCommands(scene, data) {
     dataObj.fileName = event.fileName;
     dataObj.fileType = event.fileType;
 
-    //既読削除処理
-    scene.endEvents.set(checkedCode, event);
-    scene.endMenuItems.push({
-      id: checkedCode,
-      idString: event.idString,
-      text: `${event.idString} / ${event.floorName}`,
-      color: Phaser.Math.Between(0, 0xffffff)
-    })
-    const delIndex = scene.spEventsKeys.indexOf(checkedCode);
-    if (delIndex >= 0) {
-      scene.spEventsKeys.splice(delIndex, 1);
-    }
-
-    //localStorage保存
-    if (scene.useLocalStorage) {
-      localStorage.setItem('endEvents', JSON.stringify([...scene.endEvents]));
+    //既読削除処理 : 既読から呼び出し時は何も更新しない
+    if (!scene.endEvents.has(checkedCode)) {
+      scene.endEvents.set(checkedCode, event);
+      scene.endMenuItems.push({
+        id: checkedCode,
+        idString: event.idString,
+        text: `${event.idString} / ${event.floorName}`,
+        color: Phaser.Math.Between(0, 0xffffff)
+      });
+      const delIndex = scene.spEventsKeys.indexOf(checkedCode);
+      if (delIndex >= 0) {
+        scene.spEventsKeys.splice(delIndex, 1);
+      }
+      //localStorage保存
+      if (scene.useLocalStorage) {
+        localStorage.setItem('endEvents', JSON.stringify([...scene.endEvents]));
+      }
     }
 
   } else {
