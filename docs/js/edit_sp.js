@@ -379,9 +379,10 @@ function validateInputs(input) {
   }
 
   // １行文字数のチェック
-  if (isLineCountNG(textArray)) {
+  const {isLineNg,ngLineNo} = isLineCountNG(textArray)
+  if (isLineNg) {
     validation.result = false;
-    validation.reason = '１つの行に25文字以上の入力があります';
+    validation.reason = `１つの行に全角25文字分以上の入力があります。\nダメな行：${ngLineNo.toString()}`;
     return validation;
   }
 
@@ -463,13 +464,27 @@ function escapeHtmlFull(text) {
 }
 
 function isLineCountNG(textArray) {
-  let isNG = false;
+  let isLineNg = false;
+  const ngLineNo = new Array();
 
-  textArray.forEach(texts => {
-    if (texts.length > 24) isNG = true;
-  })
+  for (let i = 0; i < textArray.length; i++) {
+    const texts = textArray[i];
+    let len = texts.length;
 
-  return isNG;
+    const hankakuArray = texts.match(/[a-zA-Z0-9.,/;:()]/g);
+    if (hankakuArray) {
+      const hankakuLen = hankakuArray.length;
+      const diff = hankakuLen - hankakuLen * 0.6;
+      len = len - diff;
+    }
+
+    if (len > 24) {
+      isLineNg = true;
+      ngLineNo.push(i + 1);
+    }
+  }
+
+  return { isLineNg, ngLineNo};
 }
 
 /** FloorId random create */
