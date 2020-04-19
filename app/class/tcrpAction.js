@@ -80,7 +80,7 @@ export default class TcrpAction {
     this.scene.eventObjs.pop(); // 次へは非表示にならない
     this.scene.textBox.setInteractive();
     this.scene.textBox.once('pointerup', () => {
-      console.log('click next');
+      // console.log('click next');
       this.scene.events.emit('next');
     });
   }

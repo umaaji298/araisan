@@ -1102,7 +1102,7 @@ function getMenuItems(count, scene) {
     data.push({
       id: "-100",
       idString: "01010101",
-      text: "YOU VISITED ALL FLOOR",
+      text: "YOU HAVE VISITED ALL FLOORS",
       color: 0xffff00
     });
     return data;

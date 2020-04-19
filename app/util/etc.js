@@ -73,7 +73,7 @@ export function scriptsToEvents(script, autoText) {
   }
 
   // 次へボタン表示
-  commands.push([wait, 'next', '次の階へ', 400, 553, 20, 16]);
+  commands.push([wait, 'next', '次の階へ', 400, 559, 12, 8]);
 
   return commands;
 }

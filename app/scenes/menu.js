@@ -59,6 +59,7 @@ export default class Menu extends Phaser.Scene {
 
         // console.log(this.grid);
         if (index === 0) {
+          //未読
           this.grid.setItems(getMenuItems(data.menuItems));
           this.grid.scrollToTop();
           this.grid.setScrollerEnable = false;
@@ -66,6 +67,7 @@ export default class Menu extends Phaser.Scene {
           this.grid.getElement('slider').setVisible(false);
           this.footer.setText(`${data.evCount}/${data.evTotal}`);
         } else {
+          //既読
           this.grid.setItems(getMenuItems(data.endItems));
           if (data.endCount > 6) {
             this.grid.setScrollerEnable = true;
@@ -73,7 +75,13 @@ export default class Menu extends Phaser.Scene {
             this.grid.getElement('slider').setVisible(true);
           }
 
-          this.footer.setText(`${data.endCount}/${data.evTotal}`);
+          //footer special
+          let footerText = `${data.endCount}/${data.evTotal}`;
+          if(data.endCount === data.evTotal){
+            footerText = `🌟${data.endCount}/${data.evTotal}`;
+          }
+
+          this.footer.setText(footerText);
         }
         // console.log(grid);
 
@@ -124,6 +132,9 @@ function createButton(scene, text, alpha) {
 }
 
 function createGridTable(scene, data) {
+  //footer special
+  let footerText = `${data.evCount}/${data.evTotal}`;
+
   return scene.rexUI.add.gridTable({
     // x: 270,
     // y: 282,
@@ -153,7 +164,7 @@ function createGridTable(scene, data) {
         'center'                     // align vertically
       )
       .add(
-        scene.add.text(0, 0, `${data.evCount}/${data.evTotal}`),// child
+        scene.add.text(0, 0, footerText),// child
         0,                           // proportion, fixed width
         'right',                     // align vertically
         {
