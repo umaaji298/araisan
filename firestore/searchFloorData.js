@@ -19,7 +19,7 @@ async function main(){
 
   ss.forEach(doc=>{
     const data = doc.data();
-    if(doc.ref.id === "18062725"){
+    if(doc.ref.id === "16090217"){
       console.log('found',doc.ref.id,doc.ref.parent.parent.id);
       // writeBatch.delete(doc.ref);
     }   
