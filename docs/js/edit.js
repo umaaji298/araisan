@@ -375,6 +375,14 @@ function validateInputs(input) {
 
   //念の為サニタイズ処理に通す
   validation.text = escapeHtml(fixedtext);
+
+  if(testDoubleSendData(validation.text)){
+    validation.result = false;
+    validation.reason = '同じ内容のフロアを登録済みです\n（v1.1.3 2重に投稿されてしまうのを防止）';
+    return validation;
+  }
+
+  //念の為サニタイズ処理に通す
   validation.creator = escapeHtmlFull(input.creator);
   validation.floorName = escapeHtmlFull(input.floorName);
   validation.file = input.file;
@@ -404,6 +412,18 @@ function testHtml(text) {
 function testHtmlFull(text) {
   let re = /[&<>"'\\]/g;
   return re.test(text);
+}
+
+/** ２重投稿がある場合はtrueを返す */
+function testDoubleSendData(text){
+  let result = false;
+  Object.keys(events_diff).forEach(key=>{
+    if(events_diff[key].text === text){
+      result = true;
+    }
+  })
+
+  return result
 }
 
 function escapeHtml(text) {
@@ -591,4 +611,5 @@ async function dbWrite(floorData, id) {
 
   //現在のobjectも更新 : global
   events[id] = floorData;
+  events_diff[id] = floorData;
 }
