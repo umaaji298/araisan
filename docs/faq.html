@@ -41,6 +41,25 @@
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
           <div class="panel panel-default">
+            <div class="panel-heading p-3 mb-3" role="tab" id="heading11">
+              <h4 class="panel-title text-left">
+                <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion"
+                  href="#collapse11" aria-expanded="true" aria-controls="collapse11">
+                  <p>削除済フロアはデフォルト文章になったが、既読リストの記録から取り除かれていません。
+                    ここは起動の時にフロアが存在するかどうかをチェックする必要があるかもしれません。</p>
+                </a>
+              </h4>
+            </div>
+            <div id="collapse11" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading11">
+              <div class="panel-body px-3 mb-4 text-left">
+                <p>2020/5/9 既読データと登録データが不整合になる問題を修正しました。なるべくDBと同期を取ります。</p>
+                <p>既読内の存在しなくなったフロア表示は削除されます。</p>
+                <p>(既読データは各ユーザーのブラウザに記憶させていますが、DBとの同期設計がよわわでした…)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
             <div class="panel-heading p-3 mb-3" role="tab" id="heading10">
               <h4 class="panel-title text-left">
                 <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion"
