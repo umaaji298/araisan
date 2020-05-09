@@ -50,28 +50,37 @@ export default class Game extends Phaser.Scene {
       const json = localStorage.getItem('endEvents');
       if (json) {
         this.endEvents = new Map(JSON.parse(json));
-        //特別対応！: 封印回が履歴に残る不具合 v2.0で消去すること
-        if(this.endEvents.has("999999990000")){
-          this.endEvents.delete("999999990000");
-          localStorage.setItem('endEvents', JSON.stringify([...this.endEvents]));
-        }
-        //削除対応！:固定イベを消した場合に既読リストと同期が取れなくなる
-        if(this.endEvents.has("13081128")){
-          this.endEvents.delete("13081128"); // v2.0で消去すること
-          localStorage.setItem('endEvents', JSON.stringify([...this.endEvents]));
-        }
+
+        // //特別対応！: 封印回が履歴に残る不具合 v2.0で消去すること
+        // if(this.endEvents.has("999999990000")){
+        //   this.endEvents.delete("999999990000");
+        //   localStorage.setItem('endEvents', JSON.stringify([...this.endEvents]));
+        // }
+        // //削除対応！:固定イベを消した場合に既読リストと同期が取れなくなる
+        // if(this.endEvents.has("13081128")){
+        //   this.endEvents.delete("13081128"); // v2.0で消去すること
+        //   localStorage.setItem('endEvents', JSON.stringify([...this.endEvents]));
+        // }
+
         let tempEvents = new Map(totalArray);
 
         this.endEvents.forEach((ev, evkey) => {
-          tempEvents.delete(evkey);
-
-          this.endMenuItems.push({
-            id: evkey,
-            idString: ev.idString,
-            text: `${ev.idString} / ${ev.floorName}`,
-            color: Phaser.Math.Between(0, 0xffffff)
-          })
+          const deleteResult = tempEvents.delete(evkey);
+          if(deleteResult){
+            this.endMenuItems.push({
+              id: evkey,
+              idString: ev.idString,
+              text: `${ev.idString} / ${ev.floorName}`,
+              color: Phaser.Math.Between(0, 0xffffff)
+            })
+          }else{
+            // false : 不整合発生 : イベントデータに無いものがendEventsに存在している
+            this.endEvents.delete(evkey);
+          }
         });
+
+        //不整合データがあったかもしれないので、localStorage更新
+        localStorage.setItem('endEvents', JSON.stringify([...this.endEvents]));
 
         //未確認リスト排除のために作成
         this.spEventsKeys = Array.from(tempEvents.keys());
