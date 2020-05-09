@@ -55,6 +55,11 @@ export default class Game extends Phaser.Scene {
           this.endEvents.delete("999999990000");
           localStorage.setItem('endEvents', JSON.stringify([...this.endEvents]));
         }
+        //削除対応！:固定イベを消した場合に既読リストと同期が取れなくなる
+        if(this.endEvents.has("13081128")){
+          this.endEvents.delete("13081128"); // v2.0で消去すること
+          localStorage.setItem('endEvents', JSON.stringify([...this.endEvents]));
+        }
         let tempEvents = new Map(totalArray);
 
         this.endEvents.forEach((ev, evkey) => {
