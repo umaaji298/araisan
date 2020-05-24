@@ -20,16 +20,8 @@ async function main(){
   ss.forEach(doc=>{
     const data = doc.data();
     switch(doc.ref.id){
-      case "0906250373":{
-        writedata(doc,data,'0906252773');
-        break;
-      }
-      case "0906250300":{
-        writedata(doc,data,'0906252700');
-        break;
-      }
-      case "0906250343":{
-        writedata(doc,data,'0906252743');
+      case "0222050816":{
+        writedata(doc,data,'0222050806');
         break;
       }
       dafault:{
