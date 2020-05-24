@@ -49,45 +49,43 @@ export default class Game extends Phaser.Scene {
       this.useLocalStorage = true;
       const json = localStorage.getItem('endEvents');
       if (json) {
+        // 既読データの処理
         this.endEvents = new Map(JSON.parse(json));
-
-        // //特別対応！: 封印回が履歴に残る不具合 v2.0で消去すること
-        // if(this.endEvents.has("999999990000")){
-        //   this.endEvents.delete("999999990000");
-        //   localStorage.setItem('endEvents', JSON.stringify([...this.endEvents]));
-        // }
-        // //削除対応！:固定イベを消した場合に既読リストと同期が取れなくなる
-        // if(this.endEvents.has("13081128")){
-        //   this.endEvents.delete("13081128"); // v2.0で消去すること
-        //   localStorage.setItem('endEvents', JSON.stringify([...this.endEvents]));
-        // }
-
         let tempEvents = new Map(totalArray);
 
         this.endEvents.forEach((ev, evkey) => {
-          const deleteResult = tempEvents.delete(evkey);
-          if(deleteResult){
+
+          if (this.spEvents.has(evkey)) {
+            // 既読リストの内容はサーバー側のデータを採用する
+            // todo : endEventsデータはevkeyのみ保存すればよい？
+            const serv_ev = this.spEvents.get(evkey);
             this.endMenuItems.push({
               id: evkey,
-              idString: ev.idString,
-              text: `${ev.idString} / ${ev.floorName}`,
+              idString: serv_ev.idString,
+              text: `${serv_ev.idString} / ${serv_ev.floorName}`,
               color: Phaser.Math.Between(0, 0xffffff)
-            })
-          }else{
-            // false : 不整合発生 : イベントデータに無いものがendEventsに存在している
+            });
+
+            tempEvents.delete(evkey);
+          } else {
+            // 不整合データ : イベントデータに無いものがstorage : endEventsに存在している
             this.endEvents.delete(evkey);
           }
         });
 
         //不整合データがあったかもしれないので、localStorage更新
+        // note : フロア番号の整合性は保たれているが、その他のデータは同期されてないので注意が必要
+        // 単一ソースの原則を元に、storage内のフロアデータは利用しない方針とする
         localStorage.setItem('endEvents', JSON.stringify([...this.endEvents]));
 
         //未確認リスト排除のために作成
         this.spEventsKeys = Array.from(tempEvents.keys());
       } else {
+        //既読データ無し
         this.spEventsKeys = Array.from(this.spEvents.keys());
       }
     } else {
+      // localstorageが活用できない : 既読データ無しと同じ処理を行う
       this.spEventsKeys = Array.from(this.spEvents.keys());
     }
 
@@ -731,11 +729,11 @@ function startFloorEvent(scene) {
       [5000, "text", "どうやら目的の階は、封印されているらしい。", 40, 317],
       [5000, "text", "いずれまた試してみよう。", 40, 357],
       [5000, "next", "次の階へ", 400, 553, 20, 16]],
-      fileName:"",
-      fileType:"",
-      isVideo:false,
-      delay:0,
-      useToneDown:false
+      fileName: "",
+      fileType: "",
+      isVideo: false,
+      delay: 0,
+      useToneDown: false
     }
 
     scene.scene.launch('floorEvent', tcrpEventData);
@@ -1084,7 +1082,7 @@ function checkClose(code) {
   const code_nogauge = code.slice(0, -2);
   const code_swonly = code.slice(0, -4);
 
-  const closeList = ["0202202522","04012025","05081111220662","0919260076","1211012024","1606070204","20081128","2120191004","2207091321","2302052606","23242719","2403102024","2424222042","2807182225",""];
+  const closeList = ["0202202522", "04012025", "05081111220662", "0919260076", "1211012024", "1606070204", "20081128", "2120191004", "2207091321", "2302052606", "23242719", "2403102024", "2424222042", "2807182225", ""];
 
   closeList.forEach(num => {
     if (num === code_nogauge || num === code_swonly) {

@@ -35,13 +35,15 @@ export default class Settings extends Phaser.Scene {
 
     this.buttons
       .on('button.click', function (button, index, pointer, event) {
-        switch(index){
-          case 0:{
-            localStorage.removeItem('endEvents');
+        switch (index) {
+          case 0: {
+            if (storageAvailable('localStorage')) {
+              localStorage.removeItem('endEvents');
+            }
             button.getElement('text').setText('消去しました。');
             break;
           }
-          case 1:{
+          case 1: {
             const scene = button.scene;
             scene.eventObj.events.emit('settingsExit'); // intaractive復活
             destructor(scene);
