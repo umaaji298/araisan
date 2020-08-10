@@ -8,12 +8,13 @@ admin.initializeApp({
 });
 
 let db = admin.firestore();
+const writeBatch = db.batch();
 
 /**
  * ここを書き換える
  * ・API呼び出してjson再生成必要
  */
-const deletefloor = "3-В-2-Б";
+const deletefloor = "В-10-17-19";
 
 async function main(){
 
@@ -26,7 +27,7 @@ async function main(){
     const data = doc.data();
     if(doc.ref.id === decodedId){
       console.log('delete id',doc.ref.parent.parent.id);
-      //writeBatch.delete(doc.ref);
+      //writeBatch.delete(doc.ref); 実データが消えないので、webコンソールから消す？
     }   
   })
 }
