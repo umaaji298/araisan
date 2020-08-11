@@ -177,8 +177,14 @@ export default class Game extends Phaser.Scene {
 
       //evImage消去
       if (this.hasOwnProperty('evImage')) {
-        this.evImage.destroy();
-        this.textures.remove('evImage');
+        if(this.evImage.type==="Video"){
+          //videos
+          this.cache.video.remove('evImage');
+        }else{
+          //images
+          this.textures.remove('evImage');
+        }
+        this.evImage.destroy();       
         this.light_l.destroy();
         this.light_r.destroy();
         this.flashGraphics.destroy();
@@ -753,7 +759,7 @@ function startFloorEvent(scene) {
         scene.load.video('evImage', `https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/medias%2F${tcrpEventData.fileName}?alt=media`, 'loadeddata', false, true);
         scene.load.start();
 
-        tcrpEventData.delay = 10000;
+        tcrpEventData.delay = 1000;
         tcrpEventData.useToneDown = false;
         const isVideo = true;
 
