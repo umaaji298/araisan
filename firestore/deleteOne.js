@@ -14,7 +14,7 @@ const writeBatch = db.batch();
  * ここを書き換える
  * ・API呼び出してjson再生成必要
  */
-const deletefloor = "В-10-17-19";
+const deletefloor = "Е-13-18-3";
 
 async function main(){
 
