@@ -27,8 +27,8 @@ async function main(){
     const data = doc.data();
     if(doc.ref.id === decodedId){
       console.log('delete id',doc.ref.parent.parent.id);
-      //writeBatch.delete(doc.ref); 実データが消えないので、webコンソールから消す？
-    }   
+      doc.ref.delete();
+    }
   })
 }
 
