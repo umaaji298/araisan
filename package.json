@@ -16,7 +16,7 @@
     "morgan": "~1.9.0",
     "phaser": "^3.22.0",
     "phaser3-rex-plugins": "^1.1.8",
-    "pug": "^2.0.4"
+    "pug": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
