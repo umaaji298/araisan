@@ -69,8 +69,9 @@ export default class Preloader extends Phaser.Scene {
     //this.load.audio('ending', 'assets/audio/taiju_63sec.mp3');
 
     //scripts
-    this.load.json('events', 'https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events.json?alt=media');
-    this.load.json('events_diff', 'https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events_diff.json?alt=media');
+    // this.load.json('events', 'https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events.json?alt=media');
+    // this.load.json('events_diff', 'https://firebasestorage.googleapis.com/v0/b/araisan-ms.appspot.com/o/events_diff.json?alt=media');
+    this.load.json('events', 'events/events_220608.json');
 
     //this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
   }

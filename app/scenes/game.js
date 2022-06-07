@@ -36,9 +36,10 @@ export default class Game extends Phaser.Scene {
 
     //events.jsonよりイベント呼び出し
     let mainArray = this.cache.json.get('events');
-    let diffArray = this.cache.json.get('events_diff');
-    let totalArray = diffArray.concat(mainArray);
-    this.spEvents = new Map(totalArray);
+    // let diffArray = this.cache.json.get('events_diff');
+    // let totalArray = diffArray.concat(mainArray);
+    // this.spEvents = new Map(totalArray);
+    this.spEvents = new Map(mainArray);
     this.endEvents = new Map();
     this.endMenuItems = new Array(); // 既読リスト用
     this.spEventsKeys;
@@ -177,14 +178,14 @@ export default class Game extends Phaser.Scene {
 
       //evImage消去
       if (this.hasOwnProperty('evImage')) {
-        if(this.evImage.type==="Video"){
+        if (this.evImage.type === "Video") {
           //videos
           this.cache.video.remove('evImage');
-        }else{
+        } else {
           //images
           this.textures.remove('evImage');
         }
-        this.evImage.destroy();       
+        this.evImage.destroy();
         this.light_l.destroy();
         this.light_r.destroy();
         this.flashGraphics.destroy();
@@ -1088,7 +1089,7 @@ function checkClose(code) {
   const code_nogauge = code.slice(0, -2);
   const code_swonly = code.slice(0, -4);
 
-  const closeList = ["0202202522", "04012025", "05081111220662", "0919260076", "1211012024", "1606070204", "20081128", "2120191004", "2207091321", "2302052606", "23242719",  "2424222042", "2807182225", ""];
+  const closeList = ["0202202522", "04012025", "05081111220662", "0919260076", "1211012024", "1606070204", "20081128", "2120191004", "2207091321", "2302052606", "23242719", "2424222042", "2807182225", ""];
 
   closeList.forEach(num => {
     if (num === code_nogauge || num === code_swonly) {
